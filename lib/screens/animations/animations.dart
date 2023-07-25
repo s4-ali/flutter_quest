@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/main.dart';
+import 'package:flutter_quest/screens/animations/built_in_animations/animated_container.dart';
 
 class AnimationsList extends StatelessWidget {
   const AnimationsList({super.key});
@@ -8,9 +10,12 @@ class AnimationsList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("Animations"),),
       body: ListView(
-        children: const [
+        children: [
           ListTile(
-            title: Text("Animated Container"),
+            title: const Text("Animated Container"),
+            onTap: (){
+              navigateTo(context, const AnimatedContainerExample());
+            },
           )
         ],
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/screens/animations/animations.dart';
+import 'package:flutter_quest/screens/widgets/sized_box.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +23,18 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF3772FF),
+        ),
+        sliderTheme: const SliderThemeData(
+          showValueIndicator: ShowValueIndicator.always,
+        ),
+        useMaterial3: true,
+        // scaffoldBackgroundColor: Colors.,
+      ),
+      themeMode: ThemeMode.dark,
+      home: const SizedBoxPropertyBuilder(),
     );
   }
 }
@@ -65,7 +77,7 @@ void navigateTo(BuildContext context, Widget screen) {
   );
 }
 
-void debugPrint(Object object){
+void debugPrint(Object object) {
   if (kDebugMode) {
     print(object);
   }

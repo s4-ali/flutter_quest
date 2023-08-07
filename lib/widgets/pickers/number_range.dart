@@ -11,7 +11,7 @@ class NumberRangePicker extends StatelessWidget {
   final num min;
   final num max;
   final num value;
-  final Function(num) onChanged;
+  final Function(num number) onChanged;
   final NumberType type;
 
   const NumberRangePicker({

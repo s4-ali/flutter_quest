@@ -32,7 +32,7 @@ class PropertyProvider {
     required String id,
     required String title,
     required num max,
-    num? min,
+    num min = 0,
     num initial = 100,
   }) {
     if (widgets.where((element) => element.id == id).isNotEmpty) {
@@ -44,7 +44,8 @@ class PropertyProvider {
         id: id,
         widget: NumberRangePicker(
           title: title,
-          max: 500,
+          max: max,
+          min: min,
           value: _getValueOf(id, initial),
           onChanged: onChanged,
         ),

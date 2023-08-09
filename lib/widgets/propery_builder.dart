@@ -1,24 +1,23 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_holder.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/scaffold.dart';
 
-class PropertyBuilder extends StatefulWidget {
+class PropertyExplorerBuilder extends StatefulWidget {
   final String widgetName;
   final Widget Function(PropertyProvider configurations) builder;
 
-  const PropertyBuilder({
+  const PropertyExplorerBuilder({
     super.key,
     required this.widgetName,
     required this.builder,
   });
 
   @override
-  State<PropertyBuilder> createState() => _PropertyBuilderState();
+  State<PropertyExplorerBuilder> createState() => _PropertyExplorerBuilderState();
 }
 
-class _PropertyBuilderState extends State<PropertyBuilder> {
+class _PropertyExplorerBuilderState extends State<PropertyExplorerBuilder> {
   List<Widget> widgets = [];
   final PropertyProvider configurations = PropertyProvider();
 

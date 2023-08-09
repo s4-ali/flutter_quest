@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/propery_builder.dart';
 
-
-class SizedBoxPropertyBuilder extends StatelessWidget {
-  const SizedBoxPropertyBuilder({
+class SizedBoxPropertyExplorer extends StatelessWidget {
+  const SizedBoxPropertyExplorer({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return PropertyBuilder(
+    return PropertyExplorerBuilder(
       widgetName: "SizedBox",
       builder: (provider) {
         final height = provider.heightRange();
@@ -30,4 +29,3 @@ class SizedBoxPropertyBuilder extends StatelessWidget {
     );
   }
 }
-

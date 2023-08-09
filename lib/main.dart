@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         // scaffoldBackgroundColor: Colors.,
       ),
       themeMode: ThemeMode.dark,
-      home: const SizedBoxPropertyBuilder(),
+      home: const SizedBoxPropertyExplorer(),
     );
   }
 }

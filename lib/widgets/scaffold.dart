@@ -24,12 +24,12 @@ class WidgetEditorScaffold extends StatelessWidget {
   AppBar buildAppBar() {
     return AppBar(
       title: Text(title),
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.add),
-        ),
-      ],
+      // actions: [
+      //   IconButton(
+      //     onPressed: () {},
+      //     icon: const Icon(Icons.add),
+      //   ),
+      // ],
     );
   }
 

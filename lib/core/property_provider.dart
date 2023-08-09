@@ -5,7 +5,7 @@ import 'property_holder.dart';
 class PropertyProvider {
   final List<void Function()> _listeners = [];
   final List<PropertyHolder> widgets = [];
-  final Map<String, dynamic> _values = {};
+  final Map<String, dynamic> values = {};
 
   void addListener(void Function() listener) {
     if (!_listeners.contains(listener)) {
@@ -36,7 +36,7 @@ class PropertyProvider {
     num initial = 100,
   }) {
     if (widgets.where((element) => element.id == id).isNotEmpty) {
-      return _getValueOf(id, initial);
+      return getValueOf(id, initial);
     }
 
     PropertyHolder buildWidget(Function(num) onChanged) {
@@ -46,27 +46,28 @@ class PropertyProvider {
           title: title,
           max: max,
           min: min,
-          value: _getValueOf(id, initial),
+          value: getValueOf(id, initial),
           onChanged: onChanged,
         ),
       );
     }
 
     void onNumberChanged(num number) {
-      _values[id] = number.toDouble();
+      values[id] = number.toDouble();
       widgets.update(buildWidget(onNumberChanged));
       notifyListeners();
     }
 
     widgets.add(buildWidget(onNumberChanged));
     Future.delayed(const Duration(milliseconds: 100), notifyListeners);
-    return _values[id];
+    return values[id];
   }
 
-  dynamic _getValueOf(String id, dynamic initial) {
-    if (_values[id] == null) {
-      _values[id] = initial;
+  dynamic getValueOf(String id, dynamic initial) {
+    if (values[id] == null) {
+      values[id] = initial;
     }
-    return _values[id];
+    return values[id];
   }
 }
+

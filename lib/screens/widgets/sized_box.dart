@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/property_holders/number_field.dart';
 import 'package:flutter_quest/widgets/propery_builder.dart';
 
 class SizedBoxPropertyExplorer extends StatelessWidget {
@@ -12,7 +13,7 @@ class SizedBoxPropertyExplorer extends StatelessWidget {
       widgetName: "SizedBox",
       builder: (provider) {
         final height = provider.heightRange();
-        final width = provider.widthRange();
+        final width = provider.numberField(id: "width", title: "Width", max: 1000).toDouble();
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

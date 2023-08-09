@@ -10,6 +10,10 @@ extension PropertyHolderListExtension on List<PropertyHolder> {
       property,
     );
   }
+
+  bool alreadyExists(String id) {
+    return where((element) => element.id == id).isNotEmpty;
+  }
 }
 
 class PropertyHolder {

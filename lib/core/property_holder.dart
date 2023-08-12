@@ -16,12 +16,14 @@ extension PropertyHolderListExtension on List<PropertyHolder> {
   }
 }
 
-class PropertyHolder {
+class PropertyHolder<T> {
   final String id;
   final Widget widget;
+  final Function(T) onChanged;
 
   const PropertyHolder({
     required this.id,
     required this.widget,
+    required this.onChanged,
   });
 }

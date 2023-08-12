@@ -140,6 +140,7 @@ class _AnimatedContainerSettingsDrawerState
                   key: ValueKey(settings.color),
                   selectedColor: settings.color,
                   onColorUpdated: onColorUpdated,
+                  title: "Color",
                 ),
               ),
               ListTile(

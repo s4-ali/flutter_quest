@@ -1,4 +1,4 @@
-import 'package:flutter_quest/widgets/pickers/number_range.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'property_holder.dart';
 
@@ -19,50 +19,6 @@ class PropertyProvider {
     }
   }
 
-  double heightRange({String? id}) {
-    return numberRange(id: id ?? 'height', title: "Height", max: 1000)
-        .toDouble();
-  }
-
-  double widthRange({String? id}) {
-    return numberRange(id: id ?? 'width', title: "Width", max: 1000).toDouble();
-  }
-
-  num numberRange({
-    required String id,
-    required String title,
-    required num max,
-    num min = 0,
-    num initial = 100,
-  }) {
-    if (widgets.where((element) => element.id == id).isNotEmpty) {
-      return getValueOf(id, initial);
-    }
-
-    PropertyHolder buildWidget(Function(num) onChanged) {
-      return PropertyHolder(
-        id: id,
-        widget: NumberRangePicker(
-          title: title,
-          max: max,
-          min: min,
-          value: getValueOf(id, initial),
-          onChanged: onChanged,
-        ),
-      );
-    }
-
-    void onNumberChanged(num number) {
-      values[id] = number.toDouble();
-      widgets.update(buildWidget(onNumberChanged));
-      notifyListeners();
-    }
-
-    widgets.add(buildWidget(onNumberChanged));
-    Future.delayed(const Duration(milliseconds: 100), notifyListeners);
-    return values[id];
-  }
-
   dynamic getValueOf(String id, dynamic initial) {
     if (values[id] == null) {
       values[id] = initial;
@@ -71,3 +27,52 @@ class PropertyProvider {
   }
 }
 
+class PropertyParams<T> {
+  final String id;
+  final String title;
+  final T initial;
+
+  PropertyParams({
+    required this.id,
+    required this.initial,
+    required this.title,
+  });
+}
+
+abstract class PropertyField<T extends PropertyParams, U> {
+  final PropertyProvider _provider;
+  final T params;
+
+  PropertyField(this._provider, this.params);
+
+  Widget build(T params, Function(U) onChanged, U value);
+
+  U call() {
+    if (_provider.widgets.alreadyExists(params.id)) {
+      return _provider.getValueOf(params.id, params.initial);
+    }
+
+    PropertyHolder buildPropertyField(Function(U) onChanged) {
+      return PropertyHolder<U>(
+        id: params.id,
+        onChanged: onChanged,
+        widget: build(
+          params,
+          onChanged,
+          _provider.getValueOf(params.id, params.initial),
+        ),
+      );
+    }
+
+    void onValueUpdated(U newValue) {
+      _provider.values[params.id] = newValue;
+      _provider.widgets.update(buildPropertyField(onValueUpdated));
+      _provider.notifyListeners();
+    }
+
+    _provider.widgets.add(buildPropertyField(onValueUpdated));
+    Future.delayed(
+        const Duration(milliseconds: 100), _provider.notifyListeners);
+    return _provider.values[params.id];
+  }
+}

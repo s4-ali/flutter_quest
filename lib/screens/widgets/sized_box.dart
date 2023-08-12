@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/property_holders/alignment_field.dart';
+import 'package:flutter_quest/widgets/property_holders/color_picker.dart';
 import 'package:flutter_quest/widgets/property_holders/number_field.dart';
 import 'package:flutter_quest/widgets/propery_builder.dart';
 
@@ -12,16 +14,21 @@ class SizedBoxPropertyExplorer extends StatelessWidget {
     return PropertyExplorerBuilder(
       widgetName: "SizedBox",
       builder: (provider) {
-        final height = provider.heightRange();
-        final width = provider.numberField(id: "width", title: "Width", max: 1000).toDouble();
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        final height = provider.numberField(id: "height", title: "Height").toDouble();
+        final width = provider.numberField(id: "width", title: "Width").toDouble();
+        final fillColor = provider.color(id: "fill", title: "Fill Color");
+        final alignment = provider.alignment(id: "alignment", title: "Set Alignment");
+
+        return Stack(
           children: [
-            SizedBox(
-              height: height,
-              width: width,
-              child: const ColoredBox(
-                color: Colors.blue,
+            Align(
+              alignment: alignment,
+              child: SizedBox(
+                height: height,
+                width: width,
+                child: ColoredBox(
+                  color: fillColor,
+                ),
               ),
             ),
           ],

@@ -61,6 +61,7 @@ class _AnimatedContainerSettingsDrawerState
               ListTile(
                 title: const Text("Color"),
                 subtitle: ColorSelector(
+                  title: "Color",
                   key: ValueKey(settings.color),
                   selectedColor: settings.color,
                   onColorUpdated: onColorUpdated,

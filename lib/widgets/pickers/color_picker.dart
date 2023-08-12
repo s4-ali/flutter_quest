@@ -4,19 +4,25 @@ import 'package:flutter_quest/utils/extensions.dart';
 class ColorSelector extends StatelessWidget {
   final Color selectedColor;
   final Function(Color) onColorUpdated;
+  final String title;
 
   const ColorSelector(
-      {super.key, required this.selectedColor, required this.onColorUpdated});
+      {super.key, required this.selectedColor, required this.onColorUpdated, required this.title});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
       children: [
-        buildColorOption(Colors.blue),
-        buildColorOption(Colors.red),
-        buildColorOption(Colors.green),
-        buildColorOption(Colors.yellow),
+        Text(title),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            buildColorOption(Colors.blue),
+            buildColorOption(Colors.red),
+            buildColorOption(Colors.green),
+            buildColorOption(Colors.yellow),
+          ],
+        ),
       ],
     );
   }

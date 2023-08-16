@@ -14,10 +14,13 @@ class SizedBoxPropertyExplorer extends StatelessWidget {
     return PropertyExplorerBuilder(
       widgetName: "SizedBox",
       builder: (provider) {
-        final height = provider.numberField(id: "height", title: "Height").toDouble();
-        final width = provider.numberField(id: "width", title: "Width").toDouble();
+        final height = provider.heightField();
+        final width = provider.widthField();
         final fillColor = provider.color(id: "fill", title: "Fill Color");
-        final alignment = provider.alignment(id: "alignment", title: "Set Alignment");
+        final alignment = provider.alignment(
+          id: "alignment",
+          title: "Set Alignment",
+        );
 
         return Stack(
           children: [

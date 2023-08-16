@@ -12,15 +12,17 @@ class NumberPropertyParams extends PropertyParams<num> {
   });
 }
 
-
-/// This is the field, here we define the design of field and
+/// Here we define the design of field and
 /// and provide the onChanged and current value params
 class NumberPropertyField extends PropertyField<NumberPropertyParams, num> {
   NumberPropertyField(super.provider, super.params);
 
   @override
   Widget build(
-      NumberPropertyParams params, Function(num) onChanged, num value) {
+    NumberPropertyParams params,
+    Function(num) onChanged,
+    num value,
+  ) {
     return Column(
       children: [
         Text(params.title),
@@ -40,7 +42,7 @@ class NumberPropertyField extends PropertyField<NumberPropertyParams, num> {
   }
 }
 
-/// helper methods that register a property field inside property provider
+/// Helper method that register a property field inside property provider
 extension NumberFieldPropertyProvider on PropertyProvider {
   num numberField({
     required String id,
@@ -56,5 +58,21 @@ extension NumberFieldPropertyProvider on PropertyProvider {
       this,
       params,
     )();
+  }
+
+  double heightField({
+    String id = "height",
+    String title = "Height",
+    num initial = 100.0,
+  }) {
+    return numberField(id: id, title: title, initial: initial).toDouble();
+  }
+
+  double widthField({
+    String id = "width",
+    String title = "Width",
+    num initial = 100.0,
+  }) {
+    return numberField(id: id, title: title, initial: initial).toDouble();
   }
 }

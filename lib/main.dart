@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/screens/animations/animations.dart';
-import 'package:flutter_quest/screens/widgets/sized_box.dart';
+import 'package:flutter_quest/catalog/home.dart';
+import 'package:flutter_quest/catalog/widgets/sized_box.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ListTile(
             title: const Text("Animations"),
             onTap: () {
-              navigateTo(context, const AnimationsList());
+              navigateTo(context, const Home());
             },
           )
         ],

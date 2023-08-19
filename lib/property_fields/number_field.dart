@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_provider.dart';
+import 'package:flutter_quest/widgets/fields/number_field.dart';
 
 /// These are the inputs required for a certain field,
 /// for example title, max value, or any other property
@@ -23,21 +24,10 @@ class TextFieldPropertyField extends PropertyField<NumberPropertyParams, num> {
     Function(num) onChanged,
     num value,
   ) {
-    return Column(
-      children: [
-        Text(params.title),
-        TextField(
-          controller: TextEditingController(text: "$value"),
-          keyboardType: TextInputType.number,
-          onSubmitted: (text) {
-            if (text.isNotEmpty) {
-              onChanged(
-                num.parse(text),
-              );
-            }
-          },
-        ),
-      ],
+    return NumberField(
+      title: params.title,
+      onChanged: onChanged,
+      value: value,
     );
   }
 }
@@ -58,7 +48,6 @@ extension TextFieldFieldPropertyProvider on PropertyProvider {
       this,
       params,
     )();
-
   }
 
   double heightField({

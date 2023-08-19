@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/widgets/drawers/properties_drawer.dart';
+import 'package:flutter_quest/widgets/core/properties_drawer.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class WidgetEditorScaffold extends StatelessWidget {

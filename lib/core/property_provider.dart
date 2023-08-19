@@ -55,7 +55,6 @@ abstract class PropertyField<T extends PropertyParams, U> {
     PropertyHolder buildPropertyField(Function(U) onChanged) {
       return PropertyHolder<U>(
         id: params.id,
-        onChanged: onChanged,
         widget: build(
           params,
           onChanged,

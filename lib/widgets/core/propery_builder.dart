@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_holder.dart';
 import 'package:flutter_quest/core/property_provider.dart';
-import 'package:flutter_quest/widgets/scaffold.dart';
+import 'package:flutter_quest/widgets/core/scaffold.dart';
 
 class PropertyExplorerBuilder extends StatefulWidget {
   final String widgetName;

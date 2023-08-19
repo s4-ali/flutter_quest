@@ -20,6 +20,7 @@ class PropertiesDrawer extends StatelessWidget {
               color: Colors.black26, offset: Offset(-4, 3), blurRadius: 4),
         ],
       ),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       width: 350,
       child: Column(
         children: [
@@ -33,7 +34,12 @@ class PropertiesDrawer extends StatelessWidget {
           Expanded(
             child: ListView(
               children: [
-                ...widgets,
+                ...widgets.map(
+                  (e) => Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: e,
+                  ),
+                ),
               ],
             ),
           ),

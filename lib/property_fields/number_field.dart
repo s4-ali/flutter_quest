@@ -8,8 +8,10 @@ import 'package:flutter_quest/widgets/fields/number_field.dart';
 class NumberPropertyParams extends PropertyParams<num> {
   NumberPropertyParams({
     required super.id,
-    required super.initial,
+    super.value,
     required super.title,
+    super.defaultValue = 0,
+    super.isOptional,
   });
 }
 
@@ -21,56 +23,62 @@ class TextFieldPropertyField extends PropertyField<NumberPropertyParams, num> {
   @override
   Widget build(
     NumberPropertyParams params,
-    Function(num) onChanged,
-    num value,
+    Function(num?) onChanged,
+    num? value,
   ) {
     return NumberField(
-      title: params.title,
       onChanged: onChanged,
-      value: value,
+      value: value!,
     );
   }
 }
 
 /// Helper method that register a property field inside property provider
 extension TextFieldFieldPropertyProvider on PropertyProvider {
-  num numberField({
+  num? numberField({
     required String id,
     required String title,
-    required num initial,
+    num? value,
+    bool isOptional = true,
+    num defaultValue = 0,
   }) {
     final params = NumberPropertyParams(
       id: id,
-      initial: initial,
       title: title,
+      isOptional: isOptional,
+      defaultValue: defaultValue,
+      value: value,
     );
+
     return TextFieldPropertyField(
       this,
       params,
     )();
   }
 
-  double heightField({
+  double? heightField({
     String id = "height",
     String title = "Height",
-    num initial = 100.0,
+    num? value,
   }) {
-    return numberField(id: id, title: title, initial: initial).toDouble();
+    return numberField(
+      id: id,
+      title: title,
+      value: value,
+      defaultValue: 50,
+    )?.toDouble();
   }
 
-  double widthField({
+  double? widthField({
     String id = "width",
     String title = "Width",
-    num initial = 100.0,
+    num? value,
   }) {
-    return numberField(id: id, title: title, initial: initial).toDouble();
-  }
-
-  double padding({
-    String id = "padding",
-    String title = "Padding",
-    num initial = 100.0,
-  }) {
-    return numberField(id: id, title: title, initial: initial).toDouble();
+    return numberField(
+      id: id,
+      title: title,
+      value: value,
+      defaultValue: 50,
+    )?.toDouble();
   }
 }

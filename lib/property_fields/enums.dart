@@ -6,9 +6,11 @@ class EnumPropertyParams<T> extends PropertyParams<T> {
 
   EnumPropertyParams({
     required super.id,
-    required super.initial,
+    required super.value,
     required super.title,
     required this.values,
+    required super.defaultValue,
+    required super.isOptional,
   });
 }
 
@@ -18,8 +20,8 @@ class EnumPropertyField<T> extends PropertyField<EnumPropertyParams, T> {
   @override
   Widget build(
     EnumPropertyParams params,
-    Function(T) onChanged,
-    T value,
+    Function(T?) onChanged,
+    T? value,
   ) {
     return Text(params.values.toString());
   }
@@ -33,14 +35,15 @@ extension EnumFieldPropertyProvider on PropertyProvider {
     required List<T> values,
   }) {
     final params = EnumPropertyParams<T>(
-      id: id,
-      initial: initial,
-      title: title,
-      values: values,
-    );
+        id: id,
+        value: initial,
+        title: title,
+        values: values,
+        defaultValue: values[0],
+        isOptional: false);
     return EnumPropertyField<T>(
       this,
       params,
-    )();
+    )()!;
   }
 }

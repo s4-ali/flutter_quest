@@ -26,6 +26,11 @@ class PropertyProvider {
     }
     return values[id];
   }
+
+  void setInitialValue(String id, value) {
+    if (values.keys.contains(id)) return;
+    values[id] = value;
+  }
 }
 
 class PropertyParams<T> {
@@ -48,22 +53,29 @@ abstract class PropertyField<T extends PropertyParams, U> {
   final PropertyProvider _provider;
   final T params;
 
+  bool get inline => false;
+
   PropertyField(this._provider, this.params);
 
   Widget build(T params, Function(U?) onChanged, U? value);
 
   U? call() {
+    _provider.setInitialValue(params.id, params.value);
+
     if (_provider.widgets.alreadyExists(params.id)) {
-      return _provider.getValueOf(params.id, params.value);
+      return _provider.getValueOf(
+          params.id, params.isOptional ? null : params.value);
     }
 
     PropertyHolder buildPropertyField(Function(U?) onChanged) {
-      final value = _provider.getValueOf(params.id, params.value);
+      final value = _provider.getValueOf(
+          params.id, params.isOptional ? null : params.value);
       return PropertyHolder<U>(
         id: params.id,
         widget: FieldTitle(
           params: params,
           onChanged: (val) => onChanged(val as U?),
+          inline: inline,
           child: value == null
               ? null
               : build(
@@ -76,6 +88,7 @@ abstract class PropertyField<T extends PropertyParams, U> {
     }
 
     void onValueUpdated(U? newValue) {
+      print("updating ${params.id} to $newValue");
       _provider.values[params.id] = newValue;
       _provider.widgets.update(buildPropertyField(onValueUpdated));
       _provider.notifyListeners();

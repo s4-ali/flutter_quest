@@ -5,7 +5,7 @@ import 'package:flutter_quest/widgets/fields/boolean_field.dart';
 class BooleanPropertyParams extends PropertyParams<bool> {
   BooleanPropertyParams({
     required super.id,
-    required super.value,
+    super.value,
     required super.title,
     super.defaultValue = false,
     super.isOptional
@@ -16,13 +16,15 @@ class BooleanPropertyField extends PropertyField<BooleanPropertyParams, bool> {
   BooleanPropertyField(super.provider, super.params);
 
   @override
+  bool get inline => true;
+
+  @override
   Widget build(
       BooleanPropertyParams params,
       Function(bool?) onChanged,
       bool? value,
       ) {
     return BooleanField(
-      title: params.title,
       onChanged: onChanged,
       initial: value!,
     );

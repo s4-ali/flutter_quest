@@ -7,12 +7,14 @@ class FieldTitle extends StatefulWidget {
   final PropertyParams params;
   final Widget? child;
   final void Function(dynamic) onChanged;
+  final bool inline;
 
   const FieldTitle({
     super.key,
     required this.params,
     this.child,
     required this.onChanged,
+    this.inline = false,
   });
 
   @override
@@ -24,38 +26,68 @@ class _FieldTitleState extends State<FieldTitle> {
 
   @override
   Widget build(BuildContext context) {
-    final optionalIconButton = widget.params.isOptional
-        ? IconButton(
-            padding: const EdgeInsets.all(0),
-            onPressed: toggleField,
-            icon: Icon(
-              isEnabled ? Icons.close : Icons.add,
-              size: 24,
-            ),
-          )
-        : null;
-    return Column(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TitleText(widget.params.title),
-            SizedBox(
-              height: 24,
-              width: 24,
-              child: optionalIconButton,
-            )
-          ],
-        ),
-        if (isEnabled) ...[
-          const SizedBox(
-            height: 6,
-          ),
-          widget.child!,
-        ]
-      ],
+    final title = TitleText(widget.params.title);
+    final optionalIconButton = IconButton(
+      padding: const EdgeInsets.all(0),
+      onPressed: toggleField,
+      icon: Icon(
+        isEnabled ? Icons.close : Icons.add,
+        size: 24,
+      ),
     );
+    final fixedSizedOptionalIconButton = SizedBox(
+      height: 24,
+      width: 24,
+      child: widget.params.isOptional ? optionalIconButton : null,
+    );
+    if (widget.inline) {
+      return SizedBox(
+        height: 32,
+        child: Center(
+          child: Row(
+            children: [
+              title,
+              const Spacer(),
+              if (isEnabled) widget.child!,
+              if (widget.params.isOptional)
+                SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: optionalIconButton,
+                )
+            ],
+          ),
+        ),
+      );
+    } else {
+      final titleRow = Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          title,
+          fixedSizedOptionalIconButton,
+        ],
+      );
+      if(isEnabled) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            titleRow,
+            if (isEnabled) ...[
+              const SizedBox(
+                height: 6,
+              ),
+              widget.child!,
+            ]
+          ],
+        );
+      } else {
+        return SizedBox(
+          height: 32,
+          child: Center(child: titleRow),
+        );
+      }
+    }
   }
 
   void toggleField() {

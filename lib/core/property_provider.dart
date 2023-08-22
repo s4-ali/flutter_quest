@@ -63,7 +63,7 @@ abstract class PropertyField<T extends PropertyParams, U> {
         id: params.id,
         widget: FieldTitle(
           params: params,
-          onChanged: (val) => onChanged(val as U),
+          onChanged: (val) => onChanged(val as U?),
           child: value == null
               ? null
               : build(

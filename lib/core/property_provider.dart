@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
+import '../widgets/field_title.dart';
 import 'property_holder.dart';
 
 class PropertyProvider {
@@ -30,12 +31,16 @@ class PropertyProvider {
 class PropertyParams<T> {
   final String id;
   final String title;
-  final T initial;
+  final T? value;
+  final T defaultValue;
+  final bool isOptional;
 
   PropertyParams({
     required this.id,
-    required this.initial,
     required this.title,
+    required this.defaultValue,
+    this.isOptional = true,
+    this.value,
   });
 }
 
@@ -45,25 +50,32 @@ abstract class PropertyField<T extends PropertyParams, U> {
 
   PropertyField(this._provider, this.params);
 
-  Widget build(T params, Function(U) onChanged, U value);
+  Widget build(T params, Function(U?) onChanged, U? value);
 
-  U call() {
+  U? call() {
     if (_provider.widgets.alreadyExists(params.id)) {
-      return _provider.getValueOf(params.id, params.initial);
+      return _provider.getValueOf(params.id, params.value);
     }
 
-    PropertyHolder buildPropertyField(Function(U) onChanged) {
+    PropertyHolder buildPropertyField(Function(U?) onChanged) {
+      final value = _provider.getValueOf(params.id, params.value);
       return PropertyHolder<U>(
         id: params.id,
-        widget: build(
-          params,
-          onChanged,
-          _provider.getValueOf(params.id, params.initial),
+        widget: FieldTitle(
+          params: params,
+          onChanged: (val) => onChanged(val as U),
+          child: value == null
+              ? null
+              : build(
+                  params,
+                  onChanged,
+                  value,
+                ),
         ),
       );
     }
 
-    void onValueUpdated(U newValue) {
+    void onValueUpdated(U? newValue) {
       _provider.values[params.id] = newValue;
       _provider.widgets.update(buildPropertyField(onValueUpdated));
       _provider.notifyListeners();
@@ -71,7 +83,9 @@ abstract class PropertyField<T extends PropertyParams, U> {
 
     _provider.widgets.add(buildPropertyField(onValueUpdated));
     Future.delayed(
-        const Duration(milliseconds: 100), _provider.notifyListeners);
+      const Duration(milliseconds: 100),
+      _provider.notifyListeners,
+    );
     return _provider.values[params.id];
   }
 }

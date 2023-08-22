@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import '../text_field.dart';
 
 class NumberField extends StatelessWidget {
-  final String title;
   final Function(num) onChanged;
   final num value;
 
   const NumberField({
     super.key,
-    required this.title,
     required this.onChanged,
     required this.value,
   });
@@ -17,7 +15,6 @@ class NumberField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppTextField(
-      title: title,
       onChanged: (text) {
         final number = num.tryParse(text);
         if(number != null) {

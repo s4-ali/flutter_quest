@@ -88,7 +88,6 @@ abstract class PropertyField<T extends PropertyParams, U> {
     }
 
     void onValueUpdated(U? newValue) {
-      print("updating ${params.id} to $newValue");
       _provider.values[params.id] = newValue;
       _provider.widgets.update(buildPropertyField(onValueUpdated));
       _provider.notifyListeners();

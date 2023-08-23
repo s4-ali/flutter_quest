@@ -13,11 +13,8 @@ class PropertyPlayground extends StatelessWidget {
       builder: (provider) {
         final height = provider.heightField();
         final width = provider.widthField();
-        final isRed = provider.booleanField(
-          id: "isRed",
-          title: "Is Red",
-          initial: false,
-        );
+        final isRed = provider.booleanField(id: "isRed", title: "Is Red");
+
         final color = isRed == null
             ? Colors.green
             : isRed

@@ -1,0 +1,18 @@
+import 'package:flutter/material.dart';
+
+class {{name.pascalCase()}}Field extends StatelessWidget {
+  final void Function({{type}}) onChanged;
+  final {{type}} value;
+
+  const {{name.pascalCase()}}Field({
+    super.key,
+    required this.onChanged,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    //TODO: Implement widget here...
+    return const Placeholder();
+  }
+}

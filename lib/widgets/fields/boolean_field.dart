@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class BooleanField extends StatelessWidget {
   final Function(bool) onChanged;
-  final bool initial;
+  final bool value;
 
   const BooleanField({
     super.key,
     required this.onChanged,
-    required this.initial,
+    required this.value,
   });
 
   @override
@@ -24,7 +24,7 @@ class BooleanField extends StatelessWidget {
         activeTrackColor: const Color(0xFF3772FF),
         inactiveTrackColor: const Color(0xFF36343b),
         inactiveThumbColor: const Color(0xFF938F99),
-        value: initial,
+        value: value,
         onChanged: (value) {
           onChanged(value);
         },

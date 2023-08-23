@@ -1,0 +1,26 @@
+name: property_field
+description: A brick that allows to register a new property field in the application.
+
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev.50 <0.1.0"
+
+vars:
+  name:
+    type: string
+    description: Property Name
+    prompt: What is property name?
+  type:
+    type: string
+    description: The data type that this field deals with
+    prompt: What is the data type?
+  defaultValue:
+    type: string
+    description: The default value of this field
+    prompt: What is the default value?
+  generateFieldWidget:
+    type: boolean
+    description: Whether or not the relevant field widget should be generated
+    default: true
+    prompt: Should generate field widget?

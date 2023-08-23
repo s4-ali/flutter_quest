@@ -36,7 +36,7 @@ class PropertyProvider {
 class PropertyParams<T> {
   final String id;
   final String title;
-  final T? value;
+  final T? initialValue;
   final T defaultValue;
   final bool isOptional;
 
@@ -45,8 +45,8 @@ class PropertyParams<T> {
     required this.title,
     required this.defaultValue,
     this.isOptional = true,
-    this.value,
-  });
+    T? initialValue,
+  }): initialValue = isOptional?initialValue:initialValue??defaultValue;
 }
 
 abstract class PropertyField<T extends PropertyParams, U> {
@@ -57,19 +57,19 @@ abstract class PropertyField<T extends PropertyParams, U> {
 
   PropertyField(this._provider, this.params);
 
-  Widget build(T params, Function(U?) onChanged, U? value);
+  Widget build(T params, Function(U) onChanged, U value);
 
   U? call() {
-    _provider.setInitialValue(params.id, params.value);
+    _provider.setInitialValue(params.id, params.initialValue);
 
     if (_provider.widgets.alreadyExists(params.id)) {
       return _provider.getValueOf(
-          params.id, params.isOptional ? null : params.value);
+          params.id, params.isOptional ? null : params.initialValue);
     }
 
     PropertyHolder buildPropertyField(Function(U?) onChanged) {
       final value = _provider.getValueOf(
-          params.id, params.isOptional ? null : params.value);
+          params.id, params.isOptional ? null : params.initialValue);
       return PropertyHolder<U>(
         id: params.id,
         widget: FieldTitle(
@@ -81,7 +81,7 @@ abstract class PropertyField<T extends PropertyParams, U> {
               : build(
                   params,
                   onChanged,
-                  value,
+                  value!,
                 ),
         ),
       );

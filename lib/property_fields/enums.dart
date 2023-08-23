@@ -7,11 +7,11 @@ class EnumPropertyParams<T> extends PropertyParams<T> {
 
   EnumPropertyParams({
     required super.id,
-    required super.value,
+    super.initialValue,
     required super.title,
-    required this.values,
     required super.defaultValue,
-    required super.isOptional,
+    super.isOptional,
+    required this.values,
   });
 }
 
@@ -20,28 +20,31 @@ class EnumPropertyField<T> extends PropertyField<EnumPropertyParams<T>, T> {
 
   @override
   Widget build(
-    EnumPropertyParams<T> params,
-    Function(T?) onChanged,
-    T? value,
+    EnumPropertyParams params,
+    Function(T) onChanged,
+    T value,
   ) {
     return DropDownField<T>(onChanged: onChanged, values: params.values, initial: params.value,);
   }
 }
 
 extension EnumFieldPropertyProvider on PropertyProvider {
-  T enumOptions<T>({
+  T? enumOptions<T>({
     required String id,
     required String title,
-    required T initial,
     required List<T> values,
+    T? initialValue,
+    bool isOptional = true,
+    T? defaultValue,
   }) {
     final params = EnumPropertyParams<T>(
-        id: id,
-        value: initial,
-        title: title,
-        values: values,
-        defaultValue: values[0],
-        isOptional: false);
+      id: id,
+      initialValue: initialValue,
+      title: title,
+      values: values,
+      defaultValue: defaultValue ?? values[0],
+      isOptional: isOptional,
+    );
     return EnumPropertyField<T>(
       this,
       params,

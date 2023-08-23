@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/boolean_field.dart';
 
+
 class BooleanPropertyParams extends PropertyParams<bool> {
   BooleanPropertyParams({
     required super.id,
-    super.value,
+    super.initialValue,
     required super.title,
-    super.defaultValue = false,
-    super.isOptional
+    required super.defaultValue,
+    super.isOptional,
   });
 }
 
-class BooleanPropertyField extends PropertyField<BooleanPropertyParams, bool> {
+class BooleanPropertyField
+    extends PropertyField<BooleanPropertyParams, bool> {
   BooleanPropertyField(super.provider, super.params);
 
   @override
@@ -20,14 +22,11 @@ class BooleanPropertyField extends PropertyField<BooleanPropertyParams, bool> {
 
   @override
   Widget build(
-      BooleanPropertyParams params,
-      Function(bool?) onChanged,
-      bool? value,
-      ) {
-    return BooleanField(
-      onChanged: onChanged,
-      initial: value!,
-    );
+    BooleanPropertyParams params,
+    Function(bool) onChanged,
+    bool value,
+  ) {
+    return BooleanField(onChanged: onChanged, value: value);
   }
 }
 
@@ -35,12 +34,16 @@ extension BooleanFieldPropertyProvider on PropertyProvider {
   bool? booleanField({
     required String id,
     required String title,
-    required bool initial,
+    bool? initialValue,
+    bool isOptional = true,
+    bool defaultValue = false,
   }) {
     final params = BooleanPropertyParams(
       id: id,
-      value: initial,
       title: title,
+      isOptional: isOptional,
+      defaultValue: defaultValue,
+      initialValue: initialValue,
     );
     return BooleanPropertyField(
       this,

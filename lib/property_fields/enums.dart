@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_provider.dart';
+import 'package:flutter_quest/widgets/fields/drop_down_button.dart';
 
 class EnumPropertyParams<T> extends PropertyParams<T> {
   final List<T> values;
@@ -14,16 +15,16 @@ class EnumPropertyParams<T> extends PropertyParams<T> {
   });
 }
 
-class EnumPropertyField<T> extends PropertyField<EnumPropertyParams, T> {
+class EnumPropertyField<T> extends PropertyField<EnumPropertyParams<T>, T> {
   EnumPropertyField(super.provider, super.params);
 
   @override
   Widget build(
-    EnumPropertyParams params,
+    EnumPropertyParams<T> params,
     Function(T?) onChanged,
     T? value,
   ) {
-    return Text(params.values.toString());
+    return DropDownField<T>(onChanged: onChanged, values: params.values, initial: params.value,);
   }
 }
 

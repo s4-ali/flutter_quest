@@ -47,6 +47,8 @@ class AppTextField extends StatelessWidget {
         controller: controller,
         keyboardType: keyboardType,
         onSubmitted: onChanged,
+        onEditingComplete: () => onChanged(controller.text),
+        onTapOutside: (_) => onChanged(controller.text),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_provider.dart';
+import 'package:flutter_quest/widgets/fields/number_field.dart';
 
 class NumberPropertyParams extends PropertyParams<num> {
   NumberPropertyParams({
@@ -20,7 +21,10 @@ class NumberPropertyField extends PropertyField<NumberPropertyParams, num> {
     Function(num) onChanged,
     num value,
   ) {
-    return const Placeholder();
+    return NumberField(
+      onChanged: onChanged,
+      value: value,
+    );
   }
 }
 
@@ -62,8 +66,8 @@ extension NumberFieldPropertyProvider on PropertyProvider {
   }
 
   double? widthField({
-    String id = "height",
-    String title = "Height",
+    String id = "width",
+    String title = "Width",
     num? initialValue,
     bool isOptional = true,
     num defaultValue = 0,

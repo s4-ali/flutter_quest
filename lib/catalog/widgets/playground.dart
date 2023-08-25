@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quest/property_fields/boolean_field.dart';
 import 'package:flutter_quest/property_fields/list_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
+import 'package:flutter_quest/property_fields/padding_field.dart';
 import 'package:flutter_quest/widgets/core/propery_builder.dart';
 
 class PropertyPlayground extends StatelessWidget {
@@ -25,6 +26,8 @@ class PropertyPlayground extends StatelessWidget {
             "Four",
           ],
         );
+        final padding = provider.paddingField(id: 'padding', title: 'Padding', );
+        final margin = provider.paddingField(id: 'margin', title: 'Margin', );
 
         final color = isRed == null
             ? Colors.green
@@ -35,6 +38,8 @@ class PropertyPlayground extends StatelessWidget {
         return Container(
           height: height,
           width: width,
+          padding: padding,
+          margin: margin,
           decoration: BoxDecoration(
             color: color,
           ),

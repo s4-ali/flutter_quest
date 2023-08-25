@@ -20,7 +20,7 @@ class _AllPaddingState extends State<AllPadding> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 6),
+      padding: const EdgeInsets.only(top: 8.5, left: 2),
       alignment: Alignment.center,
       height: 124,
       width: 124,

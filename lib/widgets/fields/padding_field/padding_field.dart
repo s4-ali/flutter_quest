@@ -79,7 +79,7 @@ class _AppPaddingFieldState<EdgeInsetsGeometry>
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.only(top: 6.5, bottom: 9.5, left: 16, right: 16),
             child: Center(child: Text(text)),
           ),
         ),

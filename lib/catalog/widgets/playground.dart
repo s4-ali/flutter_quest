@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/property_fields/alignment_field.dart';
 import 'package:flutter_quest/property_fields/boolean_field.dart';
 import 'package:flutter_quest/property_fields/list_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
@@ -31,18 +32,22 @@ class PropertyPlayground extends StatelessWidget {
             : isRed
                 ? Colors.red
                 : Colors.blue;
+        final alignment = provider.alignmentField(id: "alignment", title: "Alignment");
 
-        return Container(
-          height: height,
-          width: width,
-          decoration: BoxDecoration(
-            color: color,
+        return Align(
+          alignment: alignment?? Alignment.center,
+          child: Container(
+            height: height,
+            width: width,
+            decoration: BoxDecoration(
+              color: color,
+            ),
+            child: text == null
+                ? null
+                : Center(
+                    child: Text(text),
+                  ),
           ),
-          child: text == null
-              ? null
-              : Center(
-                  child: Text(text),
-                ),
         );
       },
     );

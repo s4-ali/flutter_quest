@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/padding_field.dart';
@@ -25,7 +24,6 @@ class PaddingPropertyField
   ) {
     return PaddingField(
       onChanged: onChanged,
-      value: value,
     );
   }
 }

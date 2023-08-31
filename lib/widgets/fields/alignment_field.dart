@@ -40,10 +40,8 @@ class _AlignmentFieldState extends State<AlignmentField> {
                     onChanged: (alignment) {
                       setState(() {
                         widget.onChanged(alignment);
-                        if (selectedOptionIndex == index) {
-                          selectedOptionIndex = 0; // Deselect if already selected.
-                        } else {
-                          selectedOptionIndex = index;
+                        if (selectedOptionIndex != index) {
+                          selectedOptionIndex = index; // Deselect if already selected.
                         }
                       });
                     },

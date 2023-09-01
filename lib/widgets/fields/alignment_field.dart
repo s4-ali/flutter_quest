@@ -1,5 +1,17 @@
 import 'package:flutter/material.dart';
 
+enum AlignmentOption {
+  topLeft,
+  topCenter,
+  topRight,
+  centerLeft,
+  center,
+  centerRight,
+  bottomLeft,
+  bottomCenter,
+  bottomRight,
+}
+
 class AlignmentField extends StatefulWidget {
   final void Function(Alignment) onChanged;
 
@@ -14,7 +26,7 @@ class AlignmentField extends StatefulWidget {
 
 class _AlignmentFieldState extends State<AlignmentField> {
 
-  int selectedOptionIndex = 5;
+  AlignmentOption selectedOption = AlignmentOption.center;
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +46,18 @@ class _AlignmentFieldState extends State<AlignmentField> {
             children: List.generate(3, (row) {
               return Row(
                 children: List.generate(3, (col) {
-                  int index = row * 3 + col + 1;
+                  AlignmentOption option = AlignmentOption.values[row * 3 + col];
                   return AlignmentFieldItem(
-                    index: index,
+                    option: option,
                     onChanged: (alignment) {
                       setState(() {
                         widget.onChanged(alignment);
-                        if (selectedOptionIndex != index) {
-                          selectedOptionIndex = index; // Deselect if already selected.
+                        if (selectedOption != option) {
+                          selectedOption = option; // Deselect if already selected.
                         }
                       });
                     },
-                    isSelected: selectedOptionIndex == index,
+                    isSelected: selectedOption == option,
                   );
                 }),
               );
@@ -59,15 +71,15 @@ class _AlignmentFieldState extends State<AlignmentField> {
 
 class AlignmentFieldItem extends StatefulWidget {
 
-  int index;
+  final AlignmentOption option;
   void Function(Alignment) onChanged;
   bool isSelected = false;
 
   AlignmentFieldItem({
     super.key,
-    required this.index,
     required this.onChanged,
     required this.isSelected,
+    required this.option,
   });
 
   @override
@@ -75,52 +87,53 @@ class AlignmentFieldItem extends StatefulWidget {
 }
 
 class _AlignmentFieldItemState extends State<AlignmentFieldItem> {
+
   BorderRadius? borderRadius;
   String text = "";
   Alignment? alignment;
 
-  int onHoverOptionIndex = 0;
+  AlignmentOption? onHoverOption;
   bool isHover = false;
 
   @override
   Widget build(BuildContext context) {
-    switch (widget.index) {
-      case 1:
+    switch (widget.option) {
+      case AlignmentOption.topLeft:
         borderRadius = const BorderRadius.only(topLeft: Radius.circular(7));
         text = "Top Left";
         alignment = Alignment.topLeft;
         break;
-      case 2:
+      case AlignmentOption.topCenter:
         text = "Top";
         alignment = Alignment.topCenter;
         break;
-      case 3:
+      case AlignmentOption.topRight:
         borderRadius = const BorderRadius.only(topRight: Radius.circular(7));
         text = "Top Right";
         alignment = Alignment.topRight;
         break;
-      case 4:
+      case AlignmentOption.centerLeft:
         text = "Left";
         alignment = Alignment.centerLeft;
         break;
-      case 5:
+      case AlignmentOption.center:
         text = "Center";
         alignment = Alignment.center;
         break;
-      case 6:
+      case AlignmentOption.centerRight:
         text = "Right";
         alignment = Alignment.centerRight;
         break;
-      case 7:
+      case AlignmentOption.bottomLeft:
         borderRadius = const BorderRadius.only(bottomLeft: Radius.circular(7));
         text = "Bottom Left";
         alignment = Alignment.bottomLeft;
         break;
-      case 8:
+      case AlignmentOption.bottomCenter:
         text = "Bottom";
         alignment = Alignment.bottomCenter;
         break;
-      case 9:
+      case AlignmentOption.bottomRight:
         borderRadius = const BorderRadius.only(bottomRight: Radius.circular(7));
         text = "Bottom Right";
         alignment = Alignment.bottomRight;
@@ -141,7 +154,7 @@ class _AlignmentFieldItemState extends State<AlignmentFieldItem> {
       onHover: (val) {
         setState(() {
           isHover = val;
-          onHoverOptionIndex = widget.index;
+          onHoverOption = widget.option;
         });
       },
       child: Container(
@@ -160,7 +173,7 @@ class _AlignmentFieldItemState extends State<AlignmentFieldItem> {
         child: Center(
           child: Text(
             (widget.isSelected ||
-                    isHover == true && onHoverOptionIndex == widget.index)
+                    isHover == true && onHoverOption == widget.option)
                 ? text : "",
             style: TextStyle(
               color: widget.isSelected ? Colors.white : const Color(0xFF49454F),

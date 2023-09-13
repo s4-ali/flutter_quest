@@ -35,7 +35,7 @@ class _AlignmentFieldState extends State<AlignmentField> {
         Container(
           width: 318,
           decoration: BoxDecoration(
-            color: const Color(0xFF36343B),
+            color: const Color(0xFF211F26),
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
               color: Colors.white,
@@ -72,10 +72,10 @@ class _AlignmentFieldState extends State<AlignmentField> {
 class AlignmentFieldItem extends StatefulWidget {
 
   final AlignmentOption option;
-  void Function(Alignment) onChanged;
-  bool isSelected = false;
+  final void Function(Alignment) onChanged;
+  final bool isSelected;
 
-  AlignmentFieldItem({
+  const AlignmentFieldItem({
     super.key,
     required this.onChanged,
     required this.isSelected,
@@ -163,7 +163,7 @@ class _AlignmentFieldItemState extends State<AlignmentFieldItem> {
         alignment: Alignment.center,
         width: 105.3,
         decoration: BoxDecoration(
-          color: const Color(0xFF36343B),
+          color: widget.isSelected ? const Color(0xFF36343B): Colors.transparent,
           border: Border.all(
             color: widget.isSelected ? Colors.white : const Color(0xFF49454F),
             width: 1,
@@ -176,7 +176,7 @@ class _AlignmentFieldItemState extends State<AlignmentFieldItem> {
                     isHover == true && onHoverOption == widget.option)
                 ? text : "",
             style: TextStyle(
-              color: widget.isSelected ? Colors.white : const Color(0xFF49454F),
+              color: widget.isSelected ? const Color(0xFFE6E0E9) : const Color(0xFF49454F),
             ),
           ),
         ),

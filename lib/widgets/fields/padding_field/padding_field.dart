@@ -1,31 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/widgets/fields/padding_field/padding_types/all_padding.dart';
-import 'package:flutter_quest/widgets/fields/padding_field/padding_types/only_padding.dart';
-import 'package:flutter_quest/widgets/fields/padding_field/padding_types/symmetric_padding.dart';
+import 'package:flutter_quest/widgets/fields/padding_field/padding_types_layout.dart';
 
-class AppPaddingField extends StatefulWidget {
+class PaddingField extends StatefulWidget {
+  final void Function(EdgeInsets) onChanged;
 
-  final Function(EdgeInsets) onChanged;
-  final EdgeInsets values;
-
-  const AppPaddingField({
-    super.key,
+  const PaddingField({
+    Key? key, // Add the 'key' parameter
     required this.onChanged,
-    required this.values,
-  });
+  }) : super(key: key);
 
   @override
-  State<AppPaddingField> createState() =>
-      _AppPaddingFieldState<EdgeInsetsGeometry>();
+  State<PaddingField> createState() => _PaddingFieldState();
 }
 
-class _AppPaddingFieldState<EdgeInsetsGeometry>
-    extends State<AppPaddingField> {
-  int selectedOption = 1;
-  int selectedIndex = 1;
+class _PaddingFieldState extends State<PaddingField> {
+  PaddingType selectedOption = PaddingType.all;
 
   @override
   Widget build(BuildContext context) {
+    Widget paddingBoxType;
+
+    switch (selectedOption) {
+      case PaddingType.all:
+        paddingBoxType = PaddingTypeLayouts(
+          paddingType: PaddingType.all,
+          onChanged: widget.onChanged,
+        );
+      case PaddingType.only:
+        paddingBoxType = PaddingTypeLayouts(
+          paddingType: PaddingType.only,
+          onChanged: widget.onChanged,
+        );
+      case PaddingType.symmetric:
+        paddingBoxType = PaddingTypeLayouts(
+          paddingType: PaddingType.symmetric,
+          onChanged: widget.onChanged,
+        );
+    }
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,35 +45,74 @@ class _AppPaddingFieldState<EdgeInsetsGeometry>
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            customRadioButton("All", 1),
-            customRadioButton("Only", 2),
-            customRadioButton("Symmetric", 3),
+            PaddingTypeSelectionRadioButton(
+              text: "All",
+              paddingType: PaddingType.all,
+              selectedOption: selectedOption,
+              onTap: () {
+                setState(() {
+                  selectedOption = PaddingType.all;
+                });
+              },
+            ),
+            PaddingTypeSelectionRadioButton(
+              text: "Only",
+              paddingType: PaddingType.only,
+              selectedOption: selectedOption,
+              onTap: () {
+                setState(() {
+                  selectedOption = PaddingType.only;
+                });
+              },
+            ),
+            PaddingTypeSelectionRadioButton(
+              text: "Symmetric",
+              paddingType: PaddingType.symmetric,
+              selectedOption: selectedOption,
+              onTap: () {
+                setState(() {
+                  selectedOption = PaddingType.symmetric;
+                });
+              },
+            ),
           ],
         ),
         Column(
           children: [
-            (selectedIndex == 1) ? AllPadding(onChanged: (padding)=>{
-              widget.onChanged(padding),
-            }) : const SizedBox(),
-            (selectedIndex == 2) ? OnlyPadding(onChanged: (padding)=>{
-              widget.onChanged(padding),
-            }) : const SizedBox(),
-            (selectedIndex == 3) ? SymmetricPadding(onChanged: (padding)=>{
-              widget.onChanged(padding),
-            }) : const SizedBox(),
+            paddingBoxType,
           ],
         ),
       ],
     );
   }
+}
 
-  Widget customRadioButton(String text, int index) {
+class PaddingTypeSelectionRadioButton extends StatefulWidget {
+  final String text;
+  final PaddingType paddingType;
+  final PaddingType selectedOption;
+  final Function() onTap;
+
+  const PaddingTypeSelectionRadioButton({
+    Key? key, // Add the 'key' parameter
+    required this.text,
+    required this.paddingType,
+    required this.selectedOption,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  State<PaddingTypeSelectionRadioButton> createState() =>
+      _PaddingTypeSelectionRadioButtonState();
+}
+
+class _PaddingTypeSelectionRadioButtonState
+    extends State<PaddingTypeSelectionRadioButton> {
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          selectedOption = index;
-          selectedIndex = index;
-        });
+        widget.onTap();
       },
       child: Padding(
         padding: const EdgeInsets.all(2.5),
@@ -70,17 +120,21 @@ class _AppPaddingFieldState<EdgeInsetsGeometry>
           decoration: BoxDecoration(
             color: const Color(0xFF36343B),
             border: Border.all(
-              color:
-                  (selectedOption == index) ? Colors.white : Colors.transparent,
-              width: (selectedOption == index) ? 1.0 : 0.0,
+              color: (widget.selectedOption == widget.paddingType)
+                  ? Colors.white
+                  : Colors.transparent,
+              width: 1.0,
             ),
             borderRadius: const BorderRadius.all(
               Radius.circular(8),
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(top: 6.5, bottom: 9.5, left: 16, right: 16),
-            child: Center(child: Text(text)),
+            padding:
+                const EdgeInsets.only(left: 16, right: 16, top: 6, bottom: 10),
+            child: Center(
+              child: Text(widget.text),
+            ),
           ),
         ),
       ),

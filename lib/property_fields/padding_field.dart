@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_quest/core/property_provider.dart';
-import 'package:flutter_quest/widgets/fields/padding_field.dart';
+import 'package:flutter_quest/widgets/fields/padding_field/padding_field.dart';
 
 class PaddingPropertyParams extends PropertyParams<EdgeInsets> {
   PaddingPropertyParams({

@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 
-enum PaddingTypeSelection {
+enum PaddingType {
   all,
   only,
   symmetric,
 }
 
-class PaddingTypes extends StatefulWidget {
+class PaddingTypeLayouts extends StatefulWidget {
   final Function(EdgeInsets) onChanged;
-  final PaddingTypeSelection paddingType;
+  final PaddingType paddingType;
 
-  PaddingTypes({
+  const PaddingTypeLayouts({
     Key? key,
     required this.onChanged,
     required this.paddingType,
   }) : super(key: key);
 
   @override
-  State<PaddingTypes> createState() => _PaddingTypesState();
+  State<PaddingTypeLayouts> createState() => _PaddingTypeLayoutsState();
 }
 
-class _PaddingTypesState extends State<PaddingTypes> {
+class _PaddingTypeLayoutsState extends State<PaddingTypeLayouts> {
   double top = 0.0;
   double bottom = 0.0;
   double left = 0.0;
@@ -30,17 +30,17 @@ class _PaddingTypesState extends State<PaddingTypes> {
 
   @override
   Widget build(BuildContext context) {
-    Widget paddingWidget;
+    Widget paddingTypeWidget;
 
     switch (widget.paddingType) {
-      case PaddingTypeSelection.all:
-        paddingWidget = _allPaddingWidget();
+      case PaddingType.all:
+        paddingTypeWidget = paddingTypeAll();
         break;
-      case PaddingTypeSelection.only:
-        paddingWidget = _onlyPaddingWidget();
+      case PaddingType.only:
+        paddingTypeWidget = paddingTypeOnly();
         break;
-      case PaddingTypeSelection.symmetric:
-        paddingWidget = _symmetricPaddingWidget();
+      case PaddingType.symmetric:
+        paddingTypeWidget = paddingTypeSymmetric();
         break;
     }
 
@@ -58,12 +58,12 @@ class _PaddingTypesState extends State<PaddingTypes> {
         ),
       ),
       child: Center(
-        child: paddingWidget,
+        child: paddingTypeWidget,
       ),
     );
   }
 
-  Widget _allPaddingWidget() {
+  Widget paddingTypeAll() {
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 10),
@@ -73,12 +73,12 @@ class _PaddingTypesState extends State<PaddingTypes> {
                 widget.onChanged(EdgeInsets.all(value));
               });
             },
-            paddingType: PaddingTypeSelection.all),
+            paddingType: PaddingType.all),
       ),
     );
   }
 
-  Widget _onlyPaddingWidget() {
+  Widget paddingTypeOnly() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -96,7 +96,7 @@ class _PaddingTypesState extends State<PaddingTypes> {
                   ));
                 });
               },
-              paddingType: PaddingTypeSelection.only),
+              paddingType: PaddingType.only),
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -113,7 +113,7 @@ class _PaddingTypesState extends State<PaddingTypes> {
                         ));
                       });
                     },
-                    paddingType: PaddingTypeSelection.only),
+                    paddingType: PaddingType.only),
                 const Icon(Icons.add, size: 30),
                 BorderlessTextField(
                     onChanged: (value) {
@@ -127,7 +127,7 @@ class _PaddingTypesState extends State<PaddingTypes> {
                         ));
                       });
                     },
-                    paddingType: PaddingTypeSelection.only),
+                    paddingType: PaddingType.only),
               ],
             ),
           ),
@@ -143,13 +143,13 @@ class _PaddingTypesState extends State<PaddingTypes> {
                   ));
                 });
               },
-              paddingType: PaddingTypeSelection.only),
+              paddingType: PaddingType.only),
         ],
       ),
     );
   }
 
-  Widget _symmetricPaddingWidget() {
+  Widget paddingTypeSymmetric() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -162,10 +162,11 @@ class _PaddingTypesState extends State<PaddingTypes> {
                   widget.onChanged(EdgeInsets.symmetric(
                     vertical: vertical,
                     horizontal: horizontal,
-                  ));
+                  ),
+                  );
                 });
               },
-              paddingType: PaddingTypeSelection.symmetric),
+              paddingType: PaddingType.symmetric),
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -178,10 +179,10 @@ class _PaddingTypesState extends State<PaddingTypes> {
                         widget.onChanged(EdgeInsets.symmetric(
                           vertical: vertical,
                           horizontal: horizontal,
-                        ));
+                        ),);
                       });
                     },
-                    paddingType: PaddingTypeSelection.symmetric),
+                    paddingType: PaddingType.symmetric),
                 const Icon(Icons.add, size: 30),
                 SymmetricOppositeField(hint: horizontal.toString(),),
               ],
@@ -196,28 +197,27 @@ class _PaddingTypesState extends State<PaddingTypes> {
 
 class BorderlessTextField extends StatelessWidget {
   final Function(double) onChanged;
-  final PaddingTypeSelection paddingType;
+  final PaddingType paddingType;
+  final EdgeInsets paddingValue = EdgeInsets.zero;
 
-  BorderlessTextField({
+  const BorderlessTextField({
     super.key,
     required this.onChanged,
     required this.paddingType,
   });
-
-  EdgeInsets paddingValue = EdgeInsets.zero;
 
   @override
   Widget build(BuildContext context) {
     String type;
 
     switch (paddingType) {
-      case PaddingTypeSelection.all:
+      case PaddingType.all:
         type = "all";
         break;
-      case PaddingTypeSelection.only:
+      case PaddingType.only:
         type = "only";
         break;
-      case PaddingTypeSelection.symmetric:
+      case PaddingType.symmetric:
         type = "symmetric";
         break;
     }

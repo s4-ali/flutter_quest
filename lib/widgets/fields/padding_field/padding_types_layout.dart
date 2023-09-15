@@ -30,20 +30,6 @@ class _PaddingTypeLayoutsState extends State<PaddingTypeLayouts> {
 
   @override
   Widget build(BuildContext context) {
-    Widget paddingTypeWidget;
-
-    switch (widget.paddingType) {
-      case PaddingType.all:
-        paddingTypeWidget = paddingTypeAll();
-        break;
-      case PaddingType.only:
-        paddingTypeWidget = paddingTypeOnly();
-        break;
-      case PaddingType.symmetric:
-        paddingTypeWidget = paddingTypeSymmetric();
-        break;
-    }
-
     return Container(
       height: 124,
       width: 124,
@@ -58,7 +44,11 @@ class _PaddingTypeLayoutsState extends State<PaddingTypeLayouts> {
         ),
       ),
       child: Center(
-        child: paddingTypeWidget,
+        child: widget.paddingType == PaddingType.all
+            ? paddingTypeAll()
+            : widget.paddingType == PaddingType.only
+                ? paddingTypeOnly()
+                : paddingTypeSymmetric(),
       ),
     );
   }
@@ -79,116 +69,98 @@ class _PaddingTypeLayoutsState extends State<PaddingTypeLayouts> {
   }
 
   Widget paddingTypeOnly() {
+    EdgeInsets padding = EdgeInsets.only(
+      top: top,
+      left: left,
+      right: right,
+      bottom: bottom,
+    );
+
+    void updatePadding(
+        {double? newTop,
+        double? newLeft,
+        double? newRight,
+        double? newBottom}) {
+      setState(() {
+        top = newTop ?? top;
+        left = newLeft ?? left;
+        right = newRight ?? right;
+        bottom = newBottom ?? bottom;
+        widget.onChanged(padding);
+      });
+    }
+
+    PaddingType paddingType = PaddingType.only;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           BorderlessTextField(
-              onChanged: (value) {
-                setState(() {
-                  top = value;
-                  widget.onChanged(EdgeInsets.only(
-                    top: top,
-                    left: left,
-                    right: right,
-                    bottom: bottom,
-                  ));
-                });
-              },
-              paddingType: PaddingType.only),
+            onChanged: (value) => updatePadding(newTop: value),
+            paddingType: paddingType,
+          ),
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 BorderlessTextField(
-                    onChanged: (value) {
-                      setState(() {
-                        left = value;
-                        widget.onChanged(EdgeInsets.only(
-                          top: top,
-                          left: left,
-                          right: right,
-                          bottom: bottom,
-                        ));
-                      });
-                    },
-                    paddingType: PaddingType.only),
+                  onChanged: (value) => updatePadding(newLeft: value),
+                  paddingType: paddingType,
+                ),
                 const Icon(Icons.add, size: 30),
                 BorderlessTextField(
-                    onChanged: (value) {
-                      setState(() {
-                        right = value;
-                        widget.onChanged(EdgeInsets.only(
-                          top: top,
-                          left: left,
-                          right: right,
-                          bottom: bottom,
-                        ));
-                      });
-                    },
-                    paddingType: PaddingType.only),
+                  onChanged: (value) => updatePadding(newRight: value),
+                  paddingType: paddingType,
+                ),
               ],
             ),
           ),
           BorderlessTextField(
-              onChanged: (value) {
-                setState(() {
-                  bottom = value;
-                  widget.onChanged(EdgeInsets.only(
-                    top: top,
-                    left: left,
-                    right: right,
-                    bottom: bottom,
-                  ));
-                });
-              },
-              paddingType: PaddingType.only),
+            onChanged: (value) => updatePadding(newBottom: value),
+            paddingType: paddingType,
+          ),
         ],
       ),
     );
   }
 
   Widget paddingTypeSymmetric() {
+    void updatePadding({double? newVertical, double? newHorizontal}) {
+      setState(() {
+        vertical = newVertical ?? vertical;
+        horizontal = newHorizontal ?? horizontal;
+        widget.onChanged(EdgeInsets.symmetric(
+          vertical: vertical,
+          horizontal: horizontal,
+        ));
+      });
+    }
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           BorderlessTextField(
-              onChanged: (value) {
-                setState(() {
-                  vertical = value;
-                  widget.onChanged(EdgeInsets.symmetric(
-                    vertical: vertical,
-                    horizontal: horizontal,
-                  ),
-                  );
-                });
-              },
-              paddingType: PaddingType.symmetric),
+            onChanged: (value) => updatePadding(newVertical: value),
+            paddingType: PaddingType.symmetric,
+          ),
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 BorderlessTextField(
-                    onChanged: (value) {
-                      setState(() {
-                        horizontal = value;
-                        widget.onChanged(EdgeInsets.symmetric(
-                          vertical: vertical,
-                          horizontal: horizontal,
-                        ),);
-                      });
-                    },
-                    paddingType: PaddingType.symmetric),
+                  onChanged: (value) => updatePadding(newHorizontal: value),
+                  paddingType: PaddingType.symmetric,
+                ),
                 const Icon(Icons.add, size: 30),
-                SymmetricOppositeField(hint: horizontal.toString(),),
+                SymmetricOppositeField(hint: horizontal.toString()),
               ],
             ),
           ),
-          SymmetricOppositeField(hint: vertical.toString(),),
+          SymmetricOppositeField(hint: vertical.toString()),
         ],
       ),
     );
@@ -208,29 +180,17 @@ class BorderlessTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String type;
 
-    switch (paddingType) {
-      case PaddingType.all:
-        type = "all";
-        break;
-      case PaddingType.only:
-        type = "only";
-        break;
-      case PaddingType.symmetric:
-        type = "symmetric";
-        break;
-    }
 
     return SizedBox(
-      width: type == "all" ? 60 : 40,
-      height: type == "all" ? 60 : 40,
+      width: paddingType == PaddingType.all? 60 : 40,
+      height: paddingType == PaddingType.all ? 60 : 40,
       child: TextField(
         onChanged: (value) {
           onChanged(double.parse(value));
         },
         maxLines: 1,
-        style: TextStyle(fontSize: type == "all" ? 18 : 12),
+        style: TextStyle(fontSize: paddingType == PaddingType.all ? 18 : 12),
         textAlign: TextAlign.center,
         decoration: const InputDecoration(
           contentPadding: EdgeInsets.all(0.0),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/widgets/fields/padding_field/padding_types_layout.dart';
+
+import 'padding_types_layout.dart';
 
 class PaddingField extends StatefulWidget {
   final void Function(EdgeInsets) onChanged;
 
   const PaddingField({
-    Key? key, // Add the 'key' parameter
+    Key? key,
     required this.onChanged,
   }) : super(key: key);
 
@@ -18,25 +19,6 @@ class _PaddingFieldState extends State<PaddingField> {
 
   @override
   Widget build(BuildContext context) {
-    Widget paddingBoxType;
-
-    switch (selectedOption) {
-      case PaddingType.all:
-        paddingBoxType = PaddingTypeLayouts(
-          paddingType: PaddingType.all,
-          onChanged: widget.onChanged,
-        );
-      case PaddingType.only:
-        paddingBoxType = PaddingTypeLayouts(
-          paddingType: PaddingType.only,
-          onChanged: widget.onChanged,
-        );
-      case PaddingType.symmetric:
-        paddingBoxType = PaddingTypeLayouts(
-          paddingType: PaddingType.symmetric,
-          onChanged: widget.onChanged,
-        );
-    }
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,57 +27,34 @@ class _PaddingFieldState extends State<PaddingField> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            PaddingTypeSelectionRadioButton(
-              text: "All",
-              paddingType: PaddingType.all,
-              selectedOption: selectedOption,
-              onTap: () {
-                setState(() {
-                  selectedOption = PaddingType.all;
-                });
-              },
-            ),
-            PaddingTypeSelectionRadioButton(
-              text: "Only",
-              paddingType: PaddingType.only,
-              selectedOption: selectedOption,
-              onTap: () {
-                setState(() {
-                  selectedOption = PaddingType.only;
-                });
-              },
-            ),
-            PaddingTypeSelectionRadioButton(
-              text: "Symmetric",
-              paddingType: PaddingType.symmetric,
-              selectedOption: selectedOption,
-              onTap: () {
-                setState(() {
-                  selectedOption = PaddingType.symmetric;
-                });
-              },
-            ),
+            for (final padding in PaddingType.values) ...[
+              PaddingTypeSelectionRadioButton(
+                  paddingType: padding,
+                  selectedOption: selectedOption,
+                  onTap: (value) {
+                    setState(() {
+                      selectedOption = value;
+                    });
+                  }),
+            ],
           ],
         ),
-        Column(
-          children: [
-            paddingBoxType,
-          ],
-        ),
+        PaddingTypeLayouts(
+          onChanged: widget.onChanged,
+          paddingType: selectedOption,
+        )
       ],
     );
   }
 }
 
 class PaddingTypeSelectionRadioButton extends StatefulWidget {
-  final String text;
   final PaddingType paddingType;
   final PaddingType selectedOption;
-  final Function() onTap;
+  final Function(PaddingType) onTap;
 
   const PaddingTypeSelectionRadioButton({
-    Key? key, // Add the 'key' parameter
-    required this.text,
+    Key? key,
     required this.paddingType,
     required this.selectedOption,
     required this.onTap,
@@ -112,7 +71,7 @@ class _PaddingTypeSelectionRadioButtonState
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.onTap();
+        widget.onTap(widget.paddingType);
       },
       child: Padding(
         padding: const EdgeInsets.all(2.5),
@@ -130,14 +89,29 @@ class _PaddingTypeSelectionRadioButtonState
             ),
           ),
           child: Padding(
-            padding:
-                const EdgeInsets.only(left: 16, right: 16, top: 6, bottom: 10),
+            padding: const EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 6,
+              bottom: 10,
+            ),
             child: Center(
-              child: Text(widget.text),
+              child: Text(
+                widget.paddingType.name.capitalizeFirstLetter(),
+              ),
             ),
           ),
         ),
       ),
     );
+  }
+}
+
+extension StringCapitalization on String {
+  String capitalizeFirstLetter() {
+    if (isEmpty) {
+      return this;
+    }
+    return this[0].toUpperCase() + substring(1);
   }
 }

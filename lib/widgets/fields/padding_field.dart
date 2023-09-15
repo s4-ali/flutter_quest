@@ -14,7 +14,7 @@ class PaddingField extends StatefulWidget {
 }
 
 class _PaddingFieldState extends State<PaddingField> {
-  int selectedOption = 1;
+  PaddingTypeSelection selectedOption = PaddingTypeSelection.all;
 
   @override
   Widget build(BuildContext context) {
@@ -26,62 +26,21 @@ class _PaddingFieldState extends State<PaddingField> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomRadioButton(
-              text: "All",
-              index: 1,
-              selectedOption: selectedOption,
-              onTap: (index) {
-                setState(() {
-                  selectedOption = index;
-                });
-              },
-            ),
-            CustomRadioButton(
-              text: "Only",
-              index: 2,
-              selectedOption: selectedOption,
-              onTap: (index) {
-                setState(() {
-                  selectedOption = index;
-                });
-              },
-            ),
-            CustomRadioButton(
-              text: "Symmetric",
-              index: 3,
-              selectedOption: selectedOption,
-              onTap: (index) {
-                setState(() {
-                  selectedOption = index;
-                });
-              },
-            ),
+            for (final padding in PaddingTypeSelection.values) ...[
+              CustomRadioButton(
+                  paddingType: padding,
+                  selectedOption: selectedOption,
+                  onTap: (paddingValue) {
+                    setState(() {
+                      selectedOption = paddingValue;
+                    });
+                  }),
+            ],
           ],
         ),
-        Column(
-          children: [
-            (selectedOption == 1)
-                ? PaddingTypes(
-                    paddingType: PaddingTypeSelection.all,
-                    onChanged: (padding) => {
-                          widget.onChanged(padding),
-                        })
-                : const SizedBox(),
-            (selectedOption == 2)
-                ? PaddingTypes(
-                    paddingType: PaddingTypeSelection.only,
-                    onChanged: (padding) => {
-                          widget.onChanged(padding),
-                        })
-                : const SizedBox(),
-            (selectedOption == 3)
-                ? PaddingTypes(
-                    paddingType: PaddingTypeSelection.symmetric,
-                    onChanged: (padding) => {
-                          widget.onChanged(padding),
-                        })
-                : const SizedBox(),
-          ],
+        PaddingTypes(
+          onChanged: widget.onChanged,
+          paddingType: selectedOption,
         ),
       ],
     );
@@ -89,15 +48,13 @@ class _PaddingFieldState extends State<PaddingField> {
 }
 
 class CustomRadioButton extends StatefulWidget {
-  final String text;
-  final int index;
-  final int selectedOption;
-  final Function(int) onTap;
+  final PaddingTypeSelection paddingType;
+  final PaddingTypeSelection selectedOption;
+  final Function(PaddingTypeSelection) onTap;
 
   const CustomRadioButton({
     super.key,
-    required this.text,
-    required this.index,
+    required this.paddingType,
     required this.selectedOption,
     required this.onTap,
   });
@@ -111,7 +68,7 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.onTap(widget.index);
+        widget.onTap(widget.paddingType);
       },
       child: Padding(
         padding: const EdgeInsets.all(2.5),
@@ -119,7 +76,7 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
           decoration: BoxDecoration(
             color: const Color(0xFF36343B),
             border: Border.all(
-              color: (widget.selectedOption == widget.index)
+              color: (widget.selectedOption == widget.paddingType)
                   ? Colors.white
                   : Colors.transparent,
               width: 1.0,
@@ -129,14 +86,29 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
             ),
           ),
           child: Padding(
-            padding:
-                const EdgeInsets.only(left: 16, right: 16, top: 6, bottom: 10),
+            padding: const EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 6,
+              bottom: 10,
+            ),
             child: Center(
-              child: Text(widget.text),
+              child: Text(
+                widget.paddingType.name.capitalizeFirstLetter(),
+              ),
             ),
           ),
         ),
       ),
     );
+  }
+}
+
+extension StringCapitalization on String {
+  String capitalizeFirstLetter() {
+    if (isEmpty) {
+      return this;
+    }
+    return this[0].toUpperCase() + substring(1);
   }
 }

@@ -6,13 +6,6 @@ enum PaddingType {
   symmetric,
 }
 
-enum PaddingFields {
-  top,
-  left,
-  right,
-  bottom,
-}
-
 class PaddingTypeLayouts extends StatefulWidget {
   final Function(EdgeInsets) onChanged;
   final PaddingType paddingType;
@@ -60,14 +53,6 @@ class _PaddingTypeLayoutsState extends State<PaddingTypeLayouts> {
     );
   }
 
-  void setValuesToNull() {
-    top = 0.0;
-    bottom = 0.0;
-    left = 0.0;
-    right = 0.0;
-    vertical = 0.0;
-    horizontal = 0.0;
-  }
 
   Widget _paddingTypeAll() {
     return Center(
@@ -106,7 +91,6 @@ class _PaddingTypeLayoutsState extends State<PaddingTypeLayouts> {
       });
     }
 
-    setValuesToNull();
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -149,7 +133,6 @@ class _PaddingTypeLayoutsState extends State<PaddingTypeLayouts> {
       });
     }
 
-    setValuesToNull();
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

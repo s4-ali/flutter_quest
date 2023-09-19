@@ -45,121 +45,10 @@ class _PaddingTypeLayoutsState extends State<PaddingTypeLayouts> {
       ),
       child: Center(
         child: widget.paddingType == PaddingType.all
-            ? _paddingTypeAll()
+            ? PaddingTypeAll(onChanged: widget.onChanged)
             : widget.paddingType == PaddingType.only
-                ? _onlyPaddingWidget()
-                : _symmetricPaddingWidget(),
-      ),
-    );
-  }
-
-
-  Widget _paddingTypeAll() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 10),
-        child: BorderlessTextField(
-            onChanged: (value) {
-              setState(() {
-                widget.onChanged(EdgeInsets.all(value));
-              });
-            },
-            paddingType: PaddingType.all),
-      ),
-    );
-  }
-
-  Widget _onlyPaddingWidget() {
-    void updateValues({
-      double? topValue,
-      double? bottomValue,
-      double? rightValue,
-      double? leftValue,
-    }) {
-      setState(() {
-        top = topValue ?? top;
-        bottom = bottomValue ?? bottom;
-        right = rightValue ?? right;
-        left = leftValue ?? left;
-
-        widget.onChanged(EdgeInsets.only(
-          top: top,
-          bottom: bottom,
-          right: right,
-          left: left,
-        ));
-      });
-    }
-
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          BorderlessTextField(
-              onChanged: (value) => updateValues(topValue: value),
-              paddingType: PaddingType.only),
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                BorderlessTextField(
-                    onChanged: (value) => updateValues(leftValue: value),
-                    paddingType: PaddingType.only),
-                const Icon(Icons.add, size: 30),
-                BorderlessTextField(
-                    onChanged: (value) => updateValues(rightValue: value),
-                    paddingType: PaddingType.only),
-              ],
-            ),
-          ),
-          BorderlessTextField(
-              onChanged: (value) => updateValues(bottomValue: value),
-              paddingType: PaddingType.only),
-        ],
-      ),
-    );
-  }
-
-  Widget _symmetricPaddingWidget() {
-    void updatePadding({double? verticalValue, double? horizontalValue}) {
-      setState(() {
-        vertical = verticalValue ?? vertical;
-        horizontal = horizontalValue ?? horizontal;
-        widget.onChanged(EdgeInsets.symmetric(
-          vertical: vertical,
-          horizontal: horizontal,
-        ));
-      });
-    }
-
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          BorderlessTextField(
-              onChanged: (value) => updatePadding(verticalValue: value),
-              paddingType: PaddingType.symmetric),
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                BorderlessTextField(
-                    onChanged: (value) => updatePadding(horizontalValue: value),
-                    paddingType: PaddingType.symmetric),
-                const Icon(Icons.add, size: 30),
-                SymmetricOppositeField(
-                  hint: horizontal.toString(),
-                ),
-              ],
-            ),
-          ),
-          SymmetricOppositeField(
-            hint: vertical.toString(),
-          ),
-        ],
+                ? PaddingTypeOnly(onChanged: widget.onChanged)
+                : PaddingTypeSymmetric(onChanged: widget.onChanged),
       ),
     );
   }
@@ -239,6 +128,160 @@ class SymmetricOppositeField extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class PaddingTypeAll extends StatelessWidget {
+  final Function(EdgeInsets) onChanged;
+
+  const PaddingTypeAll({Key? key, required this.onChanged}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: BorderlessTextField(
+          onChanged: (value) {
+            onChanged(EdgeInsets.all(value));
+          },
+          paddingType: PaddingType.all,
+        ),
+      ),
+    );
+  }
+}
+
+class PaddingTypeOnly extends StatefulWidget {
+  final Function(EdgeInsets) onChanged;
+
+  const PaddingTypeOnly({Key? key, required this.onChanged}) : super(key: key);
+
+  @override
+  _PaddingTypeOnlyState createState() => _PaddingTypeOnlyState();
+}
+
+class _PaddingTypeOnlyState extends State<PaddingTypeOnly> {
+  double top = 0.0;
+  double bottom = 0.0;
+  double right = 0.0;
+  double left = 0.0;
+
+  void updateValues({
+    double? topValue,
+    double? bottomValue,
+    double? rightValue,
+    double? leftValue,
+  }) {
+    setState(() {
+      top = topValue ?? top;
+      bottom = bottomValue ?? bottom;
+      right = rightValue ?? right;
+      left = leftValue ?? left;
+
+      widget.onChanged(EdgeInsets.only(
+        top: top,
+        bottom: bottom,
+        right: right,
+        left: left,
+      ));
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          BorderlessTextField(
+            onChanged: (value) => updateValues(topValue: value),
+            paddingType: PaddingType.only,
+          ),
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BorderlessTextField(
+                  onChanged: (value) => updateValues(leftValue: value),
+                  paddingType: PaddingType.only,
+                ),
+                const Icon(Icons.add, size: 30),
+                BorderlessTextField(
+                  onChanged: (value) => updateValues(rightValue: value),
+                  paddingType: PaddingType.only,
+                ),
+              ],
+            ),
+          ),
+          BorderlessTextField(
+            onChanged: (value) => updateValues(bottomValue: value),
+            paddingType: PaddingType.only,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PaddingTypeSymmetric extends StatefulWidget {
+  final Function(EdgeInsets) onChanged;
+
+  const PaddingTypeSymmetric({Key? key, required this.onChanged}) : super(key: key);
+
+  @override
+  _PaddingTypeSymmetricState createState() => _PaddingTypeSymmetricState();
+}
+
+class _PaddingTypeSymmetricState extends State<PaddingTypeSymmetric> {
+  double vertical = 0.0;
+  double horizontal = 0.0;
+
+  void updatePadding({double? verticalValue, double? horizontalValue}) {
+    setState(() {
+      vertical = verticalValue ?? vertical;
+      horizontal = horizontalValue ?? horizontal;
+      widget.onChanged(EdgeInsets.symmetric(
+        vertical: vertical,
+        horizontal: horizontal,
+      ));
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          BorderlessTextField(
+            onChanged: (value) => updatePadding(verticalValue: value),
+            paddingType: PaddingType.symmetric,
+          ),
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                BorderlessTextField(
+                  onChanged: (value) => updatePadding(horizontalValue: value),
+                  paddingType: PaddingType.symmetric,
+                ),
+                const Icon(Icons.add, size: 30),
+                SymmetricOppositeField(
+                  hint: horizontal.toString(),
+                ),
+              ],
+            ),
+          ),
+          SymmetricOppositeField(
+            hint: vertical.toString(),
+          ),
+        ],
       ),
     );
   }

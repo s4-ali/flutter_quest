@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_quest/core/property_provider.dart';
-import 'package:flutter_quest/widgets/fields/padding_field/padding_field.dart';
+import '../widgets/fields/edge_insets_field/edge_insets_field.dart';
 
-class PaddingPropertyParams extends PropertyParams<EdgeInsets> {
-  PaddingPropertyParams({
+class EdgeInsetsPropertyParams extends PropertyParams<EdgeInsets> {
+  EdgeInsetsPropertyParams({
     required super.id,
     super.initialValue,
     required super.title,
@@ -12,38 +12,38 @@ class PaddingPropertyParams extends PropertyParams<EdgeInsets> {
   });
 }
 
-class PaddingPropertyField
-    extends PropertyField<PaddingPropertyParams, EdgeInsets> {
-  PaddingPropertyField(super.provider, super.params);
+class EdgeInsetsPropertyField
+    extends PropertyField<EdgeInsetsPropertyParams, EdgeInsets> {
+  EdgeInsetsPropertyField(super.provider, super.params);
 
   @override
   Widget build(
-    PaddingPropertyParams params,
+    EdgeInsetsPropertyParams params,
     Function(EdgeInsets) onChanged,
     EdgeInsets value,
   ) {
-    return PaddingField(
+    return EdgeInsetsField(
       onChanged: onChanged,
     );
   }
 }
 
-extension PaddingFieldPropertyProvider on PropertyProvider {
-  EdgeInsets? paddingField({
+extension EdgeInsetsFieldPropertyProvider on PropertyProvider {
+  EdgeInsets? edgeInsetsField({
     required String id,
     required String title,
     EdgeInsets? initialValue,
     bool isOptional = true,
     EdgeInsets defaultValue = EdgeInsets.zero,
   }) {
-    final params = PaddingPropertyParams(
+    final params = EdgeInsetsPropertyParams(
       id: id,
       title: title,
       isOptional: isOptional,
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return PaddingPropertyField(
+    return EdgeInsetsPropertyField(
       this,
       params,
     )();

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'padding_types_layout.dart';
+import 'edge_insets_types_layout.dart';
 
-class PaddingField extends StatefulWidget {
+class EdgeInsetsField extends StatefulWidget {
   final void Function(EdgeInsets) onChanged;
 
-  const PaddingField({
+  const EdgeInsetsField({
     Key? key,
     required this.onChanged,
   }) : super(key: key);
 
   @override
-  State<PaddingField> createState() => _PaddingFieldState();
+  State<EdgeInsetsField> createState() => _EdgeInsetsFieldState();
 }
 
-class _PaddingFieldState extends State<PaddingField> {
-  PaddingType selectedOption = PaddingType.all;
+class _EdgeInsetsFieldState extends State<EdgeInsetsField> {
+  EdgeInsetsType selectedOption = EdgeInsetsType.all;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,9 @@ class _PaddingFieldState extends State<PaddingField> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            for (final padding in PaddingType.values) ...[
-              PaddingTypeSelectionRadioButton(
-                  paddingType: padding,
+            for (final edgeInsets in EdgeInsetsType.values) ...[
+              EdgeInsetsTypeSelectionRadioButton(
+                  edgeInsetsType: edgeInsets,
                   selectedOption: selectedOption,
                   onTap: (value) {
                     setState(() {
@@ -38,39 +38,39 @@ class _PaddingFieldState extends State<PaddingField> {
             ],
           ],
         ),
-        PaddingTypeLayouts(
+        EdgeInsetsTypeLayouts(
           onChanged: widget.onChanged,
-          paddingType: selectedOption,
+          edgeInsetsType: selectedOption,
         )
       ],
     );
   }
 }
 
-class PaddingTypeSelectionRadioButton extends StatefulWidget {
-  final PaddingType paddingType;
-  final PaddingType selectedOption;
-  final Function(PaddingType) onTap;
+class EdgeInsetsTypeSelectionRadioButton extends StatefulWidget {
+  final EdgeInsetsType edgeInsetsType;
+  final EdgeInsetsType selectedOption;
+  final Function(EdgeInsetsType) onTap;
 
-  const PaddingTypeSelectionRadioButton({
+  const EdgeInsetsTypeSelectionRadioButton({
     Key? key,
-    required this.paddingType,
+    required this.edgeInsetsType,
     required this.selectedOption,
     required this.onTap,
   }) : super(key: key);
 
   @override
-  State<PaddingTypeSelectionRadioButton> createState() =>
-      _PaddingTypeSelectionRadioButtonState();
+  State<EdgeInsetsTypeSelectionRadioButton> createState() =>
+      _EdgeInsetsTypeSelectionRadioButtonState();
 }
 
-class _PaddingTypeSelectionRadioButtonState
-    extends State<PaddingTypeSelectionRadioButton> {
+class _EdgeInsetsTypeSelectionRadioButtonState
+    extends State<EdgeInsetsTypeSelectionRadioButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.onTap(widget.paddingType);
+        widget.onTap(widget.edgeInsetsType);
       },
       child: Padding(
         padding: const EdgeInsets.all(2.5),
@@ -78,7 +78,7 @@ class _PaddingTypeSelectionRadioButtonState
           decoration: BoxDecoration(
             color: const Color(0xFF36343B),
             border: Border.all(
-              color: (widget.selectedOption == widget.paddingType)
+              color: (widget.selectedOption == widget.edgeInsetsType)
                   ? Colors.white
                   : Colors.transparent,
               width: 1.0,
@@ -91,12 +91,12 @@ class _PaddingTypeSelectionRadioButtonState
             padding: const EdgeInsets.only(
               left: 16,
               right: 16,
-              top: 6,
+              top: 10,
               bottom: 10,
             ),
             child: Center(
               child: Text(
-                widget.paddingType.name.capitalizeFirstLetter(),
+                widget.edgeInsetsType.name.capitalizeFirstLetter(),
               ),
             ),
           ),

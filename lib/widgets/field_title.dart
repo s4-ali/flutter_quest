@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_provider.dart';
-
 import 'title_text.dart';
 
 class FieldTitle extends StatefulWidget {

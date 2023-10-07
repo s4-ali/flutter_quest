@@ -3,6 +3,7 @@ import 'package:flutter_quest/property_fields/alignment_field.dart';
 import 'package:flutter_quest/property_fields/boolean_field.dart';
 import 'package:flutter_quest/property_fields/list_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
+import 'package:flutter_quest/property_fields/edge_insets_field.dart';
 import 'package:flutter_quest/widgets/core/propery_builder.dart';
 
 class PropertyPlayground extends StatelessWidget {
@@ -26,6 +27,8 @@ class PropertyPlayground extends StatelessWidget {
             "Four",
           ],
         );
+        final padding = provider.edgeInsetsField(id: 'padding', title: 'Padding', );
+        final margin = provider.edgeInsetsField(id: 'margin', title: 'Margin', );
 
         final color = isRed == null
             ? Colors.green

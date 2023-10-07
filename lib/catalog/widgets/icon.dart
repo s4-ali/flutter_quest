@@ -3,32 +3,30 @@ import 'package:flutter_quest/property_fields/boolean_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/widgets/core/propery_builder.dart';
 
-class SizedBoxPropertyExplorer extends StatelessWidget {
-  const SizedBoxPropertyExplorer({
+class IconPropertyExplorer extends StatelessWidget {
+  const IconPropertyExplorer({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return PropertyExplorerBuilder(
-      widgetName: "SizedBox",
+      widgetName: "Icon",
       builder: (provider) {
-        final height = provider.heightField();
-        final width = provider.widthField();
-        final isRed = provider.booleanField(id: "isRed", title: "Is Red");
+        final size = provider.sizeField();
 
+        final isRed = provider.booleanField(id: "isRed", title: "Is Red");
         final color = isRed == null
-            ? Colors.blue
+            ? Colors.green
             : isRed
                 ? Colors.red
                 : Colors.blue;
 
-        return SizedBox(
-          height: height,
-          width: width,
-          child: ColoredBox(
-            color: color,
-          ),
+        return Icon(
+          Icons.access_alarm_sharp,
+          size: size,
+          color: color,
+          textDirection: TextDirection.rtl,
         );
       },
     );

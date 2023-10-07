@@ -80,4 +80,70 @@ extension NumberFieldPropertyProvider on PropertyProvider {
       defaultValue: defaultValue,
     )?.toDouble();
   }
+
+  double? elevationField({
+    String id = "elevation",
+    String title = "Elevation",
+    num? initialValue,
+    bool isOptional = true,
+    num defaultValue = 0,
+  }) {
+    return numberField(
+      id: id,
+      title: title,
+      isOptional: isOptional,
+      initialValue: initialValue,
+      defaultValue: defaultValue,
+    )?.toDouble();
+  }
+
+  double? borderRadiusField({
+    String id = "borderRadius",
+    String title = "BorderRadius",
+    num initialValue=0,
+    bool isOptional = true,
+    num defaultValue = 0,
+  }) {
+    return numberField(
+      id: id,
+      title: title,
+      isOptional: isOptional,
+      initialValue: initialValue,
+      defaultValue: defaultValue,
+    )?.toDouble();
+  }
+
+  double? radiusField({
+    String id = "radius",
+    String title = "Radius",
+    num initialValue=0,
+    bool isOptional = true,
+    num defaultValue = 0,
+  }) {
+    return numberField(
+      id: id,
+      title: title,
+      isOptional: isOptional,
+      initialValue: initialValue,
+      defaultValue: defaultValue,
+    )?.toDouble();
+  }
+
+  double? sizeField({
+    String id = "size",
+    String title = "Size",
+    num initialValue=0,
+    bool isOptional = true,
+    num defaultValue = 0,
+  }) {
+    return numberField(
+      id: id,
+      title: title,
+      isOptional: isOptional,
+      initialValue: initialValue,
+      defaultValue: defaultValue,
+    )?.toDouble();
+  }
+
+
 }

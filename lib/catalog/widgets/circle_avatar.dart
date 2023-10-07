@@ -3,32 +3,29 @@ import 'package:flutter_quest/property_fields/boolean_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/widgets/core/propery_builder.dart';
 
-class SizedBoxPropertyExplorer extends StatelessWidget {
-  const SizedBoxPropertyExplorer({
+class CircleAvatarPropertyExplorer extends StatelessWidget {
+  const CircleAvatarPropertyExplorer({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return PropertyExplorerBuilder(
-      widgetName: "SizedBox",
+      widgetName: "Circle Avatar",
       builder: (provider) {
-        final height = provider.heightField();
-        final width = provider.widthField();
+        final radius = provider.radiusField();
         final isRed = provider.booleanField(id: "isRed", title: "Is Red");
-
         final color = isRed == null
-            ? Colors.blue
+            ? Colors.green
             : isRed
                 ? Colors.red
                 : Colors.blue;
 
-        return SizedBox(
-          height: height,
-          width: width,
-          child: ColoredBox(
-            color: color,
-          ),
+        return CircleAvatar(
+          radius: radius,
+          backgroundColor: color,
+          foregroundColor: color,
+          child: const Text('Image'),
         );
       },
     );

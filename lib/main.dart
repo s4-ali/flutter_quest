@@ -2,8 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/catalog/home.dart';
 
-import 'catalog/widgets/playground.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -15,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Quest',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF3772FF),
@@ -35,7 +34,7 @@ class MyApp extends StatelessWidget {
         // scaffoldBackgroundColor: Colors.,
       ),
       themeMode: ThemeMode.dark,
-      home: const PropertyPlayground(),
+      home: const Home(),
     );
   }
 }

@@ -42,78 +42,121 @@ class Home extends StatelessWidget {
             crossAxisCount: 6, // Number of columns in the grid
             children: const [
               SelectWidget(
-                  widgetName: "Container",
-                  toNavigate: ContainerPropertyExplorer()),
+                widgetName: "Container",
+                toNavigate: ContainerPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "SizedBox",
-                  toNavigate: SizedBoxPropertyExplorer()),
+                widgetName: "SizedBox",
+                toNavigate: SizedBoxPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "TextField",
-                  toNavigate: TextFieldPropertyExplorer()),
+                widgetName: "TextField",
+                toNavigate: TextFieldPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Image", toNavigate: ImagePropertyExplorer()),
+                widgetName: "Image",
+                toNavigate: ImagePropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Network Image",
-                  toNavigate: NetworkImagePropertyExplorer()),
+                widgetName: "Network Image",
+                toNavigate: NetworkImagePropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Circle Avatar",
-                  toNavigate: CircleAvatarPropertyExplorer()),
+                widgetName: "Circle Avatar",
+                toNavigate: CircleAvatarPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Icon", toNavigate: IconPropertyExplorer()),
+                widgetName: "Icon",
+                toNavigate: IconPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Card", toNavigate: CardPropertyExplorer()),
+                widgetName: "Card",
+                toNavigate: CardPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Text", toNavigate: TextPropertyExplorer()),
+                widgetName: "Text",
+                toNavigate: TextPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Row", toNavigate: RowPropertyExplorer()),
+                widgetName: "Row",
+                toNavigate: RowPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Column", toNavigate: ColumnPropertyExplorer()),
+                widgetName: "Column",
+                toNavigate: ColumnPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Divider", toNavigate: DividerPropertyExplorer()),
+                widgetName: "Divider",
+                toNavigate: DividerPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "ListView",
-                  toNavigate: ListViewPropertyExplorer()),
+                widgetName: "ListView",
+                toNavigate: ListViewPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "GridView",
-                  toNavigate: GridViewPropertyExplorer()),
+                widgetName: "GridView",
+                toNavigate: GridViewPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Drawer", toNavigate: DrawerPropertyExplorer()),
+                widgetName: "Drawer",
+                toNavigate: DrawerPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "TabBar", toNavigate: TabBarPropertyExplorer()),
+                widgetName: "TabBar",
+                toNavigate: TabBarPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Switch", toNavigate: SwitchPropertyExplorer()),
+                widgetName: "Switch",
+                toNavigate: SwitchPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Slider", toNavigate: SliderPropertyExplorer()),
+                widgetName: "Slider",
+                toNavigate: SliderPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "CheckBox",
-                  toNavigate: CheckBoxPropertyExplorer()),
+                widgetName: "CheckBox",
+                toNavigate: CheckBoxPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "AppBar", toNavigate: AppBarPropertyExplorer()),
+                widgetName: "AppBar",
+                toNavigate: AppBarPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Stack", toNavigate: StackPropertyExplorer()),
+                widgetName: "Stack",
+                toNavigate: StackPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Radio", toNavigate: RadioPropertyExplorer()),
+                widgetName: "Radio",
+                toNavigate: RadioPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Toggle Button",
-                  toNavigate: ToggleButtonPropertyExplorer()),
+                widgetName: "Toggle Button",
+                toNavigate: ToggleButtonPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Text Button",
-                  toNavigate: TextButtonPropertyExplorer()),
+                widgetName: "Text Button",
+                toNavigate: TextButtonPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Elevated Button",
-                  toNavigate: ElevatedButtonPropertyExplorer()),
+                widgetName: "Elevated Button",
+                toNavigate: ElevatedButtonPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Outlined Button",
-                  toNavigate: OutlinedButtonPropertyExplorer()),
+                widgetName: "Outlined Button",
+                toNavigate: OutlinedButtonPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Icon Button",
-                  toNavigate: IconButtonPropertyExplorer()),
+                widgetName: "Icon Button",
+                toNavigate: IconButtonPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Floating Action Button",
-                  toNavigate: FloatingActionButtonPropertyExplorer()),
+                widgetName: "Floating Action Button",
+                toNavigate: FloatingActionButtonPropertyExplorer(),
+              ),
               SelectWidget(
-                  widgetName: "Animated Container",
-                  toNavigate: AnimatedContainerPropertyExplorer()),
+                widgetName: "Animated Container",
+                toNavigate: AnimatedContainerPropertyExplorer(),
+              ),
             ],
           ),
         ));

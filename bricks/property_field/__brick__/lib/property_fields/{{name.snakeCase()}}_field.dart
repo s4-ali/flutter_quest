@@ -1,4 +1,4 @@
-{{^generateFieldWidget}}import 'package:flutter/material.dart';{{/generateFieldWidget}}
+import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 {{#generateFieldWidget}}import 'package:flutter_quest/widgets/fields/{{name.snakeCase()}}_field.dart';{{/generateFieldWidget}}
 

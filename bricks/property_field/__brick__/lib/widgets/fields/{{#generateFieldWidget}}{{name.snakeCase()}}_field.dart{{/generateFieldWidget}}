@@ -12,7 +12,8 @@ class {{name.pascalCase()}}Field extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: Implement widget here...
-    return const Placeholder();
+    return const Placeholder(
+      fallbackHeight: 60,
+    );
   }
 }

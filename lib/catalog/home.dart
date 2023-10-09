@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/catalog/widgets/List_view.dart';
+import 'package:flutter_quest/catalog/widgets/list_view.dart';
 import 'package:flutter_quest/catalog/widgets/animated_container.dart';
 import 'package:flutter_quest/catalog/widgets/appbar.dart';
 import 'package:flutter_quest/catalog/widgets/card.dart';

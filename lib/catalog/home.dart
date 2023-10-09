@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/catalog/widgets/ListView.dart';
+import 'package:flutter_quest/catalog/widgets/List_view.dart';
 import 'package:flutter_quest/catalog/widgets/animated_container.dart';
 import 'package:flutter_quest/catalog/widgets/appbar.dart';
 import 'package:flutter_quest/catalog/widgets/card.dart';
@@ -11,7 +11,7 @@ import 'package:flutter_quest/catalog/widgets/divider.dart';
 import 'package:flutter_quest/catalog/widgets/drawer.dart';
 import 'package:flutter_quest/catalog/widgets/elevated_button.dart';
 import 'package:flutter_quest/catalog/widgets/floating_action_button.dart';
-import 'package:flutter_quest/catalog/widgets/gridview.dart';
+import 'package:flutter_quest/catalog/widgets/grid_view.dart';
 import 'package:flutter_quest/catalog/widgets/icon.dart';
 import 'package:flutter_quest/catalog/widgets/icon_button.dart';
 import 'package:flutter_quest/catalog/widgets/image.dart';
@@ -25,7 +25,7 @@ import 'package:flutter_quest/catalog/widgets/stack.dart';
 import 'package:flutter_quest/catalog/widgets/switch.dart';
 import 'package:flutter_quest/catalog/widgets/tabbar.dart';
 import 'package:flutter_quest/catalog/widgets/text.dart';
-import 'package:flutter_quest/catalog/widgets/textField.dart';
+import 'package:flutter_quest/catalog/widgets/text_field.dart';
 import 'package:flutter_quest/catalog/widgets/text_button.dart';
 import 'package:flutter_quest/catalog/widgets/toggle_button.dart';
 

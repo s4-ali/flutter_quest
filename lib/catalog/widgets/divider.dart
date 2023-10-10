@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/core/propery_builder.dart';
+import 'package:flutter_quest/property_fields/number_field.dart';
 
 class DividerPropertyExplorer extends StatelessWidget {
   const DividerPropertyExplorer({
@@ -11,7 +12,20 @@ class DividerPropertyExplorer extends StatelessWidget {
     return PropertyExplorerBuilder(
       widgetName: "Divider",
       builder: (provider) {
-        return const Divider();
+        final height = provider.heightField();
+        final thickness = provider.numberField(id: "thickness", title: "Thickness")?.toDouble();
+        final indent = provider.numberField(id: "thickness", title: "Thickness")?.toDouble();
+        final endIndent = provider.numberField(id: "thickness", title: "Thickness")?.toDouble();
+
+
+        return Divider(
+          height: height,
+          thickness: thickness,
+          indent: indent,
+          endIndent: endIndent,
+          color: Colors.black,
+
+        );
       },
     );
   }

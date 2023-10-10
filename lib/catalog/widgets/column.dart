@@ -11,7 +11,15 @@ class ColumnPropertyExplorer extends StatelessWidget {
     return PropertyExplorerBuilder(
       widgetName: "Column",
       builder: (provider) {
-        return const Column();
+        return const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          textDirection: TextDirection.ltr,
+          verticalDirection: VerticalDirection.down,
+          textBaseline: TextBaseline.alphabetic,
+          children: [],
+        );
       },
     );
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/core/propery_builder.dart';
+import 'package:flutter_quest/property_fields/number_field.dart';
+
 
 class DrawerPropertyExplorer extends StatelessWidget {
   const DrawerPropertyExplorer({
@@ -11,7 +13,21 @@ class DrawerPropertyExplorer extends StatelessWidget {
     return PropertyExplorerBuilder(
       widgetName: "Drawer",
       builder: (provider) {
-        return const Drawer();
+        final width = provider.widthField();
+        return Drawer(
+          width: width,
+          backgroundColor: Colors.grey,
+          elevation: 10,
+          shadowColor: Colors.grey,
+          surfaceTintColor: Colors.greenAccent,
+          shape:const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(0.0)),
+            side: BorderSide.none,
+          ),
+          clipBehavior: Clip.none,
+          semanticLabel: "Drawer",
+          child: ListView(),
+        );
       },
     );
   }

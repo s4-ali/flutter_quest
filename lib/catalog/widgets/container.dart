@@ -32,17 +32,43 @@ class ContainerPropertyExplorer extends StatelessWidget {
                 ? Colors.red
                 : Colors.blue;
 
-        return Container(
-          height: height,
-          width: width,
-          decoration: BoxDecoration(
-            color: color,
-          ),
-          child: text == null
-              ? null
-              : Center(
-                  child: Text(text),
+        return Row(
+          verticalDirection: VerticalDirection.up,
+          children: [
+            Column(
+              verticalDirection: VerticalDirection.up,
+              children: [
+                Container(
+                  height: height,
+                  width: width,
+                  alignment: Alignment.center,
+                  color: Colors.black,
+                  margin: EdgeInsets.zero,
+                  padding: EdgeInsets.zero,
+                  transform: Matrix4.skewX(20),
+                  decoration: BoxDecoration(
+                    color: color,
+                  ),
+                  foregroundDecoration:const BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  clipBehavior: Clip.none,
+                  constraints:const BoxConstraints(
+                    minWidth: 0.0,
+                    maxWidth: double.infinity,
+                    minHeight: 0.0,
+                    maxHeight: double.infinity,
+                  ),
+                  transformAlignment: Alignment.center,
+                  child: text == null
+                      ? null
+                      : Center(
+                          child: Text(text),
+                        ),
                 ),
+              ],
+            ),
+          ],
         );
       },
     );

@@ -5,7 +5,6 @@ import 'package:flutter_quest/widgets/core/propery_builder.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/property_fields/border_radius_field.dart';
 
-
 class DrawerPropertyExplorer extends StatelessWidget {
   const DrawerPropertyExplorer({
     super.key,
@@ -21,7 +20,7 @@ class DrawerPropertyExplorer extends StatelessWidget {
         final surfaceColor = provider.colorField(id: "surfaceColor", title: "Surface Tint Color");
         final elevation = provider.numberField(id: "elevation", title: "Elevation")?? 0.0;
         final shadowColor = provider.colorField(id: "shadowColor", title: "Shadow Color");
-        final borderRadius = provider.borderRadiusField(id: "borderRadius", title: "Border Radius")?? BorderRadius.zero;
+        final borderRadius = provider.borderRadiusField(id: "borderRadius", title: "Border Radius");
         final clipBehavior = provider.clipField(id: "clipBehavior", title: "Clip Behavior");
 
         return Drawer(
@@ -31,7 +30,7 @@ class DrawerPropertyExplorer extends StatelessWidget {
           shadowColor: shadowColor,
           surfaceTintColor: surfaceColor,
           shape: RoundedRectangleBorder(
-            borderRadius: borderRadius,
+            borderRadius: borderRadius?? BorderRadius.zero,
             side: BorderSide.none,
           ),
           clipBehavior: clipBehavior,

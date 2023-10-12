@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/property_fields/clip_field.dart';
 import 'package:flutter_quest/property_fields/color_field.dart';
+import 'package:flutter_quest/property_fields/shape_border_field.dart';
 import 'package:flutter_quest/widgets/core/propery_builder.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
-import 'package:flutter_quest/property_fields/border_radius_field.dart';
 
 class DrawerPropertyExplorer extends StatelessWidget {
   const DrawerPropertyExplorer({
@@ -16,25 +16,29 @@ class DrawerPropertyExplorer extends StatelessWidget {
       widgetName: "Drawer",
       builder: (provider) {
         final width = provider.widthField();
-        final color = provider.colorField(id: "bgColor", title: "Background Color");
-        final surfaceColor = provider.colorField(id: "surfaceColor", title: "Surface Tint Color");
-        final elevation = provider.numberField(id: "elevation", title: "Elevation")?? 0.0;
-        final shadowColor = provider.colorField(id: "shadowColor", title: "Shadow Color");
-        final borderRadius = provider.borderRadiusField(id: "borderRadius", title: "Border Radius");
-        final clipBehavior = provider.clipField(id: "clipBehavior", title: "Clip Behavior");
+        final bgColor =
+            provider.colorField(id: "bgColor", title: "Background Color");
+        final elevation =
+            provider.doubleField(id: "elevation", title: "Elevation");
+        final shadowColor =
+            provider.colorField(id: "shadowColor", title: "Shadow Color");
+        final surfaceColor = provider.colorField(
+            id: "surfaceColor", title: "Surface Tint Color");
+        final shape = provider.shapeBorderField(id: "shape", title: "Shape");
+        final semanticLabel =
+            provider.stringField(id: "semanticLabel", title: "Semantic Label");
+        final clipBehavior =
+            provider.clipField(id: "clipBehavior", title: "Clip Behavior");
 
         return Drawer(
           width: width,
-          backgroundColor: color,
-          elevation: elevation.toDouble(),
+          backgroundColor: bgColor,
+          elevation: elevation,
           shadowColor: shadowColor,
           surfaceTintColor: surfaceColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: borderRadius?? BorderRadius.zero,
-            side: BorderSide.none,
-          ),
+          shape: shape,
+          semanticLabel: semanticLabel,
           clipBehavior: clipBehavior,
-          semanticLabel: "Drawer",
           child: ListView(),
         );
       },

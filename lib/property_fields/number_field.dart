@@ -113,5 +113,21 @@ extension NumberFieldPropertyProvider on PropertyProvider {
     )?.toString();
   }
 
+  int? intField({
+    String id = "intField",
+    String title = "Int Field",
+    num? initialValue,
+    bool isOptional = true,
+    num defaultValue = 0,
+  }) {
+    return numberField(
+      id: id,
+      title: title,
+      isOptional: isOptional,
+      initialValue: initialValue,
+      defaultValue: defaultValue,
+    )?.toInt();
+  }
+
 
 }

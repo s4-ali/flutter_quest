@@ -18,8 +18,6 @@ class DividerPropertyExplorer extends StatelessWidget {
         final indent = provider.doubleField(id: "thickness", title: "Thickness");
         final endIndent = provider.doubleField(id: "thickness", title: "Thickness");
         final color = provider.colorField(id: "color", title: 'Color');
-
-
         return Divider(
           height: height,
           thickness: thickness,

@@ -14,9 +14,9 @@ class DividerPropertyExplorer extends StatelessWidget {
       widgetName: "Divider",
       builder: (provider) {
         final height = provider.heightField();
-        final thickness = provider.numberField(id: "thickness", title: "Thickness")?.toDouble();
-        final indent = provider.numberField(id: "thickness", title: "Thickness")?.toDouble();
-        final endIndent = provider.numberField(id: "thickness", title: "Thickness")?.toDouble();
+        final thickness = provider.doubleField(id: "thickness", title: "Thickness");
+        final indent = provider.doubleField(id: "thickness", title: "Thickness");
+        final endIndent = provider.doubleField(id: "thickness", title: "Thickness");
         final color = provider.colorField(id: "color", title: 'Color');
 
 

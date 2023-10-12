@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/property_fields/boolean_field.dart';
-import 'package:flutter_quest/property_fields/box_border_field.dart';
 import 'package:flutter_quest/property_fields/color_field.dart';
 import 'package:flutter_quest/property_fields/list_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
@@ -55,44 +54,38 @@ class CheckBoxPropertyExplorer extends StatelessWidget {
           title: "Overlay Color",
         );
         final splashRadius =
-            provider.numberField(id: "splashRadius", title: "Splash Radius") ??
-                0.0;
+            provider.doubleField(id: "splashRadius", title: "Splash Radius");
         final materialTapTargetSize = provider.listField<MaterialTapTargetSize>(
           id: "materialTapTargetSize",
           title: "Material Tap Target Size",
           values: MaterialTapTargetSize.values,
         );
-        final visualDensityVertical = provider.numberField(
+        final visualDensityVertical = provider.doubleField(
                 id: "visualDensityVertical",
-                title: "Visual Density Vertical") ??
-            0.0;
-        final visualDensityHorizontal = provider.numberField(
+                title: "Visual Density Vertical");
+        final visualDensityHorizontal = provider.doubleField(
                 id: "visualDensityHorizontal",
-                title: "Visual Density Horizontal") ??
-            0.0;
+                title: "Visual Density Horizontal");
 
         final autoFocus =
             provider.booleanField(id: "autoFocus", title: "Auto Focus");
+        final eccentricity =
+            provider.doubleField(id: "eccentricity", title: "Eccentricity");
         final borderColor = provider.colorField(
           id: "borderColor",
           title: "Border Color",
         );
         final borderWidth =
-            provider.numberField(id: "borderWidth", title: "Border Width") ??
-                1.0;
+            provider.doubleField(id: "borderWidth", title: "Border Width");
         final borderStyle = provider.listField<BorderStyle>(
             id: "borderStyle",
             title: "Border Style",
             values: BorderStyle.values);
         final strokeAlign =
-            provider.numberField(id: "strokeAlign", title: "Stroke Align") ??
-                0.0;
-        final eccentricity =
-            provider.numberField(id: "eccentricity", title: "Eccentricity") ??
-                0.0;
+            provider.doubleField(id: "strokeAlign", title: "Stroke Align");
         final isError = provider.booleanField(id: "isError", title: "isError");
         final semanticLabel =
-            provider.numberField(id: "semanticLabel", title: "Semantic Label");
+            provider.stringField(id: "semanticLabel", title: "Semantic Label");
 
         return Checkbox(
           value: value,
@@ -112,26 +105,26 @@ class CheckBoxPropertyExplorer extends StatelessWidget {
               return overLayColor ?? Colors.transparent; // Default color
             },
           ),
-          splashRadius: splashRadius.toDouble(),
+          splashRadius: splashRadius,
           materialTapTargetSize: materialTapTargetSize,
           visualDensity: VisualDensity(
-            vertical: visualDensityVertical.toDouble(),
-            horizontal: visualDensityHorizontal.toDouble(),
+            vertical: visualDensityVertical?? 0.0,
+            horizontal: visualDensityHorizontal?? 0.0,
           ),
           focusNode: FocusNode(),
           autofocus: autoFocus ?? false,
           shape: CircleBorder(
             side: const BorderSide(),
-            eccentricity: eccentricity.toDouble(),
+            eccentricity: eccentricity?? 0.0,
           ),
           side: BorderSide(
             color: borderColor ?? const Color(0xFF000000),
-            width: borderWidth.toDouble(),
+            width: borderWidth?? 1.0,
             style: borderStyle ?? BorderStyle.solid,
-            strokeAlign: strokeAlign.toDouble(),
+            strokeAlign: strokeAlign?? 0.0,
           ),
           isError: isError ?? false,
-          semanticLabel: semanticLabel.toString(),
+          semanticLabel: semanticLabel,
           onChanged: (val) {},
         );
       },

@@ -49,4 +49,20 @@ extension RangePickerNumberFieldPropertyProvider on PropertyProvider {
       params,
     )();
   }
+
+  double? doubleRangePickerField({
+    String id = "doubleField",
+    String title = "doubleField",
+    num? initialValue,
+    bool isOptional = true,
+    num defaultValue = 0,
+  }) {
+    return rangePickerNumberField(
+      id: id,
+      title: title,
+      isOptional: isOptional,
+      initialValue: initialValue,
+      defaultValue: defaultValue,
+    )?.toDouble();
+  }
 }

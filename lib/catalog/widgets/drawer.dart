@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quest/property_fields/clip_field.dart';
 import 'package:flutter_quest/property_fields/color_field.dart';
 import 'package:flutter_quest/property_fields/shape_border_field.dart';
+import 'package:flutter_quest/property_fields/string_field_field.dart';
 import 'package:flutter_quest/widgets/core/propery_builder.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 

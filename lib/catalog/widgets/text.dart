@@ -13,7 +13,7 @@ class TextPropertyExplorer extends StatelessWidget {
     return PropertyExplorerBuilder(
       widgetName: "Text",
       builder: (provider) {
-        final size = provider.sizeField();
+        final size = provider.numberField(id: "size", title: "Size")??0.0;
         final isRed = provider.booleanField(id: "isRed", title: "Is Red");
         final color = isRed == null
             ? Colors.green
@@ -25,7 +25,7 @@ class TextPropertyExplorer extends StatelessWidget {
           "Text",
           style: TextStyle(
             color: color,
-            fontSize: size,
+            fontSize: size.toDouble(),
           ),
         );
       },

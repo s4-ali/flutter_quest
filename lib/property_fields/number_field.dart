@@ -97,21 +97,7 @@ extension NumberFieldPropertyProvider on PropertyProvider {
     )?.toDouble();
   }
 
-  String? stringField({
-    String id = "doubleField",
-    String title = "doubleField",
-    num? initialValue,
-    bool isOptional = true,
-    num defaultValue = 0,
-  }) {
-    return numberField(
-      id: id,
-      title: title,
-      isOptional: isOptional,
-      initialValue: initialValue,
-      defaultValue: defaultValue,
-    )?.toString();
-  }
+
 
   int? intField({
     String id = "intField",

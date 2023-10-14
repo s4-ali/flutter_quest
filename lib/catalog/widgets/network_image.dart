@@ -35,8 +35,7 @@ class NetworkImagePropertyExplorer extends StatelessWidget {
         final repeat = provider.listField(
             id: "repeat", title: "Repeat", values: ImageRepeat.values);
         final centerSlice = provider.listField(id: "centerSlice",
-            title: "Center Slice",
-            values: [Rect.zero, Rect.largest]);
+            title: "Center Slice", values: [Rect.zero, Rect.largest]);
         final matchTextDirection = provider.booleanField(
             id: "matchTextDirection", title: "Match Text Direction");
         final gaplessPlayback = provider.booleanField(

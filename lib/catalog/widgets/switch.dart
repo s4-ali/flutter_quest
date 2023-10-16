@@ -38,7 +38,7 @@ class SwitchPropertyExplorer extends StatelessWidget {
         final trackOutlineWidth = provider.doubleField(
             id: "trackOutlineWidth", title: "Track Outline Width");
         final thumbIcon =
-            provider.iconDataField(id: "thumbIcon", title: "thumbIcon");
+            provider.iconDataField(id: "thumbIcon", title: "ThumbIcon");
         final dragStartBehavior = provider.listField(
             id: "dragStartBehavior",
             title: "Drag Start Behavior",

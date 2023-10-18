@@ -73,7 +73,7 @@ class TabBarPropertyExplorer extends StatelessWidget {
             values: [MouseCursor.defer, MouseCursor.uncontrolled]);
         final enableFeedback = provider.booleanField(
             id: "enableFeedback", title: "Enable Feedback");
-        final splashBorderRadius = provider.doubleField(
+        final splashBorderRadius = provider.borderRadiusField(
             id: "splashBorderRadius", title: "Splash Border Radius");
         final tabAlignment = provider.listField(
             id: "tabAlignment",
@@ -111,8 +111,7 @@ class TabBarPropertyExplorer extends StatelessWidget {
           onTap: (v) {},
           physics: const ScrollPhysics(),
           splashFactory: NoSplash.splashFactory,
-          splashBorderRadius:
-              BorderRadius.all(Radius.circular(splashBorderRadius ?? 0.0)),
+          splashBorderRadius: splashBorderRadius,
           tabAlignment: tabAlignment,
         );
       },

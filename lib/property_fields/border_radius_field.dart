@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/border_radius_field.dart';
 
-class BorderRadiusPropertyParams extends PropertyParams<BorderRadiusGeometry> {
+class BorderRadiusPropertyParams extends PropertyParams<BorderRadius> {
   BorderRadiusPropertyParams({
     required super.id,
     super.initialValue,
@@ -13,14 +13,14 @@ class BorderRadiusPropertyParams extends PropertyParams<BorderRadiusGeometry> {
 }
 
 class BorderRadiusPropertyField
-    extends PropertyField<BorderRadiusPropertyParams, BorderRadiusGeometry> {
+    extends PropertyField<BorderRadiusPropertyParams, BorderRadius> {
   BorderRadiusPropertyField(super.provider, super.params);
 
   @override
   Widget build(
     BorderRadiusPropertyParams params,
-    Function(BorderRadiusGeometry) onChanged,
-    BorderRadiusGeometry value,
+    Function(BorderRadius) onChanged,
+    BorderRadius value,
   ) {
     return BorderRadiusField(
       onChanged: onChanged,
@@ -30,12 +30,12 @@ class BorderRadiusPropertyField
 }
 
 extension BorderRadiusFieldPropertyProvider on PropertyProvider {
-  BorderRadiusGeometry? borderRadiusField({
+  BorderRadius? borderRadiusField({
     required String id,
     required String title,
-    BorderRadiusGeometry? initialValue,
+    BorderRadius? initialValue,
     bool isOptional = true,
-    BorderRadiusGeometry defaultValue = BorderRadius.zero,
+    BorderRadius defaultValue = BorderRadius.zero,
   }) {
     final params = BorderRadiusPropertyParams(
       id: id,

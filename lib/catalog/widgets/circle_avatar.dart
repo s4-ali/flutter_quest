@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quest/property_fields/color_field.dart';
 import 'package:flutter_quest/property_fields/image_provider_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
+import 'package:flutter_quest/property_fields/string_field_field.dart';
 import 'package:flutter_quest/widgets/core/propery_builder.dart';
 
 class CircleAvatarPropertyExplorer extends StatelessWidget {
@@ -23,24 +24,21 @@ class CircleAvatarPropertyExplorer extends StatelessWidget {
         final foregroundColor = provider.colorField(
             id: "foregroundColor", title: "Foreground Color");
         final radius =
-            provider.numberField(id: "radius", title: "Radius") ?? 0.0;
+            provider.doubleField(id: "radius", title: "Radius");
         final minRadius =
-            provider.numberField(id: "minRadius", title: "Minimum Radius") ??
-                0.0;
+            provider.doubleField(id: "minRadius", title: "Minimum Radius");
         final maxRadius =
-            provider.numberField(id: "maxRadius", title: "MaximumRadius") ??
-                0.0;
+            provider.doubleField(id: "maxRadius", title: "MaximumRadius");
+        final childText = provider.stringField(id: "childText", title: "Child Text");
         return CircleAvatar(
-          radius: radius.toDouble(),
+          radius: radius,
           backgroundColor: backgroundColor,
           backgroundImage: backgroundImage,
           foregroundImage: foregroundImage,
-          onBackgroundImageError: (exception, stackTrace) {},
-          onForegroundImageError: (exception, stackTrace) {},
           foregroundColor: foregroundColor,
-          minRadius: minRadius.toDouble(),
-          maxRadius: maxRadius.toDouble(),
-          child: const Text('Image'),
+          minRadius: minRadius,
+          maxRadius: maxRadius,
+          child: Text(childText?? ""),
         );
       },
     );

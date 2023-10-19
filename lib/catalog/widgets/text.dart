@@ -75,7 +75,7 @@ class TextPropertyExplorer extends StatelessWidget {
           ),
           textAlign: textAlign,
           textDirection: textDirection,
-          locale: Locale(locale ?? ""),
+          locale: Locale(locale ?? " "),
           softWrap: softWrap,
           overflow: overflow,
           textScaleFactor: textScaleFactor,

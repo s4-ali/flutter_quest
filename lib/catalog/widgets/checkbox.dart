@@ -23,8 +23,7 @@ class CheckBoxPropertyExplorer extends StatelessWidget {
         final triState = provider.booleanField(
               id: "triState",
               title: "TriState",
-            ) ??
-            false;
+            );
         final mouseCursor = provider.listField<MouseCursor>(
           id: "mouseCursor",
           title: "MouseCursor",
@@ -90,7 +89,7 @@ class CheckBoxPropertyExplorer extends StatelessWidget {
 
         return Checkbox(
           value: value,
-          tristate: triState,
+          tristate: triState?? true,
           mouseCursor: mouseCursor,
           activeColor: activeColor,
           fillColor: MaterialStateProperty.resolveWith<Color>(

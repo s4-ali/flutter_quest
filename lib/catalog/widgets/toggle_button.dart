@@ -23,7 +23,7 @@ class _ToggleButtonPropertyExplorerState
     extends State<ToggleButtonPropertyExplorer> {
   @override
   Widget build(BuildContext context) {
-    List<bool> is_Selected = [false, false, false];
+    List<bool> is_Selected = [];
 
     return PropertyExplorerBuilder(
       widgetName: "Toggle Button",

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class BorderRadiusField extends StatelessWidget {
-  final void Function(BorderRadius) onChanged;
-  final BorderRadius value;
+class StringField extends StatelessWidget {
+  final void Function(String) onChanged;
+  final String value;
 
-  const BorderRadiusField({
+  const StringField({
     super.key,
     required this.onChanged,
     required this.value,

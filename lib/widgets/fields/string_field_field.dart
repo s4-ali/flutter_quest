@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/text_field.dart';
 
 class StringField extends StatelessWidget {
   final void Function(String) onChanged;
@@ -12,8 +13,12 @@ class StringField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder(
-      fallbackHeight: 60,
+    return AppTextField(
+      hintText: "Value",
+      onChanged: onChanged,
+      controller: TextEditingController(
+        text: value,
+      ),
     );
   }
 }

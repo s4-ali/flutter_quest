@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
-import 'edge_insets_types_layout.dart';
+import 'package:flutter_quest/widgets/fields/edge_insets_field/edge_insets_types_layout.dart';
+
+enum EdgeInsetsType {
+  all,
+  only,
+  symmetric,
+}
 
 class EdgeInsetsField extends StatefulWidget {
   final void Function(EdgeInsets) onChanged;
+  final EdgeInsets value;
 
   const EdgeInsetsField({
     Key? key,
     required this.onChanged,
+    required this.value
   }) : super(key: key);
 
   @override
@@ -15,102 +23,99 @@ class EdgeInsetsField extends StatefulWidget {
 
 class _EdgeInsetsFieldState extends State<EdgeInsetsField> {
   EdgeInsetsType selectedOption = EdgeInsetsType.all;
+  late Widget selectedLayout;
+  bool isHovered = false;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedLayout = AllEdgeInsetsLayout(onChanged: widget.onChanged, value: widget.value,);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            for (final edgeInsets in EdgeInsetsType.values) ...[
-              EdgeInsetsTypeSelectionRadioButton(
-                  edgeInsetsType: edgeInsets,
-                  selectedOption: selectedOption,
-                  onTap: (value) {
-                    setState(() {
-                      selectedOption = value;
-                    });
-                  }),
-            ],
-          ],
+        MouseRegion(
+          onEnter: (v) {
+            setState(() {
+              isHovered = true;
+            });
+          },
+          onExit: (v) {
+            setState(() {
+              isHovered = false;
+            });
+          },
+          child: Container(
+            height: 30,
+            width: 134,
+            decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                border: Border.all(
+                  width: 1.0,
+                  color: isHovered
+                      ? const Color(0xFF0099FF) : const Color(0xFF35363A),
+                )),
+            child: DropdownButton<EdgeInsetsType>(
+              icon: const Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Icon(Icons.keyboard_arrow_down),
+              ),
+              iconSize: 12,
+              iconEnabledColor: const Color(0xFFFFFFFF),
+              focusColor: Colors.transparent,
+              underline: const SizedBox(),
+              alignment: Alignment.centerLeft,
+              value: selectedOption,
+              onChanged: (value) {
+                setState(() {
+                  selectedOption = value!;
+                });
+              },
+              items: [
+                DropdownMenuItem<EdgeInsetsType>(
+                  onTap: () {
+                    selectedLayout =
+                        AllEdgeInsetsLayout(onChanged: widget.onChanged, value: widget.value,);
+                  },
+                  value: EdgeInsetsType.all,
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 8, bottom: 3),
+                    child: Text("All"),
+                  ),
+                ),
+                DropdownMenuItem<EdgeInsetsType>(
+                  onTap: () {
+                    selectedLayout =
+                        SymmetricEdgeInsetsLayout(onChanged: widget.onChanged, value: widget.value);
+                  },
+                  value: EdgeInsetsType.symmetric,
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 8, bottom: 5),
+                    child: Text("Symmetric"),
+                  ),
+                ),
+                DropdownMenuItem<EdgeInsetsType>(
+                  onTap: () {
+                    selectedLayout =
+                        OnlyEdgeInsetsLayout(onChanged: widget.onChanged, value: widget.value);
+                  },
+                  value: EdgeInsetsType.only,
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 8, bottom: 5),
+                    child: Text("Only"),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
-        EdgeInsetsTypeLayouts(
-          onChanged: widget.onChanged,
-          edgeInsetsType: selectedOption,
-        )
+        selectedLayout,
       ],
     );
-  }
-}
-
-class EdgeInsetsTypeSelectionRadioButton extends StatefulWidget {
-  final EdgeInsetsType edgeInsetsType;
-  final EdgeInsetsType selectedOption;
-  final Function(EdgeInsetsType) onTap;
-
-  const EdgeInsetsTypeSelectionRadioButton({
-    Key? key,
-    required this.edgeInsetsType,
-    required this.selectedOption,
-    required this.onTap,
-  }) : super(key: key);
-
-  @override
-  State<EdgeInsetsTypeSelectionRadioButton> createState() =>
-      _EdgeInsetsTypeSelectionRadioButtonState();
-}
-
-class _EdgeInsetsTypeSelectionRadioButtonState
-    extends State<EdgeInsetsTypeSelectionRadioButton> {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        widget.onTap(widget.edgeInsetsType);
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(2.5),
-        child: Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFF36343B),
-            border: Border.all(
-              color: (widget.selectedOption == widget.edgeInsetsType)
-                  ? Colors.white
-                  : Colors.transparent,
-              width: 1.0,
-            ),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(8),
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
-              top: 10,
-              bottom: 10,
-            ),
-            child: Center(
-              child: Text(
-                widget.edgeInsetsType.name.capitalizeFirstLetter(),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-extension StringCapitalization on String {
-  String capitalizeFirstLetter() {
-    if (isEmpty) {
-      return this;
-    }
-    return this[0].toUpperCase() + substring(1);
   }
 }

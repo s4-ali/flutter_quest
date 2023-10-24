@@ -1,350 +1,391 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/text_field.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-enum EdgeInsetsType {
-  all,
-  only,
-  symmetric,
-}
-
-class EdgeInsetsTypeLayouts extends StatefulWidget {
+class AllEdgeInsetsLayout extends StatefulWidget {
   final Function(EdgeInsets) onChanged;
-  final EdgeInsetsType edgeInsetsType;
+  final EdgeInsets value;
 
-  const EdgeInsetsTypeLayouts({
-    Key? key,
-    required this.onChanged,
-    required this.edgeInsetsType,
-  }) : super(key: key);
+  const AllEdgeInsetsLayout(
+      {super.key, required this.onChanged, required this.value});
 
   @override
-  State<EdgeInsetsTypeLayouts> createState() => _EdgeInsetsTypeLayoutsState();
+  State<AllEdgeInsetsLayout> createState() => _AllEdgeInsetsLayoutState();
 }
 
-class _EdgeInsetsTypeLayoutsState extends State<EdgeInsetsTypeLayouts> {
+class _AllEdgeInsetsLayoutState extends State<AllEdgeInsetsLayout> {
+  double all = 0.0;
+  Color linesColor = const Color(0xFF808080);
 
+  void updateValues({
+    double? allValue,
+  }) {
+    setState(() {
+      all = allValue ?? all;
+      linesColor = const Color(0xFF0099FF);
+
+      widget.onChanged(
+        EdgeInsets.all(all),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        EdgeInsetsTextField(
+            prefixText: "T",
+            onChanged: (value) {
+              updateValues(allValue: value);
+            }),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            EdgeInsetsTextField(
+                prefixText: "L",
+                onChanged: (value) {
+                  updateValues(allValue: value);
+                }),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LineContainer(
+                  vertical: true,
+                  color: linesColor,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LineContainer(
+                      vertical: false,
+                      color: linesColor,
+                    ),
+                    Container(
+                      height: 20,
+                      width: 20,
+                      margin: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF0099FF),
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                      ),
+                      child: SvgPicture.asset("assets/all.svg"),
+                    ),
+                    LineContainer(
+                      vertical: false,
+                      color: linesColor,
+                    ),
+                  ],
+                ),
+                LineContainer(
+                  vertical: true,
+                  color: linesColor,
+                ),
+              ],
+            ),
+            EdgeInsetsTextField(
+                prefixText: "R",
+                onChanged: (value) {
+                  updateValues(allValue: value);
+                }),
+          ],
+        ),
+        EdgeInsetsTextField(
+            prefixText: "B",
+            onChanged: (value) {
+              updateValues(allValue: value);
+            }),
+      ],
+    );
+  }
+}
+
+class OnlyEdgeInsetsLayout extends StatefulWidget {
+  final Function(EdgeInsets) onChanged;
+  final EdgeInsets value;
+
+  const OnlyEdgeInsetsLayout(
+      {super.key, required this.onChanged, required this.value});
+
+  @override
+  State<OnlyEdgeInsetsLayout> createState() => _OnlyEdgeInsetsLayoutState();
+}
+
+class _OnlyEdgeInsetsLayoutState extends State<OnlyEdgeInsetsLayout> {
   double top = 0.0;
   double bottom = 0.0;
   double left = 0.0;
   double right = 0.0;
+
+
+  Color topLinesColor = const Color(0xFF808080);
+  Color bottomLinesColor = const Color(0xFF808080);
+  Color leftLinesColor = const Color(0xFF808080);
+  Color rightLinesColor = const Color(0xFF808080);
+
+  void updateValues({
+    double? topValue,
+    double? bottomValue,
+    double? leftValue,
+    double? rightValue,
+  }) {
+    setState(() {
+      top = topValue ?? top;
+      bottom = bottomValue ?? bottom;
+      left = leftValue ?? left;
+      right = rightValue ?? right;
+
+      topLinesColor = top != 0? const Color(0xFF0099FF)
+          : const Color(0xFF808080);
+      bottomLinesColor = bottom != 0? const Color(0xFF0099FF)
+          : const Color(0xFF808080);
+      leftLinesColor = left != 0? const Color(0xFF0099FF)
+          : const Color(0xFF808080);
+      rightLinesColor = right != 0? const Color(0xFF0099FF)
+          : const Color(0xFF808080);
+
+
+
+      widget.onChanged(
+        EdgeInsets.only(top: top, left: left, right: right, bottom: bottom),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        EdgeInsetsTextField(
+            prefixText: "T",
+            onChanged: (value) {
+              updateValues(topValue: value);
+            }),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            EdgeInsetsTextField(
+                prefixText: "L",
+                onChanged: (value) {
+                  updateValues(leftValue: value);
+                }),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LineContainer(
+                  vertical: true,
+                  color: topLinesColor,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LineContainer(
+                      vertical: false,
+                      color: leftLinesColor,
+                    ),
+                    Container(
+                      height: 20,
+                      width: 20,
+                      margin: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF0099FF),
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                      ),
+                      child: SvgPicture.asset("assets/only.svg"),
+                    ),
+                    LineContainer(
+                      vertical: false,
+                      color: rightLinesColor,
+                    ),
+                  ],
+                ),
+                LineContainer(
+                  vertical: true,
+                  color: bottomLinesColor,
+                ),
+              ],
+            ),
+            EdgeInsetsTextField(
+                prefixText: "R",
+                onChanged: (value) {
+                  updateValues(rightValue: value);
+                }),
+          ],
+        ),
+        EdgeInsetsTextField(
+            prefixText: "B",
+            onChanged: (value) {
+              updateValues(bottomValue: value);
+            }),
+      ],
+    );
+  }
+}
+
+class SymmetricEdgeInsetsLayout extends StatefulWidget {
+  final Function(EdgeInsets) onChanged;
+  final EdgeInsets value;
+
+  const SymmetricEdgeInsetsLayout(
+      {super.key, required this.onChanged, required this.value});
+
+  @override
+  State<SymmetricEdgeInsetsLayout> createState() =>
+      _SymmetricEdgeInsetsLayoutState();
+}
+
+class _SymmetricEdgeInsetsLayoutState extends State<SymmetricEdgeInsetsLayout> {
   double vertical = 0.0;
   double horizontal = 0.0;
 
-  TextEditingController allController = TextEditingController();
-  TextEditingController topController = TextEditingController();
-  TextEditingController bottomController = TextEditingController();
-  TextEditingController leftController = TextEditingController();
-  TextEditingController rightController = TextEditingController();
-  TextEditingController verticalController = TextEditingController();
-  TextEditingController horizontalController = TextEditingController();
+  Color verticalLinesColor = const Color(0xFF808080);
+ Color horizontalLinesColor = const Color(0xFF808080);
+
+  void updateValues({
+    double? verticalValue,
+    double? horizontalValue,
+  }) {
+    setState(() {
+      vertical = verticalValue ?? vertical;
+      horizontal = horizontalValue ?? horizontal;
+      vertical != 0
+          ? verticalLinesColor = const Color(0xFF0099FF)
+          : const Color(0xFF808080);
+      horizontal != 0
+          ? horizontalLinesColor = const Color(0xFF0099FF)
+          : const Color(0xFF808080);
+
+      widget.onChanged(
+        EdgeInsets.symmetric(vertical: vertical, horizontal: horizontal),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        EdgeInsetsTextField(
+            prefixText: "T",
+            onChanged: (value) {
+              updateValues(verticalValue: value);
+            }),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            EdgeInsetsTextField(
+                prefixText: "L",
+                onChanged: (value) {
+                  updateValues(horizontalValue: value);
+                }),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LineContainer(
+                  vertical: true,
+                  color: verticalLinesColor,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LineContainer(
+                      vertical: false,
+                      color: horizontalLinesColor,
+                    ),
+                    Container(
+                      height: 20,
+                      width: 20,
+                      margin: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF0099FF),
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                      ),
+                      child: SvgPicture.asset("assets/symmetric.svg"),
+                    ),
+                    LineContainer(
+                      vertical: false,
+                      color: horizontalLinesColor,
+                    ),
+                  ],
+                ),
+                LineContainer(
+                  vertical: true,
+                  color: verticalLinesColor,
+                ),
+              ],
+            ),
+            EdgeInsetsTextField(
+                prefixText: "R",
+                onChanged: (value) {
+                  updateValues(horizontalValue: value);
+                }),
+          ],
+        ),
+        EdgeInsetsTextField(
+            prefixText: "B",
+            onChanged: (value) {
+              updateValues(verticalValue: value);
+            }),
+      ],
+    );
+  }
+}
+
+class EdgeInsetsTextField extends StatelessWidget {
+  final Function(double) onChanged;
+  final String prefixText;
+  final double? value;
+
+  const EdgeInsetsTextField(
+      {super.key,
+      required this.onChanged,
+      required this.prefixText,
+      this.value = 0});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SizedBox(
+        height: 30,
+        width: 60,
+        child: Center(
+          child: AppTextField(
+            onChanged: (value) {
+              onChanged(double.parse(value));
+            },
+            controller: TextEditingController(text: value.toString()),
+            prefix: Text(prefixText),
+            textAlign: TextAlign.center,
+            contentPadding:
+                const EdgeInsets.only(left: 10, right: 4, top: 10, bottom: 9),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LineContainer extends StatelessWidget {
+  final bool vertical;
+  final Color color;
+
+  const LineContainer({super.key, required this.vertical, required this.color});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 124,
-      width: 124,
+      height: vertical ? 14 : 2,
+      width: vertical ? 2 : 14,
       decoration: BoxDecoration(
-        color: Colors.transparent,
-        border: Border.all(
-          color: Colors.white,
-          width: 1,
-        ),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(8),
-        ),
-      ),
-      child: Center(
-        child: widget.edgeInsetsType == EdgeInsetsType.all
-            ? _allTypeEdgeInsets()
-            : widget.edgeInsetsType == EdgeInsetsType.only
-                ? _onlyTypeEdgeInsets()
-                : _symmetricTypeEdgeInsets(),
-      ),
-    );
-  }
-
-  void funClearData() {
-    setState(() {
-      allController.clear();
-      topController.clear();
-      bottomController.clear();
-      leftController.clear();
-      rightController.clear();
-      verticalController.clear();
-      horizontalController.clear();
-    });
-  }
-
-  Widget _allTypeEdgeInsets() {
-    funClearData();
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 10),
-        child: BorderlessTextField(
-          onChanged: (value) {
-            setState(() {
-              widget.onChanged(EdgeInsets.all(value));
-            });
-          },
-          edgeInsetsType: EdgeInsetsType.all,
-          controller: allController,
-        ),
-      ),
-    );
-  }
-
-  Widget _onlyTypeEdgeInsets() {
-    funClearData();
-    void updateValues({
-      double? topValue,
-      double? bottomValue,
-      double? rightValue,
-      double? leftValue,
-    }) {
-      setState(() {
-        top = topValue ?? top;
-        bottom = bottomValue ?? bottom;
-        right = rightValue ?? right;
-        left = leftValue ?? left;
-
-        widget.onChanged(EdgeInsets.only(
-          top: top,
-          bottom: bottom,
-          right: right,
-          left: left,
-        ));
-      });
-    }
-
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          BorderlessTextField(
-            onChanged: (value) => updateValues(topValue: value),
-            edgeInsetsType: EdgeInsetsType.only,
-            controller: topController,
-          ),
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                BorderlessTextField(
-                  onChanged: (value) => updateValues(leftValue: value),
-                  edgeInsetsType: EdgeInsetsType.only,
-                  controller: leftController,
-                ),
-                const Icon(Icons.add, size: 30),
-                BorderlessTextField(
-                  onChanged: (value) => updateValues(rightValue: value),
-                  edgeInsetsType: EdgeInsetsType.only,
-                  controller: rightController,
-                ),
-              ],
-            ),
-          ),
-          BorderlessTextField(
-            onChanged: (value) => updateValues(bottomValue: value),
-            edgeInsetsType: EdgeInsetsType.only,
-            controller: bottomController,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _symmetricTypeEdgeInsets() {
-    funClearData();
-    void updatePadding({double? verticalValue, double? horizontalValue}) {
-      setState(() {
-        vertical = verticalValue ?? vertical;
-        horizontal = horizontalValue ?? horizontal;
-        widget.onChanged(EdgeInsets.symmetric(
-          vertical: vertical,
-          horizontal: horizontal,
-        ));
-      });
-    }
-
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          BorderlessTextField(
-            onChanged: (value) => updatePadding(verticalValue: value),
-            edgeInsetsType: EdgeInsetsType.symmetric,
-            controller: verticalController,
-          ),
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                BorderlessTextField(
-                  onChanged: (value) => updatePadding(horizontalValue: value),
-                  edgeInsetsType: EdgeInsetsType.symmetric,
-                  controller: horizontalController,
-                ),
-                const Icon(Icons.add, size: 30),
-                SymmetricOppositeField(
-                  hint: horizontal.toString(),
-                  controller: horizontalController,
-                ),
-              ],
-            ),
-          ),
-          SymmetricOppositeField(
-            hint: vertical.toString(),
-            controller: verticalController,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class BorderlessTextField extends StatefulWidget {
-  final Function(double) onChanged;
-  final EdgeInsetsType edgeInsetsType;
-  final TextEditingController controller;
-
-  const BorderlessTextField({
-    super.key,
-    required this.onChanged,
-    required this.edgeInsetsType,
-    required this.controller,
-  });
-
-  @override
-  State<BorderlessTextField> createState() => _BorderlessTextFieldState();
-}
-
-class _BorderlessTextFieldState extends State<BorderlessTextField> {
-  final EdgeInsets edgeInsetsValue = EdgeInsets.zero;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: widget.edgeInsetsType == EdgeInsetsType.all ? 60 : 40,
-      height: widget.edgeInsetsType == EdgeInsetsType.all ? 60 : 40,
-      child: TextField(
-        controller: widget.controller,
-        onChanged: (value) {
-          try {
-            if (value.isNotEmpty) {
-              widget.onChanged(double.parse(value));
-              print(value);
-            }
-          } catch (e) {
-            print(e);
-          }
-        },
-        maxLines: 1,
-        style: TextStyle(
-          fontSize: widget.edgeInsetsType == EdgeInsetsType.all ? 18 : 12,
-        ),
-        textAlign: TextAlign.center,
-        decoration: const InputDecoration(
-          contentPadding: EdgeInsets.all(0.0),
-          hintText: "0.0",
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.transparent,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.transparent,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class SymmetricOppositeField extends StatefulWidget {
-  final String hint;
-  final TextEditingController controller;
-
-  const SymmetricOppositeField({
-    super.key,
-    required this.hint,
-    required this.controller,
-  });
-
-  @override
-  State<SymmetricOppositeField> createState() => _SymmetricOppositeFieldState();
-}
-
-class _SymmetricOppositeFieldState extends State<SymmetricOppositeField> {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 40,
-      height: 40,
-      child: TextField(
-        controller: widget.controller,
-        readOnly: true,
-        maxLines: 1,
-        style: const TextStyle(fontSize: 12),
-        textAlign: TextAlign.center,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(0.0),
-          hintText: widget.hint,
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.transparent,
-            ),
-          ),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.transparent,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  final TextEditingController textController = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Clear TextField Example'),
-        ),
-        body: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              TextField(
-                controller: textController,
-                decoration: InputDecoration(labelText: 'Enter text'),
-                onChanged: (value) {
-                  print(value);
-                },
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: () {
-                  // Clear the TextField text
-                  textController.clear();
-                },
-                child: Text('Clear Text'),
-              ),
-            ],
-          ),
-        ),
+        color: color,
+        borderRadius: const BorderRadius.all(Radius.circular(50)),
       ),
     );
   }

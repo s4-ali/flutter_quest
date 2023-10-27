@@ -119,7 +119,6 @@ class _OnlyEdgeInsetsLayoutState extends State<OnlyEdgeInsetsLayout> {
   double left = 0.0;
   double right = 0.0;
 
-
   Color topLinesColor = const Color(0xFF808080);
   Color bottomLinesColor = const Color(0xFF808080);
   Color leftLinesColor = const Color(0xFF808080);
@@ -137,16 +136,14 @@ class _OnlyEdgeInsetsLayoutState extends State<OnlyEdgeInsetsLayout> {
       left = leftValue ?? left;
       right = rightValue ?? right;
 
-      topLinesColor = top != 0? const Color(0xFF0099FF)
-          : const Color(0xFF808080);
-      bottomLinesColor = bottom != 0? const Color(0xFF0099FF)
-          : const Color(0xFF808080);
-      leftLinesColor = left != 0? const Color(0xFF0099FF)
-          : const Color(0xFF808080);
-      rightLinesColor = right != 0? const Color(0xFF0099FF)
-          : const Color(0xFF808080);
-
-
+      topLinesColor =
+          top != 0 ? const Color(0xFF0099FF) : const Color(0xFF808080);
+      bottomLinesColor =
+          bottom != 0 ? const Color(0xFF0099FF) : const Color(0xFF808080);
+      leftLinesColor =
+          left != 0 ? const Color(0xFF0099FF) : const Color(0xFF808080);
+      rightLinesColor =
+          right != 0 ? const Color(0xFF0099FF) : const Color(0xFF808080);
 
       widget.onChanged(
         EdgeInsets.only(top: top, left: left, right: right, bottom: bottom),
@@ -243,7 +240,7 @@ class _SymmetricEdgeInsetsLayoutState extends State<SymmetricEdgeInsetsLayout> {
   double horizontal = 0.0;
 
   Color verticalLinesColor = const Color(0xFF808080);
- Color horizontalLinesColor = const Color(0xFF808080);
+  Color horizontalLinesColor = const Color(0xFF808080);
 
   void updateValues({
     double? verticalValue,
@@ -361,7 +358,10 @@ class EdgeInsetsTextField extends StatelessWidget {
               onChanged(double.parse(value));
             },
             controller: TextEditingController(text: value.toString()),
-            prefix: Text(prefixText),
+            prefix: Padding(
+              padding: const EdgeInsets.only(right: 4.0, bottom: 13.0),
+              child: Text(prefixText),
+            ),
             textAlign: TextAlign.center,
             contentPadding:
                 const EdgeInsets.only(left: 10, right: 4, top: 10, bottom: 9),

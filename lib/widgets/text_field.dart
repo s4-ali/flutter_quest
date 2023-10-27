@@ -46,10 +46,7 @@ class _AppTextFieldState extends State<AppTextField> {
         textAlign: widget.textAlign ?? TextAlign.start,
         textAlignVertical: TextAlignVertical.center,
         decoration: InputDecoration(
-          prefix: Padding(
-            padding: const EdgeInsets.only(right: 4.0, bottom: 13.0),
-            child: widget.prefix,
-          ),
+          prefix: widget.prefix,
           prefixStyle: const TextStyle(color: Color(0xFF808080),),
           contentPadding: widget.contentPadding ?? const EdgeInsets.all(14.0),
           suffixIcon: widget.suffixIcon,

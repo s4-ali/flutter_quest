@@ -26,7 +26,7 @@ class _VerticalDirectionFieldState extends State<VerticalDirectionField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         for (final maixAxis in VerticalDirection.values) ...[
-          MainAxisRadioButton(
+          VerticalDirectionRadioButton(
               type: maixAxis,
               selectedOption: selectedOption,
               onTap: (value) {
@@ -41,12 +41,12 @@ class _VerticalDirectionFieldState extends State<VerticalDirectionField> {
   }
 }
 
-class MainAxisRadioButton extends StatefulWidget {
+class VerticalDirectionRadioButton extends StatefulWidget {
   final VerticalDirection type;
   final VerticalDirection selectedOption;
   final Function(VerticalDirection) onTap;
 
-  const MainAxisRadioButton({
+  const VerticalDirectionRadioButton({
     Key? key,
     required this.type,
     required this.selectedOption,
@@ -54,10 +54,10 @@ class MainAxisRadioButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<MainAxisRadioButton> createState() => _MainAxisRadioButtonState();
+  State<VerticalDirectionRadioButton> createState() => _VerticalDirectionRadioButtonState();
 }
 
-class _MainAxisRadioButtonState extends State<MainAxisRadioButton> {
+class _VerticalDirectionRadioButtonState extends State<VerticalDirectionRadioButton> {
   VerticalDirection result = VerticalDirection.down;
   String image = "downDirection.svg";
   bool isHover = false;

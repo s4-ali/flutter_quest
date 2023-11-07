@@ -25,7 +25,7 @@ class _AxisFieldState extends State<AxisField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         for (final maixAxis in Axis.values) ...[
-          MainAxisRadioButton(
+          AxisRadioButton(
               type: maixAxis,
               selectedOption: selectedOption,
               onTap: (value) {
@@ -40,12 +40,12 @@ class _AxisFieldState extends State<AxisField> {
   }
 }
 
-class MainAxisRadioButton extends StatefulWidget {
+class AxisRadioButton extends StatefulWidget {
   final Axis type;
   final Axis selectedOption;
   final Function(Axis) onTap;
 
-  const MainAxisRadioButton({
+  const AxisRadioButton({
     Key? key,
     required this.type,
     required this.selectedOption,
@@ -53,10 +53,10 @@ class MainAxisRadioButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<MainAxisRadioButton> createState() => _MainAxisRadioButtonState();
+  State<AxisRadioButton> createState() => _AxisRadioButtonState();
 }
 
-class _MainAxisRadioButtonState extends State<MainAxisRadioButton> {
+class _AxisRadioButtonState extends State<AxisRadioButton> {
   Axis result = Axis.vertical;
   String image = "downDirection.svg";
   bool isHover = false;

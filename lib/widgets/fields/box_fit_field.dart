@@ -26,7 +26,7 @@ class _BoxFitFieldState extends State<BoxFitField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         for (final boxFit in BoxFit.values) ...[
-          MainAxisRadioButton(
+          BoxFitRadioButton(
               type: boxFit,
               selectedOption: selectedOption,
               onTap: (value) {
@@ -41,12 +41,12 @@ class _BoxFitFieldState extends State<BoxFitField> {
   }
 }
 
-class MainAxisRadioButton extends StatefulWidget {
+class BoxFitRadioButton extends StatefulWidget {
   final BoxFit type;
   final BoxFit selectedOption;
   final Function(BoxFit) onTap;
 
-  const MainAxisRadioButton({
+  const BoxFitRadioButton({
     Key? key,
     required this.type,
     required this.selectedOption,
@@ -54,10 +54,10 @@ class MainAxisRadioButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<MainAxisRadioButton> createState() => _MainAxisRadioButtonState();
+  State<BoxFitRadioButton> createState() => _BoxFitRadioButtonState();
 }
 
-class _MainAxisRadioButtonState extends State<MainAxisRadioButton> {
+class _BoxFitRadioButtonState extends State<BoxFitRadioButton> {
   BoxFit result = BoxFit.fill;
   String image = "boxfitfill";
   bool isHover = false;

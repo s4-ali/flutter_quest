@@ -23,7 +23,8 @@ class AlignmentPropertyField
     Alignment value,
   ) {
     return AlignmentField(
-      onChanged: onChanged
+      onChanged: onChanged,
+      value: value,
     );
   }
 }

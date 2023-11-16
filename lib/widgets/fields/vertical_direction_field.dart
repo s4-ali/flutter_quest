@@ -39,6 +39,7 @@ class _VerticalDirectionFieldState extends State<VerticalDirectionField> {
       ],
     );
   }
+
 }
 
 class VerticalDirectionRadioButton extends StatefulWidget {

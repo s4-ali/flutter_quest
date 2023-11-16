@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/logger.dart';
 
 class PropertiesDrawer extends StatelessWidget {
   final String title;
@@ -12,6 +13,7 @@ class PropertiesDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log.i("$title -> properties: ${widgets.length}");
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).drawerTheme.backgroundColor,

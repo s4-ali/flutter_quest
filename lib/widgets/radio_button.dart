@@ -25,7 +25,7 @@ class _AppRadioButtonState extends State<AppRadioButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(7.5),
       child: InkWell(
         hoverColor: Colors.transparent,
         onTap: widget.onSelected,

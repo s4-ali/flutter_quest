@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_quest/widgets/radio_button.dart';
 
-class AxisField extends StatefulWidget {
+extension on Enum {
+  String get iconPath {
+    switch (this) {
+      case Axis.vertical:
+        return "assets/axisVertical.svg";
+      case Axis.horizontal:
+        return "assets/axisHorizontal.svg";
+      default:
+        return "";
+    }
+  }
+}
+
+class AxisField extends StatelessWidget {
   final void Function(Axis) onChanged;
   final Axis value;
 
@@ -12,110 +25,18 @@ class AxisField extends StatefulWidget {
   });
 
   @override
-  State<AxisField> createState() => _AxisFieldState();
-}
-
-class _AxisFieldState extends State<AxisField> {
-  Axis selectedOption = Axis.vertical;
-
-  @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (final maixAxis in Axis.values) ...[
-          AxisRadioButton(
-              type: maixAxis,
-              selectedOption: selectedOption,
-              onTap: (value) {
-                setState(() {
-                  selectedOption = value;
-                  widget.onChanged(value);
-                });
-              }),
-        ],
-      ],
-    );
-  }
-}
-
-class AxisRadioButton extends StatefulWidget {
-  final Axis type;
-  final Axis selectedOption;
-  final Function(Axis) onTap;
-
-  const AxisRadioButton({
-    Key? key,
-    required this.type,
-    required this.selectedOption,
-    required this.onTap,
-  }) : super(key: key);
-
-  @override
-  State<AxisRadioButton> createState() => _AxisRadioButtonState();
-}
-
-class _AxisRadioButtonState extends State<AxisRadioButton> {
-  Axis result = Axis.vertical;
-  String image = "downDirection.svg";
-  bool isHover = false;
-
-  @override
-  Widget build(BuildContext context) {
-    switch (widget.type) {
-      case Axis.vertical:
-        result = Axis.vertical;
-        image = "axisVertical.svg";
-        break;
-      case Axis.horizontal:
-        result = Axis.horizontal;
-        image = "axisHorizontal.svg";
-        break;
-    }
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: InkWell(
-        onTap: () {
-          widget.onTap(result);
-        },
-        child: MouseRegion(
-          onEnter: (v) {
-            setState(() {
-              isHover = true;
-            });
-          },
-          onExit: (v) {
-            setState(() {
-              isHover = false;
-            });
-          },
-          child: Container(
-            height: 30,
-            width: 30,
-            decoration: BoxDecoration(
-                color: widget.selectedOption == widget.type
-                    ? const Color(0xFF0099FF)
-                    : Colors.transparent,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(4),
-                ),
-                border: Border.all(
-                  width: 1,
-                  color: isHover ? const Color(0xFF0099FF) : Colors.transparent,
-                )),
-            child: Center(
-              child: SvgPicture.asset(
-                "assets/$image",
-                color: widget.selectedOption == widget.type || isHover
-                    ? const Color(0xFFFFFFFF)
-                    : const Color(0xFF808080),
-              ),
-            ),
+        for (final axis in Axis.values)
+          AppRadioButton(
+            isSelected: value == axis,
+            iconPath: axis.iconPath,
+            onSelected: () => onChanged(axis),
           ),
-        ),
-      ),
+      ],
     );
   }
 }

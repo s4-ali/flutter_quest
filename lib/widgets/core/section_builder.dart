@@ -1,43 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_holder.dart';
 import 'package:flutter_quest/core/property_provider.dart';
-import 'package:flutter_quest/widgets/core/scaffold.dart';
-
-class PropertyExplorerBuilder extends StatefulWidget {
+import 'section.dart' as app;
+class SectionBuilder extends StatefulWidget {
   final String widgetName;
-  final Widget Function(PropertyProvider configurations) builder;
+  final void Function(PropertyProvider configurations) builder;
 
-  const PropertyExplorerBuilder({
+  const SectionBuilder({
     super.key,
     required this.widgetName,
     required this.builder,
   });
 
   @override
-  State<PropertyExplorerBuilder> createState() => _PropertyExplorerBuilderState();
+  State<SectionBuilder> createState() => _SectionBuilderState();
 }
 
-class _PropertyExplorerBuilderState extends State<PropertyExplorerBuilder> {
+class _SectionBuilderState extends State<SectionBuilder> {
+  List<Widget> widgets = [];
   final PropertyProvider configurations = PropertyProvider();
 
   @override
   void initState() {
     super.initState();
+    Future.delayed(const Duration(milliseconds: 100), (){
+      widget.builder.call(configurations);
+      setState(() {});
+    });
     configurations.addListener(_onConfigurationsUpdated);
   }
 
   void _onConfigurationsUpdated() {
-    setState(() {});
+    widget.builder.call(configurations);
+    // setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    toWidget(PropertyHolder e) => e.widget;
 
-    return WidgetEditorScaffold(
+    toWidget(PropertyHolder e) => e.widget;
+    return app.Section(
       title: widget.widgetName,
       properties: configurations.widgets.map(toWidget).toList(),
-      widget: widget.builder.call(configurations),
     );
   }
 }

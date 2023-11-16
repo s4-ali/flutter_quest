@@ -20,10 +20,10 @@ class BooleanField extends StatelessWidget {
           Icons.circle_sharp,
           color: Colors.transparent,
         )),
-        activeColor: Colors.white,
-        activeTrackColor: const Color(0xFF3772FF),
-        inactiveTrackColor: const Color(0xFF36343b),
-        inactiveThumbColor: const Color(0xFF938F99),
+        activeColor: const Color(0xFFFFFFFF),
+        activeTrackColor: const Color(0xFF0099FF),
+        inactiveTrackColor: const Color(0xFF35363A),
+        inactiveThumbColor: const Color(0xFF808080),
         value: value,
         onChanged: (value) {
           onChanged(value);

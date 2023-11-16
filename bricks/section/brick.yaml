@@ -1,0 +1,21 @@
+name: section
+description: A brick that allows to register a new section field in the application.
+
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev.51 <0.1.0"
+
+vars:
+  name:
+    type: string
+    description: Section Name
+    prompt: What is Section name?
+  type:
+    type: string
+    description: The data type that this section deals with
+    prompt: What is the data type?
+  defaultValue:
+    type: string
+    description: The default value of this section
+    prompt: What is the default value?

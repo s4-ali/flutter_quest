@@ -5,55 +5,41 @@ const values = [
   Curves.bounceIn,
   Curves.bounceInOut,
   Curves.bounceOut,
-  Curves.decelerate,
-  Curves.ease,
   Curves.easeIn,
-  Curves.easeInBack,
-  Curves.easeInCirc,
-  Curves.easeInCubic,
-  Curves.easeInExpo,
   Curves.easeInOut,
-  Curves.easeInOutBack,
-  Curves.easeInOutCirc,
-  Curves.easeInOutCubic,
-  Curves.easeInOutCubicEmphasized,
-  Curves.easeInOutExpo,
-  Curves.easeInOutQuad,
-  Curves.easeInOutQuart,
-  Curves.easeInOutQuint,
-  Curves.easeInOutSine,
-  Curves.easeInQuad,
-  Curves.easeInQuint,
-  Curves.easeInSine,
-  Curves.easeInToLinear,
   Curves.easeOut,
-  Curves.easeOutBack,
-  Curves.easeOutCirc,
-  Curves.easeOutCubic,
-  Curves.easeOutExpo,
-  Curves.easeOutQuad,
-  Curves.easeOutQuint,
-  Curves.easeOutSine,
   Curves.elasticIn,
   Curves.elasticInOut,
   Curves.elasticOut,
-  Curves.fastEaseInToSlowEaseOut,
-  Curves.fastLinearToSlowEaseIn,
   Curves.fastOutSlowIn,
   Curves.linear,
-  Curves.linearToEaseOut,
-  Curves.slowMiddle,
 ];
 
-extension on Curve{
-  String get iconPath{
-    switch (this){
+extension on Curve {
+  String get iconPath {
+    switch (this) {
       case Curves.bounceIn:
-        return "";
+        return "assets/bounceIn.svg";
       case Curves.bounceInOut:
-        return "";
+        return "assets/bounceInOut.svg";
       case Curves.bounceOut:
-        return "";
+        return "assets/bounceOut.svg";
+      case Curves.easeIn:
+        return "assets/curveEaseIn.svg";
+      case Curves.easeInOut:
+        return "assets/curveEaseInOut.svg";
+      case Curves.easeOut:
+        return "assets/curveEaseOut.svg";
+      case Curves.fastOutSlowIn:
+        return "assets/curveFastOutEaseIn.svg";
+      case Curves.linear:
+        return "assets/curveLinear.svg";
+      case Curves.elasticIn:
+        return "assets/elasticIn.svg";
+      case Curves.elasticInOut:
+        return "assets/elasticInOut.svg";
+      case Curves.elasticOut:
+        return "assets/elasticOut.svg";
       default:
         return "";
     }
@@ -72,17 +58,25 @@ class CurveField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (final curves in values)
-          AppRadioButton(
-            isSelected: value == curves,
-            iconPath: curves.iconPath,
-            onSelected: () => onChanged(curves),
-          ),
-      ],
+      children: List.generate((values.length / 6).ceil(), (rowIndex) {
+        int start = rowIndex * 6;
+        int end = (rowIndex + 1) * 6;
+        end = end > values.length ? values.length : end;
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: List.generate(end - start, (index) {
+            final curves = values[start + index];
+            return AppRadioButton(
+              isSelected: value == curves,
+              iconPath: curves.iconPath,
+              onSelected: () => onChanged(curves),
+            );
+          }),
+        );
+      }),
     );
   }
 }

@@ -26,3 +26,14 @@ flutter:
   assets:
     - assets/axisHorizontal.svg
     - assets/axisVertical.svg
+    - assets/bounceIn.svg
+    - assets/bounceInOut.svg
+    - assets/bounceOut.svg
+    - assets/curveEaseIn.svg
+    - assets/curveEaseInOut.svg
+    - assets/curveEaseOut.svg
+    - assets/curveFastOutEaseIn.svg
+    - assets/curveLinear.svg
+    - assets/elasticIn.svg
+    - assets/elasticInOut.svg
+    - assets/elasticOut.svg

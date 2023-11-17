@@ -26,3 +26,5 @@ flutter:
   assets:
     - assets/axisHorizontal.svg
     - assets/axisVertical.svg
+    - assets/leftToRight.svg
+    - assets/rightToLeft.svg

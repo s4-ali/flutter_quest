@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/widgets/radio_button.dart';
+import 'package:flutter_quest/widgets/icon_options.dart';
 
 extension on Enum {
   String get iconPath {
@@ -26,17 +26,11 @@ class AxisField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (final axis in Axis.values)
-          AppRadioButton(
-            isSelected: value == axis,
-            iconPath: axis.iconPath,
-            onSelected: () => onChanged(axis),
-          ),
-      ],
+    return IconOptions(
+      onChanged: (dynamic val) => onChanged(val as Axis),
+      value: value,
+      options: Axis.values,
+      iconPath: (dynamic value) => (value as Axis).iconPath,
     );
   }
 }

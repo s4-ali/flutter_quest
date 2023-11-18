@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/widgets/radio_button.dart';
+import 'package:flutter_quest/widgets/icon_options.dart';
 
 const values = [
   Curves.bounceIn,
@@ -58,25 +58,11 @@ class CurveField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: List.generate((values.length / 6).ceil(), (rowIndex) {
-        int start = rowIndex * 6;
-        int end = (rowIndex + 1) * 6;
-        end = end > values.length ? values.length : end;
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: List.generate(end - start, (index) {
-            final curves = values[start + index];
-            return AppRadioButton(
-              isSelected: value == curves,
-              iconPath: curves.iconPath,
-              onSelected: () => onChanged(curves),
-            );
-          }),
-        );
-      }),
+    return IconOptions(
+      onChanged: (dynamic val) => onChanged(val as Curve),
+      value: value,
+      options: values,
+      iconPath: (dynamic value) => (value as Curve).iconPath,
     );
   }
 }

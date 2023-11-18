@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/widgets/radio_button.dart';
+import 'package:flutter_quest/widgets/icon_options.dart';
 
 extension on CrossAxisAlignment{
   String get iconPath{
@@ -30,17 +30,11 @@ class CrossAxisAlignmentField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (final axisAlignment in CrossAxisAlignment.values)
-          AppRadioButton(
-            isSelected: value == axisAlignment,
-            iconPath: axisAlignment.iconPath,
-            onSelected: () => onChanged(axisAlignment),
-          ),
-      ],
+    return IconOptions(
+      onChanged: (dynamic val) => onChanged(val as CrossAxisAlignment),
+      value: value,
+      options: CrossAxisAlignment.values,
+      iconPath: (dynamic value) => (value as CrossAxisAlignment).iconPath,
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_provider.dart';
-import 'package:flutter_quest/widgets/fields/string_field_field.dart';
+import 'package:flutter_quest/widgets/fields/string_field.dart';
 
 class StringFieldPropertyParams extends PropertyParams<String> {
   StringFieldPropertyParams({

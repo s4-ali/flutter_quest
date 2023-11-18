@@ -56,7 +56,7 @@ class _AppTextFieldState extends State<AppTextField> {
             borderRadius: const BorderRadius.all(Radius.circular(6.0)),
             borderSide: BorderSide(
               color:
-                  isHovered ? const Color(0xff0099FF) : const Color(0xff35363A),
+              isHovered ? const Color(0xff0099FF) : const Color(0xff35363A),
               width: 1.0,
             ),
           ),

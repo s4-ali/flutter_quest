@@ -81,7 +81,7 @@ class _IconDataFieldState extends State<IconDataField> {
                         selectedIcon,
                         size: 20,
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       Text(selectedIcon.toString()),
                     ],
                   ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/widgets/radio_button.dart';
+import 'package:flutter_quest/widgets/icon_options.dart';
 
 extension on BoxFit {
   String get iconPath {
@@ -36,17 +36,11 @@ class BoxFitField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (final boxFit in BoxFit.values)
-          AppRadioButton(
-            isSelected: value == boxFit,
-            iconPath: boxFit.iconPath,
-            onSelected: () => onChanged(boxFit),
-          ),
-      ],
+    return IconOptions(
+      onChanged: (dynamic val) => onChanged(val as BoxFit),
+      value: value,
+      options: BoxFit.values,
+      iconPath: (dynamic value) => (value as BoxFit).iconPath,
     );
   }
 }

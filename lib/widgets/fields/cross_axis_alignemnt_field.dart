@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/icon_options.dart';
 
-extension on CrossAxisAlignment{
-  String get iconPath{
+extension on CrossAxisAlignment {
+  String get iconPath {
     switch (this) {
       case CrossAxisAlignment.start:
         return "assets/startVertical.svg";
       case CrossAxisAlignment.end:
         return "assets/endVertical.svg";
-        case CrossAxisAlignment.center:
+      case CrossAxisAlignment.center:
         return "assets/center.svg";
       case CrossAxisAlignment.baseline:
         return "assets/baseline.svg";
@@ -38,4 +38,3 @@ class CrossAxisAlignmentField extends StatelessWidget {
     );
   }
 }
-

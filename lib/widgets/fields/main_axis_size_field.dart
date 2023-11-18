@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/widgets/radio_button.dart';
+import 'package:flutter_quest/widgets/icon_options.dart';
 
 extension on MainAxisSize{
   String get iconPath{
@@ -26,17 +26,11 @@ class MainAxisSizeField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (final axisSize in MainAxisSize.values)
-          AppRadioButton(
-            isSelected: value == axisSize,
-            iconPath: axisSize.iconPath,
-            onSelected: () => onChanged(axisSize),
-          ),
-      ],
+    return IconOptions(
+      onChanged: (dynamic val) => onChanged(val as MainAxisSize),
+      value: value,
+      options: MainAxisSize.values,
+      iconPath: (dynamic value) => (value as MainAxisSize).iconPath,
     );
   }
 }

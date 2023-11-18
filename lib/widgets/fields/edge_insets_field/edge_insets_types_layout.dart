@@ -22,13 +22,15 @@ class _AllEdgeInsetsLayoutState extends State<AllEdgeInsetsLayout> {
   }) {
     setState(() {
       all = allValue ?? all;
-      linesColor = const Color(0xFF0099FF);
-
+      all != 0.0
+          ? linesColor = const Color(0xFF0099FF)
+          : const Color(0xFF808080);
       widget.onChanged(
         EdgeInsets.all(all),
       );
     });
   }
+  double updateValue = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -36,18 +38,28 @@ class _AllEdgeInsetsLayoutState extends State<AllEdgeInsetsLayout> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         EdgeInsetsTextField(
-            prefixText: "T",
-            onChanged: (value) {
-              updateValues(allValue: value);
-            }),
+          prefixText: "T",
+          onChanged: (value) {
+            updateValues(allValue: value);
+            setState(() {
+              updateValue = value;
+            });
+          },
+          myValue: updateValue,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             EdgeInsetsTextField(
-                prefixText: "L",
-                onChanged: (value) {
-                  updateValues(allValue: value);
-                }),
+              prefixText: "L",
+              onChanged: (value) {
+                updateValues(allValue: value);
+                setState(() {
+                  updateValue = value;
+                });
+              },
+              myValue: updateValue,
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -62,17 +74,7 @@ class _AllEdgeInsetsLayoutState extends State<AllEdgeInsetsLayout> {
                       vertical: false,
                       color: linesColor,
                     ),
-                    Container(
-                      height: 20,
-                      width: 20,
-                      margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF0099FF),
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                      ),
-                      child: SvgPicture.asset("assets/all.svg"),
-                    ),
+                    const _IconContainer(iconPath: "assets/all.svg"),
                     LineContainer(
                       vertical: false,
                       color: linesColor,
@@ -86,17 +88,27 @@ class _AllEdgeInsetsLayoutState extends State<AllEdgeInsetsLayout> {
               ],
             ),
             EdgeInsetsTextField(
-                prefixText: "R",
-                onChanged: (value) {
-                  updateValues(allValue: value);
-                }),
+              prefixText: "R",
+              onChanged: (value) {
+                updateValues(allValue: value);
+                setState(() {
+                  updateValue = value;
+                });
+              },
+              myValue: updateValue,
+            ),
           ],
         ),
         EdgeInsetsTextField(
-            prefixText: "B",
-            onChanged: (value) {
-              updateValues(allValue: value);
-            }),
+          prefixText: "B",
+          onChanged: (value) {
+          updateValues(allValue: value);
+          setState(() {
+            updateValue = value;
+          });
+        },
+          myValue: updateValue,
+        ),
       ],
     );
   }
@@ -157,18 +169,20 @@ class _OnlyEdgeInsetsLayoutState extends State<OnlyEdgeInsetsLayout> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         EdgeInsetsTextField(
-            prefixText: "T",
-            onChanged: (value) {
-              updateValues(topValue: value);
-            }),
+          prefixText: "T",
+          onChanged: (value) {
+            updateValues(topValue: value);
+          },
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             EdgeInsetsTextField(
-                prefixText: "L",
-                onChanged: (value) {
-                  updateValues(leftValue: value);
-                }),
+              prefixText: "L",
+              onChanged: (value) {
+                updateValues(leftValue: value);
+              },
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -183,17 +197,7 @@ class _OnlyEdgeInsetsLayoutState extends State<OnlyEdgeInsetsLayout> {
                       vertical: false,
                       color: leftLinesColor,
                     ),
-                    Container(
-                      height: 20,
-                      width: 20,
-                      margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF0099FF),
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                      ),
-                      child: SvgPicture.asset("assets/only.svg"),
-                    ),
+                    const _IconContainer(iconPath: "assets/only.svg"),
                     LineContainer(
                       vertical: false,
                       color: rightLinesColor,
@@ -214,10 +218,11 @@ class _OnlyEdgeInsetsLayoutState extends State<OnlyEdgeInsetsLayout> {
           ],
         ),
         EdgeInsetsTextField(
-            prefixText: "B",
-            onChanged: (value) {
-              updateValues(bottomValue: value);
-            }),
+          prefixText: "B",
+          onChanged: (value) {
+            updateValues(bottomValue: value);
+          },
+        ),
       ],
     );
   }
@@ -261,6 +266,8 @@ class _SymmetricEdgeInsetsLayoutState extends State<SymmetricEdgeInsetsLayout> {
       );
     });
   }
+  double updateVerticalValue = 0.0;
+  double updateHorizontalValue = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -268,18 +275,28 @@ class _SymmetricEdgeInsetsLayoutState extends State<SymmetricEdgeInsetsLayout> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         EdgeInsetsTextField(
-            prefixText: "T",
-            onChanged: (value) {
-              updateValues(verticalValue: value);
-            }),
+          prefixText: "T",
+          onChanged: (value) {
+            updateValues(verticalValue: value);
+            setState(() {
+              updateVerticalValue = value;
+            });
+          },
+          myValue: updateVerticalValue,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             EdgeInsetsTextField(
-                prefixText: "L",
-                onChanged: (value) {
-                  updateValues(horizontalValue: value);
-                }),
+              prefixText: "L",
+              onChanged: (value) {
+                updateValues(horizontalValue: value);
+                setState(() {
+                  updateHorizontalValue = value;
+                });
+              },
+              myValue: updateHorizontalValue,
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -294,17 +311,7 @@ class _SymmetricEdgeInsetsLayoutState extends State<SymmetricEdgeInsetsLayout> {
                       vertical: false,
                       color: horizontalLinesColor,
                     ),
-                    Container(
-                      height: 20,
-                      width: 20,
-                      margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF0099FF),
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                      ),
-                      child: SvgPicture.asset("assets/symmetric.svg"),
-                    ),
+                    const _IconContainer(iconPath: "assets/symmetric.svg"),
                     LineContainer(
                       vertical: false,
                       color: horizontalLinesColor,
@@ -318,17 +325,27 @@ class _SymmetricEdgeInsetsLayoutState extends State<SymmetricEdgeInsetsLayout> {
               ],
             ),
             EdgeInsetsTextField(
-                prefixText: "R",
-                onChanged: (value) {
-                  updateValues(horizontalValue: value);
-                }),
+              prefixText: "R",
+              onChanged: (value) {
+                updateValues(horizontalValue: value);
+                setState(() {
+                  updateHorizontalValue = value;
+                });
+              },
+              myValue: updateHorizontalValue,
+            ),
           ],
         ),
         EdgeInsetsTextField(
-            prefixText: "B",
-            onChanged: (value) {
-              updateValues(verticalValue: value);
-            }),
+          prefixText: "B",
+          onChanged: (value) {
+            updateValues(verticalValue: value);
+            setState(() {
+              updateVerticalValue = value;
+            });
+          },
+          myValue: updateVerticalValue,
+        ),
       ],
     );
   }
@@ -337,13 +354,13 @@ class _SymmetricEdgeInsetsLayoutState extends State<SymmetricEdgeInsetsLayout> {
 class EdgeInsetsTextField extends StatelessWidget {
   final Function(double) onChanged;
   final String prefixText;
-  final double? value;
+  final double? myValue;
 
   const EdgeInsetsTextField(
       {super.key,
       required this.onChanged,
       required this.prefixText,
-      this.value = 0});
+      this.myValue = 0});
 
   @override
   Widget build(BuildContext context) {
@@ -357,7 +374,7 @@ class EdgeInsetsTextField extends StatelessWidget {
             onChanged: (value) {
               onChanged(double.parse(value));
             },
-            controller: TextEditingController(text: value.toString()),
+            controller: TextEditingController(text: myValue.toString()),
             prefix: Padding(
               padding: const EdgeInsets.only(right: 4.0, bottom: 13.0),
               child: Text(prefixText),
@@ -387,6 +404,30 @@ class LineContainer extends StatelessWidget {
         color: color,
         borderRadius: const BorderRadius.all(Radius.circular(50)),
       ),
+    );
+  }
+}
+
+class _IconContainer extends StatelessWidget {
+  final String iconPath;
+
+  const _IconContainer({
+    super.key,
+    required this.iconPath,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 20,
+      width: 20,
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(4),
+      decoration: const BoxDecoration(
+        color: Color(0xFF0099FF),
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+      ),
+      child: SvgPicture.asset(iconPath),
     );
   }
 }

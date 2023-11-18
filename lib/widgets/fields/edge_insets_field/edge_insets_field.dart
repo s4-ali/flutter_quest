@@ -34,6 +34,15 @@ class _EdgeInsetsFieldState extends State<EdgeInsetsField> {
 
   @override
   Widget build(BuildContext context) {
+
+    Border buttonBorder = Border.all(
+      width: 1.0,
+      color: isHovered
+          ? const Color(0xFF0099FF) : const Color(0xFF35363A),
+    );
+
+
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,11 +64,8 @@ class _EdgeInsetsFieldState extends State<EdgeInsetsField> {
             decoration: BoxDecoration(
                 color: Colors.transparent,
                 borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-                border: Border.all(
-                  width: 1.0,
-                  color: isHovered
-                      ? const Color(0xFF0099FF) : const Color(0xFF35363A),
-                )),
+                border: buttonBorder,
+            ),
             child: DropdownButton<EdgeInsetsType>(
               icon: const Padding(
                 padding: EdgeInsets.only(left: 20),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/widgets/radio_button.dart';
+import 'package:flutter_quest/widgets/icon_options.dart';
 
-extension on TextDirection{
-  String get iconPath{
-    switch(this) {
+extension on TextDirection {
+  String get iconPath {
+    switch (this) {
       case TextDirection.ltr:
         return "assets/leftToRight.svg";
       case TextDirection.rtl:
@@ -26,17 +26,11 @@ class TextDirectionField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (final textDirection in TextDirection.values)
-          AppRadioButton(
-            isSelected: value == textDirection,
-            iconPath: textDirection.iconPath,
-            onSelected: () => onChanged(textDirection),
-          ),
-      ],
+    return IconOptions(
+      onChanged: (dynamic val) => onChanged(val as TextDirection),
+      value: value,
+      options: TextDirection.values,
+      iconPath: (dynamic value) => (value as TextDirection).iconPath,
     );
   }
 }

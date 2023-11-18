@@ -75,9 +75,15 @@ class _IconDataFieldState extends State<IconDataField> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    selectedIcon,
-                    size: 20,
+                  Row(
+                    children: [
+                      Icon(
+                        selectedIcon,
+                        size: 20,
+                      ),
+                      SizedBox(width: 8),
+                      Text(selectedIcon.toString()),
+                    ],
                   ),
                   const Icon(
                     Icons.keyboard_arrow_down,

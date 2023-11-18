@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/widgets/radio_button.dart';
+import 'package:flutter_quest/widgets/icon_options.dart';
 
-extension on MainAxisAlignment{
+extension on MainAxisAlignment {
   String get iconPath {
     switch (this) {
       case MainAxisAlignment.start:
@@ -34,17 +34,11 @@ class MainAxisAlignmentField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (final axisAlignment in MainAxisAlignment.values)
-          AppRadioButton(
-            isSelected: value == axisAlignment,
-            iconPath: axisAlignment.iconPath,
-            onSelected: () => onChanged(axisAlignment),
-          ),
-      ],
+    return IconOptions(
+      onChanged: (dynamic val) => onChanged(val as MainAxisAlignment),
+      value: value,
+      options: MainAxisAlignment.values,
+      iconPath: (dynamic value) => (value as MainAxisAlignment).iconPath,
     );
   }
 }

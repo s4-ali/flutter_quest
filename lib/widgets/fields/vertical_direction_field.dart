@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/widgets/radio_button.dart';
+import 'package:flutter_quest/widgets/icon_options.dart';
 
 extension on VerticalDirection {
   String get iconPath {
@@ -26,17 +26,11 @@ class VerticalDirectionField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (final direction in VerticalDirection.values)
-          AppRadioButton(
-            iconPath: direction.iconPath,
-            isSelected: value == direction,
-            onSelected: () => onChanged(direction),
-          ),
-      ],
+    return IconOptions(
+      onChanged: (dynamic val) => onChanged(val as VerticalDirection),
+      value: value,
+      options: VerticalDirection.values,
+      iconPath: (dynamic value) => (value as VerticalDirection).iconPath,
     );
   }
 }

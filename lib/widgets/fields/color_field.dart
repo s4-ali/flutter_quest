@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
 
+List<Color> _commonColorList = [
+  const Color(0xFF1708FF),
+  const Color(0xFF000000),
+  const Color(0xFFFFFFFF),
+  const Color(0xFFFF0000),
+  const Color(0xFFFF7A00),
+  const Color(0xFF008000),
+  const Color(0xFFFFF000),
+  const Color(0xFF00FFB2),
+  const Color(0xFF4b0082),
+  const Color(0xFF8FFF00),
+  const Color(0xFFE22EFF),
+  const Color(0xFF545454),
+  const Color(0xFF7B0000),
+  const Color(0xFF00FF1A),
+  const Color(0xFF00E0FF),
+];
+
 class ColorField extends StatefulWidget {
   final void Function(Color) onChanged;
   final Color value;
@@ -18,10 +36,10 @@ class ColorField extends StatefulWidget {
 class _ColorFieldState extends State<ColorField> {
   Color? prefixColor;
   int opacity = 100;
-  bool isHover = false;
   Color? colorWithOpacity;
   TextEditingController opacityTextEditingController =
       TextEditingController(text: "100");
+  TextEditingController textEditingController = TextEditingController();
 
   void updateColor(Color color) {
     setState(() {
@@ -36,33 +54,24 @@ class _ColorFieldState extends State<ColorField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        MouseRegion(
-          onEnter: (_) {
-            setState(() {
-              isHover = true;
-            });
-          },
-          onExit: (_) {
-            setState(() {
-              isHover = false;
-            });
-          },
+        SizedBox(
+          height: 30,
           child: AppTextField(
             contentPadding: EdgeInsets.zero,
-            prefix: CommonColorContainer(
-              fillColor: prefixColor ?? Colors.transparent,
-              onTab: widget.onChanged,
-              margin: EdgeInsets.zero,//const EdgeInsets.only(top: 8, left: 14, right: 14, bottom: 8),
+            prefix: Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10,),
+              child: CommonColorContainer(
+                fillColor: prefixColor ?? Colors.transparent,
+                onTab: widget.onChanged,
+              ),
             ),
             suffixIcon: Container(
               width: 52,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 border: Border(
                   left: BorderSide(
                     width: 1,
-                    color: isHover
-                        ? const Color(0xff0099FF)
-                        : const Color(0xff35363A),
+                    color: Color(0xff35363A),
                   ),
                 ),
               ),
@@ -90,77 +99,21 @@ class _ColorFieldState extends State<ColorField> {
             onChanged: (v) {
               updateColor(Color(int.parse("0xFF$v")));
             },
-            controller: TextEditingController(),
+            controller: textEditingController,
           ),
         ),
         const Text("Common Colors"),
-        Row(
-          children: [
-            CommonColorContainer(
-              fillColor: const Color(0xFF1708FF),
-              onTab: updateColor,
+        Wrap(
+          children: List.generate(
+            _commonColorList.length,
+            (index) => Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: CommonColorContainer(
+                fillColor: _commonColorList[index],
+                onTab: updateColor,
+              ),
             ),
-            CommonColorContainer(
-              fillColor: const Color(0xFF000000),
-              onTab: updateColor,
-            ),
-            CommonColorContainer(
-              fillColor: const Color(0xFFFFFFFF),
-              onTab: updateColor,
-            ),
-            CommonColorContainer(
-              fillColor: const Color(0xFFFF0000),
-              onTab: updateColor,
-            ),
-            CommonColorContainer(
-              fillColor: const Color(0xFFFF7A00),
-              onTab: updateColor,
-            ),
-            CommonColorContainer(
-              fillColor: const Color(0xFF008000),
-              onTab: updateColor,
-            ),
-            CommonColorContainer(
-              fillColor: const Color(0xFFFFF000),
-              onTab: updateColor,
-            ),
-            CommonColorContainer(
-              fillColor: const Color(0xFF00FFB2),
-              onTab: updateColor,
-            ),
-            CommonColorContainer(
-              fillColor: const Color(0xFF4b0082),
-              onTab: updateColor,
-            ),
-            CommonColorContainer(
-              fillColor: const Color(0xFF8FFF00),
-              onTab: updateColor,
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            CommonColorContainer(
-              fillColor: const Color(0xFFE22EFF),
-              onTab: updateColor,
-            ),
-            CommonColorContainer(
-              fillColor: const Color(0xFF545454),
-              onTab: updateColor,
-            ),
-            CommonColorContainer(
-              fillColor: const Color(0xFF7B0000),
-              onTab: updateColor,
-            ),
-            CommonColorContainer(
-              fillColor: const Color(0xFF00FF1A),
-              onTab: updateColor,
-            ),
-            CommonColorContainer(
-              fillColor: const Color(0xFF00E0FF),
-              onTab: updateColor,
-            ),
-          ],
+          ),
         ),
       ],
     );
@@ -170,25 +123,21 @@ class _ColorFieldState extends State<ColorField> {
 class CommonColorContainer extends StatelessWidget {
   final Function(Color) onTab;
   final Color fillColor;
-  final EdgeInsets? margin;
-
   const CommonColorContainer({
     super.key,
     required this.fillColor,
     required this.onTab,
-    this.margin,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTapDown: (v) {
         onTab(fillColor);
       },
       child: Container(
         height: 20,
         width: 20,
-        margin: margin ?? const EdgeInsets.all(5),
         decoration: BoxDecoration(
             color: fillColor,
             borderRadius: const BorderRadius.all(Radius.circular(4)),

@@ -40,12 +40,14 @@ class _ColorFieldState extends State<ColorField> {
   TextEditingController opacityTextEditingController =
       TextEditingController(text: "100");
   TextEditingController textEditingController = TextEditingController();
+  String textFieldValue = "000000";
 
   void updateColor(Color color) {
     setState(() {
       prefixColor = color;
       colorWithOpacity = color;
       widget.onChanged(colorWithOpacity!.withOpacity(opacity / 100));
+      textFieldValue = color.value.toRadixString(16).substring(2).toUpperCase();
     });
   }
 
@@ -57,6 +59,7 @@ class _ColorFieldState extends State<ColorField> {
         SizedBox(
           height: 30,
           child: AppTextField(
+            controller: TextEditingController(text: textFieldValue.toString()),
             contentPadding: EdgeInsets.zero,
             prefix: Padding(
               padding: const EdgeInsets.only(left: 10, right: 10,),
@@ -97,12 +100,17 @@ class _ColorFieldState extends State<ColorField> {
               ),
             ),
             onChanged: (v) {
+              setState(() {
+                textFieldValue = v;
+              });
               updateColor(Color(int.parse("0xFF$v")));
             },
-            controller: textEditingController,
           ),
         ),
-        const Text("Common Colors"),
+        const Padding(
+          padding: EdgeInsets.only(top: 16, bottom: 7),
+          child: Text("Common Colors"),
+        ),
         Wrap(
           children: List.generate(
             _commonColorList.length,
@@ -132,7 +140,7 @@ class CommonColorContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapDown: (v) {
+      onTap: () {
         onTab(fillColor);
       },
       child: Container(

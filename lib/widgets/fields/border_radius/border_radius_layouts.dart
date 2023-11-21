@@ -25,6 +25,11 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
 
   @override
   Widget build(BuildContext context) {
+    Border buttonBorder = Border.all(
+      width: 1.0,
+      color: isHovered ? const Color(0xFF0099FF) : const Color(0xFF35363A),
+    );
+
     return Column(
       children: [
         MouseRegion(
@@ -44,7 +49,7 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
             decoration: BoxDecoration(
               color: Colors.transparent,
               borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-              //   border: buttonBorder,
+              border: buttonBorder,
             ),
             child: DropdownButton<BorderRadiusAllType>(
               icon: const Padding(
@@ -65,7 +70,7 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
               items: [
                 DropdownMenuItem<BorderRadiusAllType>(
                   onTap: () {
-                    selectedLayout = BorderRadiusTextField(
+                    selectedLayout = _BorderRadiusTextField(
                       onChanged: (v) {
                         widget.onChanged(
                           BorderRadius.all(
@@ -83,8 +88,10 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
                 ),
                 DropdownMenuItem<BorderRadiusAllType>(
                   onTap: () {
-                    selectedLayout = Row(children: [
-                      BorderRadiusTextField(
+                    selectedLayout = Row(
+                        children: [
+                      _BorderRadiusTextField(
+                        prefixText: "X",
                         onChanged: (v) {
                           setState(() {
                             x = v;
@@ -96,7 +103,8 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
                           );
                         },
                       ),
-                      BorderRadiusTextField(
+                      _BorderRadiusTextField(
+                        prefixText: "Y",
                         onChanged: (v) {
                           setState(() {
                             y = v;
@@ -121,32 +129,33 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
             ),
           ),
         ),
-        BorderRadiusTextField(
-          onChanged: (v) {
-            widget.onChanged(
-              BorderRadius.all(
-                Radius.circular(v),
-              ),
-            );
-          },
-        ),
+        selectedLayout,
       ],
     );
   }
 }
 
-class BorderRadiusTextField extends StatelessWidget {
+class BorderRadiusCircularLayout extends StatelessWidget {
+  final void Function(BorderRadius) onChanged;
+
+  const BorderRadiusCircularLayout({super.key, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    return _BorderRadiusTextField(
+        onChanged: (v) => onChanged(BorderRadius.circular(v)));
+  }
+}
+
+
+
+class _BorderRadiusTextField extends StatelessWidget {
   final Function(double) onChanged;
   final String? prefixText;
   final double? myValue;
-  final double? width;
 
-  const BorderRadiusTextField(
-      {super.key,
-        required this.onChanged,
-        this.prefixText,
-        this.width = double.infinity,
-        this.myValue = 0});
+  const _BorderRadiusTextField(
+      {super.key, required this.onChanged, this.prefixText, this.myValue = 0});
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +163,7 @@ class BorderRadiusTextField extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: SizedBox(
         height: 30,
-        width: width,
+        width: double.infinity,
         child: Center(
           child: AppTextField(
             onChanged: (value) {
@@ -167,7 +176,7 @@ class BorderRadiusTextField extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
             contentPadding:
-            const EdgeInsets.only(left: 10, right: 4, top: 10, bottom: 9),
+                const EdgeInsets.only(left: 10, right: 4, top: 10, bottom: 9),
           ),
         ),
       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/property_fields/alignment_field.dart';
+import 'package:flutter_quest/property_fields/border_radius_field.dart';
+import 'package:flutter_quest/property_fields/box_border_field.dart';
 import 'package:flutter_quest/property_fields/clip_field.dart';
 import 'package:flutter_quest/property_fields/color_field.dart';
 import 'package:flutter_quest/property_fields/edge_insets_field.dart';
@@ -23,6 +25,8 @@ class ContainerPropertyExplorer extends StatelessWidget {
         final padding =
             provider.edgeInsetsField(id: "padding", title: "Padding");
         final color = provider.colorField(id: "color", title: "Color");
+        final borderRadius = provider.borderRadiusField(id: "BorderRadius", title: "BorderRadius");
+        final border = provider.borderField(id: "border", title: "Border");
         final foregroundColor =
             provider.colorField(id: "fgColor", title: "Foreground Color");
         final transform =
@@ -53,6 +57,8 @@ class ContainerPropertyExplorer extends StatelessWidget {
           transform: transform,
           decoration: BoxDecoration(
             color: color,
+            borderRadius: borderRadius,
+            border: border,
           ),
           foregroundDecoration: BoxDecoration(
             color: foregroundColor,

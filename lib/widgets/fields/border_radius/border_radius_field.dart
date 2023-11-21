@@ -26,7 +26,7 @@ class BorderRadiusField extends StatefulWidget {
 
 class _BorderRadiusFieldState extends State<BorderRadiusField> {
   BorderRadiusType selectedOption = BorderRadiusType.all;
-  late Widget selectedAllLayout;
+  Widget? selectedLayout;
   bool isHovered = false;
 
   @override
@@ -78,7 +78,7 @@ class _BorderRadiusFieldState extends State<BorderRadiusField> {
               items: [
                 DropdownMenuItem<BorderRadiusType>(
                   onTap: () {
-                    selectedAllLayout = BorderRadiusAllLayout(onChanged: widget.onChanged);
+                    selectedLayout = BorderRadiusAllLayout(onChanged: widget.onChanged);
                   },
                   value: BorderRadiusType.all,
                   child: const Padding(
@@ -88,7 +88,7 @@ class _BorderRadiusFieldState extends State<BorderRadiusField> {
                 ),
                 DropdownMenuItem<BorderRadiusType>(
                   onTap: () {
-                    selectedAllLayout = BorderRadiusCircularLayout(onChanged: widget.onChanged);
+                    selectedLayout = BorderRadiusCircularLayout(onChanged: widget.onChanged);
                   },
                   value: BorderRadiusType.circular,
                   child: const Padding(
@@ -98,7 +98,7 @@ class _BorderRadiusFieldState extends State<BorderRadiusField> {
                 ),
                 DropdownMenuItem<BorderRadiusType>(
                   onTap: () {
-                    selectedAllLayout = const SizedBox();
+                    selectedLayout = const SizedBox();
                   },
                   value: BorderRadiusType.vertical,
                   child: const Padding(
@@ -108,7 +108,7 @@ class _BorderRadiusFieldState extends State<BorderRadiusField> {
                 ),
                 DropdownMenuItem<BorderRadiusType>(
                   onTap: () {
-                    selectedAllLayout = const SizedBox();
+                    selectedLayout = const SizedBox();
                   },
                   value: BorderRadiusType.horizontal,
                   child: const Padding(
@@ -118,7 +118,7 @@ class _BorderRadiusFieldState extends State<BorderRadiusField> {
                 ),
                 DropdownMenuItem<BorderRadiusType>(
                   onTap: () {
-                    selectedAllLayout = const SizedBox();
+                    selectedLayout = const SizedBox();
                   },
                   value: BorderRadiusType.only,
                   child: const Padding(
@@ -128,7 +128,7 @@ class _BorderRadiusFieldState extends State<BorderRadiusField> {
                 ),
                 DropdownMenuItem<BorderRadiusType>(
                   onTap: () {
-                    selectedAllLayout = const SizedBox();
+                    selectedLayout = const SizedBox();
                   },
                   value: BorderRadiusType.zero,
                   child: const Padding(
@@ -140,7 +140,7 @@ class _BorderRadiusFieldState extends State<BorderRadiusField> {
             ),
           ),
         ),
-        selectedAllLayout,
+        selectedLayout!,
       ],
     );
   }

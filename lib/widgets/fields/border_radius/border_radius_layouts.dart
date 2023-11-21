@@ -17,7 +17,7 @@ class BorderRadiusAllLayout extends StatefulWidget {
 
 class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
   BorderRadiusAllType selectedOption = BorderRadiusAllType.circular;
-  late Widget selectedLayout;
+  late Widget selectedAllLayout;
   bool isHovered = false;
 
   double x = 0.0;
@@ -53,7 +53,7 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
             ),
             child: DropdownButton<BorderRadiusAllType>(
               icon: const Padding(
-                padding: EdgeInsets.only(left: 20),
+                padding: EdgeInsets.only(left: 40,),
                 child: Icon(Icons.keyboard_arrow_down),
               ),
               iconSize: 12,
@@ -70,7 +70,7 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
               items: [
                 DropdownMenuItem<BorderRadiusAllType>(
                   onTap: () {
-                    selectedLayout = _BorderRadiusTextField(
+                    selectedAllLayout = _BorderRadiusTextField(
                       onChanged: (v) {
                         widget.onChanged(
                           BorderRadius.all(
@@ -88,7 +88,7 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
                 ),
                 DropdownMenuItem<BorderRadiusAllType>(
                   onTap: () {
-                    selectedLayout = Row(
+                    selectedAllLayout = Row(
                         children: [
                       _BorderRadiusTextField(
                         prefixText: "X",
@@ -129,7 +129,7 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
             ),
           ),
         ),
-        selectedLayout,
+        selectedAllLayout!,
       ],
     );
   }

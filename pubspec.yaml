@@ -26,3 +26,6 @@ flutter:
   assets:
     - assets/axisHorizontal.svg
     - assets/axisVertical.svg
+    - assets/all.svg
+    - assets/only.svg
+    - assets/symmetric.svg

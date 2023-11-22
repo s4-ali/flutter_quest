@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
 
 List<Color> _commonColorList = [
   const Color(0xFF1708FF),
@@ -34,19 +35,17 @@ class ColorField extends StatefulWidget {
 }
 
 class _ColorFieldState extends State<ColorField> {
-  Color? prefixColor;
+  Color selectedColor = Colors.black;
   int opacity = 100;
-  Color? colorWithOpacity;
   TextEditingController opacityTextEditingController =
       TextEditingController(text: "100");
-  TextEditingController textEditingController = TextEditingController();
   String textFieldValue = "000000";
+  bool flexColorDialog = false;
 
   void updateColor(Color color) {
     setState(() {
-      prefixColor = color;
-      colorWithOpacity = color;
-      widget.onChanged(colorWithOpacity!.withOpacity(opacity / 100));
+      selectedColor = color;
+      widget.onChanged(selectedColor.withOpacity(opacity / 100));
       textFieldValue = color.value.toRadixString(16).substring(2).toUpperCase();
     });
   }
@@ -56,57 +55,71 @@ class _ColorFieldState extends State<ColorField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: 30,
-          child: AppTextField(
-            controller: TextEditingController(text: textFieldValue.toString()),
-            contentPadding: EdgeInsets.zero,
-            prefix: Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10,),
-              child: CommonColorContainer(
-                fillColor: prefixColor ?? Colors.transparent,
-                onTab: widget.onChanged,
-              ),
-            ),
-            suffixIcon: Container(
-              width: 52,
-              decoration: const BoxDecoration(
-                border: Border(
-                  left: BorderSide(
-                    width: 1,
-                    color: Color(0xff35363A),
+        Stack(children: [
+          SizedBox(
+            height: 30,
+            child: AppTextField(
+              controller:
+                  TextEditingController(text: textFieldValue.toString()),
+              contentPadding: const EdgeInsets.only(left: 35, bottom: 10),
+              suffixIcon: Container(
+                width: 52,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    left: BorderSide(
+                      width: 1,
+                      color: Color(0xff35363A),
+                    ),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 6.8),
+                  child: TextField(
+                    controller: opacityTextEditingController,
+                    onChanged: (value) {
+                      opacity = int.parse(value);
+                      updateColor(selectedColor);
+                    },
+                    textAlign: TextAlign.right,
+                    textAlignVertical: TextAlignVertical.center,
+                    maxLines: 1,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      suffix: Padding(
+                        padding: EdgeInsets.only(right: 5),
+                        child: Text("%"),
+                      ),
+                    ),
                   ),
                 ),
               ),
-              child: TextField(
-                controller: opacityTextEditingController,
-                onChanged: (value) {
-                  setState(() {
-                    opacity = int.parse(value);
-                    widget.onChanged(
-                        colorWithOpacity!.withOpacity(opacity / 100));
-                  });
-                },
-                textAlign: TextAlign.right,
-                textAlignVertical: TextAlignVertical.center,
-                maxLines: 1,
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  suffix: Padding(
-                    padding: EdgeInsets.only(right: 5),
-                    child: Text("%"),
-                  ),
-                ),
-              ),
+              onChanged: (value) => updateColor(Color(int.parse("0xFF$value"))),
             ),
-            onChanged: (v) {
-              setState(() {
-                textFieldValue = v;
-              });
-              updateColor(Color(int.parse("0xFF$v")));
-            },
           ),
-        ),
+          Positioned(
+            top: 5,
+            left: 7,
+            child: InkWell(
+              onTap: () {
+                setState(() {
+                  flexColorDialog = !flexColorDialog;
+                });
+              },
+              child: Container(
+                height: 20,
+                width: 20,
+                decoration: BoxDecoration(
+                  color: selectedColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(4)),
+                  border: Border.all(
+                    color: const Color(0xFFFFFFFF).withOpacity(0.3),
+                    width: 1,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ]),
         const Padding(
           padding: EdgeInsets.only(top: 16, bottom: 7),
           child: Text("Common Colors"),
@@ -116,33 +129,48 @@ class _ColorFieldState extends State<ColorField> {
             _commonColorList.length,
             (index) => Padding(
               padding: const EdgeInsets.all(5.0),
-              child: CommonColorContainer(
+              child: _CommonColorContainer(
                 fillColor: _commonColorList[index],
                 onTab: updateColor,
               ),
             ),
           ),
         ),
+        flexColorDialog
+            ? Center(
+                child: ColorPicker(
+                  onColorChanged: updateColor,
+                  wheelSquarePadding: 15,
+                  color: selectedColor,
+                  wheelDiameter: 200,
+                  maxRecentColors: 5,
+                  enableShadesSelection: false,
+                  pickersEnabled: const <ColorPickerType, bool>{
+                    ColorPickerType.wheel: true,
+                    ColorPickerType.primary: false,
+                    ColorPickerType.accent: false,
+                  },
+                ),
+              )
+            : const SizedBox(),
       ],
     );
   }
 }
 
-class CommonColorContainer extends StatelessWidget {
+class _CommonColorContainer extends StatelessWidget {
   final Function(Color) onTab;
   final Color fillColor;
-  const CommonColorContainer({
-    super.key,
+
+  const _CommonColorContainer({
     required this.fillColor,
     required this.onTab,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        onTab(fillColor);
-      },
+    return InkWell(
+      onTap: () => onTab(fillColor),
       child: Container(
         height: 20,
         width: 20,

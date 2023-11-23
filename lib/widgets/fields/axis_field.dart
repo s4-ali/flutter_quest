@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
+import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/icon_options.dart';
 
 extension on Enum {
@@ -16,7 +17,6 @@ extension on Enum {
 }
 
 class AxisField extends PropertyWidget<Axis> {
-
   const AxisField({
     super.key,
     required super.onChanged,
@@ -30,6 +30,23 @@ class AxisField extends PropertyWidget<Axis> {
       value: value,
       options: Axis.values,
       iconPath: (dynamic value) => (value as Axis).iconPath,
+    );
+  }
+}
+
+class AxisPreviewer extends StatelessWidget {
+  const AxisPreviewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PropertyPreviewer<Axis>(
+      values: Axis.values,
+      propertyBuilder: (onChanged, value) {
+        return AxisField(
+          onChanged: onChanged,
+          value: value,
+        );
+      },
     );
   }
 }

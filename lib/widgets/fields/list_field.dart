@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
+import 'package:flutter_quest/widgets/core/property_previewer.dart';
 
 class ListField<T> extends PropertyWidget<T> {
   final List<T> values;
@@ -60,6 +61,24 @@ class ListField<T> extends PropertyWidget<T> {
           }
         },
       ),
+    );
+  }
+}
+
+class ListPreviewer extends StatelessWidget {
+  const ListPreviewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PropertyPreviewer<dynamic>(
+      values: Axis.values,
+      propertyBuilder: (onChanged, value) {
+        return ListField(
+          onChanged: onChanged,
+          value: value,
+          values: [],
+        );
+      },
     );
   }
 }

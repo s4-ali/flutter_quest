@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/icon_options.dart';
 
 extension on Enum {
@@ -14,14 +15,12 @@ extension on Enum {
   }
 }
 
-class AxisField extends StatelessWidget {
-  final void Function(Axis) onChanged;
-  final Axis value;
+class AxisField extends PropertyWidget<Axis> {
 
   const AxisField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

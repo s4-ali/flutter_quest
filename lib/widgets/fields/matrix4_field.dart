@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class Matrix4Field extends StatelessWidget {
-  final void Function(Matrix4) onChanged;
-  final Matrix4 value;
+class Matrix4Field extends PropertyWidget<Matrix4> {
 
   const Matrix4Field({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

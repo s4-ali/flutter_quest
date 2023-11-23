@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
 import '../text_field.dart';
 
-class NumberField extends StatelessWidget {
-  final Function(num) onChanged;
-  final num value;
+class NumberField extends PropertyWidget<num> {
 
   const NumberField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class MainAxisSizeField extends StatelessWidget {
-  final void Function(MainAxisSize) onChanged;
-  final MainAxisSize value;
+class MainAxisSizeField extends PropertyWidget<MainAxisSize> {
 
   const MainAxisSizeField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

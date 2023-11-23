@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class ImageProviderField extends StatelessWidget {
-  final void Function(ImageProvider) onChanged;
-  final ImageProvider value;
+class ImageProviderField extends PropertyWidget<ImageProvider> {
 
   const ImageProviderField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

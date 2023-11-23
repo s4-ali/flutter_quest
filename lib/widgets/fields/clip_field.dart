@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class ClipField extends StatelessWidget {
-  final void Function(Clip) onChanged;
-  final Clip value;
+class ClipField extends PropertyWidget<Clip> {
 
   const ClipField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

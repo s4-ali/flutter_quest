@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
 
-class StringField extends StatelessWidget {
-  final void Function(String) onChanged;
-  final String value;
+class StringField extends PropertyWidget<String> {
 
   const StringField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

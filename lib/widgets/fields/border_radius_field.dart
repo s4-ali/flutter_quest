@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class BorderRadiusField extends StatelessWidget {
-  final void Function(BorderRadius) onChanged;
-  final BorderRadius value;
+class BorderRadiusField extends PropertyWidget<BorderRadius> {
 
   const BorderRadiusField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class ListField<T> extends StatelessWidget {
-  final Function(T) onChanged;
-  final T value;
+class ListField<T> extends PropertyWidget<T> {
   final List<T> values;
   final String Function(T)? titleBuilder;
 
   const ListField({
     super.key,
-    required this.onChanged,
+    required super.onChanged,
     required this.values,
-    required this.value,
+    required super.value,
     this.titleBuilder,
   });
 

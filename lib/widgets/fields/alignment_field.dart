@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
 const values = [
   Alignment.topLeft,
@@ -39,14 +40,13 @@ extension on Alignment {
   }
 }
 
-class AlignmentField extends StatelessWidget {
-  final void Function(Alignment) onChanged;
-  final Alignment value;
+class AlignmentField extends PropertyWidget<Alignment> {
+
   const AlignmentField({
-    Key? key,
-    required this.onChanged,
-    required this.value,
-  }) : super(key: key);
+    super.key,
+    required super.onChanged,
+    required super.value,
+  });
 
   @override
   Widget build(BuildContext context) {

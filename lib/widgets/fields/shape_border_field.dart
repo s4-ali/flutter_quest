@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class ShapeBorderField extends StatelessWidget {
-  final void Function(ShapeBorder) onChanged;
-  final ShapeBorder value;
+class ShapeBorderField extends PropertyWidget<ShapeBorder> {
 
   const ShapeBorderField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

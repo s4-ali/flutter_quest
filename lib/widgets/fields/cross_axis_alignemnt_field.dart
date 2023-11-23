@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class CrossAxisAlignemntField extends StatelessWidget {
-  final void Function(CrossAxisAlignment) onChanged;
-  final CrossAxisAlignment value;
+class CrossAxisAlignmentField extends PropertyWidget<CrossAxisAlignment> {
 
-  const CrossAxisAlignemntField({
+  const CrossAxisAlignmentField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

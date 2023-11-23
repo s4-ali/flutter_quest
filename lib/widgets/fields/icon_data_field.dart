@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class IconDataField extends StatelessWidget {
-  final void Function(IconData) onChanged;
-  final IconData value;
+class IconDataField extends PropertyWidget<IconData> {
 
   const IconDataField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

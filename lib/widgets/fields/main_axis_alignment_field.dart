@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class MainAxisAlignmentField extends StatelessWidget {
-  final void Function(MainAxisAlignment) onChanged;
-  final MainAxisAlignment value;
+class MainAxisAlignmentField extends PropertyWidget<MainAxisAlignment> {
 
   const MainAxisAlignmentField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class RangePickerNumberField extends StatelessWidget {
-  final void Function(num) onChanged;
-  final num value;
+class RangePickerNumberField extends PropertyWidget<num> {
 
   const RangePickerNumberField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

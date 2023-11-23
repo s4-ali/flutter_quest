@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class BoxBorderField extends StatelessWidget {
-  final void Function(BoxBorder) onChanged;
-  final BoxBorder value;
+class BoxBorderField extends PropertyWidget<BoxBorder> {
 
   const BoxBorderField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

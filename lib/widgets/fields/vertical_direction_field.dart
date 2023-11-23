@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class VerticalDirectionField extends StatelessWidget {
-  final void Function(VerticalDirection) onChanged;
-  final VerticalDirection value;
+class VerticalDirectionField extends PropertyWidget<VerticalDirection> {
 
   const VerticalDirectionField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

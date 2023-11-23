@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class TextDirectionField extends StatelessWidget {
-  final void Function(TextDirection) onChanged;
-  final TextDirection value;
+class TextDirectionField extends PropertyWidget<TextDirection> {
 
   const TextDirectionField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

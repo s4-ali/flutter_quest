@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class BoxFitField extends StatelessWidget {
-  final void Function(BoxFit) onChanged;
-  final BoxFit value;
+class BoxFitField extends PropertyWidget<BoxFit> {
 
   const BoxFitField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

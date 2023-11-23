@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 
-class ColorField extends StatelessWidget {
-  final void Function(Color) onChanged;
-  final Color value;
+class ColorField extends PropertyWidget<Color> {
 
   const ColorField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override

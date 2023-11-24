@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
+import 'package:flutter_quest/widgets/core/property_previewer.dart';
 
 const values = [
   Alignment.topLeft,
@@ -41,7 +42,6 @@ extension on Alignment {
 }
 
 class AlignmentField extends PropertyWidget<Alignment> {
-
   const AlignmentField({
     super.key,
     required super.onChanged,
@@ -130,8 +130,25 @@ class _AlignmentFieldItemState extends State<_AlignmentFieldItem> {
   }
 
   void onHover(val) {
-      setState(() {
-        isHovering = val;
-      });
-    }
+    setState(() {
+      isHovering = val;
+    });
+  }
+}
+
+class AlignmentPreviewer extends StatelessWidget {
+  const AlignmentPreviewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PropertyPreviewer<Alignment>(
+      values: values,
+      propertyBuilder: (onChanged, value) {
+        return AlignmentField(
+          onChanged: onChanged,
+          value: value,
+        );
+      },
+    );
+  }
 }

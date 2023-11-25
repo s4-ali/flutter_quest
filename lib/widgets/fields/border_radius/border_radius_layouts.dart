@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/drop_down_button.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
 
 enum BorderRadiusAllType {
@@ -10,9 +11,24 @@ enum BorderRadiusVerticalType {
   top,
   bottom,
 }
+
 enum BorderRadiusHorizontalType {
   left,
   right,
+}
+
+enum BorderRadiusOnlyType {
+  topLeft,
+  topRight,
+  bottomLeft,
+  bottomRight,
+}
+
+Widget name(String name) {
+  return Padding(
+    padding: const EdgeInsets.only(left: 8, bottom: 5),
+    child: Text(name),
+  );
 }
 
 class BorderRadiusAllLayout extends StatefulWidget {
@@ -28,8 +44,7 @@ class BorderRadiusAllLayout extends StatefulWidget {
 
 class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
   BorderRadiusAllType selectedOption = BorderRadiusAllType.circular;
-  late Widget selectedAllLayout;
-  bool isHovered = false;
+  late Widget selectedLayout;
 
   double x = 0.0;
   double y = 0.0;
@@ -37,7 +52,7 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
   @override
   void initState() {
     super.initState();
-    selectedAllLayout = _BorderRadiusTextField(
+    selectedLayout = _BorderRadiusTextField(
       onChanged: (v) {
         widget.onChanged(
           BorderRadius.all(
@@ -50,77 +65,37 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
 
   @override
   Widget build(BuildContext context) {
-    Border buttonBorder = Border.all(
-      width: 1.0,
-      color: isHovered ? const Color(0xFF0099FF) : const Color(0xFF35363A),
-    );
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        MouseRegion(
-          onEnter: (v) {
+        AppDropDownButton(
+          selectedOption: selectedOption,
+          onChanged: (value) {
             setState(() {
-              isHovered = true;
+              selectedOption = value;
             });
           },
-          onExit: (v) {
-            setState(() {
-              isHovered = false;
-            });
-          },
-          child: Container(
-            height: 30,
-            width: 150,
-            padding: const EdgeInsets.only(left: 5),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-              border: buttonBorder,
-            ),
-            child: DropdownButton<BorderRadiusAllType>(
-              icon: const Padding(
-                padding: EdgeInsets.only(
-                  left: 50,
-                ),
-                child: Icon(Icons.keyboard_arrow_down),
-              ),
-              iconSize: 12,
-              iconEnabledColor: const Color(0xFFFFFFFF),
-              focusColor: Colors.transparent,
-              underline: const SizedBox(),
-              alignment: Alignment.centerLeft,
-              value: selectedOption,
-              onChanged: (value) {
-                setState(() {
-                  selectedOption = value!;
-                });
-              },
-              items: [
-                DropdownMenuItem<BorderRadiusAllType>(
-                  onTap: () {
-                    selectedAllLayout = _BorderRadiusTextField(
-                      onChanged: (v) {
-                        widget.onChanged(
-                          BorderRadius.all(
-                            Radius.circular(v),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  value: BorderRadiusAllType.circular,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 3),
-                    child: Text("Circular"),
-                  ),
-                ),
-                DropdownMenuItem<BorderRadiusAllType>(
-                  onTap: () {
-                    selectedAllLayout = Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
+          items: [
+            DropdownMenuItem<BorderRadiusAllType>(
+                onTap: () {
+                  selectedLayout = _BorderRadiusTextField(
+                    onChanged: (v) {
+                      widget.onChanged(
+                        BorderRadius.all(
+                          Radius.circular(v),
+                        ),
+                      );
+                    },
+                  );
+                },
+                value: BorderRadiusAllType.circular,
+                child: name("Circular")),
+            DropdownMenuItem<BorderRadiusAllType>(
+              onTap: () {
+                selectedLayout = Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
                       SizedBox(
                         width: 150,
                         child: _BorderRadiusTextField(
@@ -137,7 +112,8 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
                           },
                         ),
                       ),
-                      SizedBox(width: 150,
+                      SizedBox(
+                        width: 150,
                         child: _BorderRadiusTextField(
                           prefixText: "Y",
                           onChanged: (v) {
@@ -153,21 +129,16 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
                         ),
                       )
                     ]);
-                    ;
-                  },
-                  value: BorderRadiusAllType.elliptical,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 5),
-                    child: Text("Elliptical"),
-                  ),
-                ),
-              ],
+                ;
+              },
+              value: BorderRadiusAllType.elliptical,
+              child: name("Elliptical"),
             ),
-          ),
+          ],
         ),
         Padding(
           padding: const EdgeInsets.only(top: 16.0),
-          child: selectedAllLayout,
+          child: selectedLayout,
         ),
       ],
     );
@@ -196,18 +167,19 @@ class BorderRadiusVerticalLayout extends StatefulWidget {
       {super.key, required this.onChanged, required this.value});
 
   @override
-  State<BorderRadiusVerticalLayout> createState() => _BorderRadiusVerticalLayoutState();
+  State<BorderRadiusVerticalLayout> createState() =>
+      _BorderRadiusVerticalLayoutState();
 }
 
-class _BorderRadiusVerticalLayoutState extends State<BorderRadiusVerticalLayout> {
+class _BorderRadiusVerticalLayoutState
+    extends State<BorderRadiusVerticalLayout> {
   BorderRadiusVerticalType selectedOption = BorderRadiusVerticalType.top;
-  late Widget selectedVerticalLayout;
-  bool isHovered = false;
+  late Widget selectedLayout;
 
   @override
   void initState() {
     super.initState();
-    selectedVerticalLayout = _BorderRadiusTextField(
+    selectedLayout = _BorderRadiusTextField(
       onChanged: (v) {
         widget.onChanged(
           BorderRadius.vertical(
@@ -220,98 +192,52 @@ class _BorderRadiusVerticalLayoutState extends State<BorderRadiusVerticalLayout>
 
   @override
   Widget build(BuildContext context) {
-    Border buttonBorder = Border.all(
-      width: 1.0,
-      color: isHovered ? const Color(0xFF0099FF) : const Color(0xFF35363A),
-    );
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        MouseRegion(
-          onEnter: (v) {
+        AppDropDownButton(
+          selectedOption: selectedOption,
+          onChanged: (value) {
             setState(() {
-              isHovered = true;
+              selectedOption = value;
             });
           },
-          onExit: (v) {
-            setState(() {
-              isHovered = false;
-            });
-          },
-          child: Container(
-            height: 30,
-            width: 150,
-            padding: const EdgeInsets.only(left: 5),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-              border: buttonBorder,
-            ),
-            child: DropdownButton<BorderRadiusVerticalType>(
-              icon: const Padding(
-                padding: EdgeInsets.only(
-                  left: 50,
-                ),
-                child: Icon(Icons.keyboard_arrow_down),
-              ),
-              iconSize: 12,
-              iconEnabledColor: const Color(0xFFFFFFFF),
-              focusColor: Colors.transparent,
-              underline: const SizedBox(),
-              alignment: Alignment.centerLeft,
-              value: selectedOption,
-              onChanged: (value) {
-                setState(() {
-                  selectedOption = value!;
-                });
+          items: [
+            DropdownMenuItem<BorderRadiusVerticalType>(
+              onTap: () {
+                selectedLayout = _BorderRadiusTextField(
+                  onChanged: (v) {
+                    widget.onChanged(
+                      BorderRadius.vertical(
+                        top: Radius.circular(v),
+                      ),
+                    );
+                  },
+                );
               },
-              items: [
-                DropdownMenuItem<BorderRadiusVerticalType>(
-                  onTap: () {
-                    selectedVerticalLayout = _BorderRadiusTextField(
-                      onChanged: (v) {
-                        widget.onChanged(
-                          BorderRadius.vertical(
-                            top: Radius.circular(v),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  value: BorderRadiusVerticalType.top,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 3),
-                    child: Text("Top"),
-                  ),
-                ),
-                DropdownMenuItem<BorderRadiusVerticalType>(
-                  onTap: () {
-                    selectedVerticalLayout = _BorderRadiusTextField(
-                      onChanged: (v) {
-                        widget.onChanged(
-                          BorderRadius.vertical(
-                            bottom: Radius.circular(v),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  value: BorderRadiusVerticalType.bottom,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 3),
-                    child: Text("Bottom"),
-                  ),
-                ),
-              ],
+              value: BorderRadiusVerticalType.top,
+              child: name("Top"),
             ),
-          ),
+            DropdownMenuItem<BorderRadiusVerticalType>(
+              onTap: () {
+                selectedLayout = _BorderRadiusTextField(
+                  onChanged: (v) {
+                    widget.onChanged(
+                      BorderRadius.vertical(
+                        bottom: Radius.circular(v),
+                      ),
+                    );
+                  },
+                );
+              },
+              value: BorderRadiusVerticalType.bottom,
+              child: name("Bottom"),
+            ),
+          ],
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16.0),
-          child: selectedVerticalLayout
-        ),
+            padding: const EdgeInsets.only(top: 16.0), child: selectedLayout),
       ],
     );
   }
@@ -325,18 +251,19 @@ class BorderRadiusHorizontalLayout extends StatefulWidget {
       {super.key, required this.onChanged, required this.value});
 
   @override
-  State<BorderRadiusHorizontalLayout> createState() => _BorderRadiusHorizontalLayoutState();
+  State<BorderRadiusHorizontalLayout> createState() =>
+      _BorderRadiusHorizontalLayoutState();
 }
 
-class _BorderRadiusHorizontalLayoutState extends State<BorderRadiusHorizontalLayout> {
+class _BorderRadiusHorizontalLayoutState
+    extends State<BorderRadiusHorizontalLayout> {
   BorderRadiusHorizontalType selectedOption = BorderRadiusHorizontalType.left;
-  late Widget selectedVerticalLayout;
-  bool isHovered = false;
+  late Widget selectedLayout;
 
   @override
   void initState() {
     super.initState();
-    selectedVerticalLayout = _BorderRadiusTextField(
+    selectedLayout = _BorderRadiusTextField(
       onChanged: (v) {
         widget.onChanged(
           BorderRadius.horizontal(
@@ -349,108 +276,168 @@ class _BorderRadiusHorizontalLayoutState extends State<BorderRadiusHorizontalLay
 
   @override
   Widget build(BuildContext context) {
-    Border buttonBorder = Border.all(
-      width: 1.0,
-      color: isHovered ? const Color(0xFF0099FF) : const Color(0xFF35363A),
-    );
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        MouseRegion(
-          onEnter: (v) {
-            setState(() {
-              isHovered = true;
-            });
-          },
-          onExit: (v) {
-            setState(() {
-              isHovered = false;
-            });
-          },
-          child: Container(
-            height: 30,
-            width: 150,
-            padding: const EdgeInsets.only(left: 5),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-              border: buttonBorder,
-            ),
-            child: DropdownButton<BorderRadiusHorizontalType>(
-              icon: const Padding(
-                padding: EdgeInsets.only(
-                  left: 50,
-                ),
-                child: Icon(Icons.keyboard_arrow_down),
+        AppDropDownButton(
+            selectedOption: selectedOption,
+            onChanged: (value) {
+              setState(() {
+                selectedOption = value;
+              });
+            },
+            items: [
+              DropdownMenuItem<BorderRadiusHorizontalType>(
+                onTap: () {
+                  selectedLayout = _BorderRadiusTextField(
+                    onChanged: (v) {
+                      widget.onChanged(
+                        BorderRadius.horizontal(
+                          left: Radius.circular(v),
+                        ),
+                      );
+                    },
+                  );
+                },
+                value: BorderRadiusHorizontalType.left,
+                child: name("Left"),
               ),
-              iconSize: 12,
-              iconEnabledColor: const Color(0xFFFFFFFF),
-              focusColor: Colors.transparent,
-              underline: const SizedBox(),
-              alignment: Alignment.centerLeft,
-              value: selectedOption,
-              onChanged: (value) {
-                setState(() {
-                  selectedOption = value!;
-                });
-              },
-              items: [
-                DropdownMenuItem<BorderRadiusHorizontalType>(
-                  onTap: () {
-                    selectedVerticalLayout = _BorderRadiusTextField(
-                      onChanged: (v) {
-                        widget.onChanged(
-                          BorderRadius.horizontal(
-                            left: Radius.circular(v),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  value: BorderRadiusHorizontalType.left,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 3),
-                    child: Text("Left"),
-                  ),
-                ),
-                DropdownMenuItem<BorderRadiusHorizontalType>(
-                  onTap: () {
-                    selectedVerticalLayout = _BorderRadiusTextField(
-                      onChanged: (v) {
-                        widget.onChanged(
-                          BorderRadius.horizontal(
-                            right: Radius.circular(v),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  value: BorderRadiusHorizontalType.right,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 3),
-                    child: Text("Right"),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+              DropdownMenuItem<BorderRadiusHorizontalType>(
+                onTap: () {
+                  selectedLayout = _BorderRadiusTextField(
+                    onChanged: (v) {
+                      widget.onChanged(
+                        BorderRadius.horizontal(
+                          right: Radius.circular(v),
+                        ),
+                      );
+                    },
+                  );
+                },
+                value: BorderRadiusHorizontalType.right,
+                child: name("Right"),
+              ),
+            ]),
         Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child: selectedVerticalLayout
-        ),
+            padding: const EdgeInsets.only(top: 16.0), child: selectedLayout),
       ],
     );
   }
 }
 
+class BorderRadiusOnlyLayout extends StatefulWidget {
+  final void Function(BorderRadius) onChanged;
+  final BorderRadius value;
 
+  const BorderRadiusOnlyLayout(
+      {super.key, required this.onChanged, required this.value});
 
+  @override
+  State<BorderRadiusOnlyLayout> createState() =>
+      _BorderRadiusOnlyLayoutState();
+}
 
+class _BorderRadiusOnlyLayoutState
+    extends State<BorderRadiusOnlyLayout> {
+  BorderRadiusOnlyType selectedOption = BorderRadiusOnlyType.topLeft;
+  late Widget selectedLayout;
 
+  @override
+  void initState() {
+    super.initState();
+    selectedLayout = _BorderRadiusTextField(
+      onChanged: (v) {
+        widget.onChanged(
+          BorderRadius.only(
+            topLeft: Radius.circular(v),
+          ),
+        );
+      },
+    );
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        AppDropDownButton(
+            selectedOption: selectedOption,
+            onChanged: (value) {
+              setState(() {
+                selectedOption = value;
+              });
+            },
+            items: [
+              DropdownMenuItem<BorderRadiusOnlyType>(
+                onTap: () {
+                  selectedLayout = _BorderRadiusTextField(
+                    onChanged: (v) {
+                      widget.onChanged(
+                        BorderRadius.only(
+                          topLeft: Radius.circular(v),
+                        ),
+                      );
+                    },
+                  );
+                },
+                value: BorderRadiusOnlyType.topLeft,
+                child: name("Top Left"),
+              ),
+              DropdownMenuItem<BorderRadiusOnlyType>(
+                onTap: () {
+                  selectedLayout = _BorderRadiusTextField(
+                    onChanged: (v) {
+                      widget.onChanged(
+                        BorderRadius.only(
+                          topRight: Radius.circular(v),
+                        ),
+                      );
+                    },
+                  );
+                },
+                value: BorderRadiusOnlyType.topRight,
+                child: name("Top Right")
+              ),
+              DropdownMenuItem<BorderRadiusOnlyType>(
+                  onTap: () {
+                    selectedLayout = _BorderRadiusTextField(
+                      onChanged: (v) {
+                        widget.onChanged(
+                          BorderRadius.only(
+                            bottomLeft: Radius.circular(v),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  value: BorderRadiusOnlyType.bottomLeft,
+                  child: name("Bottom Left")
+              ),
+              DropdownMenuItem<BorderRadiusOnlyType>(
+                  onTap: () {
+                    selectedLayout = _BorderRadiusTextField(
+                      onChanged: (v) {
+                        widget.onChanged(
+                          BorderRadius.only(
+                            bottomRight: Radius.circular(v),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  value: BorderRadiusOnlyType.bottomRight,
+                  child: name("Bottom Right")
+              ),
+            ]),
+        Padding(
+            padding: const EdgeInsets.only(top: 16.0), child: selectedLayout),
+      ],
+    );
+  }
+}
 
 
 
@@ -472,7 +459,7 @@ class _BorderRadiusTextField extends StatelessWidget {
   final double? myValue;
 
   const _BorderRadiusTextField(
-      {super.key, required this.onChanged, this.prefixText, this.myValue = 0});
+      {super.key, required this.onChanged, this.prefixText, this.myValue=0.0});
 
   @override
   Widget build(BuildContext context) {
@@ -497,51 +484,3 @@ class _BorderRadiusTextField extends StatelessWidget {
     );
   }
 }
-
-class DropDownContainer extends StatefulWidget {
-  final Widget child;
-  final double width;
-  const DropDownContainer({super.key, required this.width, required this.child});
-
-  @override
-  State<DropDownContainer> createState() => _DropDownContainerState();
-}
-
-class _DropDownContainerState extends State<DropDownContainer> {
-
-  bool isHovered = false;
-
-  @override
-  Widget build(BuildContext context) {
-
-    Border buttonBorder = Border.all(
-      width: 1.0,
-      color: isHovered ? const Color(0xFF0099FF) : const Color(0xFF35363A),
-    );
-
-    return MouseRegion(
-        onEnter: (v) {
-      setState(() {
-        isHovered = true;
-      });
-    },
-    onExit: (v) {
-    setState(() {
-    isHovered = false;
-    });
-    },
-    child: Container(
-    height: 30,
-    width: 150,
-    padding: const EdgeInsets.only(left: 5),
-    decoration: BoxDecoration(
-    color: Colors.transparent,
-    borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-    border: buttonBorder,
-    ),
-    child: widget.child,
-    ),
-    );
-  }
-}
-

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/drop_down_button.dart';
 import 'package:flutter_quest/widgets/fields/border_radius/border_radius_layouts.dart';
 
 enum BorderRadiusType {
@@ -27,119 +28,104 @@ class BorderRadiusField extends StatefulWidget {
 class _BorderRadiusFieldState extends State<BorderRadiusField> {
   BorderRadiusType selectedOption = BorderRadiusType.all;
   late Widget selectedLayout;
-  bool isHovered = false;
 
   @override
   void initState() {
     super.initState();
-    selectedLayout = BorderRadiusAllLayout(onChanged: widget.onChanged, value: widget.value,);
+    selectedLayout = BorderRadiusAllLayout(
+      onChanged: widget.onChanged,
+      value: widget.value,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    Border buttonBorder = Border.all(
-      width: 1.0,
-      color: isHovered ? const Color(0xFF0099FF) : const Color(0xFF35363A),
-    );
 
-    return Wrap(
+    return Stack(
       children: [
-        MouseRegion(
-          onEnter: (v) {
+        AppDropDownButton(
+          selectedOption: selectedOption,
+          onChanged: (value) {
             setState(() {
-              isHovered = true;
+              selectedOption = value!;
             });
           },
-          onExit: (v) {
-            setState(() {
-              isHovered = false;
-            });
-          },
-          child: Container(
-            height: 30,
-            width: 150,
-            padding: EdgeInsets.only(left: 5),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-              border: buttonBorder,
-            ),
-            child: DropdownButton<BorderRadiusType>(
-              icon: const Padding(
-                padding: EdgeInsets.only(left: 35),
-                child: Icon(Icons.keyboard_arrow_down),
+          width: selectedOption == BorderRadiusType.circular ||
+                  selectedOption == BorderRadiusType.zero
+              ? double.infinity
+              : 150,
+          items: [
+            DropdownMenuItem<BorderRadiusType>(
+              onTap: () => selectedLayout = BorderRadiusAllLayout(
+                onChanged: widget.onChanged,
+                value: widget.value,
               ),
-              iconSize: 12,
-              iconEnabledColor: const Color(0xFFFFFFFF),
-              focusColor: Colors.transparent,
-              underline: const SizedBox(),
-              alignment: Alignment.centerLeft,
-              value: selectedOption,
-              onChanged: (value) {
-                setState(() {
-                  selectedOption = value!;
-                });
-              },
-              items: [
-                DropdownMenuItem<BorderRadiusType>(
-                  onTap: () => selectedLayout =
-                      BorderRadiusAllLayout(onChanged: widget.onChanged, value: widget.value,),
-                  value: BorderRadiusType.all,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 3),
-                    child: Text("All"),
-                  ),
-                ),
-                DropdownMenuItem<BorderRadiusType>(
-                  onTap: () => selectedLayout =
-                      BorderRadiusCircularLayout(onChanged: widget.onChanged, value: widget.value,),
-                  value: BorderRadiusType.circular,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 5),
-                    child: Text("Circular"),
-                  ),
-                ),
-                DropdownMenuItem<BorderRadiusType>(
-                  onTap: () => selectedLayout =
-                      BorderRadiusVerticalLayout(onChanged: widget.onChanged, value: widget.value,),
-                  value: BorderRadiusType.vertical,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 5),
-                    child: Text("Vertical"),
-                  ),
-                ),
-                DropdownMenuItem<BorderRadiusType>(
-                  onTap: () => selectedLayout =
-                      BorderRadiusHorizontalLayout(onChanged: widget.onChanged, value: widget.value,),
-                  value: BorderRadiusType.horizontal,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 5),
-                    child: Text("Horizontal"),
-                  ),
-                ),
-                DropdownMenuItem<BorderRadiusType>(
-                  onTap: () => selectedLayout =
-                      BorderRadiusCircularLayout(onChanged: widget.onChanged, value: widget.value,),
-                  value: BorderRadiusType.only,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 5),
-                    child: Text("Only"),
-                  ),
-                ),
-                DropdownMenuItem<BorderRadiusType>(
-                  onTap: () => selectedLayout = const SizedBox(),
-                  value: BorderRadiusType.zero,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 5),
-                    child: Text("Zero"),
-                  ),
-                ),
-              ],
+              value: BorderRadiusType.all,
+              child: const Padding(
+                padding: EdgeInsets.only(left: 8, bottom: 3),
+                child: Text("All"),
+              ),
             ),
-          ),
+            DropdownMenuItem<BorderRadiusType>(
+              onTap: () => selectedLayout = BorderRadiusCircularLayout(
+                onChanged: widget.onChanged,
+                value: widget.value,
+              ),
+              value: BorderRadiusType.circular,
+              child: const Padding(
+                padding: EdgeInsets.only(left: 8, bottom: 5),
+                child: Text("Circular"),
+              ),
+            ),
+            DropdownMenuItem<BorderRadiusType>(
+              onTap: () => selectedLayout = BorderRadiusVerticalLayout(
+                onChanged: widget.onChanged,
+                value: widget.value,
+              ),
+              value: BorderRadiusType.vertical,
+              child: const Padding(
+                padding: EdgeInsets.only(left: 8, bottom: 5),
+                child: Text("Vertical"),
+              ),
+            ),
+            DropdownMenuItem<BorderRadiusType>(
+              onTap: () => selectedLayout = BorderRadiusHorizontalLayout(
+                onChanged: widget.onChanged,
+                value: widget.value,
+              ),
+              value: BorderRadiusType.horizontal,
+              child: const Padding(
+                padding: EdgeInsets.only(left: 8, bottom: 5),
+                child: Text("Horizontal"),
+              ),
+            ),
+            DropdownMenuItem<BorderRadiusType>(
+              onTap: () => selectedLayout = BorderRadiusOnlyLayout(
+                onChanged: widget.onChanged,
+                value: widget.value,
+              ),
+              value: BorderRadiusType.only,
+              child: const Padding(
+                padding: EdgeInsets.only(left: 8, bottom: 5),
+                child: Text("Only"),
+              ),
+            ),
+            DropdownMenuItem<BorderRadiusType>(
+              onTap: () {
+                selectedLayout = const SizedBox();
+                widget.onChanged(BorderRadius.zero);
+              },
+              value: BorderRadiusType.zero,
+              child: const Padding(
+                padding: EdgeInsets.only(left: 8, bottom: 5),
+                child: Text("Zero"),
+              ),
+            ),
+          ],
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16.0),
+          padding: EdgeInsets.only(
+              top: selectedOption == BorderRadiusType.circular ? 45.0 : 0.0),
           child: selectedLayout,
         ),
       ],

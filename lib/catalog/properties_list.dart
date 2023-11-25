@@ -3,7 +3,7 @@ import 'package:flutter_quest/widgets/fields/alignment_field.dart';
 import 'package:flutter_quest/widgets/fields/axis_field.dart';
 import 'package:flutter_quest/widgets/fields/boolean_field.dart';
 import 'package:flutter_quest/widgets/fields/border_radius_field.dart';
-import 'package:flutter_quest/widgets/fields/box_border_field.dart';
+import 'package:flutter_quest/widgets/fields/border_field/box_border_field.dart';
 import 'package:flutter_quest/widgets/fields/box_fit_field.dart';
 import 'package:flutter_quest/widgets/fields/clip_field.dart';
 import 'package:flutter_quest/widgets/fields/color_field.dart';

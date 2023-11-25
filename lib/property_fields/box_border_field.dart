@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_provider.dart';
-import 'package:flutter_quest/widgets/fields/box_border_field.dart';
+import 'package:flutter_quest/widgets/fields/border_field/box_border_field.dart';
 
 class BoxBorderPropertyParams extends PropertyParams<BoxBorder> {
   BoxBorderPropertyParams({

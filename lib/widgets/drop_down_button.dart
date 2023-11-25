@@ -48,7 +48,7 @@ class _AppDropDownButtonState extends State<AppDropDownButton> {
       },
       child: Container(
           height: 30,
-          width: widget.width?? 150,
+          width: widget.width?? 155,
           padding: const EdgeInsets.only(left: 5),
           decoration: BoxDecoration(
             color: Colors.transparent,

@@ -53,7 +53,7 @@ class _BorderRadiusFieldState extends State<BorderRadiusField> {
           width: selectedOption == BorderRadiusType.circular ||
                   selectedOption == BorderRadiusType.zero
               ? double.infinity
-              : 150,
+              : null,
           items: [
             DropdownMenuItem<BorderRadiusType>(
               onTap: () => selectedLayout = BorderRadiusAllLayout(

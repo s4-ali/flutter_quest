@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/drop_down_button.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 enum BorderRadiusAllType {
   circular,
@@ -24,10 +25,18 @@ enum BorderRadiusOnlyType {
   bottomRight,
 }
 
-Widget name(String name) {
+Widget name(String name, String image) {
   return Padding(
-    padding: const EdgeInsets.only(left: 8, bottom: 5),
-    child: Text(name),
+    padding: const EdgeInsets.only(left: 5, bottom: 5),
+    child: Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 4, right: 7.0),
+          child: SvgPicture.asset("assets/$image"),
+        ),
+        Text(name),
+      ],
+    ),
   );
 }
 
@@ -90,14 +99,14 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
                   );
                 },
                 value: BorderRadiusAllType.circular,
-                child: name("Circular")),
+                child: name("Circular", "allCircular.svg")),
             DropdownMenuItem<BorderRadiusAllType>(
               onTap: () {
                 selectedLayout = Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width: 150,
+                        width: 155,
                         child: _BorderRadiusTextField(
                           prefixText: "X",
                           onChanged: (v) {
@@ -113,7 +122,7 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
                         ),
                       ),
                       SizedBox(
-                        width: 150,
+                        width: 155,
                         child: _BorderRadiusTextField(
                           prefixText: "Y",
                           onChanged: (v) {
@@ -129,10 +138,9 @@ class _BorderRadiusAllLayoutState extends State<BorderRadiusAllLayout> {
                         ),
                       )
                     ]);
-                ;
               },
               value: BorderRadiusAllType.elliptical,
-              child: name("Elliptical"),
+              child: name("Elliptical", "allElliptical.svg"),
             ),
           ],
         ),
@@ -217,7 +225,7 @@ class _BorderRadiusVerticalLayoutState
                 );
               },
               value: BorderRadiusVerticalType.top,
-              child: name("Top"),
+              child: name("Top", "verticalTop.svg"),
             ),
             DropdownMenuItem<BorderRadiusVerticalType>(
               onTap: () {
@@ -232,7 +240,7 @@ class _BorderRadiusVerticalLayoutState
                 );
               },
               value: BorderRadiusVerticalType.bottom,
-              child: name("Bottom"),
+              child: name("Bottom", "verticalBottom.svg"),
             ),
           ],
         ),
@@ -301,7 +309,7 @@ class _BorderRadiusHorizontalLayoutState
                   );
                 },
                 value: BorderRadiusHorizontalType.left,
-                child: name("Left"),
+                child: name("Left", "horizontalLeft.svg"),
               ),
               DropdownMenuItem<BorderRadiusHorizontalType>(
                 onTap: () {
@@ -316,7 +324,7 @@ class _BorderRadiusHorizontalLayoutState
                   );
                 },
                 value: BorderRadiusHorizontalType.right,
-                child: name("Right"),
+                child: name("Right", "horizontalRight.svg"),
               ),
             ]),
         Padding(
@@ -384,7 +392,7 @@ class _BorderRadiusOnlyLayoutState
                   );
                 },
                 value: BorderRadiusOnlyType.topLeft,
-                child: name("Top Left"),
+                child: name("Top Left", "topLeft.svg"),
               ),
               DropdownMenuItem<BorderRadiusOnlyType>(
                 onTap: () {
@@ -399,7 +407,7 @@ class _BorderRadiusOnlyLayoutState
                   );
                 },
                 value: BorderRadiusOnlyType.topRight,
-                child: name("Top Right")
+                child: name("Top Right", "topRight.svg")
               ),
               DropdownMenuItem<BorderRadiusOnlyType>(
                   onTap: () {
@@ -414,7 +422,7 @@ class _BorderRadiusOnlyLayoutState
                     );
                   },
                   value: BorderRadiusOnlyType.bottomLeft,
-                  child: name("Bottom Left")
+                  child: name("Bottom Left", "bottomLeft.svg"),
               ),
               DropdownMenuItem<BorderRadiusOnlyType>(
                   onTap: () {
@@ -429,7 +437,7 @@ class _BorderRadiusOnlyLayoutState
                     );
                   },
                   value: BorderRadiusOnlyType.bottomRight,
-                  child: name("Bottom Right")
+                  child: name("Bottom Right", "bottomRight.svg"),
               ),
             ]),
         Padding(
@@ -438,20 +446,6 @@ class _BorderRadiusOnlyLayoutState
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 class _BorderRadiusTextField extends StatelessWidget {
   final Function(double) onChanged;
@@ -465,7 +459,6 @@ class _BorderRadiusTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 30,
-      width: double.infinity,
       child: Center(
         child: AppTextField(
           onChanged: (value) {
@@ -476,7 +469,6 @@ class _BorderRadiusTextField extends StatelessWidget {
             padding: const EdgeInsets.only(right: 4.0, bottom: 13.0),
             child: Text(prefixText ?? ""),
           ),
-          textAlign: TextAlign.center,
           contentPadding:
               const EdgeInsets.only(left: 10, right: 4, top: 10, bottom: 9),
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/drop_down_button.dart';
+import 'package:flutter_quest/widgets/radio_button.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
 
 enum BoxBorderType {
@@ -43,7 +44,6 @@ class _BoxBorderField extends StatefulWidget {
   final BoxBorder value;
 
   const _BoxBorderField({
-    super.key,
     required this.onChanged,
     required this.value,
   });
@@ -61,92 +61,98 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
-        AppDropDownButton(
-          selectedOption: selectedOption,
-          onChanged: (value) {
-            setState(() {
-              selectedOption = value!;
-            });
-          },
-          items: [
-            DropdownMenuItem<BoxBorderType>(
-              onTap: () {
+        Row(
+          children: [
+            AppDropDownButton(
+              selectedOption: selectedOption,
+              onChanged: (value) {
                 setState(() {
-                  widget.onChanged(
-                    Border.all(
-                      color: color,
-                      style: borderStyle,
-                      strokeAlign: alignBorder,
-                      width: width,
-                    ),
-                  );
+                  selectedOption = value!;
                 });
               },
-              value: BoxBorderType.only,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 3),
-                child: Text("All"),
-              ),
+              items: [
+                DropdownMenuItem<BoxBorderType>(
+                  onTap: () {
+                    setState(() {
+                      widget.onChanged(
+                        Border.all(
+                          color: color,
+                          style: borderStyle,
+                          strokeAlign: alignBorder,
+                          width: width,
+                        ),
+                      );
+                    });
+                  },
+                  value: BoxBorderType.all,
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 8, bottom: 3),
+                    child: Text("All"),
+                  ),
+                ),
+                DropdownMenuItem<BoxBorderType>(
+                  onTap: () => {
+                    setState(() {
+                      widget.onChanged(
+                        Border.all(
+                          color: color,
+                          style: borderStyle,
+                          strokeAlign: alignBorder,
+                          width: width,
+                        ),
+                      );
+                    })
+                  },
+                  value: BoxBorderType.symmetric,
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 8, bottom: 3),
+                    child: Text("Symmetric"),
+                  ),
+                ),
+                DropdownMenuItem<BoxBorderType>(
+                  onTap: () {
+                    setState(() {
+                      widget.onChanged(
+                        Border.all(
+                          color: color,
+                          style: borderStyle,
+                          strokeAlign: alignBorder,
+                          width: width,
+                        ),
+                      );
+                    });
+                  },
+                  value: BoxBorderType.only,
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 8, bottom: 3),
+                    child: Text("Only"),
+                  ),
+                ),
+                DropdownMenuItem<BoxBorderType>(
+                  onTap: () => {
+                    setState(() {
+                      widget.onChanged(
+                        Border.all(
+                          color: color,
+                          style: borderStyle,
+                          strokeAlign: alignBorder,
+                          width: width,
+                        ),
+                      );
+                    })
+                  },
+                  value: BoxBorderType.side,
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 8, bottom: 3),
+                    child: Text("Side"),
+                  ),
+                ),
+              ],
             ),
-            DropdownMenuItem<BoxBorderType>(
-              onTap: () {
-                setState(() {
-                  widget.onChanged(
-                    Border.all(
-                      color: color,
-                      style: borderStyle,
-                      strokeAlign: alignBorder,
-                      width: width,
-                    ),
-                  );
-                });
-              },
-              value: BoxBorderType.all,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 3),
-                child: Text("All"),
-              ),
-            ),
-            DropdownMenuItem<BoxBorderType>(
-              onTap: () => {
-                setState(() {
-                  widget.onChanged(
-                    Border.all(
-                      color: color,
-                      style: borderStyle,
-                      strokeAlign: alignBorder,
-                      width: width,
-                    ),
-                  );
-                })
-              },
-              value: BoxBorderType.symmetric,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 3),
-                child: Text("All"),
-              ),
-            ),
-            DropdownMenuItem<BoxBorderType>(
-              onTap: () => {
-                setState(() {
-                  widget.onChanged(
-                    Border.all(
-                      color: color,
-                      style: borderStyle,
-                      strokeAlign: alignBorder,
-                      width: width,
-                    ),
-                  );
-                })
-              },
-              value: BoxBorderType.side,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 3),
-                child: Text("All"),
-              ),
-            ),
+            AppRadioButton(isSelected: true, iconPath: "", onSelected: (){}, onHover: (v){}),
+
           ],
         ),
         _BorderProperties(onChanged: (value) {
@@ -170,7 +176,6 @@ class _BorderProperties extends StatefulWidget {
   final void Function(BorderStyle) styleChanged;
 
   const _BorderProperties({
-    super.key,
     required this.onChanged,
     required this.color,
     required this.alignChanged,
@@ -188,97 +193,92 @@ class _BorderPropertiesState extends State<_BorderProperties> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return GridView.count(
+      crossAxisCount: 2,
+      crossAxisSpacing: 8.0,
+      mainAxisSpacing: 8.0,
       children: [
-        Row(
-          children: [
-            _BoxBorderTextField(onChanged: widget.onChanged),
-            _BoxBorderTextField(
-              onChanged: (v) {
-                int val = v.toInt();
-                widget.color(Color(0xFF + val));
-                prefixColor = Color(0xFF + val);
+        _BoxBorderTextField(onChanged: widget.onChanged),
+        _BoxBorderTextField(
+          onChanged: (v) {
+            int val = v.toInt();
+            widget.color(Color(0xFF + val));
+            prefixColor = Color(0xFF + val);
+          },
+          prefix: Container(
+            width: 15,
+            height: 15,
+            color: prefixColor,
+          ),
+        ),
+        AppDropDownButton(
+          selectedOption: selectedAlign,
+          onChanged: (value) {
+            setState(() {
+              selectedAlign = value;
+            });
+          },
+          items: [
+            DropdownMenuItem<StrokeAlign>(
+              onTap: () {
+                widget.alignChanged(BorderSide.strokeAlignCenter);
               },
-              prefix: Container(
-                width: 15,
-                height: 15,
-                color: prefixColor,
+              value: StrokeAlign.center,
+              child: const Padding(
+                padding: EdgeInsets.only(left: 8, bottom: 3),
+                child: Text("Center"),
+              ),
+            ),
+            DropdownMenuItem<StrokeAlign>(
+              onTap: () {
+                widget.alignChanged(BorderSide.strokeAlignInside);
+              },
+              value: StrokeAlign.inside,
+              child: const Padding(
+                padding: EdgeInsets.only(left: 8, bottom: 3),
+                child: Text("Inside"),
+              ),
+            ),
+            DropdownMenuItem<StrokeAlign>(
+              onTap: () {
+                widget.alignChanged(BorderSide.strokeAlignOutside);
+              },
+              value: StrokeAlign.outside,
+              child: const Padding(
+                padding: EdgeInsets.only(left: 8, bottom: 3),
+                child: Text("Outside"),
               ),
             ),
           ],
         ),
-        Row(
-          children: [
-            AppDropDownButton(
-              selectedOption: selectedAlign,
-              onChanged: (value) {
-                setState(() {
-                  selectedAlign = value;
-                });
+        AppDropDownButton(
+          selectedOption: selectedStyle,
+          onChanged: (value) {
+            setState(() {
+              selectedStyle = value;
+            });
+          },
+          items: [
+            DropdownMenuItem<StyleBorder>(
+              onTap: () {
+                widget.styleChanged(BorderStyle.solid);
               },
-              items: [
-                DropdownMenuItem<StrokeAlign>(
-                  onTap: () {
-                    widget.alignChanged(BorderSide.strokeAlignCenter);
-                  },
-                  value: StrokeAlign.center,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 3),
-                    child: Text("Center"),
-                  ),
-                ),
-                DropdownMenuItem<StrokeAlign>(
-                  onTap: () {
-                    widget.alignChanged(BorderSide.strokeAlignInside);
-                  },
-                  value: StrokeAlign.inside,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 3),
-                    child: Text("Inside"),
-                  ),
-                ),
-                DropdownMenuItem<StrokeAlign>(
-                  onTap: () {
-                    widget.alignChanged(BorderSide.strokeAlignOutside);
-                  },
-                  value: StrokeAlign.outside,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 3),
-                    child: Text("Outside"),
-                  ),
-                ),
-              ],
+              value: StyleBorder.solid,
+              child: const Padding(
+                padding: EdgeInsets.only(left: 8, bottom: 3),
+                child: Text("Solid"),
+              ),
             ),
-            AppDropDownButton(
-              selectedOption: selectedStyle,
-              onChanged: (value) {
-                setState(() {
-                  selectedStyle = value;
-                });
+            DropdownMenuItem<StyleBorder>(
+              onTap: () {
+                widget.styleChanged(BorderStyle.none);
               },
-              items: [
-                DropdownMenuItem<StyleBorder>(
-                  onTap: () {
-                    widget.styleChanged(BorderStyle.solid);
-                  },
-                  value: StyleBorder.solid,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 3),
-                    child: Text("Solid"),
-                  ),
-                ),
-                DropdownMenuItem<StyleBorder>(
-                  onTap: () {
-                    widget.styleChanged(BorderStyle.none);
-                  },
-                  value: StyleBorder.none,
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 8, bottom: 3),
-                    child: Text("None"),
-                  ),
-                ),
-              ],
-            )
+              value: StyleBorder.none,
+              child: const Padding(
+                padding: EdgeInsets.only(left: 8, bottom: 3),
+                child: Text("None"),
+              ),
+            ),
           ],
         )
       ],
@@ -292,7 +292,7 @@ class _BoxBorderTextField extends StatelessWidget {
   final Widget? prefix;
 
   const _BoxBorderTextField(
-      {super.key, required this.onChanged, this.prefix, this.myValue = 0.0});
+      {required this.onChanged, this.prefix, this.myValue = 0.0});
 
   @override
   Widget build(BuildContext context) {

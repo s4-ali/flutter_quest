@@ -84,10 +84,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
               });
             },
             value: BoxBorderType.all,
-            child: const Padding(
-              padding: EdgeInsets.only(left: 8, bottom: 3),
-              child: Text("All"),
-            ),
+            child: name("All"),
           ),
           DropdownMenuItem<BoxBorderType>(
             onTap: () => {
@@ -111,10 +108,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
               })
             },
             value: BoxBorderType.symmetric,
-            child: const Padding(
-              padding: EdgeInsets.only(left: 8, bottom: 3),
-              child: Text("Symmetric"),
-            ),
+            child: name("Symmetric"),
           ),
           DropdownMenuItem<BoxBorderType>(
             onTap: () {
@@ -130,10 +124,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
               });
             },
             value: BoxBorderType.only,
-            child: const Padding(
-              padding: EdgeInsets.only(left: 8, bottom: 3),
-              child: Text("Only"),
-            ),
+            child: name("Only"),
           ),
           DropdownMenuItem<BoxBorderType>(
             onTap: () => {
@@ -149,10 +140,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
               })
             },
             value: BoxBorderType.side,
-            child: const Padding(
-              padding: EdgeInsets.only(left: 8, bottom: 3),
-              child: Text("Side"),
-            ),
+            child: name("Side"),
           ),
         ],
       ),
@@ -201,7 +189,6 @@ class _BorderProperties extends StatefulWidget {
 }
 
 class _BorderPropertiesState extends State<_BorderProperties> {
-
   double borderWidth = 0.0;
   Color borderColor = Colors.black;
   StrokeAlign selectedAlign = StrokeAlign.center;
@@ -211,7 +198,6 @@ class _BorderPropertiesState extends State<_BorderProperties> {
 
   @override
   Widget build(BuildContext context) {
-
     void passChangedValues() {
       widget.onChanged(
         _PassBorderProperties(
@@ -257,10 +243,7 @@ class _BorderPropertiesState extends State<_BorderProperties> {
                 passChangedValues();
               },
               value: StrokeAlign.center,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 3),
-                child: Text("Center"),
-              ),
+              child: name("Center"),
             ),
             DropdownMenuItem<StrokeAlign>(
               onTap: () {
@@ -268,10 +251,7 @@ class _BorderPropertiesState extends State<_BorderProperties> {
                 passChangedValues();
               },
               value: StrokeAlign.inside,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 3),
-                child: Text("Inside"),
-              ),
+              child: name("Inside"),
             ),
             DropdownMenuItem<StrokeAlign>(
               onTap: () {
@@ -279,10 +259,7 @@ class _BorderPropertiesState extends State<_BorderProperties> {
                 passChangedValues();
               },
               value: StrokeAlign.outside,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 3),
-                child: Text("Outside"),
-              ),
+              child: name("Outside"),
             ),
           ],
         ),
@@ -301,10 +278,7 @@ class _BorderPropertiesState extends State<_BorderProperties> {
                 passChangedValues();
               },
               value: StyleBorder.solid,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 3),
-                child: Text("Solid"),
-              ),
+              child: name("Solid"),
             ),
             DropdownMenuItem<StyleBorder>(
               onTap: () {
@@ -312,16 +286,20 @@ class _BorderPropertiesState extends State<_BorderProperties> {
                 passChangedValues();
               },
               value: StyleBorder.none,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 3),
-                child: Text("None"),
-              ),
+              child: name("None"),
             ),
           ],
         )
       ],
     );
   }
+}
+
+Widget name(String name) {
+  return Padding(
+    padding: const EdgeInsets.only(left: 8, bottom: 3),
+    child: Text(name),
+  );
 }
 
 class _BoxBorderTextField extends StatelessWidget {

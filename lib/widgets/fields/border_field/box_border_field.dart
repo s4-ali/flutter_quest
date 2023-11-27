@@ -61,119 +61,117 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100,
-      child: Column(
-          children: [
-        AppDropDownButton(
-          selectedOption: selectedOption,
-          onChanged: (value) {
-            setState(() {
-              selectedOption = value!;
-            });
-          },
-          items: [
-            DropdownMenuItem<BoxBorderType>(
-              onTap: () {
-                setState(() {
-                  widget.onChanged(
-                    Border.all(
-                      color: color,
-                      style: borderStyle,
-                      strokeAlign: alignBorder,
-                      width: borderWidth,
-                    ),
-                  );
-                });
-              },
-              value: BoxBorderType.all,
-              child: name("All"),
-            ),
-            DropdownMenuItem<BoxBorderType>(
-              onTap: () => {
-                setState(() {
-                  widget.onChanged(
-                    Border.symmetric(
-                      horizontal: BorderSide(
+    return Column(children: [
+      Row(
+        children: [
+          AppDropDownButton(
+            selectedOption: selectedOption,
+            onChanged: (value) {
+              setState(() {
+                selectedOption = value!;
+              });
+            },
+            items: [
+              DropdownMenuItem<BoxBorderType>(
+                onTap: () {
+                  setState(() {
+                    widget.onChanged(
+                      Border.all(
                         color: color,
                         style: borderStyle,
                         strokeAlign: alignBorder,
                         width: borderWidth,
                       ),
-                      vertical: BorderSide(
+                    );
+                  });
+                },
+                value: BoxBorderType.all,
+                child: label("All"),
+              ),
+              DropdownMenuItem<BoxBorderType>(
+                onTap: () => {
+                  setState(() {
+                    widget.onChanged(
+                      Border.symmetric(
+                        horizontal: BorderSide(
+                          color: color,
+                          style: borderStyle,
+                          strokeAlign: alignBorder,
+                          width: borderWidth,
+                        ),
+                        vertical: BorderSide(
+                          color: color,
+                          style: borderStyle,
+                          strokeAlign: alignBorder,
+                          width: borderWidth,
+                        ),
+                      ),
+                    );
+                  })
+                },
+                value: BoxBorderType.symmetric,
+                child: label("Symmetric"),
+              ),
+              DropdownMenuItem<BoxBorderType>(
+                onTap: () {
+                  setState(() {
+                    widget.onChanged(
+                      Border.all(
                         color: color,
                         style: borderStyle,
                         strokeAlign: alignBorder,
                         width: borderWidth,
                       ),
-                    ),
-                  );
-                })
-              },
-              value: BoxBorderType.symmetric,
-              child: name("Symmetric"),
-            ),
-            DropdownMenuItem<BoxBorderType>(
-              onTap: () {
-                setState(() {
-                  widget.onChanged(
-                    Border.all(
-                      color: color,
-                      style: borderStyle,
-                      strokeAlign: alignBorder,
-                      width: borderWidth,
-                    ),
-                  );
-                });
-              },
-              value: BoxBorderType.only,
-              child: name("Only"),
-            ),
-            DropdownMenuItem<BoxBorderType>(
-              onTap: () => {
-                setState(() {
-                  widget.onChanged(
-                    Border.all(
-                      color: color,
-                      style: borderStyle,
-                      strokeAlign: alignBorder,
-                      width: borderWidth,
-                    ),
-                  );
-                })
-              },
-              value: BoxBorderType.side,
-              child: name("Side"),
-            ),
-          ],
-        ),
-        _BorderProperties(
-          onChanged: (value) {
-            borderWidth = value.borderWidth;
-            color = value.color;
-            alignBorder = value.alignBorder;
-            borderStyle = value.borderStyle;
+                    );
+                  });
+                },
+                value: BoxBorderType.only,
+                child: label("Only"),
+              ),
+              DropdownMenuItem<BoxBorderType>(
+                onTap: () => {
+                  setState(() {
+                    widget.onChanged(
+                      Border.all(
+                        color: color,
+                        style: borderStyle,
+                        strokeAlign: alignBorder,
+                        width: borderWidth,
+                      ),
+                    );
+                  })
+                },
+                value: BoxBorderType.side,
+                child: label("Side"),
+              ),
+            ],
+          ),
+          AppRadioButton(isSelected: false, iconPath: "assets/topBorder.svg", onSelected: (){}, onHover: (v){}),
+          AppRadioButton(isSelected: false, iconPath: "assets/leftBorder.svg", onSelected: (){}, onHover: (v){}),
+          AppRadioButton(isSelected: false, iconPath: "assets/rightBorder.svg", onSelected: (){}, onHover: (v){}),
+          AppRadioButton(isSelected: false, iconPath: "assets/bottomBorder.svg", onSelected: (){}, onHover: (v){}),
 
-            widget.onChanged(Border.all(
-              color: color,
-              style: borderStyle,
-              strokeAlign: alignBorder,
-              width: borderWidth,
-            ));
-          },
-        ),
-      ]),
-    );
+        ],
+      ),
+      _BorderProperties(
+        onChanged: (value) {
+          borderWidth = value.borderWidth;
+          color = value.color;
+          alignBorder = value.alignBorder;
+          borderStyle = value.borderStyle;
+        },
+      ),
+    ]);
   }
 }
 
-class _PassBorderProperties {
+class _UpdateBorderProperties {
   final double borderWidth;
   final Color color;
   final double alignBorder;
   final BorderStyle borderStyle;
 
-  _PassBorderProperties({
+  _UpdateBorderProperties({
     required this.borderWidth,
     required this.color,
     required this.alignBorder,
@@ -182,7 +180,7 @@ class _PassBorderProperties {
 }
 
 class _BorderProperties extends StatefulWidget {
-  final void Function(_PassBorderProperties) onChanged;
+  final void Function(_UpdateBorderProperties) onChanged;
 
   const _BorderProperties({
     required this.onChanged,
@@ -202,9 +200,9 @@ class _BorderPropertiesState extends State<_BorderProperties> {
 
   @override
   Widget build(BuildContext context) {
-    void passChangedValues() {
+    void updateChanges() {
       widget.onChanged(
-        _PassBorderProperties(
+        _UpdateBorderProperties(
           borderWidth: borderWidth,
           color: borderColor,
           alignBorder: alignBorder,
@@ -213,134 +211,204 @@ class _BorderPropertiesState extends State<_BorderProperties> {
       );
     }
 
-    return Column(
+    return Wrap(
+      spacing: 8,
+      runSpacing: 16,
       children: [
-        Row(
-          children: [
-            _BoxBorderTextField(onChanged: (value) {
+        BorderWidth(
+            onChanged: (value) {
               borderWidth = value;
-              passChangedValues();
+              updateChanges();
             }),
-            _BoxBorderTextField(
-              onChanged: (v) {
-                int val = v.toInt();
-                borderColor = Color(0xFF + val);
-                passChangedValues();
-              },
-              prefix: Container(
-                width: 15,
-                height: 15,
-                color: borderColor,
-              ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            AppDropDownButton(
-              selectedOption: selectedAlign,
-              onChanged: (value) {
-                setState(() {
-                  selectedAlign = value;
-                  passChangedValues();
-                });
-              },
-              items: [
-                DropdownMenuItem<StrokeAlign>(
-                  onTap: () {
-                    alignBorder = BorderSide.strokeAlignCenter;
-                    passChangedValues();
-                  },
-                  value: StrokeAlign.center,
-                  child: name("Center"),
-                ),
-                DropdownMenuItem<StrokeAlign>(
-                  onTap: () {
-                    alignBorder = BorderSide.strokeAlignInside;
-                    passChangedValues();
-                  },
-                  value: StrokeAlign.inside,
-                  child: name("Inside"),
-                ),
-                DropdownMenuItem<StrokeAlign>(
-                  onTap: () {
-                    alignBorder = BorderSide.strokeAlignOutside;
-                    passChangedValues();
-                  },
-                  value: StrokeAlign.outside,
-                  child: name("Outside"),
-                ),
-              ],
-            ),
-            AppDropDownButton(
-              selectedOption: selectedStyle,
-              onChanged: (value) {
-                setState(() {
-                  selectedStyle = value;
-                  passChangedValues();
-                });
-              },
-              items: [
-                DropdownMenuItem<StyleBorder>(
-                  onTap: () {
-                    borderStyle = BorderStyle.solid;
-                    passChangedValues();
-                  },
-                  value: StyleBorder.solid,
-                  child: name("Solid"),
-                ),
-                DropdownMenuItem<StyleBorder>(
-                  onTap: () {
-                    borderStyle = BorderStyle.none;
-                    passChangedValues();
-                  },
-                  value: StyleBorder.none,
-                  child: name("None"),
-                ),
-              ],
-            ),
-          ],
-        )
+        BorderColor(colorChanged: (value) {
+          borderColor = value;
+          updateChanges();
+        }),
+        AlignBorder(alignChanged: (value) {
+          alignBorder = value;
+        }),
+        BoxBorderStyle(styleChanged: (value) {
+          borderStyle = value;
+        })
       ],
     );
   }
 }
 
-Widget name(String name) {
-  return Padding(
-    padding: const EdgeInsets.only(left: 8, bottom: 3),
-    child: Text(name),
-  );
-}
-
-class _BoxBorderTextField extends StatelessWidget {
+class BorderWidth extends StatelessWidget {
   final Function(double) onChanged;
-  final double? myValue;
-  final Widget? prefix;
 
-  const _BoxBorderTextField(
-      {required this.onChanged, this.prefix, this.myValue = 0.0});
+  BorderWidth({
+    super.key,
+    required this.onChanged,
+  });
+
+  String myValue = "0.0";
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 30,
+      width: 155,
       child: Center(
         child: AppTextField(
           onChanged: (value) {
             onChanged(double.parse(value));
+            myValue = value;
           },
-          controller: TextEditingController(text: myValue.toString()),
-          prefix: Padding(
-            padding: const EdgeInsets.only(right: 4.0, bottom: 13.0),
-            child: prefix ?? const Text("W"),
+          controller: TextEditingController(text: myValue),
+          prefix: const Padding(
+            padding: EdgeInsets.only(right: 4.0, bottom: 13.0),
+            child: Text("W"),
           ),
-          contentPadding:
-              const EdgeInsets.only(left: 10, right: 4, top: 10, bottom: 9),
+          contentPadding: const EdgeInsets.only(left: 10, right: 4, bottom: 9),
         ),
       ),
     );
   }
+}
+
+class BorderColor extends StatefulWidget {
+  final void Function(Color) colorChanged;
+
+  const BorderColor({super.key, required this.colorChanged});
+
+  @override
+  State<BorderColor> createState() => _BorderColorState();
+}
+
+class _BorderColorState extends State<BorderColor> {
+  Color borderColor = Colors.black;
+  String myValue = "0.0";
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(children: [
+      SizedBox(
+        height: 30,
+        width: 155,
+        child: Center(
+          child: AppTextField(
+            onChanged: (v) {
+              setState(() {
+                myValue = v;
+                borderColor = Color(int.parse("0xFF$v"));
+              });
+              widget.colorChanged(borderColor);
+            },
+            controller: TextEditingController(text: myValue),
+            contentPadding:
+                const EdgeInsets.only(left: 30, right: 4, bottom: 9),
+          ),
+        ),
+      ),
+      Positioned(
+        top: 5,
+        left: 7,
+        child: Container(
+          width: 20,
+          height: 20,
+          decoration: BoxDecoration(
+            color: borderColor,
+            borderRadius: BorderRadius.circular(3),
+            border: Border.all(
+              width: 1,
+              color: const Color(0xFFFFFFFF).withOpacity(0.3),
+            ),
+          ),
+        ),
+      ),
+    ]);
+  }
+}
+
+class BoxBorderStyle extends StatelessWidget {
+  final void Function(BorderStyle) styleChanged;
+
+  BoxBorderStyle({super.key, required this.styleChanged});
+
+  StyleBorder selectedStyle = StyleBorder.solid;
+  BorderStyle borderStyle = BorderStyle.solid;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppDropDownButton(
+      selectedOption: selectedStyle,
+      onChanged: (value) {
+        selectedStyle = value;
+      },
+      items: [
+        DropdownMenuItem<StyleBorder>(
+          onTap: () {
+            borderStyle = BorderStyle.solid;
+            styleChanged(BorderStyle.solid);
+          },
+          value: StyleBorder.solid,
+          child: label("Solid"),
+        ),
+        DropdownMenuItem<StyleBorder>(
+          onTap: () {
+            borderStyle = BorderStyle.none;
+            styleChanged(BorderStyle.none);
+          },
+          value: StyleBorder.none,
+          child: label("None"),
+        ),
+      ],
+    );
+  }
+}
+
+class AlignBorder extends StatelessWidget {
+  final void Function(double) alignChanged;
+
+  AlignBorder({super.key, required this.alignChanged});
+
+  StrokeAlign selectedAlign = StrokeAlign.center;
+  double alignBorder = BorderSide.strokeAlignCenter;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppDropDownButton(
+      selectedOption: selectedAlign,
+      onChanged: (value) {
+        selectedAlign = value;
+      },
+      items: [
+        DropdownMenuItem<StrokeAlign>(
+          onTap: () {
+            alignBorder = BorderSide.strokeAlignCenter;
+            alignChanged(BorderSide.strokeAlignCenter);
+          },
+          value: StrokeAlign.center,
+          child: label("Center"),
+        ),
+        DropdownMenuItem<StrokeAlign>(
+          onTap: () {
+            alignBorder = BorderSide.strokeAlignInside;
+            alignChanged(BorderSide.strokeAlignInside);
+          },
+          value: StrokeAlign.inside,
+          child: label("Inside"),
+        ),
+        DropdownMenuItem<StrokeAlign>(
+          onTap: () {
+            alignBorder = BorderSide.strokeAlignOutside;
+            alignChanged(BorderSide.strokeAlignOutside);
+          },
+          value: StrokeAlign.outside,
+          child: label("Outside"),
+        ),
+      ],
+    );
+  }
+}
+
+Widget label(String name) {
+  return Padding(
+    padding: const EdgeInsets.only(left: 8, bottom: 3),
+    child: Text(name),
+  );
 }
 
 class BoxBorderPreviewer extends StatelessWidget {

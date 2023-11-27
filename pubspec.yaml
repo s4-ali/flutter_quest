@@ -29,3 +29,10 @@ flutter:
     - assets/all.svg
     - assets/only.svg
     - assets/symmetric.svg
+    - assets/horizontalBorder.svg
+    - assets/verticalBorder.svg
+    - assets/bottomBorder.svg
+    - assets/leftBorder.svg
+    - assets/rightBorder.svg
+    - assets/topBorder.svg
+    - assets/allBorder.svg

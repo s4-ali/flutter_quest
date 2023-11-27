@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
+import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/radio_button.dart';
 
 const values = [
@@ -46,14 +48,12 @@ extension on Curve {
   }
 }
 
-class CurveField extends StatelessWidget {
-  final void Function(Curve) onChanged;
-  final Curve value;
+class CurveField extends PropertyWidget<Curve> {
 
   const CurveField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override
@@ -77,6 +77,23 @@ class CurveField extends StatelessWidget {
           }),
         );
       }),
+    );
+  }
+}
+
+class CurvePreviewer extends StatelessWidget {
+  const CurvePreviewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PropertyPreviewer<Curve>(
+      values: const [Curves.linear, Curves.bounceIn, Curves.bounceOut],
+      propertyBuilder: (onChanged, value) {
+        return CurveField(
+          onChanged: onChanged,
+          value: value,
+        );
+      },
     );
   }
 }

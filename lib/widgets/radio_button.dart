@@ -3,15 +3,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class AppRadioButton extends StatefulWidget {
   final bool isSelected;
-
   final String iconPath;
   final Function() onSelected;
+  final Function(bool) onHover;
 
   const AppRadioButton({
     super.key,
     required this.isSelected,
     required this.iconPath,
     required this.onSelected,
+    required this.onHover,
   });
 
   @override
@@ -49,6 +50,7 @@ class _AppRadioButtonState extends State<AppRadioButton> {
         hoverColor: Colors.transparent,
         onTap: widget.onSelected,
         onHover: (value) {
+          widget.onHover(value);
           setState(() {
             isHovering = value;
           });

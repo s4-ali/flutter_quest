@@ -24,6 +24,7 @@ class EdgeInsetsPropertyField
   ) {
     return EdgeInsetsField(
       onChanged: onChanged,
+      value: value,
     );
   }
 }

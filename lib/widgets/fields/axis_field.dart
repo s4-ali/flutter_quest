@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/widgets/radio_button.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
+import 'package:flutter_quest/widgets/core/property_previewer.dart';
+import 'package:flutter_quest/widgets/icon_options.dart';
 
 extension on Enum {
   String get iconPath {
@@ -14,29 +16,37 @@ extension on Enum {
   }
 }
 
-class AxisField extends StatelessWidget {
-  final void Function(Axis) onChanged;
-  final Axis value;
-
+class AxisField extends PropertyWidget<Axis> {
   const AxisField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (final axis in Axis.values)
-          AppRadioButton(
-            isSelected: value == axis,
-            iconPath: axis.iconPath,
-            onSelected: () => onChanged(axis),
-          ),
-      ],
+    return IconOptions(
+      onChanged: (dynamic val) => onChanged(val as Axis),
+      value: value,
+      options: Axis.values,
+      iconPath: (dynamic value) => (value as Axis).iconPath,
+    );
+  }
+}
+
+class AxisPreviewer extends StatelessWidget {
+  const AxisPreviewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PropertyPreviewer<Axis>(
+      values: Axis.values,
+      propertyBuilder: (onChanged, value) {
+        return AxisField(
+          onChanged: onChanged,
+          value: value,
+        );
+      },
     );
   }
 }

@@ -38,3 +38,6 @@ flutter:
     - assets/elasticIn.svg
     - assets/elasticInOut.svg
     - assets/elasticOut.svg
+    - assets/all.svg
+    - assets/only.svg
+    - assets/symmetric.svg

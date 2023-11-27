@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
+import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 
@@ -26,8 +28,8 @@ class ColorField extends StatefulWidget {
 
   const ColorField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override
@@ -182,6 +184,28 @@ class _CommonColorContainer extends StatelessWidget {
               width: 1,
             )),
       ),
+    );
+  }
+}
+
+class ColorPreviewer extends StatelessWidget {
+  const ColorPreviewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PropertyPreviewer<Color>(
+      values: const [
+        Colors.red,
+        Colors.blue,
+        Colors.green,
+        Colors.blue,
+      ],
+      propertyBuilder: (onChanged, value) {
+        return ColorField(
+          onChanged: onChanged,
+          value: value,
+        );
+      },
     );
   }
 }

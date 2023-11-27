@@ -9,6 +9,7 @@ import 'package:flutter_quest/widgets/fields/clip_field.dart';
 import 'package:flutter_quest/widgets/fields/color_field.dart';
 import 'package:flutter_quest/widgets/fields/cross_axis_alignemnt_field.dart';
 import 'package:flutter_quest/widgets/fields/curve_field.dart';
+import 'package:flutter_quest/widgets/fields/edge_insets_field/edge_insets_field.dart';
 import 'package:flutter_quest/widgets/fields/icon_data_field.dart';
 import 'package:flutter_quest/widgets/fields/list_field.dart';
 import 'package:flutter_quest/widgets/fields/main_axis_alignment_field.dart';
@@ -36,6 +37,7 @@ class PropertiesList extends StatelessWidget {
               spacing: 12.0,
               runSpacing: 12.0,
               children: [
+                EdgeInsetsPreviewer(),
                 AlignmentPreviewer(),
                 AxisPreviewer(),
                 BooleanPreviewer(),

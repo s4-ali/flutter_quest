@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/catalog/home.dart';
+import 'package:flutter_quest/catalog/properties_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         // scaffoldBackgroundColor: Colors.,
       ),
       themeMode: ThemeMode.dark,
-      home: const Home(),
+      home: const PropertiesList(),
     );
   }
 }

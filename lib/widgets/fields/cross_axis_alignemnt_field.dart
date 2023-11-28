@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/icon_options.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
+import 'package:flutter_quest/widgets/core/property_previewer.dart';
 
 extension on CrossAxisAlignment {
   String get iconPath {
@@ -18,14 +20,12 @@ extension on CrossAxisAlignment {
   }
 }
 
-class CrossAxisAlignmentField extends StatelessWidget {
-  final void Function(CrossAxisAlignment) onChanged;
-  final CrossAxisAlignment value;
+class CrossAxisAlignmentField extends PropertyWidget<CrossAxisAlignment>  {
 
   const CrossAxisAlignmentField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override
@@ -35,6 +35,23 @@ class CrossAxisAlignmentField extends StatelessWidget {
       value: value,
       options: CrossAxisAlignment.values,
       iconPath: (dynamic value) => (value as CrossAxisAlignment).iconPath,
+    );
+  }
+}
+
+class CrossAxisAlignmentPreviewer extends StatelessWidget {
+  const CrossAxisAlignmentPreviewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PropertyPreviewer<CrossAxisAlignment>(
+      values: CrossAxisAlignment.values,
+      propertyBuilder: (onChanged, value) {
+        return CrossAxisAlignmentField(
+          onChanged: onChanged,
+          value: value,
+        );
+      },
     );
   }
 }

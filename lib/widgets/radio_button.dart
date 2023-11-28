@@ -7,6 +7,7 @@ class AppRadioButton extends StatefulWidget {
   final String iconPath;
   final Function() onSelected;
   final Function(bool) onHover;
+  final EdgeInsets padding;
 
   const AppRadioButton({
     super.key,
@@ -14,6 +15,7 @@ class AppRadioButton extends StatefulWidget {
     required this.iconPath,
     required this.onSelected,
     required this.onHover,
+    this.padding = const EdgeInsets.all(8.0),
   });
 
   @override
@@ -26,7 +28,7 @@ class _AppRadioButtonState extends State<AppRadioButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: widget.padding,
       child: InkWell(
         hoverColor: Colors.transparent,
         onTap: widget.onSelected,

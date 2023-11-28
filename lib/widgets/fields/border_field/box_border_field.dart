@@ -5,6 +5,41 @@ import 'package:flutter_quest/widgets/drop_down_button.dart';
 import 'package:flutter_quest/widgets/radio_button.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
 
+enum OnlyBorderType {
+  top,
+  left,
+  right,
+  bottom,
+}
+
+extension on OnlyBorderType {
+  String get iconPath {
+    switch (this) {
+      case OnlyBorderType.top:
+        return "assets/topBorder.svg";
+      case OnlyBorderType.left:
+        return "assets/leftBorder.svg";
+      case OnlyBorderType.right:
+        return "assets/rightBorder.svg";
+      case OnlyBorderType.bottom:
+        return "assets/BottomBorder.svg";
+    }
+  }
+
+  Border onlyBorder(BorderSide borderSide) {
+    switch (this) {
+      case OnlyBorderType.top:
+        return Border(top: borderSide);
+      case OnlyBorderType.left:
+        return Border(left: borderSide);
+      case OnlyBorderType.right:
+        return Border(right: borderSide);
+      case OnlyBorderType.bottom:
+        return Border(bottom: borderSide);
+    }
+  }
+}
+
 enum BoxBorderType {
   only,
   all,
@@ -146,11 +181,24 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
               ),
             ],
           ),
-          AppRadioButton(isSelected: false, iconPath: "assets/topBorder.svg", onSelected: (){}, onHover: (v){}),
-          AppRadioButton(isSelected: false, iconPath: "assets/leftBorder.svg", onSelected: (){}, onHover: (v){}),
-          AppRadioButton(isSelected: false, iconPath: "assets/rightBorder.svg", onSelected: (){}, onHover: (v){}),
-          AppRadioButton(isSelected: false, iconPath: "assets/bottomBorder.svg", onSelected: (){}, onHover: (v){}),
-
+          SizedBox(
+            width: 155,
+            child: BorderRadioButton(
+              onChanged: (v) => widget.onChanged(
+                (v as OnlyBorderType).onlyBorder(
+                  BorderSide(
+                    width: borderWidth,
+                    color: color,
+                    style: borderStyle,
+                    strokeAlign: alignBorder,
+                  ),
+                ),
+              ),
+              value: widget.value,
+              options: OnlyBorderType.values,
+              iconPath: (dynamic value) => (value as OnlyBorderType).iconPath,
+            ),
+          ),
         ],
       ),
       _BorderProperties(
@@ -215,11 +263,10 @@ class _BorderPropertiesState extends State<_BorderProperties> {
       spacing: 8,
       runSpacing: 16,
       children: [
-        BorderWidth(
-            onChanged: (value) {
-              borderWidth = value;
-              updateChanges();
-            }),
+        BorderWidth(onChanged: (value) {
+          borderWidth = value;
+          updateChanges();
+        }),
         BorderColor(colorChanged: (value) {
           borderColor = value;
           updateChanges();
@@ -234,6 +281,68 @@ class _BorderPropertiesState extends State<_BorderProperties> {
     );
   }
 }
+
+
+
+class BorderRadioButton<T> extends StatefulWidget {
+  final void Function(T) onChanged;
+  final T value;
+  final List<T> options;
+  final String Function(T) iconPath;
+
+  const BorderRadioButton({
+    super.key,
+    required this.onChanged,
+    required this.value,
+    required this.options,
+    required this.iconPath,
+  });
+
+  @override
+  State<BorderRadioButton> createState() => _BorderRadioButtonState<T>();
+}
+
+class _BorderRadioButtonState<T> extends State<BorderRadioButton> {
+  T? hoveredValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Wrap(
+            direction: Axis.horizontal,
+            runAlignment: WrapAlignment.start,
+            crossAxisAlignment: WrapCrossAlignment.start,
+            children: [
+              for (final value in widget.options)
+                AppRadioButton(
+                  isSelected: widget.value == value,
+                  iconPath: widget.iconPath(value as T),
+                  onSelected: () => widget.onChanged(value),
+                  onHover: (bool hovering) {
+                    setState(() {
+                      hoveredValue = hovering ? value : null;
+                    });
+                  },
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+
+
+
+
 
 class BorderWidth extends StatelessWidget {
   final Function(double) onChanged;

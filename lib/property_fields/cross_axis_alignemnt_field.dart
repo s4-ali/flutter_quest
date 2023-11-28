@@ -12,9 +12,9 @@ class CrossAxisAlignmentPropertyParams extends PropertyParams<CrossAxisAlignment
   });
 }
 
-class CrossAxisAlignemntPropertyField
+class CrossAxisAlignmentPropertyField
     extends PropertyField<CrossAxisAlignmentPropertyParams, CrossAxisAlignment> {
-  CrossAxisAlignemntPropertyField(super.provider, super.params);
+  CrossAxisAlignmentPropertyField(super.provider, super.params);
 
   @override
   Widget build(
@@ -44,7 +44,7 @@ extension CrossAxisAlignemntFieldPropertyProvider on PropertyProvider {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return CrossAxisAlignemntPropertyField(
+    return CrossAxisAlignmentPropertyField(
       this,
       params,
     )();

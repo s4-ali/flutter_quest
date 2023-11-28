@@ -1,9 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/icon_options.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 
-class CrossAxisAlignmentField extends PropertyWidget<CrossAxisAlignment> {
+extension on CrossAxisAlignment {
+  String get iconPath {
+    switch (this) {
+      case CrossAxisAlignment.start:
+        return "assets/startVertical.svg";
+      case CrossAxisAlignment.end:
+        return "assets/endVertical.svg";
+      case CrossAxisAlignment.center:
+        return "assets/center.svg";
+      case CrossAxisAlignment.baseline:
+        return "assets/baseline.svg";
+      case CrossAxisAlignment.stretch:
+        return "assets/stretch.svg";
+    }
+  }
+}
 
+class CrossAxisAlignmentField extends PropertyWidget<CrossAxisAlignment>  {
   const CrossAxisAlignmentField({
     super.key,
     required super.onChanged,
@@ -12,8 +29,11 @@ class CrossAxisAlignmentField extends PropertyWidget<CrossAxisAlignment> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder(
-      fallbackHeight: 60,
+    return IconOptions(
+      onChanged: (val) => onChanged(val),
+      value: value,
+      options: CrossAxisAlignment.values,
+      iconPath: (value) => (value).iconPath,
     );
   }
 }

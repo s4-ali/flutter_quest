@@ -41,3 +41,8 @@ flutter:
     - assets/all.svg
     - assets/only.svg
     - assets/symmetric.svg
+    - assets/baseline.svg
+    - assets/center.svg
+    - assets/startVertical.svg
+    - assets/endVertical.svg
+    - assets/stretch.svg

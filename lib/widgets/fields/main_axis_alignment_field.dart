@@ -34,10 +34,10 @@ class MainAxisAlignmentField extends PropertyWidget<MainAxisAlignment> {
   @override
   Widget build(BuildContext context) {
     return IconOptions(
-      onChanged: (dynamic val) => onChanged(val as MainAxisAlignment),
+      onChanged: (val) => onChanged(val),
       value: value,
       options: MainAxisAlignment.values,
-      iconPath: (dynamic value) => (value as MainAxisAlignment).iconPath,
+      iconPath: (val) => (val).iconPath,
     );
   }
 }

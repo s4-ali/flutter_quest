@@ -35,7 +35,7 @@ extension ColorFieldPropertyProvider on PropertyProvider {
     required String title,
     Color? initialValue,
     bool isOptional = true,
-    Color defaultValue = Colors.black,
+    Color defaultValue = const Color(0xFFF44236),
   }) {
     final params = ColorPropertyParams(
       id: id,

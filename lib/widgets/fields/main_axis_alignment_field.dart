@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/icon_options.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
+import 'package:flutter_quest/widgets/core/property_previewer.dart';
 
 extension on MainAxisAlignment {
   String get iconPath {
@@ -22,14 +24,11 @@ extension on MainAxisAlignment {
   }
 }
 
-class MainAxisAlignmentField extends StatelessWidget {
-  final void Function(MainAxisAlignment) onChanged;
-  final MainAxisAlignment value;
-
+class MainAxisAlignmentField extends PropertyWidget<MainAxisAlignment> {
   const MainAxisAlignmentField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override
@@ -39,6 +38,23 @@ class MainAxisAlignmentField extends StatelessWidget {
       value: value,
       options: MainAxisAlignment.values,
       iconPath: (dynamic value) => (value as MainAxisAlignment).iconPath,
+    );
+  }
+}
+
+class MainAxisAlignmentPreviewer extends StatelessWidget {
+  const MainAxisAlignmentPreviewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PropertyPreviewer<MainAxisAlignment>(
+      values: MainAxisAlignment.values,
+      propertyBuilder: (onChanged, value) {
+        return MainAxisAlignmentField(
+          onChanged: onChanged,
+          value: value,
+        );
+      },
     );
   }
 }

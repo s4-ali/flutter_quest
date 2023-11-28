@@ -5,6 +5,27 @@ import 'package:flutter_quest/widgets/drop_down_button.dart';
 import 'package:flutter_quest/widgets/radio_button.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
 
+enum BoxBorderType {
+  only,
+  all,
+  symmetric,
+}
+
+enum StrokeAlign {
+  center,
+  inside,
+  outside,
+}
+
+enum StyleBorder {
+  solid,
+  none,
+}
+
+enum AllBorderType {
+  all,
+}
+
 enum OnlyBorderType {
   top,
   left,
@@ -40,22 +61,29 @@ extension on OnlyBorderType {
   }
 }
 
-enum BoxBorderType {
-  only,
-  all,
-  symmetric,
-  side,
+enum SymmetricBorderType {
+  vertical,
+  horizontal,
 }
 
-enum StrokeAlign {
-  center,
-  inside,
-  outside,
-}
+extension on SymmetricBorderType {
+  String get iconPath {
+    switch (this) {
+      case SymmetricBorderType.vertical:
+        return "assets/verticalBorder.svg";
+      case SymmetricBorderType.horizontal:
+        return "assets/horizontalBorder.svg";
+    }
+  }
 
-enum StyleBorder {
-  solid,
-  none,
+  Border symmetricBorder(BorderSide borderSide) {
+    switch (this) {
+      case SymmetricBorderType.vertical:
+        return Border.symmetric(vertical: borderSide);
+      case SymmetricBorderType.horizontal:
+        return Border.symmetric(horizontal: borderSide);
+    }
+  }
 }
 
 class BoxBorderField extends PropertyWidget<BoxBorder> {
@@ -93,113 +121,120 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
   double alignBorder = BorderSide.strokeAlignCenter;
   double borderWidth = 0.0;
   BorderStyle borderStyle = BorderStyle.solid;
+  late Widget subTypes;
+
+  void initState() {
+    subTypes = BorderRadioButton(
+      onChanged: (v) => widget.onChanged(Border.all(
+        color: color,
+        style: borderStyle,
+        strokeAlign: alignBorder,
+        width: borderWidth,
+      )),
+      value: AllBorderType.all,
+      options: AllBorderType.values,
+      iconPath: (dynamic value) => "assets/allBorder.svg",
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Row(
-        children: [
-          AppDropDownButton(
-            selectedOption: selectedOption,
-            onChanged: (value) {
-              setState(() {
-                selectedOption = value!;
-              });
-            },
-            items: [
-              DropdownMenuItem<BoxBorderType>(
-                onTap: () {
-                  setState(() {
-                    widget.onChanged(
-                      Border.all(
-                        color: color,
-                        style: borderStyle,
-                        strokeAlign: alignBorder,
-                        width: borderWidth,
-                      ),
-                    );
-                  });
-                },
-                value: BoxBorderType.all,
-                child: label("All"),
-              ),
-              DropdownMenuItem<BoxBorderType>(
-                onTap: () => {
-                  setState(() {
-                    widget.onChanged(
-                      Border.symmetric(
-                        horizontal: BorderSide(
+      Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AppDropDownButton(
+              selectedOption: selectedOption,
+              onChanged: (value) {
+                setState(() {
+                  selectedOption = value!;
+                });
+              },
+              items: [
+                DropdownMenuItem<BoxBorderType>(
+                  onTap: () {
+                    setState(() {
+                      subTypes = BorderRadioButton(
+                        onChanged: (v) => widget.onChanged(Border.all(
                           color: color,
                           style: borderStyle,
                           strokeAlign: alignBorder,
                           width: borderWidth,
-                        ),
-                        vertical: BorderSide(
-                          color: color,
-                          style: borderStyle,
-                          strokeAlign: alignBorder,
-                          width: borderWidth,
-                        ),
-                      ),
-                    );
-                  })
-                },
-                value: BoxBorderType.symmetric,
-                child: label("Symmetric"),
-              ),
-              DropdownMenuItem<BoxBorderType>(
-                onTap: () {
-                  setState(() {
-                    widget.onChanged(
-                      Border.all(
-                        color: color,
-                        style: borderStyle,
-                        strokeAlign: alignBorder,
-                        width: borderWidth,
-                      ),
-                    );
-                  });
-                },
-                value: BoxBorderType.only,
-                child: label("Only"),
-              ),
-              DropdownMenuItem<BoxBorderType>(
-                onTap: () => {
-                  setState(() {
-                    widget.onChanged(
-                      Border.all(
-                        color: color,
-                        style: borderStyle,
-                        strokeAlign: alignBorder,
-                        width: borderWidth,
-                      ),
-                    );
-                  })
-                },
-                value: BoxBorderType.side,
-                child: label("Side"),
-              ),
-            ],
-          ),
-          SizedBox(
-            width: 155,
-            child: BorderRadioButton(
-              onChanged: (v) => widget.onChanged(
-                (v as OnlyBorderType).onlyBorder(
-                  BorderSide(
-                    width: borderWidth,
-                    color: color,
-                    style: borderStyle,
-                    strokeAlign: alignBorder,
-                  ),
+                        )),
+                        value: AllBorderType.all,
+                        options: AllBorderType.values,
+                        iconPath: (dynamic value) => "assets/allBorder.svg",
+                      );
+                    });
+                  },
+                  value: BoxBorderType.all,
+                  child: label("All"),
                 ),
-              ),
-              value: widget.value,
-              options: OnlyBorderType.values,
-              iconPath: (dynamic value) => (value as OnlyBorderType).iconPath,
+                DropdownMenuItem<BoxBorderType>(
+                  onTap: () => {
+                    setState(() {
+                      subTypes = BorderRadioButton(
+                        onChanged: (v) => widget.onChanged(
+                          (v as SymmetricBorderType).symmetricBorder(
+                            BorderSide(
+                              width: borderWidth,
+                              color: color,
+                              style: borderStyle,
+                              strokeAlign: alignBorder,
+                            ),
+                          ),
+                        ),
+                        value: widget.value,
+                        options: SymmetricBorderType.values,
+                        iconPath: (dynamic value) =>
+                            (value as SymmetricBorderType).iconPath,
+                      );
+                    })
+                  },
+                  value: BoxBorderType.symmetric,
+                  child: label("Symmetric"),
+                ),
+                DropdownMenuItem<BoxBorderType>(
+                  onTap: () {
+                    setState(() {
+                      widget.onChanged(
+                        Border.all(
+                          color: color,
+                          style: borderStyle,
+                          strokeAlign: alignBorder,
+                          width: borderWidth,
+                        ),
+                      );
+                      subTypes = BorderRadioButton(
+                        onChanged: (v) => widget.onChanged(
+                          (v as OnlyBorderType).onlyBorder(
+                            BorderSide(
+                              width: borderWidth,
+                              color: color,
+                              style: borderStyle,
+                              strokeAlign: alignBorder,
+                            ),
+                          ),
+                        ),
+                        value: widget.value,
+                        options: OnlyBorderType.values,
+                        iconPath: (dynamic value) =>
+                            (value as OnlyBorderType).iconPath,
+                      );
+                    });
+                  },
+                  value: BoxBorderType.only,
+                  child: label("Only"),
+                ),
+              ],
             ),
-          ),
-        ],
+            subTypes,
+          ],
+        ),
       ),
       _BorderProperties(
         onChanged: (value) {
@@ -282,8 +317,6 @@ class _BorderPropertiesState extends State<_BorderProperties> {
   }
 }
 
-
-
 class BorderRadioButton<T> extends StatefulWidget {
   final void Function(T) onChanged;
   final T value;
@@ -307,42 +340,33 @@ class _BorderRadioButtonState<T> extends State<BorderRadioButton> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Wrap(
-            direction: Axis.horizontal,
-            runAlignment: WrapAlignment.start,
-            crossAxisAlignment: WrapCrossAlignment.start,
-            children: [
-              for (final value in widget.options)
-                AppRadioButton(
-                  isSelected: widget.value == value,
-                  iconPath: widget.iconPath(value as T),
-                  onSelected: () => widget.onChanged(value),
-                  onHover: (bool hovering) {
-                    setState(() {
-                      hoveredValue = hovering ? value : null;
-                    });
-                  },
-                ),
-            ],
-          ),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Wrap(
+          direction: Axis.horizontal,
+          runAlignment: WrapAlignment.start,
+          crossAxisAlignment: WrapCrossAlignment.start,
+          children: [
+            for (final value in widget.options)
+              AppRadioButton(
+                padding: const EdgeInsets.all(2),
+                isSelected: widget.value == value,
+                iconPath: widget.iconPath(value as T),
+                onSelected: () => widget.onChanged(value),
+                onHover: (bool hovering) {
+                  setState(() {
+                    hoveredValue = hovering ? value : null;
+                  });
+                },
+              ),
+          ],
+        ),
+      ],
     );
   }
 }
-
-
-
-
-
-
-
 
 class BorderWidth extends StatelessWidget {
   final Function(double) onChanged;

@@ -26,10 +26,10 @@ class AxisField extends PropertyWidget<Axis> {
   @override
   Widget build(BuildContext context) {
     return IconOptions(
-      onChanged: (dynamic val) => onChanged(val as Axis),
+      onChanged: (val) => onChanged(val),
       value: value,
       options: Axis.values,
-      iconPath: (dynamic value) => (value as Axis).iconPath,
+      iconPath: (val) => (val).iconPath,
     );
   }
 }

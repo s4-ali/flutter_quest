@@ -59,10 +59,10 @@ class CurveField extends PropertyWidget<Curve> {
   @override
   Widget build(BuildContext context) {
     return IconOptions(
-      onChanged: (dynamic val) => onChanged(val as Curve),
+      onChanged: (val) => onChanged(val),
       value: value,
       options: values,
-      iconPath: (dynamic value) => (value as Curve).iconPath,
+      iconPath: (val) => (value).iconPath,
     );
   }
 }

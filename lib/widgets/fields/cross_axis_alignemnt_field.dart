@@ -21,7 +21,6 @@ extension on CrossAxisAlignment {
 }
 
 class CrossAxisAlignmentField extends PropertyWidget<CrossAxisAlignment>  {
-
   const CrossAxisAlignmentField({
     super.key,
     required super.onChanged,
@@ -31,10 +30,10 @@ class CrossAxisAlignmentField extends PropertyWidget<CrossAxisAlignment>  {
   @override
   Widget build(BuildContext context) {
     return IconOptions(
-      onChanged: (dynamic val) => onChanged(val as CrossAxisAlignment),
+      onChanged: (val) => onChanged(val),
       value: value,
       options: CrossAxisAlignment.values,
-      iconPath: (dynamic value) => (value as CrossAxisAlignment).iconPath,
+      iconPath: (value) => (value).iconPath,
     );
   }
 }

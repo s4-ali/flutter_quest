@@ -42,6 +42,22 @@ enum AllBorderType {
   all,
 }
 
+enum SymmetricBorderType {
+  vertical,
+  horizontal,
+}
+
+extension on SymmetricBorderType {
+  String get iconPath {
+    switch (this) {
+      case SymmetricBorderType.vertical:
+        return "assets/verticalBorder.svg";
+      case SymmetricBorderType.horizontal:
+        return "assets/horizontalBorder.svg";
+    }
+  }
+}
+
 enum OnlyBorderType {
   top,
   left,
@@ -62,44 +78,6 @@ extension on OnlyBorderType {
         return "assets/BottomBorder.svg";
     }
   }
-
-  Border onlyBorder(BorderSide borderSide) {
-    switch (this) {
-      case OnlyBorderType.top:
-        return Border(top: borderSide);
-      case OnlyBorderType.left:
-        return Border(left: borderSide);
-      case OnlyBorderType.right:
-        return Border(right: borderSide);
-      case OnlyBorderType.bottom:
-        return Border(bottom: borderSide);
-    }
-  }
-}
-
-enum SymmetricBorderType {
-  vertical,
-  horizontal,
-}
-
-extension on SymmetricBorderType {
-  String get iconPath {
-    switch (this) {
-      case SymmetricBorderType.vertical:
-        return "assets/verticalBorder.svg";
-      case SymmetricBorderType.horizontal:
-        return "assets/horizontalBorder.svg";
-    }
-  }
-
-  Border symmetricBorder(BorderSide borderSide) {
-    switch (this) {
-      case SymmetricBorderType.vertical:
-        return Border.symmetric(vertical: borderSide);
-      case SymmetricBorderType.horizontal:
-        return Border.symmetric(horizontal: borderSide);
-    }
-  }
 }
 
 class _BoxBorderField extends StatefulWidget {
@@ -116,29 +94,18 @@ class _BoxBorderField extends StatefulWidget {
 }
 
 class _BoxBorderFieldState extends State<_BoxBorderField> {
-  BoxBorderType selectedOption = BoxBorderType.all;
+  BoxBorderType selectedBorder = BoxBorderType.all;
   dynamic selectedSubType = AllBorderType.all;
   Color color = Colors.black;
   double alignBorder = BorderSide.strokeAlignCenter;
   double borderWidth = 0.0;
   BorderStyle borderStyle = BorderStyle.solid;
-  late Widget subTypes;
-  dynamic value;
-
-  void initState() {
-    subTypes = BorderRadioButton(
-      onChanged: (v) => widget.onChanged(Border.all(
-        color: color,
-        style: borderStyle,
-        strokeAlign: alignBorder,
-        width: borderWidth,
-      )),
-      value: AllBorderType.all,
-      options: AllBorderType.values,
-      iconPath: (dynamic value) => "assets/allBorder.svg",
-    );
-    super.initState();
-  }
+  Widget selectedLayout = BorderRadioButton(
+    onChanged: (v) {},
+    value: AllBorderType.all,
+    options: AllBorderType.values,
+    iconPath: (dynamic value) => "assets/allBorder.svg",
+  );
 
   void updateChanges() {
     BoxBorder? updatedValue;
@@ -186,7 +153,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
         break;
       case SymmetricBorderType.vertical:
         updatedValue = Border.symmetric(
-          vertical: BorderSide(
+          horizontal: BorderSide(
             width: borderWidth,
             color: color,
             style: borderStyle,
@@ -196,7 +163,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
         break;
       case SymmetricBorderType.horizontal:
         updatedValue = Border.symmetric(
-          horizontal: BorderSide(
+          vertical: BorderSide(
             width: borderWidth,
             color: color,
             style: borderStyle,
@@ -227,104 +194,72 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppDropDownButton(
-              selectedOption: selectedOption,
+              selectedOption: selectedBorder,
               onChanged: (value) {
                 setState(() {
-                  selectedOption = value!;
+                  selectedBorder = value!;
                 });
               },
               items: [
                 DropdownMenuItem<BoxBorderType>(
                   onTap: () {
-                    setState(() {
-                      value =AllBorderType.all;
-                      selectedSubType = BoxBorderType.all;
-                      subTypes = BorderRadioButton(
-                        onChanged: (v) => widget.onChanged(Border.all(
-                          color: color,
-                          style: borderStyle,
-                          strokeAlign: alignBorder,
-                          width: borderWidth,
-                        )),
-                        value: value,
+                    selectedSubType = AllBorderType.all;
+                    updateChanges();
+                      selectedSubType = AllBorderType.all;
+                      selectedLayout = BorderRadioButton(
+                        onChanged: (v) => updateChanges(),
+                        value: selectedSubType,
                         options: AllBorderType.values,
                         iconPath: (dynamic value) => "assets/allBorder.svg",
                       );
-                    });
                   },
                   value: BoxBorderType.all,
                   child: label("All"),
                 ),
                 DropdownMenuItem<BoxBorderType>(
                   onTap: () {
-                    setState(() {
-                      value = SymmetricBorderType.vertical;
-                      subTypes = BorderRadioButton(
+                    selectedSubType = SymmetricBorderType.vertical;
+                    updateChanges();
+                      updateChanges();
+                      selectedLayout = BorderRadioButton(
                         onChanged: (v) {
-                          selectedSubType = v as SymmetricBorderType;
-                          value = v;
-                          widget.onChanged(
-                            v.symmetricBorder(
-                              BorderSide(
-                                width: borderWidth,
-                                color: color,
-                                style: borderStyle,
-                                strokeAlign: alignBorder,
-                              ),
-                            ),
-                          );
+                          setState(() {
+                            selectedSubType = v as SymmetricBorderType;
+                            updateChanges();
+                          });
                         },
-                        value: value,
+                        value: selectedSubType,
                         options: SymmetricBorderType.values,
                         iconPath: (dynamic value) =>
                             (value as SymmetricBorderType).iconPath,
                       );
-                    });
                   },
                   value: BoxBorderType.symmetric,
                   child: label("Symmetric"),
                 ),
                 DropdownMenuItem<BoxBorderType>(
                   onTap: () {
-
-                    value = OnlyBorderType.top;
-                    setState(() {
-                      widget.onChanged(
-                        Border.all(
-                          color: color,
-                          style: borderStyle,
-                          strokeAlign: alignBorder,
-                          width: borderWidth,
-                        ),
-                      );
-                      subTypes = BorderRadioButton(
+                    selectedSubType = OnlyBorderType.top;
+                    updateChanges();
+                      selectedLayout = BorderRadioButton(
                         onChanged: (v) {
-                          selectedSubType = v as OnlyBorderType;
-                          value = v;
-                          widget.onChanged(
-                            v.onlyBorder(
-                              BorderSide(
-                                width: borderWidth,
-                                color: color,
-                                style: borderStyle,
-                                strokeAlign: alignBorder,
-                              ),
-                            ),
-                          );
+                          setState(() {
+                            selectedSubType = v as OnlyBorderType;
+                            updateChanges();
+                          });
                         },
-                        value: value,
+                        value: selectedSubType,
                         options: OnlyBorderType.values,
                         iconPath: (dynamic value) =>
                             (value as OnlyBorderType).iconPath,
                       );
-                    });
                   },
                   value: BoxBorderType.only,
                   child: label("Only"),
                 ),
               ],
             ),
-            subTypes,
+            selectedLayout,
           ],
         ),
       ),
@@ -354,7 +289,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
   }
 }
 
-class BorderWidth extends StatelessWidget {
+class BorderWidth extends StatefulWidget {
   final Function(double) onChanged;
 
   BorderWidth({
@@ -362,6 +297,11 @@ class BorderWidth extends StatelessWidget {
     required this.onChanged,
   });
 
+  @override
+  State<BorderWidth> createState() => _BorderWidthState();
+}
+
+class _BorderWidthState extends State<BorderWidth> {
   String myValue = "0.0";
 
   @override
@@ -372,7 +312,7 @@ class BorderWidth extends StatelessWidget {
       child: Center(
         child: AppTextField(
           onChanged: (value) {
-            onChanged(double.parse(value));
+            widget.onChanged(double.parse(value));
             myValue = value;
           },
           controller: TextEditingController(text: myValue),

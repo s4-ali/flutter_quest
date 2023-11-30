@@ -207,7 +207,10 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
                     updateChanges();
                       selectedSubType = AllBorderType.all;
                       selectedLayout = BorderRadioButton(
-                        onChanged: (v) => updateChanges(),
+                        onChanged: (v){
+                          selectedSubType = v;
+                          updateChanges();
+                        },
                         value: selectedSubType,
                         options: AllBorderType.values,
                         iconPath: (dynamic value) => "assets/allBorder.svg",
@@ -224,7 +227,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
                       selectedLayout = BorderRadioButton(
                         onChanged: (v) {
                           setState(() {
-                            selectedSubType = v as SymmetricBorderType;
+                            selectedSubType = v;
                             updateChanges();
                           });
                         },
@@ -244,7 +247,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
                       selectedLayout = BorderRadioButton(
                         onChanged: (v) {
                           setState(() {
-                            selectedSubType = v as OnlyBorderType;
+                            selectedSubType = v;
                             updateChanges();
                           });
                         },
@@ -338,7 +341,7 @@ class BorderColor extends StatefulWidget {
 
 class _BorderColorState extends State<BorderColor> {
   Color borderColor = Colors.black;
-  String myValue = "0.0";
+  String myValue = "000000";
 
   @override
   Widget build(BuildContext context) {

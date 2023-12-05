@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Matrix4Field extends PropertyWidget<Matrix4> {
   const Matrix4Field({
@@ -14,31 +15,49 @@ class Matrix4Field extends PropertyWidget<Matrix4> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        MatrixProperties(name: "Rotate", onTap: () {}),
-        MatrixProperties(name: "Offset", onTap: () {}),
+        _Matrix4Properties(name: "Rotate", onTap: (v) {}),
+        _Matrix4Properties(name: "Offset", onTap: (v) {}),
+        _Matrix4Properties(name: "Scale", onTap: (v) {}),
+        _Matrix4Properties(name: "Skew", onTap: (v) {}),
+        _Matrix4Properties(
+          name: "Flip Horizontal",
+          onTap: (v) {},
+          iconPath: "flipHorizontal.svg",
+        ),
+        _Matrix4Properties(
+          name: "Flip Vertical",
+          onTap: (v) {},
+          iconPath: "flipVertical.svg",
+        ),
       ],
     );
   }
 }
 
-class MatrixProperties extends StatefulWidget {
+class _Matrix4Properties extends StatefulWidget {
   final String name;
-  final void Function() onTap;
+  final void Function(bool) onTap;
+  final String? iconPath;
 
-  const MatrixProperties(
-      {super.key, required this.name, required this.onTap});
+  const _Matrix4Properties(
+      {required this.name, required this.onTap, this.iconPath});
 
   @override
-  State<MatrixProperties> createState() => _MatrixPropertiesState();
+  State<_Matrix4Properties> createState() => _Matrix4PropertiesState();
 }
 
-class _MatrixPropertiesState extends State<MatrixProperties> {
+class _Matrix4PropertiesState extends State<_Matrix4Properties> {
   bool hovering = false;
   Color color = const Color(0xFF808080);
-  bool opened = false;
+  bool selected = false;
 
   @override
   Widget build(BuildContext context) {
+    String path =
+        widget.iconPath ?? (selected ? "downArrow.svg" : "rightArrow.svg");
+    Color color =
+        hovering || selected ? const Color(0xFFFFFFFF) : const Color(0xFF808080);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
@@ -48,9 +67,9 @@ class _MatrixPropertiesState extends State<MatrixProperties> {
           });
         },
         onTap: () {
-          widget.onTap();
+          widget.onTap(selected);
           setState(() {
-            opened = !opened;
+            selected = !selected;
           });
         },
         child: Row(
@@ -59,17 +78,11 @@ class _MatrixPropertiesState extends State<MatrixProperties> {
             Text(
               widget.name,
               style: TextStyle(
-                color: hovering
-                    ? const Color(0xFFFFFFFF)
-                    : const Color(0xFF808080),
+                color: color
               ),
             ),
-            Icon(
-              opened? Icons.keyboard_arrow_down : Icons.keyboard_arrow_right,
-              size: 16,
-              color:
-                  hovering ? const Color(0xFFFFFFFF) : const Color(0xFF808080),
-            ),
+            SvgPicture.asset(path,
+                color: color),
           ],
         ),
       ),

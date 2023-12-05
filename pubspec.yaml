@@ -46,3 +46,7 @@ flutter:
     - assets/startVertical.svg
     - assets/endVertical.svg
     - assets/stretch.svg
+    - assets/downArrow.svg
+    - assets/rightArrow.svg
+    - assets/flipHorizontal.svg
+    - assets/flipVertical.svg

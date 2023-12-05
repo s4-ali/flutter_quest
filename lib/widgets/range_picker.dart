@@ -47,7 +47,7 @@ class _AppRangePickerState extends State<AppRangePicker> {
                 value: selectedValue.toDouble(),
                 onChanged: (value) {
                   double myValue = double.parse(value.toStringAsFixed(2));
-                    selectedValue = myValue;
+                  selectedValue = myValue;
                   widget.onChanged(myValue);
                 },
                 min: 0,

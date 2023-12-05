@@ -3,7 +3,6 @@ import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 
 class Matrix4Field extends PropertyWidget<Matrix4> {
-
   const Matrix4Field({
     super.key,
     required super.onChanged,
@@ -12,8 +11,68 @@ class Matrix4Field extends PropertyWidget<Matrix4> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder(
-      fallbackHeight: 60,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        MatrixProperties(name: "Rotate", onTap: () {}),
+        MatrixProperties(name: "Offset", onTap: () {}),
+      ],
+    );
+  }
+}
+
+class MatrixProperties extends StatefulWidget {
+  final String name;
+  final void Function() onTap;
+
+  const MatrixProperties(
+      {super.key, required this.name, required this.onTap});
+
+  @override
+  State<MatrixProperties> createState() => _MatrixPropertiesState();
+}
+
+class _MatrixPropertiesState extends State<MatrixProperties> {
+  bool hovering = false;
+  Color color = const Color(0xFF808080);
+  bool opened = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        onHover: (value) {
+          setState(() {
+            hovering = value;
+          });
+        },
+        onTap: () {
+          widget.onTap();
+          setState(() {
+            opened = !opened;
+          });
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              widget.name,
+              style: TextStyle(
+                color: hovering
+                    ? const Color(0xFFFFFFFF)
+                    : const Color(0xFF808080),
+              ),
+            ),
+            Icon(
+              opened? Icons.keyboard_arrow_down : Icons.keyboard_arrow_right,
+              size: 16,
+              color:
+                  hovering ? const Color(0xFFFFFFFF) : const Color(0xFF808080),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

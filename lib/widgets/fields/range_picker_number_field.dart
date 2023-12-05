@@ -12,11 +12,7 @@ class RangePickerNumberField extends PropertyWidget<num> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        AppRangePicker(onChanged: onChanged),
-      ],
-    );
+    return AppRangePicker(onChanged: onChanged);
   }
 }
 

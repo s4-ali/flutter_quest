@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
 
 class AppRangePicker extends StatefulWidget {
-  final void Function(num) onChanged;
+  final void Function(double) onChanged;
 
   const AppRangePicker({super.key, required this.onChanged});
 
@@ -11,8 +11,7 @@ class AppRangePicker extends StatefulWidget {
 }
 
 class _AppRangePickerState extends State<AppRangePicker> {
-  num selectedValue = 0.0;
-  int numberOfDots = 7;
+  double selectedValue = 0.0;
   Color thumbColor = const Color(0xFF808080);
 
   @override
@@ -20,36 +19,38 @@ class _AppRangePickerState extends State<AppRangePicker> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-          width: double.infinity,
-          child: MouseRegion(
-            onEnter: (v) {
-              setState(() {
-                thumbColor = const Color(0xFFFFFFFF);
-              });
-            },
-            onExit: (v) {
-              setState(() {
-                thumbColor = const Color(0xFF808080);
-              });
-            },
-            child: SliderTheme(
-              data: SliderTheme.of(context).copyWith(
-                trackHeight: 2,
-                thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
-                overlayColor: Colors.red,
-              ),
+        MouseRegion(
+          onEnter: (v) {
+            setState(() {
+              thumbColor = const Color(0xFFFFFFFF);
+            });
+          },
+          onExit: (v) {
+            setState(() {
+              thumbColor = const Color(0xFF808080);
+            });
+          },
+          child: SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+              trackHeight: 2,
+              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
+              overlayColor: Colors.red,
+            ),
+            child: SizedBox(
+              width: 250,
               child: Slider(
                 activeColor: const Color(0xFFFFFFFF),
                 inactiveColor: const Color(0xFF808080),
+                secondaryActiveColor: Colors.red,
                 thumbColor: thumbColor,
                 secondaryTrackValue: 1,
                 value: selectedValue.toDouble(),
                 onChanged: (value) {
+                  double myValue = double.parse(value.toStringAsFixed(2));
                   setState(() {
-                    selectedValue = value;
+                    selectedValue = myValue;
                   });
-                  widget.onChanged(value);
+                  widget.onChanged(myValue);
                 },
                 min: 0,
                 max: 100,
@@ -63,8 +64,13 @@ class _AppRangePickerState extends State<AppRangePicker> {
           child: AppTextField(
             contentPadding: const EdgeInsets.only(left: 5),
             onChanged: (value) {
-              widget.onChanged(num.parse(value));
-              selectedValue = num.parse(value);
+              double myValue = double.parse(value);
+              widget.onChanged(
+                double.parse(myValue.toStringAsFixed(2)),
+              );
+              selectedValue = double.parse(
+                myValue.toStringAsFixed(2),
+              );
             },
             controller: TextEditingController(text: selectedValue.toString()),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
+import 'package:flutter_quest/widgets/range_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Matrix4Field extends PropertyWidget<Matrix4> {
@@ -12,10 +13,37 @@ class Matrix4Field extends PropertyWidget<Matrix4> {
 
   @override
   Widget build(BuildContext context) {
+    return _Matrix4Field(onChanged: onChanged, value: value);
+  }
+}
+
+
+class _Matrix4Field extends StatefulWidget {
+  final void Function(Matrix4) onChanged;
+  final Matrix4 value;
+
+  const _Matrix4Field(
+      {required this.onChanged, required this.value,});
+
+  @override
+  State<_Matrix4Field> createState() => _Matrix4FieldState();
+}
+
+class _Matrix4FieldState extends State<_Matrix4Field> {
+
+  bool rotation = false;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _Matrix4Properties(name: "Rotate", onTap: (v) {}),
+        _Matrix4Properties(name: "Rotate", onTap: (v) {
+          setState(() {
+            rotation = v;
+          });
+        }),
+        rotation? _RotateProperty(onChange: widget.onChanged): const SizedBox(),
         _Matrix4Properties(name: "Offset", onTap: (v) {}),
         _Matrix4Properties(name: "Scale", onTap: (v) {}),
         _Matrix4Properties(name: "Skew", onTap: (v) {}),
@@ -28,6 +56,36 @@ class Matrix4Field extends PropertyWidget<Matrix4> {
           name: "Flip Vertical",
           onTap: (v) {},
           iconPath: "flipVertical.svg",
+        ),
+      ],
+    );
+  }
+}
+
+
+class _RotateProperty extends StatelessWidget {
+  final void Function(Matrix4) onChange;
+
+  const _RotateProperty({super.key, required this.onChange});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        AppRangePicker(
+          onChanged: (v) {
+            onChange(Matrix4.rotationX(v));
+          },
+        ),
+        AppRangePicker(
+          onChanged: (v) {
+            onChange(Matrix4.rotationY(v));
+          },
+        ),
+        AppRangePicker(
+          onChanged: (v) {
+            onChange(Matrix4.rotationZ(v));
+          },
         ),
       ],
     );
@@ -55,8 +113,9 @@ class _Matrix4PropertiesState extends State<_Matrix4Properties> {
   Widget build(BuildContext context) {
     String path =
         widget.iconPath ?? (selected ? "downArrow.svg" : "rightArrow.svg");
-    Color color =
-        hovering || selected ? const Color(0xFFFFFFFF) : const Color(0xFF808080);
+    Color color = hovering || selected
+        ? const Color(0xFFFFFFFF)
+        : const Color(0xFF808080);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -77,12 +136,9 @@ class _Matrix4PropertiesState extends State<_Matrix4Properties> {
           children: [
             Text(
               widget.name,
-              style: TextStyle(
-                color: color
-              ),
+              style: TextStyle(color: color),
             ),
-            SvgPicture.asset(path,
-                color: color),
+            SvgPicture.asset(path, color: color),
           ],
         ),
       ),

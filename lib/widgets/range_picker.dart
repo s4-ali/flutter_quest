@@ -12,21 +12,29 @@ class AppRangePicker extends StatefulWidget {
 
 class _AppRangePickerState extends State<AppRangePicker> {
   double selectedValue = 0.0;
-  Color thumbColor = const Color(0xFF808080);
+  bool hovering = false;
 
   @override
   Widget build(BuildContext context) {
+    Color thumbColor = hovering
+        ? const Color(0xFFFFFFFF)
+        : selectedValue > 0
+        ? const Color(0xFF0099FF)
+        : const Color(0xFF808080);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         MouseRegion(
           onEnter: (v) {
             setState(() {
+              hovering = true;
               thumbColor = const Color(0xFFFFFFFF);
             });
           },
           onExit: (v) {
             setState(() {
+              hovering = false;
               thumbColor = const Color(0xFF808080);
             });
           },
@@ -47,7 +55,7 @@ class _AppRangePickerState extends State<AppRangePicker> {
                 value: selectedValue.toDouble(),
                 onChanged: (value) {
                   double myValue = double.parse(value.toStringAsFixed(2));
-                    selectedValue = myValue;
+                  selectedValue = myValue;
                   widget.onChanged(myValue);
                 },
                 min: 0,

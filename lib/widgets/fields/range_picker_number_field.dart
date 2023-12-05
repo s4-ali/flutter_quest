@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
-import 'package:flutter_quest/widgets/fields/range_picker.dart';
+import 'package:flutter_quest/widgets/range_picker.dart';
 
 class RangePickerNumberField extends PropertyWidget<num> {
   const RangePickerNumberField({

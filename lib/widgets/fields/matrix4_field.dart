@@ -17,36 +17,66 @@ class Matrix4Field extends PropertyWidget<Matrix4> {
   }
 }
 
-
 class _Matrix4Field extends StatefulWidget {
   final void Function(Matrix4) onChanged;
   final Matrix4 value;
 
-  const _Matrix4Field(
-      {required this.onChanged, required this.value,});
+  const _Matrix4Field({
+    required this.onChanged,
+    required this.value,
+  });
 
   @override
   State<_Matrix4Field> createState() => _Matrix4FieldState();
 }
 
 class _Matrix4FieldState extends State<_Matrix4Field> {
-
-  bool rotation = false;
+  bool openRotation = false;
+  bool openOffset = false;
+  bool openScale = false;
+  bool openSkew = false;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _Matrix4Properties(name: "Rotate", onTap: (v) {
+        _Matrix4Properties(
+            name: "Rotate",
+            onTap: (value) {
+              setState(() {
+                openRotation = value;
+              });
+            }),
+        openRotation
+            ? _RotateProperty(onChange: widget.onChanged)
+            : const SizedBox(),
+        _Matrix4Properties(
+            name: "Offset",
+            onTap: (value) {
+              setState(() {
+                openOffset = value;
+              });
+            }),
+        openOffset
+            ? _OffsetProperty(onChange: widget.onChanged)
+            : const SizedBox(),
+        _Matrix4Properties(name: "Scale", onTap: (value) {
           setState(() {
-            rotation = v;
+            openScale = value;
           });
         }),
-        rotation? _RotateProperty(onChange: widget.onChanged): const SizedBox(),
-        _Matrix4Properties(name: "Offset", onTap: (v) {}),
-        _Matrix4Properties(name: "Scale", onTap: (v) {}),
-        _Matrix4Properties(name: "Skew", onTap: (v) {}),
+        openScale
+            ? _ScaleProperty(onChange: widget.onChanged)
+            : const SizedBox(),
+        _Matrix4Properties(
+            name: "Skew",
+            onTap: (value) {
+              setState(() {
+                openSkew = value;
+              });
+            }),
+        openSkew ? _SkewProperty(onChange: widget.onChanged) : const SizedBox(),
         _Matrix4Properties(
           name: "Flip Horizontal",
           onTap: (v) {},
@@ -62,32 +92,122 @@ class _Matrix4FieldState extends State<_Matrix4Field> {
   }
 }
 
-
 class _RotateProperty extends StatelessWidget {
   final void Function(Matrix4) onChange;
 
-  const _RotateProperty({super.key, required this.onChange});
+  const _RotateProperty({required this.onChange});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AppRangePicker(
-          onChanged: (v) {
-            onChange(Matrix4.rotationX(v));
-          },
-        ),
-        AppRangePicker(
-          onChanged: (v) {
-            onChange(Matrix4.rotationY(v));
-          },
-        ),
-        AppRangePicker(
-          onChanged: (v) {
-            onChange(Matrix4.rotationZ(v));
-          },
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text("Rotation X"),
+          AppRangePicker(
+            onChanged: (v) {
+              onChange(Matrix4.rotationX(v));
+            },
+          ),
+          const Text("Rotation Y"),
+          AppRangePicker(
+            onChanged: (v) {
+              onChange(Matrix4.rotationY(v));
+            },
+          ),
+          const Text("Rotation Z"),
+          AppRangePicker(
+            onChanged: (v) {
+              onChange(Matrix4.rotationZ(v));
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _OffsetProperty extends StatelessWidget {
+  final void Function(Matrix4) onChange;
+
+  const _OffsetProperty({required this.onChange});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text("Offset X"),
+          AppRangePicker(
+            onChanged: (v) {
+              onChange(Matrix4.rotationX(v));
+            },
+          ),
+          const Text("Offset Y"),
+          AppRangePicker(
+            onChanged: (v) {
+              onChange(Matrix4.rotationY(v));
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ScaleProperty extends StatelessWidget {
+  final void Function(Matrix4) onChange;
+
+  const _ScaleProperty({required this.onChange});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text("Scale"),
+          AppRangePicker(
+            onChanged: (v) {
+              onChange(Matrix4.rotationX(v));
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SkewProperty extends StatelessWidget {
+  final void Function(Matrix4) onChange;
+
+  const _SkewProperty({required this.onChange});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text("Skew X"),
+          AppRangePicker(
+            onChanged: (v) {
+              onChange(Matrix4.skewX(v));
+            },
+          ),
+          const Text("Skew Y"),
+          AppRangePicker(
+            onChanged: (v) {
+              onChange(Matrix4.skewY(v));
+            },
+          ),
+        ],
+      ),
     );
   }
 }
@@ -126,10 +246,10 @@ class _Matrix4PropertiesState extends State<_Matrix4Properties> {
           });
         },
         onTap: () {
-          widget.onTap(selected);
           setState(() {
             selected = !selected;
           });
+          widget.onTap(selected);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

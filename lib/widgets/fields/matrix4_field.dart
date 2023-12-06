@@ -61,11 +61,13 @@ class _Matrix4FieldState extends State<_Matrix4Field> {
         openOffset
             ? _OffsetProperty(onChange: widget.onChanged)
             : const SizedBox(),
-        _Matrix4Properties(name: "Scale", onTap: (value) {
-          setState(() {
-            openScale = value;
-          });
-        }),
+        _Matrix4Properties(
+            name: "Scale",
+            onTap: (value) {
+              setState(() {
+                openScale = value;
+              });
+            }),
         openScale
             ? _ScaleProperty(onChange: widget.onChanged)
             : const SizedBox(),
@@ -79,12 +81,20 @@ class _Matrix4FieldState extends State<_Matrix4Field> {
         openSkew ? _SkewProperty(onChange: widget.onChanged) : const SizedBox(),
         _Matrix4Properties(
           name: "Flip Horizontal",
-          onTap: (v) {},
+          onTap: (v) {
+            widget.onChanged(
+              Matrix4.diagonal3Values(-1, 1, 1),
+            );
+          },
           iconPath: "flipHorizontal.svg",
         ),
         _Matrix4Properties(
           name: "Flip Vertical",
-          onTap: (v) {},
+          onTap: (v) {
+            widget.onChanged(
+              Matrix4.identity()..scale(1.0, -1.0),
+            );
+          },
           iconPath: "flipVertical.svg",
         ),
       ],
@@ -173,7 +183,9 @@ class _ScaleProperty extends StatelessWidget {
           const Text("Scale"),
           AppRangePicker(
             onChanged: (v) {
-              onChange(Matrix4.rotationX(v));
+              onChange(
+                Matrix4.identity()..scale(v),
+              );
             },
           ),
         ],
@@ -272,8 +284,13 @@ class Matrix4Previewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<Matrix4>(
-      values: [Matrix4.zero()],
-      titleBuilder: (val) => "Matrix4.zero()",
+      values: [
+        Matrix4.zero(),
+        Matrix4.skewY(20),
+        Matrix4.skewX(54),
+        Matrix4.rotationX(80),
+        Matrix4.rotationY(63)
+      ],
       propertyBuilder: (onChanged, value) {
         return Matrix4Field(
           onChanged: onChanged,

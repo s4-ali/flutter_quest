@@ -203,11 +203,11 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
               items: [
                 DropdownMenuItem<BoxBorderType>(
                   onTap: () {
+                    selectedSubType = AllBorderType.all;
                     updateChanges();
                       selectedLayout = BorderRadioButton(
                         onChanged: (v){
                           selectedSubType = v;
-                          print(v);
                           updateChanges();
                         },
                         value: selectedSubType,
@@ -220,12 +220,12 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
                 ),
                 DropdownMenuItem<BoxBorderType>(
                   onTap: () {
+                    selectedSubType = SymmetricBorderType.vertical;
                     updateChanges();
                       selectedLayout = BorderRadioButton(
                         onChanged: (v) {
                           setState(() {
                             selectedSubType = v;
-                            print(v);
                             updateChanges();
                           });
                         },
@@ -241,6 +241,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
                 DropdownMenuItem<BoxBorderType>(
                   onTap: () {
                     updateChanges();
+                    selectedSubType = OnlyBorderType.top;
                       selectedLayout = BorderRadioButton(
                         onChanged: (v) {
                           setState(() {

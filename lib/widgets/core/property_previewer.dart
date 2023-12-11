@@ -30,33 +30,36 @@ class _PropertyPreviewerState<U> extends State<PropertyPreviewer<U>> {
     return Material(
       child: SizedBox(
         width: 350,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              children: [
-                IconButton(
-                  onPressed: _prevValue,
-                  icon: const Icon(Icons.arrow_left),
-                ),
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      title,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: _prevValue,
+                    icon: const Icon(Icons.arrow_left),
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        title,
+                      ),
                     ),
                   ),
-                ),
-                IconButton(
-                  onPressed: _nextValue,
-                  icon: const Icon(Icons.arrow_right),
-                ),
-              ],
-            ),
-            widget.propertyBuilder(
-              onChanged,
-              value,
-            ),
-          ],
+                  IconButton(
+                    onPressed: _nextValue,
+                    icon: const Icon(Icons.arrow_right),
+                  ),
+                ],
+              ),
+              widget.propertyBuilder(
+                onChanged,
+                value,
+              ),
+            ],
+          ),
         ),
       ),
     );

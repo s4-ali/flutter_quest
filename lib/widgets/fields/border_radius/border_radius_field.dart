@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
+import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/drop_down_button.dart';
 import 'package:flutter_quest/widgets/fields/border_radius/border_radius_layouts.dart';
 
@@ -11,21 +13,36 @@ enum BorderRadiusType {
   zero,
 }
 
-class BorderRadiusField extends StatefulWidget {
+class BorderRadiusField extends PropertyWidget<BorderRadius> {
+  const BorderRadiusField({
+    super.key,
+    required super.onChanged,
+    required super.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return _BorderRadiusField(
+      onChanged: onChanged,
+      value: value,
+    );
+  }
+}
+
+class _BorderRadiusField extends StatefulWidget {
   final void Function(BorderRadius) onChanged;
   final BorderRadius value;
 
-  const BorderRadiusField({
-    super.key,
+  const _BorderRadiusField({
     required this.onChanged,
     required this.value,
   });
 
   @override
-  State<BorderRadiusField> createState() => _BorderRadiusFieldState();
+  State<_BorderRadiusField> createState() => _BorderRadiusFieldState();
 }
 
-class _BorderRadiusFieldState extends State<BorderRadiusField> {
+class _BorderRadiusFieldState extends State<_BorderRadiusField> {
   BorderRadiusType selectedOption = BorderRadiusType.all;
   late Widget selectedLayout;
 
@@ -40,7 +57,6 @@ class _BorderRadiusFieldState extends State<BorderRadiusField> {
 
   @override
   Widget build(BuildContext context) {
-
     return Stack(
       children: [
         AppDropDownButton(
@@ -129,6 +145,27 @@ class _BorderRadiusFieldState extends State<BorderRadiusField> {
           child: selectedLayout,
         ),
       ],
+    );
+  }
+}
+
+class BorderRadiusPreviewer extends StatelessWidget {
+  const BorderRadiusPreviewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PropertyPreviewer<BorderRadius>(
+      values: [
+        const BorderRadius.all(Radius.circular(30)),
+        BorderRadius.circular(20),
+        BorderRadius.zero
+      ],
+      propertyBuilder: (onChanged, value) {
+        return BorderRadiusField(
+          onChanged: onChanged,
+          value: value,
+        );
+      },
     );
   }
 }

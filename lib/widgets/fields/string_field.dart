@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
+import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
 
-class StringField extends StatelessWidget {
-  final void Function(String) onChanged;
-  final String value;
-
+class StringField extends PropertyWidget<String> {
   const StringField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override
@@ -19,6 +18,23 @@ class StringField extends StatelessWidget {
       controller: TextEditingController(
         text: value,
       ),
+    );
+  }
+}
+
+class StringFieldPreviewer extends StatelessWidget {
+  const StringFieldPreviewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PropertyPreviewer<String>(
+      values: const ["String: 1", "String: 2", "String: 3"],
+      propertyBuilder: (onChanged, value) {
+        return StringField(
+          onChanged: onChanged,
+          value: value,
+        );
+      },
     );
   }
 }

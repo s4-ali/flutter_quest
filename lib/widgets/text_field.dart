@@ -70,7 +70,7 @@ class _AppTextFieldState extends State<AppTextField> {
         ),
         controller: widget.controller,
         keyboardType: widget.keyboardType,
-        onSubmitted: widget.onChanged,
+        onChanged: widget.onChanged,
         onEditingComplete: () => widget.onChanged(widget.controller.text),
         onTapOutside: (_) => widget.onChanged(widget.controller.text),
         maxLines: 1,

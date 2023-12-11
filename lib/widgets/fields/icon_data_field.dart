@@ -10,10 +10,28 @@ class IconDataField extends PropertyWidget<IconData> {
   });
 
   @override
-  State<IconDataField> createState() => _IconDataFieldState();
+  Widget build(BuildContext context) {
+    return _IconDataField(
+      onChanged: onChanged,
+      value: value,
+    );
+  }
 }
 
-class _IconDataFieldState extends State<IconDataField> {
+class _IconDataField extends StatefulWidget {
+  final void Function(IconData) onChanged;
+  final IconData value;
+
+  const _IconDataField({
+    required this.onChanged,
+    required this.value,
+  });
+
+  @override
+  State<_IconDataField> createState() => _IconDataFieldState();
+}
+
+class _IconDataFieldState extends State<_IconDataField> {
   final List<IconData> icons = [
     Icons.access_alarm,
     Icons.access_time,

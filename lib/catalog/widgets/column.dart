@@ -20,7 +20,7 @@ class ColumnPropertyExplorer extends StatelessWidget {
 
         final mainAxisAlignment = provider.mainAxisAlignmentField(id: "mainAxisAlignment", title: "Main Axis Alignment");
         final mainAxisSize = provider.mainAxisSizeField(id: "mainAxisSize", title: "Main Axis Size");
-        final crossAxisAlignment = provider.crossAxisAlignemntField(id: "crossAxisAlignment", title: "Cross Axis Alignment");
+        final crossAxisAlignment = provider.crossAxisAlignmentField(id: "crossAxisAlignment", title: "Cross Axis Alignment");
         final textDirection = provider.textDirectionField(id: "textDirection", title: "Text Direction");
         final verticalDirection = provider.verticalDirectionField(id: "verticalDirection", title: "Vertical Direction");
         final textBaseLine = provider.listField<TextBaseline>(id: "textBaseLine", title: "TextBaseLine", values: TextBaseline.values);

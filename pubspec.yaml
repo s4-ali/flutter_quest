@@ -39,3 +39,5 @@ flutter:
     - assets/topRight.svg
     - assets/verticalBottom.svg
     - assets/verticalTop.svg
+    - assets/maximum.svg
+    - assets/minimum.svg

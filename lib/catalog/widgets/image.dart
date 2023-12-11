@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/property_fields/alignment_field.dart';
 import 'package:flutter_quest/property_fields/boolean_field.dart';
+import 'package:flutter_quest/property_fields/box_fit_field.dart';
 import 'package:flutter_quest/property_fields/color_field.dart';
 import 'package:flutter_quest/property_fields/list_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
@@ -27,8 +28,7 @@ class ImagePropertyExplorer extends StatelessWidget {
           final color = provider.colorField(id: "color", title: "color");
           final opacity = provider.doubleField(id: "opacity", title: "Opacity");
           final colorBlendMode = provider.listField(id: "colorBlendMode", title: "colorBlendMode", values: BlendMode.values);
-          final fit = provider.listField(
-              id: "fit", title: "Fit", values: BoxFit.values);
+          final boxFit = provider.boxFitField(id: "boxFit", title: "Box Fit");
           final alignment = provider.alignmentField(
               id: "Alignment", title: "Alignment");
           final repeat = provider.listField(
@@ -66,7 +66,7 @@ class ImagePropertyExplorer extends StatelessWidget {
             color: color,
             opacity: AlwaysStoppedAnimation(opacity?? 1.0),
             colorBlendMode: colorBlendMode,
-            fit: fit,
+            fit: boxFit,
             alignment: alignment ?? Alignment.center,
             repeat: repeat ?? ImageRepeat.noRepeat,
             centerSlice: centerSlice,

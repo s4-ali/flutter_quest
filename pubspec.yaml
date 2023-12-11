@@ -61,3 +61,5 @@ flutter:
     - assets/spaceEvenly.svg
     - assets/spaceAround.svg
     - assets/spaceBetween.svg
+    - assets/leftToRight.svg
+    - assets/rightToLeft.svg

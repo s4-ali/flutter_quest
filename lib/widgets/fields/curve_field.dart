@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/icon_options.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
-import 'package:flutter_quest/widgets/icon_options.dart';
 
 const values = [
   Curves.bounceIn,

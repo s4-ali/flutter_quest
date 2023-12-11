@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/icon_options.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
+import 'package:flutter_quest/widgets/core/property_previewer.dart';
 
 const values = [
   Curves.bounceIn,
@@ -46,23 +48,38 @@ extension on Curve {
   }
 }
 
-class CurveField extends StatelessWidget {
-  final void Function(Curve) onChanged;
-  final Curve value;
+class CurveField extends PropertyWidget<Curve> {
 
   const CurveField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override
   Widget build(BuildContext context) {
     return IconOptions(
-      onChanged: (dynamic val) => onChanged(val as Curve),
+      onChanged: (val) => onChanged(val),
       value: value,
       options: values,
-      iconPath: (dynamic value) => (value as Curve).iconPath,
+      iconPath: (val) => (value).iconPath,
+    );
+  }
+}
+
+class CurvePreviewer extends StatelessWidget {
+  const CurvePreviewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PropertyPreviewer<Curve>(
+      values: const [Curves.linear, Curves.bounceIn, Curves.bounceOut],
+      propertyBuilder: (onChanged, value) {
+        return CurveField(
+          onChanged: onChanged,
+          value: value,
+        );
+      },
     );
   }
 }

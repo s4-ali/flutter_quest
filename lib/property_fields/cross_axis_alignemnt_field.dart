@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/cross_axis_alignemnt_field.dart';
 
-class CrossAxisAlignemntPropertyParams extends PropertyParams<CrossAxisAlignment> {
-  CrossAxisAlignemntPropertyParams({
+class CrossAxisAlignmentPropertyParams extends PropertyParams<CrossAxisAlignment> {
+  CrossAxisAlignmentPropertyParams({
     required super.id,
     super.initialValue,
     required super.title,
@@ -12,17 +12,17 @@ class CrossAxisAlignemntPropertyParams extends PropertyParams<CrossAxisAlignment
   });
 }
 
-class CrossAxisAlignemntPropertyField
-    extends PropertyField<CrossAxisAlignemntPropertyParams, CrossAxisAlignment> {
-  CrossAxisAlignemntPropertyField(super.provider, super.params);
+class CrossAxisAlignmentPropertyField
+    extends PropertyField<CrossAxisAlignmentPropertyParams, CrossAxisAlignment> {
+  CrossAxisAlignmentPropertyField(super.provider, super.params);
 
   @override
   Widget build(
-    CrossAxisAlignemntPropertyParams params,
+    CrossAxisAlignmentPropertyParams params,
     Function(CrossAxisAlignment) onChanged,
     CrossAxisAlignment value,
   ) {
-    return CrossAxisAlignemntField(
+    return CrossAxisAlignmentField(
       onChanged: onChanged,
       value: value,
     );
@@ -30,21 +30,21 @@ class CrossAxisAlignemntPropertyField
 }
 
 extension CrossAxisAlignemntFieldPropertyProvider on PropertyProvider {
-  CrossAxisAlignment? crossAxisAlignemntField({
+  CrossAxisAlignment? crossAxisAlignmentField({
     required String id,
     required String title,
     CrossAxisAlignment? initialValue,
     bool isOptional = true,
     CrossAxisAlignment defaultValue = CrossAxisAlignment.center,
   }) {
-    final params = CrossAxisAlignemntPropertyParams(
+    final params = CrossAxisAlignmentPropertyParams(
       id: id,
       title: title,
       isOptional: isOptional,
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return CrossAxisAlignemntPropertyField(
+    return CrossAxisAlignmentPropertyField(
       this,
       params,
     )();

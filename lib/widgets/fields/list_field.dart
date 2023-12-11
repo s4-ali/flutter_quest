@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
+import 'package:flutter_quest/widgets/core/property_previewer.dart';
 
-class ListField<T> extends StatelessWidget {
-  final Function(T) onChanged;
-  final T value;
+class ListField<T> extends PropertyWidget<T> {
   final List<T> values;
   final String Function(T)? titleBuilder;
 
   const ListField({
     super.key,
-    required this.onChanged,
+    required super.onChanged,
     required this.values,
-    required this.value,
+    required super.value,
     this.titleBuilder,
   });
 
@@ -61,6 +61,24 @@ class ListField<T> extends StatelessWidget {
           }
         },
       ),
+    );
+  }
+}
+
+class ListPreviewer extends StatelessWidget {
+  const ListPreviewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PropertyPreviewer<dynamic>(
+      values: Axis.values,
+      propertyBuilder: (onChanged, value) {
+        return ListField(
+          onChanged: onChanged,
+          value: value,
+          values: [],
+        );
+      },
     );
   }
 }

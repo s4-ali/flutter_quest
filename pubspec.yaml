@@ -14,7 +14,8 @@ dependencies:
   logger: ^2.0.2+1
   cupertino_icons: ^1.0.6
   responsive_builder: ^0.7.0
-  flutter_svg: ^2.0.8
+  flutter_svg: ^2.0.9
+  flex_color_picker: ^3.3.0
 
 dev_dependencies:
   flutter_test:
@@ -28,3 +29,39 @@ flutter:
     - assets/axisVertical.svg
     - assets/downDirection.svg
     - assets/upDirection.svg
+    - assets/all.svg
+    - assets/only.svg
+    - assets/symmetric.svg
+    - assets/allCircular.svg
+    - assets/allElliptical.svg
+    - assets/bottomLeft.svg
+    - assets/bottomRight.svg
+    - assets/horizontalLeft.svg
+    - assets/horizontalRight.svg
+    - assets/topLeft.svg
+    - assets/topRight.svg
+    - assets/verticalBottom.svg
+    - assets/verticalTop.svg
+    - assets/maximum.svg
+    - assets/minimum.svg
+    - assets/bounceIn.svg
+    - assets/bounceInOut.svg
+    - assets/bounceOut.svg
+    - assets/curveEaseIn.svg
+    - assets/curveEaseInOut.svg
+    - assets/curveEaseOut.svg
+    - assets/curveFastOutEaseIn.svg
+    - assets/curveLinear.svg
+    - assets/elasticIn.svg
+    - assets/elasticInOut.svg
+    - assets/elasticOut.svg
+    - assets/baseline.svg
+    - assets/center.svg
+    - assets/startVertical.svg
+    - assets/endVertical.svg
+    - assets/stretch.svg
+    - assets/spaceEvenly.svg
+    - assets/spaceAround.svg
+    - assets/spaceBetween.svg
+    - assets/leftToRight.svg
+    - assets/rightToLeft.svg

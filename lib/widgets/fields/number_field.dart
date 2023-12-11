@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
+import 'package:flutter_quest/widgets/core/property_previewer.dart';
 
 import '../text_field.dart';
 
-class NumberField extends StatelessWidget {
-  final Function(num) onChanged;
-  final num value;
+class NumberField extends PropertyWidget<num> {
 
   const NumberField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override
@@ -35,6 +35,23 @@ class NumberField extends StatelessWidget {
         text: "${value.isInfinite ? "Infinite" : value}",
       ),
       keyboardType: TextInputType.number,
+    );
+  }
+}
+
+class NumberFieldPreviewer extends StatelessWidget {
+  const NumberFieldPreviewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PropertyPreviewer<num>(
+      values: const [56, 89, 456, 2, 754],
+      propertyBuilder: (onChanged, value) {
+        return NumberField(
+          onChanged: onChanged,
+          value: value,
+        );
+      },
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
+import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/icon_options.dart';
 
 extension on VerticalDirection {
@@ -14,14 +16,11 @@ extension on VerticalDirection {
   }
 }
 
-class VerticalDirectionField extends StatelessWidget {
-  final void Function(VerticalDirection) onChanged;
-  final VerticalDirection value;
-
+class VerticalDirectionField extends PropertyWidget<VerticalDirection> {
   const VerticalDirectionField({
     super.key,
-    required this.onChanged,
-    required this.value,
+    required super.onChanged,
+    required super.value,
   });
 
   @override
@@ -31,6 +30,23 @@ class VerticalDirectionField extends StatelessWidget {
       value: value,
       options: VerticalDirection.values,
       iconPath: (dynamic value) => (value as VerticalDirection).iconPath,
+    );
+  }
+}
+
+class VerticalDirectionPreviewer extends StatelessWidget {
+  const VerticalDirectionPreviewer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PropertyPreviewer<VerticalDirection>(
+      values: VerticalDirection.values,
+      propertyBuilder: (onChanged, value) {
+        return VerticalDirectionField(
+          onChanged: onChanged,
+          value: value,
+        );
+      },
     );
   }
 }

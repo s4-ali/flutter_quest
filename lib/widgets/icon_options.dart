@@ -16,10 +16,10 @@ class IconOptions<T> extends StatefulWidget {
   });
 
   @override
-  State<IconOptions> createState() => _IconOptionsState<T>();
+  State<IconOptions<T>> createState() => _IconOptionsState<T>();
 }
 
-class _IconOptionsState<T> extends State<IconOptions> {
+class _IconOptionsState<T> extends State<IconOptions<T>> {
   T? hoveredValue;
 
   @override
@@ -38,7 +38,7 @@ class _IconOptionsState<T> extends State<IconOptions> {
               for (final value in widget.options)
                 AppRadioButton(
                   isSelected: widget.value == value,
-                  iconPath: widget.iconPath(value as T),
+                  iconPath: widget.iconPath(value),
                   onSelected: () => widget.onChanged(value),
                   onHover: (bool hovering) {
                     setState(() {

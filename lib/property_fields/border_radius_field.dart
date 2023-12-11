@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_provider.dart';
-import 'package:flutter_quest/widgets/fields/border_radius_field.dart';
+import 'package:flutter_quest/widgets/fields/border_radius/border_radius_field.dart';
 
 class BorderRadiusPropertyParams extends PropertyParams<BorderRadius> {
   BorderRadiusPropertyParams({

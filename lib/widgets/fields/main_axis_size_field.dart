@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/icon_options.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
+
+extension on MainAxisSize{
+  String get iconPath{
+    switch (this) {
+      case MainAxisSize.min:
+        return "assets/minimum.svg";
+      case MainAxisSize.max:
+        return "assets/maximum.svg";
+      default:
+        return "";
+    }
+  }
+}
 
 class MainAxisSizeField extends PropertyWidget<MainAxisSize> {
 
@@ -12,11 +26,15 @@ class MainAxisSizeField extends PropertyWidget<MainAxisSize> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder(
-      fallbackHeight: 60,
+    return IconOptions(
+      onChanged: (dynamic val) => onChanged(val as MainAxisSize),
+      value: value,
+      options: MainAxisSize.values,
+      iconPath: (dynamic value) => (value as MainAxisSize).iconPath,
     );
   }
 }
+
 
 class MainAxisSizePreviewer extends StatelessWidget {
   const MainAxisSizePreviewer({super.key});

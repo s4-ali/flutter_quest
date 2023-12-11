@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -25,8 +24,28 @@ class _AppRadioButtonState extends State<AppRadioButton> {
 
   @override
   Widget build(BuildContext context) {
+
+    Color svgColor = widget.isSelected || isHovering
+        ? const Color(0xFFFFFFFF)
+        : const Color(0xFF808080);
+    Color borderColor = isHovering ? const Color(0xFF0099FF) : Colors.transparent;
+    Color backgroundColor = widget.isSelected
+        ? const Color(0xFF0099FF)
+        : Colors.transparent;
+
+    BoxDecoration boxDecoration = BoxDecoration(
+      color: backgroundColor,
+      borderRadius: const BorderRadius.all(
+        Radius.circular(4),
+      ),
+      border: Border.all(
+        width: 1,
+        color: borderColor,
+      ),
+    );
+
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(7.5),
       child: InkWell(
         hoverColor: Colors.transparent,
         onTap: widget.onSelected,
@@ -39,25 +58,12 @@ class _AppRadioButtonState extends State<AppRadioButton> {
         child: Container(
           height: 30,
           width: 30,
-          decoration: BoxDecoration(
-            color: widget.isSelected
-                ? const Color(0xFF0099FF)
-                : Colors.transparent,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(4),
-            ),
-            border: Border.all(
-              width: 1,
-              color: isHovering ? const Color(0xFF0099FF) : Colors.transparent,
-            ),
-          ),
+          decoration: boxDecoration,
           child: Center(
             child: SvgPicture.asset(
               widget.iconPath,
               colorFilter: ColorFilter.mode(
-                widget.isSelected || isHovering
-                    ? const Color(0xFFFFFFFF)
-                    : const Color(0xFF808080),
+                svgColor,
                 BlendMode.srcATop,
               ),
             ),

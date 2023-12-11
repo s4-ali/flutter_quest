@@ -46,7 +46,7 @@ class PropertyParams<T> {
     required this.defaultValue,
     this.isOptional = true,
     T? initialValue,
-  }): initialValue = isOptional?initialValue:initialValue??defaultValue;
+  }) : initialValue = isOptional ? initialValue : initialValue ?? defaultValue;
 }
 
 abstract class PropertyField<T extends PropertyParams, U> {

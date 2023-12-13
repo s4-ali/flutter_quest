@@ -3,40 +3,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quest/catalog/home.dart';
 import 'package:flutter_quest/catalog/properties_list.dart';
 
+import 'utils/color_schemes.g.dart';
+
 void main() {
   runApp(const MyApp());
 }
 
+final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
+
 class MyApp extends StatelessWidget {
+
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Quest',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF3772FF),
-        ),
-        sliderTheme: const SliderThemeData(
-          showValueIndicator: ShowValueIndicator.always,
-        ),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF3772FF),
-        ),
-        sliderTheme: const SliderThemeData(
-          showValueIndicator: ShowValueIndicator.always,
-        ),
-        useMaterial3: true,
-        // scaffoldBackgroundColor: Colors.,
-      ),
-      themeMode: ThemeMode.dark,
-      home: const PropertiesList(),
-    );
+    return ValueListenableBuilder<ThemeMode>(
+        valueListenable: themeNotifier,
+        builder: (_, mode, __) {
+          return MaterialApp(
+            title: 'Flutter Quest',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              colorScheme: lightColorScheme,
+              sliderTheme: const SliderThemeData(
+                showValueIndicator: ShowValueIndicator.always,
+              ),
+            ),
+            darkTheme: ThemeData(
+              colorScheme: darkColorScheme,
+              sliderTheme: const SliderThemeData(
+                showValueIndicator: ShowValueIndicator.always,
+              ),
+              // scaffoldBackgroundColor: Colors.,
+            ),
+            themeMode: mode,
+            home: const PropertiesList(),
+          );
+        });
   }
 }
 
@@ -50,6 +53,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+  void dispose() {
+    themeNotifier.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

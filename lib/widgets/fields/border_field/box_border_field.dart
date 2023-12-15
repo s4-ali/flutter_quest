@@ -38,11 +38,13 @@ enum StyleBorder {
   none,
 }
 
-enum AllBorderType {
+abstract class AppBorderType{}
+
+enum AllBorderType implements AppBorderType{
   all,
 }
 
-enum SymmetricBorderType {
+enum SymmetricBorderType implements AppBorderType {
   vertical,
   horizontal,
 }
@@ -58,7 +60,7 @@ extension on SymmetricBorderType {
   }
 }
 
-enum OnlyBorderType {
+enum OnlyBorderType implements AppBorderType {
   top,
   left,
   right,
@@ -95,7 +97,7 @@ class _BoxBorderField extends StatefulWidget {
 
 class _BoxBorderFieldState extends State<_BoxBorderField> {
   BoxBorderType selectedBorder = BoxBorderType.all;
-  dynamic selectedSubType = AllBorderType.all;
+  AppBorderType selectedSubType = AllBorderType.all;
   Color color = Colors.black;
   double alignBorder = BorderSide.strokeAlignCenter;
   double borderWidth = 0.0;
@@ -206,6 +208,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
                   onTap: () {
                     selectedSubType = AllBorderType.all;
                       selectedLayout = _BorderRadioButton(
+                        key: UniqueKey(),
                         onChanged: (v){},
                         options: AllBorderType.values,
                         iconPath: (dynamic value) => "assets/allBorder.svg",
@@ -220,6 +223,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
                   onTap: () {
                     selectedSubType = SymmetricBorderType.vertical;
                       selectedLayout = _BorderRadioButton(
+                        key: UniqueKey(),
                         onChanged: (v) {
                           setState(() {
                             selectedSubType = v;
@@ -240,6 +244,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
                   onTap: () {
                     selectedSubType = OnlyBorderType.top;
                       selectedLayout = _BorderRadioButton(
+                        key: UniqueKey(),
                         onChanged: (v) {
                           setState(() {
                             selectedSubType = v;
@@ -290,7 +295,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
 class _BorderWidth extends StatefulWidget {
   final Function(double) onChanged;
 
-  _BorderWidth({
+  const _BorderWidth({
     super.key,
     required this.onChanged,
   });
@@ -468,7 +473,7 @@ Widget label(String name) {
   );
 }
 
-class _BorderRadioButton<T> extends StatefulWidget {
+class _BorderRadioButton<T extends AppBorderType> extends StatefulWidget {
   final void Function(T) onChanged;
   final T value;
   final List<T> options;
@@ -486,8 +491,21 @@ class _BorderRadioButton<T> extends StatefulWidget {
   State<_BorderRadioButton> createState() => _BorderRadioButtonState<T>();
 }
 
-class _BorderRadioButtonState<T> extends State<_BorderRadioButton> {
-  T? hoveredValue;
+class _BorderRadioButtonState<T extends AppBorderType> extends State<_BorderRadioButton> {
+  AppBorderType? hoveredValue;
+  late AppBorderType selected;
+
+  @override
+  void initState() {
+    selected = widget.value;
+    super.initState();
+  }
+
+  void onTapOption(T selectedOption){
+    selected = selectedOption;
+    widget.onChanged(selected);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -503,9 +521,9 @@ class _BorderRadioButtonState<T> extends State<_BorderRadioButton> {
             for (final value in widget.options)
               AppRadioButton(
                 padding: const EdgeInsets.all(2),
-                isSelected: widget.value == value,
+                isSelected: selected == value,
                 iconPath: widget.iconPath(value as T),
-                onSelected: () => widget.onChanged(value),
+                onSelected:()=> onTapOption(value),
                 onHover: (bool hovering) {
                   setState(() {
                     hoveredValue = hovering ? value : null;

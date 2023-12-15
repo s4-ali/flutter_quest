@@ -357,7 +357,7 @@ class _BorderColorState extends State<_BorderColor> {
           value: borderColor,
         ),
         const SizedBox(
-          width: 10,
+          width: 8,
         ),
         SizedBox(
           height: 30,

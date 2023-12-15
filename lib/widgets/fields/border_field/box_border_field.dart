@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
+import 'package:flutter_quest/widgets/dialog_color_option.dart';
 import 'package:flutter_quest/widgets/drop_down_button.dart';
 import 'package:flutter_quest/widgets/radio_button.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
@@ -38,9 +39,9 @@ enum StyleBorder {
   none,
 }
 
-abstract class AppBorderType{}
+abstract class AppBorderType {}
 
-enum AllBorderType implements AppBorderType{
+enum AllBorderType implements AppBorderType {
   all,
 }
 
@@ -207,13 +208,13 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
                   value: BoxBorderType.all,
                   onTap: () {
                     selectedSubType = AllBorderType.all;
-                      selectedLayout = _BorderRadioButton(
-                        key: UniqueKey(),
-                        onChanged: (v){},
-                        options: AllBorderType.values,
-                        iconPath: (dynamic value) => "assets/allBorder.svg",
-                        value: selectedSubType,
-                      );
+                    selectedLayout = _BorderRadioButton(
+                      key: UniqueKey(),
+                      onChanged: (v) {},
+                      options: AllBorderType.values,
+                      iconPath: (dynamic value) => "assets/allBorder.svg",
+                      value: selectedSubType,
+                    );
                     updateChanges();
                   },
                   child: label("All"),
@@ -222,19 +223,19 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
                   value: BoxBorderType.symmetric,
                   onTap: () {
                     selectedSubType = SymmetricBorderType.vertical;
-                      selectedLayout = _BorderRadioButton(
-                        key: UniqueKey(),
-                        onChanged: (v) {
-                          setState(() {
-                            selectedSubType = v;
-                            updateChanges();
-                          });
-                        },
-                        options: SymmetricBorderType.values,
-                        iconPath: (dynamic value) =>
-                            (value as SymmetricBorderType).iconPath,
-                        value: selectedSubType,
-                      );
+                    selectedLayout = _BorderRadioButton(
+                      key: UniqueKey(),
+                      onChanged: (v) {
+                        setState(() {
+                          selectedSubType = v;
+                          updateChanges();
+                        });
+                      },
+                      options: SymmetricBorderType.values,
+                      iconPath: (dynamic value) =>
+                          (value as SymmetricBorderType).iconPath,
+                      value: selectedSubType,
+                    );
                     updateChanges();
                   },
                   child: label("Symmetric"),
@@ -243,19 +244,19 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
                   value: BoxBorderType.only,
                   onTap: () {
                     selectedSubType = OnlyBorderType.top;
-                      selectedLayout = _BorderRadioButton(
-                        key: UniqueKey(),
-                        onChanged: (v) {
-                          setState(() {
-                            selectedSubType = v;
-                            updateChanges();
-                          });
-                        },
-                        options: OnlyBorderType.values,
-                        iconPath: (dynamic value) =>
-                            (value as OnlyBorderType).iconPath,
-                        value: selectedSubType,
-                      );
+                    selectedLayout = _BorderRadioButton(
+                      key: UniqueKey(),
+                      onChanged: (v) {
+                        setState(() {
+                          selectedSubType = v;
+                          updateChanges();
+                        });
+                      },
+                      options: OnlyBorderType.values,
+                      iconPath: (dynamic value) =>
+                          (value as OnlyBorderType).iconPath,
+                      value: selectedSubType,
+                    );
                     updateChanges();
                   },
                   child: label("Only"),
@@ -296,7 +297,6 @@ class _BorderWidth extends StatefulWidget {
   final Function(double) onChanged;
 
   const _BorderWidth({
-    super.key,
     required this.onChanged,
   });
 
@@ -345,42 +345,40 @@ class _BorderColorState extends State<_BorderColor> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      SizedBox(
-        height: 30,
-        width: 155,
-        child: Center(
-          child: AppTextField(
-            onChanged: (v) {
-              setState(() {
-                myValue = v;
-                borderColor = Color(int.parse("0xFF$v"));
-              });
-              widget.colorChanged(borderColor);
-            },
-            controller: TextEditingController(text: myValue),
-            contentPadding:
-                const EdgeInsets.only(left: 30, right: 4, bottom: 9),
-          ),
+    return SizedBox(
+      width: 155,
+      child: Row(children: [
+        AppDialogColor(
+          onChanged: (value) {
+            borderColor = value;
+            widget.colorChanged(borderColor);
+            myValue = borderColor.value.toRadixString(16).substring(2);
+          },
+          value: borderColor,
         ),
-      ),
-      Positioned(
-        top: 5,
-        left: 7,
-        child: Container(
-          width: 20,
-          height: 20,
-          decoration: BoxDecoration(
-            color: borderColor,
-            borderRadius: BorderRadius.circular(3),
-            border: Border.all(
-              width: 1,
-              color: const Color(0xFFFFFFFF).withOpacity(0.3),
+        const SizedBox(
+          width: 10,
+        ),
+        SizedBox(
+          height: 30,
+          width: 115,
+          child: Center(
+            child: AppTextField(
+              onChanged: (v) {
+                setState(() {
+                  myValue = v;
+                  borderColor = Color(int.parse("0xFF$v"));
+                });
+                widget.colorChanged(borderColor);
+              },
+              controller: TextEditingController(text: myValue),
+              contentPadding:
+                  const EdgeInsets.only(left: 10, right: 4, bottom: 9),
             ),
           ),
         ),
-      ),
-    ]);
+      ]),
+    );
   }
 }
 
@@ -491,7 +489,8 @@ class _BorderRadioButton<T extends AppBorderType> extends StatefulWidget {
   State<_BorderRadioButton> createState() => _BorderRadioButtonState<T>();
 }
 
-class _BorderRadioButtonState<T extends AppBorderType> extends State<_BorderRadioButton> {
+class _BorderRadioButtonState<T extends AppBorderType>
+    extends State<_BorderRadioButton> {
   AppBorderType? hoveredValue;
   late AppBorderType selected;
 
@@ -501,7 +500,7 @@ class _BorderRadioButtonState<T extends AppBorderType> extends State<_BorderRadi
     super.initState();
   }
 
-  void onTapOption(T selectedOption){
+  void onTapOption(T selectedOption) {
     selected = selectedOption;
     widget.onChanged(selected);
     setState(() {});
@@ -523,7 +522,7 @@ class _BorderRadioButtonState<T extends AppBorderType> extends State<_BorderRadi
                 padding: const EdgeInsets.all(2),
                 isSelected: selected == value,
                 iconPath: widget.iconPath(value as T),
-                onSelected:()=> onTapOption(value),
+                onSelected: () => onTapOption(value),
                 onHover: (bool hovering) {
                   setState(() {
                     hoveredValue = hovering ? value : null;

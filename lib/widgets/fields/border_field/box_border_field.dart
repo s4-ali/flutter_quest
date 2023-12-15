@@ -100,7 +100,7 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
   double alignBorder = BorderSide.strokeAlignCenter;
   double borderWidth = 0.0;
   BorderStyle borderStyle = BorderStyle.solid;
-  Widget selectedLayout = BorderRadioButton(
+  Widget selectedLayout = _BorderRadioButton(
     onChanged: (v) {},
     value: AllBorderType.all,
     options: AllBorderType.values,
@@ -202,60 +202,57 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
               },
               items: [
                 DropdownMenuItem<BoxBorderType>(
+                  value: BoxBorderType.all,
                   onTap: () {
                     selectedSubType = AllBorderType.all;
-                    updateChanges();
-                      selectedLayout = BorderRadioButton(
-                        onChanged: (v){
-                          selectedSubType = v;
-                          updateChanges();
-                        },
-                        value: selectedSubType,
+                      selectedLayout = _BorderRadioButton(
+                        onChanged: (v){},
                         options: AllBorderType.values,
                         iconPath: (dynamic value) => "assets/allBorder.svg",
+                        value: selectedSubType,
                       );
+                    updateChanges();
                   },
-                  value: BoxBorderType.all,
                   child: label("All"),
                 ),
                 DropdownMenuItem<BoxBorderType>(
+                  value: BoxBorderType.symmetric,
                   onTap: () {
                     selectedSubType = SymmetricBorderType.vertical;
-                    updateChanges();
-                      selectedLayout = BorderRadioButton(
+                      selectedLayout = _BorderRadioButton(
                         onChanged: (v) {
                           setState(() {
                             selectedSubType = v;
                             updateChanges();
                           });
                         },
-                        value: selectedSubType,
                         options: SymmetricBorderType.values,
                         iconPath: (dynamic value) =>
                             (value as SymmetricBorderType).iconPath,
+                        value: selectedSubType,
                       );
+                    updateChanges();
                   },
-                  value: BoxBorderType.symmetric,
                   child: label("Symmetric"),
                 ),
                 DropdownMenuItem<BoxBorderType>(
+                  value: BoxBorderType.only,
                   onTap: () {
-                    updateChanges();
                     selectedSubType = OnlyBorderType.top;
-                      selectedLayout = BorderRadioButton(
+                      selectedLayout = _BorderRadioButton(
                         onChanged: (v) {
                           setState(() {
                             selectedSubType = v;
                             updateChanges();
                           });
                         },
-                        value: selectedSubType,
                         options: OnlyBorderType.values,
                         iconPath: (dynamic value) =>
                             (value as OnlyBorderType).iconPath,
+                        value: selectedSubType,
                       );
+                    updateChanges();
                   },
-                  value: BoxBorderType.only,
                   child: label("Only"),
                 ),
               ],
@@ -268,19 +265,19 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
         spacing: 8,
         runSpacing: 16,
         children: [
-          BorderWidth(onChanged: (value) {
+          _BorderWidth(onChanged: (value) {
             borderWidth = value;
             updateChanges();
           }),
-          BorderColor(colorChanged: (value) {
+          _BorderColor(colorChanged: (value) {
             color = value;
             updateChanges();
           }),
-          AlignBorder(alignChanged: (value) {
+          _AlignBorder(alignChanged: (value) {
             alignBorder = value;
             updateChanges();
           }),
-          BoxBorderStyle(styleChanged: (value) {
+          _BoxBorderStyle(styleChanged: (value) {
             borderStyle = value;
             updateChanges();
           })
@@ -290,19 +287,19 @@ class _BoxBorderFieldState extends State<_BoxBorderField> {
   }
 }
 
-class BorderWidth extends StatefulWidget {
+class _BorderWidth extends StatefulWidget {
   final Function(double) onChanged;
 
-  BorderWidth({
+  _BorderWidth({
     super.key,
     required this.onChanged,
   });
 
   @override
-  State<BorderWidth> createState() => _BorderWidthState();
+  State<_BorderWidth> createState() => _BorderWidthState();
 }
 
-class _BorderWidthState extends State<BorderWidth> {
+class _BorderWidthState extends State<_BorderWidth> {
   String myValue = "0.0";
 
   @override
@@ -328,16 +325,16 @@ class _BorderWidthState extends State<BorderWidth> {
   }
 }
 
-class BorderColor extends StatefulWidget {
+class _BorderColor extends StatefulWidget {
   final void Function(Color) colorChanged;
 
-  const BorderColor({super.key, required this.colorChanged});
+  const _BorderColor({required this.colorChanged});
 
   @override
-  State<BorderColor> createState() => _BorderColorState();
+  State<_BorderColor> createState() => _BorderColorState();
 }
 
-class _BorderColorState extends State<BorderColor> {
+class _BorderColorState extends State<_BorderColor> {
   Color borderColor = Colors.black;
   String myValue = "000000";
 
@@ -382,10 +379,10 @@ class _BorderColorState extends State<BorderColor> {
   }
 }
 
-class BoxBorderStyle extends StatelessWidget {
+class _BoxBorderStyle extends StatelessWidget {
   final void Function(BorderStyle) styleChanged;
 
-  BoxBorderStyle({super.key, required this.styleChanged});
+  _BoxBorderStyle({required this.styleChanged});
 
   StyleBorder selectedStyle = StyleBorder.solid;
   BorderStyle borderStyle = BorderStyle.solid;
@@ -419,10 +416,10 @@ class BoxBorderStyle extends StatelessWidget {
   }
 }
 
-class AlignBorder extends StatelessWidget {
+class _AlignBorder extends StatelessWidget {
   final void Function(double) alignChanged;
 
-  AlignBorder({super.key, required this.alignChanged});
+  _AlignBorder({required this.alignChanged});
 
   StrokeAlign selectedAlign = StrokeAlign.center;
   double alignBorder = BorderSide.strokeAlignCenter;
@@ -471,13 +468,13 @@ Widget label(String name) {
   );
 }
 
-class BorderRadioButton<T> extends StatefulWidget {
+class _BorderRadioButton<T> extends StatefulWidget {
   final void Function(T) onChanged;
   final T value;
   final List<T> options;
   final String Function(T) iconPath;
 
-  const BorderRadioButton({
+  const _BorderRadioButton({
     super.key,
     required this.onChanged,
     required this.value,
@@ -486,10 +483,10 @@ class BorderRadioButton<T> extends StatefulWidget {
   });
 
   @override
-  State<BorderRadioButton> createState() => _BorderRadioButtonState<T>();
+  State<_BorderRadioButton> createState() => _BorderRadioButtonState<T>();
 }
 
-class _BorderRadioButtonState<T> extends State<BorderRadioButton> {
+class _BorderRadioButtonState<T> extends State<_BorderRadioButton> {
   T? hoveredValue;
 
   @override

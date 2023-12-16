@@ -352,7 +352,7 @@ class _BorderColorState extends State<_BorderColor> {
           onChanged: (value) {
             borderColor = value;
             widget.colorChanged(borderColor);
-            myValue = borderColor.value.toRadixString(16).substring(2);
+            myValue = borderColor.value.toRadixString(16).substring(2).toUpperCase();
           },
           value: borderColor,
         ),
@@ -366,7 +366,7 @@ class _BorderColorState extends State<_BorderColor> {
             child: AppTextField(
               onChanged: (v) {
                 setState(() {
-                  myValue = v;
+                  myValue = v.toUpperCase();
                   borderColor = Color(int.parse("0xFF$v"));
                 });
                 widget.colorChanged(borderColor);

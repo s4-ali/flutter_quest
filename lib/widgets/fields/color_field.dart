@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/color_option.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
@@ -64,7 +65,7 @@ class _ColorField extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 8),
-              child: _ColorOptionBox(
+              child: ColorOptionBox(
                 fillColor: value,
                 onUpdated: (color) async {
                   final newColor = await showColorPickerDialog(
@@ -163,7 +164,7 @@ class _ColorField extends StatelessWidget {
             _commonColorList.length,
             (index) => Padding(
               padding: const EdgeInsets.all(2.0),
-              child: _ColorOptionBox(
+              child: ColorOptionBox(
                 fillColor: _commonColorList[index],
                 isSelected: _commonColorList[index] == value,
                 onUpdated: onChanged,
@@ -172,66 +173,6 @@ class _ColorField extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _ColorOptionBox extends StatefulWidget {
-  final Function(Color)? onUpdated;
-  final Color fillColor;
-
-  final bool isSelected;
-
-  const _ColorOptionBox({
-    required this.fillColor,
-    this.isSelected = false,
-    this.onUpdated,
-  });
-
-  @override
-  State<_ColorOptionBox> createState() => _ColorOptionBoxState();
-}
-
-class _ColorOptionBoxState extends State<_ColorOptionBox> {
-  bool isHovering = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => widget.onUpdated?.call(widget.fillColor),
-      onHover: (value) {
-        setState(() {
-          isHovering = value;
-        });
-      },
-      child: Container(
-        height: 30,
-        width: 30,
-        decoration: BoxDecoration(
-          color: widget.fillColor,
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-            color: isHovering
-                ? ((widget.fillColor.computeLuminance() > 0.179)
-                        ? Colors.black
-                        : Colors.white)
-                    .withOpacity(0.3)
-                : Colors.transparent,
-          ),
-          child: widget.isSelected
-              ? const Center(
-                  child: Icon(
-                    Icons.check,
-                    color: Colors.white,
-                    size: 16,
-                  ),
-                )
-              : const SizedBox(),
-        ),
-      ),
     );
   }
 }

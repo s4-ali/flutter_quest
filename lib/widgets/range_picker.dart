@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class AppRangePicker extends StatefulWidget {
   final void Function(double) onChanged;
+  final double min;
+  final double max;
+  final double stepSize;
 
-  const AppRangePicker({super.key, required this.onChanged});
+
+  const AppRangePicker(
+      {super.key, required this.onChanged, this.min = 0, this.max = 100, this.stepSize = 1});
 
   @override
   State<AppRangePicker> createState() => _AppRangePickerState();
@@ -15,12 +21,18 @@ class _AppRangePickerState extends State<AppRangePicker> {
   bool hovering = false;
 
   @override
+  void initState() {
+    selectedValue = widget.min;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Color thumbColor = hovering
         ? const Color(0xFFFFFFFF)
-        : selectedValue > 0
-        ? const Color(0xFF0099FF)
-        : const Color(0xFF808080);
+        : selectedValue > widget.min
+            ? const Color(0xFF0099FF)
+            : const Color(0xFF808080);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -38,30 +50,28 @@ class _AppRangePickerState extends State<AppRangePicker> {
               thumbColor = const Color(0xFF808080);
             });
           },
-          child: SliderTheme(
-            data: SliderTheme.of(context).copyWith(
-              trackHeight: 2,
-              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
-              overlayColor: Colors.red,
+          child: SfSlider(
+            onChanged: (value) {
+              selectedValue = double.parse(value.toStringAsFixed(2));
+              widget.onChanged(selectedValue);
+            },
+            min: widget.min,
+            max: widget.max,
+            value: selectedValue,
+            activeColor: const Color(0xFFFFFFFF),
+            inactiveColor: const Color(0xFF35363A),
+            trackShape: const SfTrackShape(),
+            interval: 10,
+            showDividers: true,
+            stepSize: 1,
+            dividerShape: const SfDividerShape(),
+
+            thumbIcon: Icon(
+              Icons.circle,
+              size: 20,
+              color: thumbColor,
             ),
-            child: SizedBox(
-              width: 250,
-              child: Slider(
-                activeColor: const Color(0xFFFFFFFF),
-                inactiveColor: const Color(0xFF808080),
-                secondaryActiveColor: Colors.red,
-                thumbColor: thumbColor,
-                secondaryTrackValue: 1,
-                value: selectedValue.toDouble(),
-                onChanged: (value) {
-                  double myValue = double.parse(value.toStringAsFixed(2));
-                  selectedValue = myValue;
-                  widget.onChanged(myValue);
-                },
-                min: 0,
-                max: 100,
-              ),
-            ),
+            thumbShape: const SfThumbShape(),
           ),
         ),
         SizedBox(

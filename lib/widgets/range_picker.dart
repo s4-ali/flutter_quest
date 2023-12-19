@@ -34,9 +34,8 @@ class _AppRangePickerState extends State<AppRangePicker> {
   Widget build(BuildContext context) {
     Color thumbColor = hovering
         ? const Color(0xFFFFFFFF)
-        : selectedValue > widget.min
-            ? const Color(0xFF0099FF)
-            : const Color(0xFF808080);
+        : selectedValue == widget.min
+            ? const Color(0xFF808080) : const Color(0xFF0099FF);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -62,19 +61,13 @@ class _AppRangePickerState extends State<AppRangePicker> {
             min: widget.min,
             max: widget.max,
             value: selectedValue,
-            activeColor: const Color(0xFFFFFFFF),
+            activeColor: thumbColor,
             inactiveColor: const Color(0xFF35363A),
             trackShape: _SfTrackShape(),
             interval: 10,
             showDividers: true,
-            stepSize: 1,
+            stepSize: widget.stepSize,
             dividerShape: _DividerShape(),
-            thumbIcon: Icon(
-              Icons.circle,
-              size: 20,
-              color: thumbColor,
-            ),
-            thumbShape:  _SfThumbShape(),
 
           ),
         ),
@@ -110,10 +103,20 @@ class _SfTrackShape extends SfTrackShape {
         required Paint? inactivePaint,
         required Paint? activePaint,
         required TextDirection textDirection}) {
+
+    bool isActive;
+
+    switch (textDirection) {
+      case TextDirection.ltr:
+        isActive = offset.dx <= thumbCenter!.dx;
+        break;
+      case TextDirection.rtl:
+        isActive = offset.dx >= thumbCenter!.dx;
+        break;
+    }
+
     Paint paint = Paint()
-      ..color = themeData.activeTrackColor!
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 0;
+      ..color = isActive ? const Color(0xFFFFFFFF): const Color(0xFF35363A);
     super.paint(context, offset, thumbCenter, startThumbCenter, endThumbCenter,
         parentBox: parentBox,
         themeData: themeData,
@@ -121,33 +124,6 @@ class _SfTrackShape extends SfTrackShape {
         inactivePaint: inactivePaint,
         activePaint: paint,
         textDirection: textDirection);
-  }
-}
-
-class _SfThumbShape extends SfThumbShape {
-  @override
-  void paint(PaintingContext context, Offset center,
-      {required RenderBox parentBox,
-        required RenderBox? child,
-        required themeData,
-        SfRangeValues? currentValues,
-        dynamic currentValue,
-        required Paint? paint,
-        required Animation<double> enableAnimation,
-        required TextDirection textDirection,
-        required SfThumb? thumb}) {
-    final Path path = Path();
-
-    path.moveTo(center.dx, center.dy);
-    path.lineTo(center.dx + 10, center.dy - 15);
-    path.lineTo(center.dx - 10, center.dy - 15);
-    path.close();
-    context.canvas.drawPath(
-        path,
-        Paint()
-          ..color = themeData.thumbColor!
-          ..style = PaintingStyle.fill
-          ..strokeWidth = 2);
   }
 }
 
@@ -174,10 +150,10 @@ class _DividerShape extends SfDividerShape {
     }
 
     context.canvas.drawRect(
-        Rect.fromCenter(center: center, width: 2.0, height: 5.0),
+        Rect.fromCenter(center: center, width: 2.0, height: 7.0),
         Paint()
           ..isAntiAlias = true
           ..style = PaintingStyle.fill
-          ..color = isActive ? themeData.activeTrackColor! : Colors.white);
+          ..color = isActive ? const Color(0xFFFFFFFF): const Color(0xFF35363A));
   }
 }

@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class AppRangePicker extends StatefulWidget {
   final void Function(double) onChanged;
+  final double min;
+  final double max;
+  final double stepSize;
 
-  const AppRangePicker({super.key, required this.onChanged});
+  const AppRangePicker({
+    super.key,
+    required this.onChanged,
+    this.min = 0,
+    this.max = 100,
+    this.stepSize = 1,
+  });
 
   @override
   State<AppRangePicker> createState() => _AppRangePickerState();
@@ -15,12 +25,17 @@ class _AppRangePickerState extends State<AppRangePicker> {
   bool hovering = false;
 
   @override
+  void initState() {
+    selectedValue = widget.min;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Color thumbColor = hovering
         ? const Color(0xFFFFFFFF)
-        : selectedValue > 0
-            ? const Color(0xFF0099FF)
-            : const Color(0xFF808080);
+        : selectedValue == widget.min
+        ? const Color(0xFF808080) : const Color(0xFF0099FF);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -38,30 +53,22 @@ class _AppRangePickerState extends State<AppRangePicker> {
               thumbColor = const Color(0xFF808080);
             });
           },
-          child: SliderTheme(
-            data: SliderTheme.of(context).copyWith(
-              trackHeight: 2,
-              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
-              overlayColor: Colors.red,
-            ),
-            child: SizedBox(
-              width: 250,
-              child: Slider(
-                activeColor: const Color(0xFFFFFFFF),
-                inactiveColor: const Color(0xFF808080),
-                secondaryActiveColor: Colors.red,
-                thumbColor: thumbColor,
-                secondaryTrackValue: 1,
-                value: selectedValue.toDouble(),
-                onChanged: (value) {
-                  double myValue = double.parse(value.toStringAsFixed(2));
-                  selectedValue = myValue;
-                  widget.onChanged(myValue);
-                },
-                min: 0,
-                max: 100,
-              ),
-            ),
+          child: SfSlider(
+            onChanged: (value) {
+              selectedValue = double.parse(value.toStringAsFixed(2));
+              widget.onChanged(selectedValue);
+            },
+            min: widget.min,
+            max: widget.max,
+            value: selectedValue,
+            activeColor: thumbColor,
+            inactiveColor: const Color(0xFF35363A),
+            trackShape: _SfTrackShape(),
+            interval: 10,
+            showDividers: true,
+            stepSize: widget.stepSize,
+            dividerShape: _DividerShape(),
+
           ),
         ),
         SizedBox(
@@ -74,14 +81,79 @@ class _AppRangePickerState extends State<AppRangePicker> {
               widget.onChanged(
                 double.parse(myValue.toStringAsFixed(2)),
               );
-              selectedValue = double.parse(
-                myValue.toStringAsFixed(2),
-              );
+              selectedValue = double.parse(myValue.toStringAsFixed(2));
             },
             controller: TextEditingController(text: selectedValue.toString()),
           ),
         ),
       ],
     );
+  }
+}
+
+class _SfTrackShape extends SfTrackShape {
+  @override
+  void paint(PaintingContext context, Offset offset, Offset? thumbCenter,
+      Offset? startThumbCenter, Offset? endThumbCenter,
+      {required RenderBox parentBox,
+        required themeData,
+        SfRangeValues? currentValues,
+        dynamic currentValue,
+        required Animation<double> enableAnimation,
+        required Paint? inactivePaint,
+        required Paint? activePaint,
+        required TextDirection textDirection}) {
+
+    bool isActive;
+
+    switch (textDirection) {
+      case TextDirection.ltr:
+        isActive = offset.dx <= thumbCenter!.dx;
+        break;
+      case TextDirection.rtl:
+        isActive = offset.dx >= thumbCenter!.dx;
+        break;
+    }
+
+    Paint paint = Paint()
+      ..color = isActive ? const Color(0xFFFFFFFF): const Color(0xFF35363A);
+    super.paint(context, offset, thumbCenter, startThumbCenter, endThumbCenter,
+        parentBox: parentBox,
+        themeData: themeData,
+        enableAnimation: enableAnimation,
+        inactivePaint: inactivePaint,
+        activePaint: paint,
+        textDirection: textDirection);
+  }
+}
+
+class _DividerShape extends SfDividerShape {
+  @override
+  void paint(PaintingContext context, Offset center, Offset? thumbCenter,
+      Offset? startThumbCenter, Offset? endThumbCenter,
+      {required RenderBox parentBox,
+        required themeData,
+        SfRangeValues? currentValues,
+        dynamic currentValue,
+        required Paint? paint,
+        required Animation<double> enableAnimation,
+        required TextDirection textDirection}) {
+    bool isActive;
+
+    switch (textDirection) {
+      case TextDirection.ltr:
+        isActive = center.dx <= thumbCenter!.dx;
+        break;
+      case TextDirection.rtl:
+        isActive = center.dx >= thumbCenter!.dx;
+        break;
+    }
+
+    context.canvas.drawRect(
+        Rect.fromCenter(center: center, width: 2.0, height: 7.0),
+        Paint()
+          ..isAntiAlias = true
+          ..style = PaintingStyle.fill
+          ..color = isActive ? const Color(0xFFFFFFFF): const Color(0xFF35363A));
   }
 }

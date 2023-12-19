@@ -35,6 +35,9 @@ class _Matrix4FieldState extends State<_Matrix4Field> {
   bool openOffset = false;
   bool openScale = false;
   bool openSkew = false;
+  bool flipHorizontal = false;
+  bool flipVertical = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -81,21 +84,36 @@ class _Matrix4FieldState extends State<_Matrix4Field> {
         openSkew ? _SkewProperty(onChange: widget.onChanged) : const SizedBox(),
         _Matrix4Properties(
           name: "Flip Horizontal",
-          onTap: (v) {
-            widget.onChanged(
-              Matrix4.diagonal3Values(-1, 1, 1),
-            );
+          onTap: (value) {
+            if (value == true) {
+              widget.onChanged(
+                Matrix4.diagonal3Values(-1, 1, 1),
+              );
+            }
+            else{
+              widget.onChanged(
+                Matrix4.diagonal3Values(0, 0, 0),
+              );
+            }
           },
-          iconPath: "flipHorizontal.svg",
+          iconPath: "assets/flipHorizontal.svg",
         ),
         _Matrix4Properties(
           name: "Flip Vertical",
-          onTap: (v) {
-            widget.onChanged(
-              Matrix4.identity()..scale(1.0, -1.0),
-            );
+          onTap: (value) {
+            if (value == true) {
+              widget.onChanged(
+                Matrix4.identity()
+                  ..scale(1.0, -1.0),
+              );
+            }
+            else{
+              widget.onChanged(
+                Matrix4.identity()..scale(0.0, 0.0, 0.0),
+              );
+            }
           },
-          iconPath: "flipVertical.svg",
+          iconPath: "assets/flipVertical.svg",
         ),
       ],
     );
@@ -244,7 +262,7 @@ class _Matrix4PropertiesState extends State<_Matrix4Properties> {
   @override
   Widget build(BuildContext context) {
     String path =
-        widget.iconPath ?? (selected ? "downArrow.svg" : "rightArrow.svg");
+        widget.iconPath ?? (selected ? "assets/downArrow.svg" : "assets/rightArrow.svg");
     Color color = hovering || selected
         ? const Color(0xFFFFFFFF)
         : const Color(0xFF808080);

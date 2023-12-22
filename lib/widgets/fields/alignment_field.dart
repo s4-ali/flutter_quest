@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/utils/extensions.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 
@@ -89,25 +90,27 @@ class _AlignmentFieldItemState extends State<_AlignmentFieldItem> {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor =
-        widget.isSelected ? const Color(0xFF0099FF) : Colors.transparent;
-    final borderColor = widget.isSelected
-        ? Colors.transparent
-        : isHovering
-            ? const Color(0xFF0099FF)
-            : const Color(0xFF35363A);
-    final decoration = BoxDecoration(
-      color: backgroundColor,
-      border: Border.all(
-        color: borderColor,
-        width: 1,
-      ),
-      borderRadius: const BorderRadius.all(Radius.circular(4)),
-    );
-
-    final textColor = widget.isSelected || isHovering
-        ? const Color(0xFFFFFFFF)
-        : const Color(0xFF808080);
+    BoxDecoration decoration;
+    Color textColor;
+    if (widget.isSelected) {
+      decoration = BoxDecoration(
+        color: context.colorScheme.primary,
+        borderRadius: const BorderRadius.all(Radius.circular(4)),
+      );
+      textColor = context.colorScheme.onPrimary;
+    } else if (isHovering) {
+      decoration = BoxDecoration(
+        color: context.colorScheme.primaryContainer,
+        borderRadius: const BorderRadius.all(Radius.circular(4)),
+      );
+      textColor = context.colorScheme.onPrimaryContainer;
+    } else {
+      decoration = const BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+      );
+      textColor = context.colorScheme.onSurface;
+    }
 
     return InkWell(
       hoverColor: Colors.transparent,

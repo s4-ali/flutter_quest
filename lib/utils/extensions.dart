@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 extension ColorExtension on Color {
   bool isThe(Color color) {
@@ -12,6 +13,8 @@ extension ThemeExtension on BuildContext {
   TextTheme get textTheme => theme.textTheme;
 
   ColorScheme get colorScheme => theme.colorScheme;
+
+  DeviceScreenType get deviceScreenType => getDeviceType(MediaQuery.of(this).size);
 }
 
 extension SwitchThemeExtension on ValueNotifier<ThemeMode> {
@@ -30,4 +33,14 @@ extension SwitchThemeExtension on ValueNotifier<ThemeMode> {
   bool get isLight => value == ThemeMode.light;
 
   bool get isDark => value == ThemeMode.dark;
+}
+
+extension DeviceTypeExtension on DeviceScreenType {
+  bool get isMobile => this == DeviceScreenType.mobile;
+
+  bool get isTablet => this == DeviceScreenType.tablet;
+
+  bool get isDesktop => this == DeviceScreenType.desktop;
+
+  bool get isWatch => this == DeviceScreenType.watch;
 }

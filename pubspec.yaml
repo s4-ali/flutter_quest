@@ -16,6 +16,7 @@ dependencies:
   responsive_builder: ^0.7.0
   flutter_svg: ^2.0.9
   flex_color_picker: ^3.3.0
+  flutter_staggered_grid_view: ^0.7.0
 
 dev_dependencies:
   flutter_test:
@@ -65,3 +66,10 @@ flutter:
     - assets/spaceBetween.svg
     - assets/leftToRight.svg
     - assets/rightToLeft.svg
+    - assets/boxFitScaleDown.svg
+    - assets/boxFitNone.svg
+    - assets/boxFitHeightFit.svg
+    - assets/boxFitWidthFit.svg
+    - assets/boxFitCover.svg
+    - assets/boxFitContain.svg
+    - assets/boxFitFill.svg

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/utils/extensions.dart';
+import 'package:flutter_quest/widgets/animated_card.dart';
+import 'package:flutter_quest/widgets/app_bar.dart';
 import 'package:flutter_quest/widgets/fields/alignment_field.dart';
 import 'package:flutter_quest/widgets/fields/axis_field.dart';
 import 'package:flutter_quest/widgets/fields/boolean_field.dart';
@@ -21,46 +24,79 @@ import 'package:flutter_quest/widgets/fields/string_field.dart';
 import 'package:flutter_quest/widgets/fields/text_direction_field.dart';
 import 'package:flutter_quest/widgets/fields/text_style_field.dart';
 import 'package:flutter_quest/widgets/fields/vertical_direction_field.dart';
+import 'package:flutter_quest/widgets/theme_colors.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class PropertiesList extends StatelessWidget {
   const PropertiesList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.blueAccent,
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 40.0),
-          child: SingleChildScrollView(
-            child: Wrap(
-              spacing: 12.0,
-              runSpacing: 12.0,
+    const items = [
+      AlignmentPreviewer(),
+      AxisPreviewer(),
+      BooleanPreviewer(),
+      BorderRadiusPreviewer(),
+      BoxBorderPreviewer(),
+      BoxFitPreviewer(),
+      ClipPreviewer(),
+      ColorPreviewer(),
+      CrossAxisAlignmentPreviewer(),
+      CurvePreviewer(),
+      IconDataPreviewer(),
+      ListPreviewer(),
+      MainAxisAlignmentPreviewer(),
+      MainAxisSizePreviewer(),
+      Matrix4Previewer(),
+      NumberFieldPreviewer(),
+      NumberRangePreviewer(),
+      ShapeBorderPreviewer(),
+      StringFieldPreviewer(),
+      TextDirectionPreviewer(),
+      TextStylePreviewer(),
+      VerticalDirectionPreviewer(),
+    ];
+
+    final rows =
+        ((MediaQuery.of(context).size.width - 32) / (350 + 16)).floor();
+
+    final deviceType = context.deviceScreenType;
+
+    final content = Center(
+      child: SizedBox(
+        width: ((350 + 16) * rows).toDouble(),
+        child: MasonryGridView.count(
+          crossAxisCount: rows == 0 ? 1 : rows,
+          mainAxisSpacing: 16,
+          crossAxisSpacing: 16,
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return items[index];
+          },
+        ),
+      ),
+    );
+    return Scaffold(
+      appBar: const CustomAppBar(
+        title: "Properties List",
+      ),
+      body: deviceType.isMobile
+          ? Column(
               children: [
-                AlignmentPreviewer(),
-                AxisPreviewer(),
-                BooleanPreviewer(),
-                BorderRadiusPreviewer(),
-                BoxBorderPreviewer(),
-                BoxFitPreviewer(),
-                ClipPreviewer(),
-                ColorPreviewer(),
-                CrossAxisAlignmentPreviewer(),
-                CurvePreviewer(),
-                IconDataPreviewer(),
-                ListPreviewer(),
-                MainAxisAlignmentPreviewer(),
-                MainAxisSizePreviewer(),
-                Matrix4Previewer(),
-                NumberFieldPreviewer(),
-                NumberRangePreviewer(),
-                ShapeBorderPreviewer(),
-                StringFieldPreviewer(),
-                TextDirectionPreviewer(),
-                TextStylePreviewer(),
-                VerticalDirectionPreviewer(),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  margin: const EdgeInsets.only(top: 8),
+                  decoration: ShapeDecoration(
+                    color: context.colorScheme.tertiaryContainer,
+                    shape: const StadiumBorder(),
+                  ),
+                  child: const ThemeColors(),
+                ),
+                Expanded(child: content),
               ],
-            ),
-          ),
-        ));
+            )
+          : content,
+    );
   }
 }

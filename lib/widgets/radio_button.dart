@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/utils/extensions.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AppRadioButton extends StatefulWidget {
@@ -24,23 +25,22 @@ class _AppRadioButtonState extends State<AppRadioButton> {
 
   @override
   Widget build(BuildContext context) {
+    Color svgColor = widget.isSelected
+        ? context.colorScheme.onPrimary
+        : isHovering
+            ? context.colorScheme.onPrimaryContainer
+            : context.colorScheme.onSurface;
 
-    Color svgColor = widget.isSelected || isHovering
-        ? const Color(0xFFFFFFFF)
-        : const Color(0xFF808080);
-    Color borderColor = isHovering ? const Color(0xFF0099FF) : Colors.transparent;
     Color backgroundColor = widget.isSelected
-        ? const Color(0xFF0099FF)
-        : Colors.transparent;
+        ? context.colorScheme.primary
+        : isHovering
+            ? context.colorScheme.primaryContainer
+            : Colors.transparent;
 
     BoxDecoration boxDecoration = BoxDecoration(
       color: backgroundColor,
       borderRadius: const BorderRadius.all(
         Radius.circular(4),
-      ),
-      border: Border.all(
-        width: 1,
-        color: borderColor,
       ),
     );
 

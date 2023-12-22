@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/utils/extensions.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 
 import '../text_field.dart';
 
 class NumberField extends PropertyWidget<num> {
-
   const NumberField({
     super.key,
     required super.onChanged,
@@ -17,7 +17,7 @@ class NumberField extends PropertyWidget<num> {
     return AppTextField(
       onChanged: (text) {
         final number = num.tryParse(text);
-        if(number != null) {
+        if (number != null) {
           onChanged(number);
         }
       },
@@ -25,10 +25,10 @@ class NumberField extends PropertyWidget<num> {
         onPressed: () {
           onChanged(double.infinity);
         },
-        icon: const Icon(
+        icon: Icon(
           Icons.all_inclusive,
-          color: Colors.white,
           size: 24,
+          color: value.isInfinite ? context.colorScheme.primary : null,
         ),
       ),
       controller: TextEditingController(

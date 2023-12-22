@@ -11,23 +11,11 @@ class BooleanField extends PropertyWidget<bool> {
 
   @override
   Widget build(BuildContext context) {
-    return Transform.scale(
-      scale: 0.7,
-      child: Switch(
-        trackOutlineColor: MaterialStateProperty.all(Colors.transparent),
-        thumbIcon: MaterialStateProperty.all(const Icon(
-          Icons.circle_sharp,
-          color: Colors.transparent,
-        )),
-        activeColor: const Color(0xFFFFFFFF),
-        activeTrackColor: const Color(0xFF0099FF),
-        inactiveTrackColor: const Color(0xFF35363A),
-        inactiveThumbColor: const Color(0xFF808080),
-        value: value,
-        onChanged: (value) {
-          onChanged(value);
-        },
-      ),
+    return Switch(
+      value: value,
+      onChanged: (value) {
+        onChanged(value);
+      },
     );
   }
 }

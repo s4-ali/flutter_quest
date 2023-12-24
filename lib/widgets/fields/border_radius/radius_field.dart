@@ -77,6 +77,7 @@ class _RadiusFieldState extends State<RadiusField> {
         ),
         if (borderRadiusCornerType.isCircular)
           BorderRadiusTextField(
+            label: "Radius",
             value: widget.value.x,
             onChanged: (value) => widget.onChanged(Radius.circular(value)),
           )
@@ -85,7 +86,7 @@ class _RadiusFieldState extends State<RadiusField> {
             children: [
               Expanded(
                 child: BorderRadiusTextField(
-                  prefixText: "X",
+                  label: "X",
                   value: xRadius,
                   onChanged: (value) {
                     xRadius = value;
@@ -98,7 +99,7 @@ class _RadiusFieldState extends State<RadiusField> {
               ),
               Expanded(
                 child: BorderRadiusTextField(
-                  prefixText: "Y",
+                  label: "Y",
                   value: yRadius,
                   onChanged: (value) {
                     yRadius = value;

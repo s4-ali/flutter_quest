@@ -13,7 +13,7 @@ class StringField extends PropertyWidget<String> {
   @override
   Widget build(BuildContext context) {
     return AppTextField(
-      hintText: "Value",
+      label: "Value",
       onChanged: onChanged,
       controller: TextEditingController(
         text: value,

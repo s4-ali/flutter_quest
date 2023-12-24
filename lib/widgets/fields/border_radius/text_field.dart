@@ -4,14 +4,14 @@ import 'package:flutter_quest/widgets/text_field.dart';
 
 class BorderRadiusTextField extends StatelessWidget {
   final Function(double) onChanged;
-  final String? prefixText;
+  final String? label;
   final double value;
 
   const BorderRadiusTextField({
     super.key,
     required this.onChanged,
     required this.value,
-    this.prefixText,
+    this.label,
   });
 
   @override
@@ -21,7 +21,7 @@ class BorderRadiusTextField extends StatelessWidget {
         onChanged(double.parse(value));
       },
       controller: TextEditingController(text: value.toStringAsFixed(2),),
-      prefix: prefixText == null ? null : Text("$prefixText  "),
+      label: label,
     );
   }
 }

@@ -15,6 +15,7 @@ class BorderRadiusCircular extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BorderRadiusTextField(
+      label: "Radius",
       value: value.bottomRight.x,
       onChanged: (value) => onChanged(BorderRadius.circular(value)),
     );

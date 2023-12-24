@@ -41,118 +41,44 @@ class ColorField extends PropertyWidget<Color> {
   }
 }
 
-class _ColorField extends StatelessWidget {
+class _ColorField extends StatefulWidget {
   final void Function(Color) onChanged;
   final Color value;
 
-  _ColorField({
+  const _ColorField({
     required this.onChanged,
     required this.value,
   });
 
-  final TextEditingController opacityTextEditingController =
-      TextEditingController(text: "100");
+  @override
+  State<_ColorField> createState() => _ColorFieldState();
+}
+
+class _ColorFieldState extends State<_ColorField> {
+  late TextEditingController opacityTextEditingController;
+
+  @override
+  void initState() {
+    opacityTextEditingController =
+        TextEditingController(text: "${(widget.value.opacity * 100).toInt()}");
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final textFieldValue =
-        value.value.toRadixString(16).substring(2).toUpperCase();
+    final textFieldValue = widget.value.hex;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: ColorOptionBox(
-                fillColor: value,
-                onUpdated: (color) async {
-                  final newColor = await showColorPickerDialog(
-                    context,
-                    color,
-                    pickersEnabled: {
-                      ColorPickerType.wheel: true,
-                      ColorPickerType.accent: false,
-                      ColorPickerType.primary: false,
-                    },
-                    title: const Padding(
-                      padding: EdgeInsets.only(left: 8),
-                      child: Text(
-                        "Pick Color",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    enableShadesSelection: false,
-                    padding: const EdgeInsets.only(
-                        bottom: 32, left: 16, right: 16, top: 16),
-                    actionButtons: const ColorPickerActionButtons(
-                      okButton: true,
-                      closeButton: true,
-                      dialogActionButtons: false,
-                      dialogActionIcons: true,
-                    ),
-                    backgroundColor: const Color(0xFF000000),
-                  );
-                  onChanged(newColor);
-                },
-              ),
+            buildColorBox(context),
+            buildColorTextField(textFieldValue),
+            const SizedBox(
+              width: 8,
             ),
-            Expanded(
-              child: SizedBox(
-                height: 30,
-                child: AppTextField(
-                  controller: TextEditingController(text: textFieldValue),
-                  contentPadding: const EdgeInsets.only(left: 8),
-                  suffixIcon: Container(
-                    width: 65,
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        left: BorderSide(
-                          width: 1,
-                          color: Color(0xff35363A),
-                        ),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 7.5),
-                      child: TextField(
-                        controller: opacityTextEditingController,
-                        onChanged: (value) {
-                          try {
-                            final intValue = int.parse(value);
-                            if (intValue > 100) {
-                              opacityTextEditingController.text = "100";
-                              return;
-                            }
-                            onChanged(this.value.withOpacity(intValue / 100));
-                          } catch (e) {
-                            opacityTextEditingController.text = "100";
-                          }
-                        },
-                        textAlign: TextAlign.right,
-                        textAlignVertical: TextAlignVertical.center,
-                        maxLines: 1,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          isDense: true,
-                          suffix: Padding(
-                            padding: EdgeInsets.only(right: 8),
-                            child: Text("%"),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  onChanged: (value) => onChanged(
-                    Color(int.parse("0xFF$value")),
-                  ),
-                ),
-              ),
-            ),
+            buildOpacityTextField(),
           ],
         ),
         const Padding(
@@ -166,14 +92,103 @@ class _ColorField extends StatelessWidget {
               padding: const EdgeInsets.all(2.0),
               child: ColorOptionBox(
                 fillColor: _commonColorList[index],
-                isSelected: _commonColorList[index] == value,
-                onUpdated: onChanged,
+                isSelected: _commonColorList[index] == widget.value,
+                onUpdated: widget.onChanged,
               ),
             ),
           ),
         ),
       ],
     );
+  }
+
+  SizedBox buildOpacityTextField() {
+    return SizedBox(
+            width: 85,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 0),
+              child: AppTextField(
+                label: "Opacity",
+                controller: opacityTextEditingController,
+                suffix: const Text("%"),
+                maxLength: 3,
+                onChanged: (value) {
+                  try {
+                    final intValue = int.parse(value);
+                    if (intValue > 100) {
+                      opacityTextEditingController.text = "100";
+                      return;
+                    }
+                    widget
+                        .onChanged(widget.value.withOpacity(intValue / 100));
+                  } catch (e) {
+                    opacityTextEditingController.text = "100";
+                  }
+                },
+                textAlign: TextAlign.center,
+              ),
+            ),
+          );
+  }
+
+  Expanded buildColorTextField(String textFieldValue) {
+    return Expanded(
+            child: AppTextField(
+              label: "Color",
+              maxLength: 6,
+              controller: TextEditingController(text: textFieldValue),
+              onChanged: (value) {
+                if(value.length != 6) return;
+                final color = Color(int.parse(
+                    "0x${widget.value.hexAlpha.substring(0, 2)}$value"));
+                widget.onChanged(
+                  color,
+                );
+              },
+            ),
+          );
+  }
+
+  Padding buildColorBox(BuildContext context) {
+    return Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: ColorOptionBox(
+              fillColor: widget.value,
+              onUpdated: (color) => _showColorPickerDialog(context, color),
+            ),
+          );
+  }
+
+  void _showColorPickerDialog(BuildContext context, Color color) async {
+    final newColor = await showColorPickerDialog(
+      context,
+      color,
+      pickersEnabled: {
+        ColorPickerType.wheel: true,
+        ColorPickerType.accent: false,
+        ColorPickerType.primary: false,
+      },
+      title: const Padding(
+        padding: EdgeInsets.only(left: 8),
+        child: Text(
+          "Pick Color",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      enableShadesSelection: false,
+      padding: const EdgeInsets.only(bottom: 32, left: 16, right: 16, top: 16),
+      actionButtons: const ColorPickerActionButtons(
+        okButton: true,
+        closeButton: true,
+        dialogActionButtons: false,
+        dialogActionIcons: true,
+      ),
+      backgroundColor: const Color(0xFF000000),
+    );
+    widget.onChanged(newColor);
   }
 }
 

@@ -3,23 +3,27 @@ import 'package:flutter/material.dart';
 class AppTextField extends StatefulWidget {
   final Function(String) onChanged;
   final Widget? suffixIcon;
-  final String? hintText;
+  final Widget? suffix;
+  final String? label;
   final TextEditingController controller;
   final TextInputType? keyboardType;
   final Widget? prefix;
   final TextAlign? textAlign;
   final EdgeInsets? contentPadding;
+  final int? maxLength;
 
   const AppTextField({
     super.key,
     required this.onChanged,
     this.suffixIcon,
+    this.suffix,
     required this.controller,
     this.keyboardType,
-    this.hintText,
+    this.label,
     this.prefix,
     this.textAlign,
     this.contentPadding,
+    this.maxLength,
   });
 
   @override
@@ -38,8 +42,11 @@ class _AppTextFieldState extends State<AppTextField> {
         prefix: widget.prefix,
         contentPadding: widget.contentPadding,
         suffixIcon: widget.suffixIcon,
-        hintText: widget.hintText,
+        suffix: widget.suffix,
+        counterText: "",
+        label: widget.label == null?null:Text(widget.label!),
       ),
+      maxLength: widget.maxLength,
       controller: widget.controller,
       keyboardType: widget.keyboardType,
       onChanged: widget.onChanged,

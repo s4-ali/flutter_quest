@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class AppDropDownButton extends StatefulWidget {
-  final void Function(dynamic) onChanged;
-  final dynamic selectedOption;
-  final List<DropdownMenuItem> items;
+class AppDropDownButton<T> extends StatefulWidget {
+  final void Function(T) onChanged;
+  final T selectedOption;
+  final List<DropdownMenuItem<T>> items;
   final double? width;
 
   const AppDropDownButton({
@@ -15,11 +15,11 @@ class AppDropDownButton extends StatefulWidget {
   });
 
   @override
-  State<AppDropDownButton> createState() => _AppDropDownButtonState();
+  State<AppDropDownButton<T>> createState() => _AppDropDownButtonState();
 }
 
-class _AppDropDownButtonState extends State<AppDropDownButton> {
-  dynamic _selectedOption;
+class _AppDropDownButtonState<T> extends State<AppDropDownButton<T>> {
+  late T _selectedOption;
   bool isHovered = false;
 
   @override
@@ -30,49 +30,25 @@ class _AppDropDownButtonState extends State<AppDropDownButton> {
 
   @override
   Widget build(BuildContext context) {
-    Border buttonBorder = Border.all(
-      width: 1.0,
-      color: isHovered ? const Color(0xFF0099FF) : const Color(0xFF35363A),
-    );
-
-    return MouseRegion(
-      onEnter: (v) {
+    return DropdownButtonFormField<T>(
+      icon: const Icon(Icons.keyboard_arrow_down),
+      // iconSize: 12,
+      // padding: const EdgeInsets.only(right: 10),
+      // isExpanded: true,
+      // focusColor: Colors.transparent,
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+      ),
+      alignment: Alignment.centerLeft,
+      value: _selectedOption,
+      onChanged: (value) {
+        if(value == null) return;
         setState(() {
-          isHovered = true;
+          _selectedOption = value;
         });
+        widget.onChanged(value);
       },
-      onExit: (v) {
-        setState(() {
-          isHovered = false;
-        });
-      },
-      child: Container(
-          height: 30,
-          width: widget.width?? 155,
-          padding: const EdgeInsets.only(left: 5),
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-            border: buttonBorder,
-          ),
-          child: DropdownButton(
-            icon: const Icon(Icons.keyboard_arrow_down),
-            iconSize: 12,
-            padding: const EdgeInsets.only(right: 10),
-            iconEnabledColor: const Color(0xFFFFFFFF),
-            isExpanded: true,
-            focusColor: Colors.transparent,
-            underline: const SizedBox(),
-            alignment: Alignment.centerLeft,
-            value: _selectedOption,
-            onChanged: (value) {
-              setState(() {
-                _selectedOption = value;
-              });
-              widget.onChanged(value);
-            },
-            items: widget.items,
-          )),
+      items: widget.items,
     );
   }
 }

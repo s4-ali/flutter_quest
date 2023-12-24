@@ -32,10 +32,6 @@ class _AppDropDownButtonState<T> extends State<AppDropDownButton<T>> {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<T>(
       icon: const Icon(Icons.keyboard_arrow_down),
-      // iconSize: 12,
-      // padding: const EdgeInsets.only(right: 10),
-      // isExpanded: true,
-      // focusColor: Colors.transparent,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
       ),

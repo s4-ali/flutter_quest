@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 
+import '../dropdown_menu.dart';
+
 class IconDataField extends PropertyWidget<IconData> {
   const IconDataField({
     super.key,
@@ -32,119 +34,60 @@ class _IconDataField extends StatefulWidget {
 }
 
 class _IconDataFieldState extends State<_IconDataField> {
-  final List<IconData> icons = [
-    Icons.access_alarm,
-    Icons.access_time,
-    Icons.add_alarm,
-    Icons.airplanemode_active,
-    Icons.bluetooth,
-    Icons.camera,
-    Icons.directions_bike,
-    Icons.email,
-    Icons.face,
-    Icons.golf_course,
-    Icons.headset,
-    Icons.image,
-    Icons.laptop,
-    Icons.account_balance_outlined,
-    Icons.pets,
-    Icons.shopping_cart,
-    Icons.star,
-    Icons.train,
-    Icons.videocam,
-    Icons.watch,
-    Icons.zoom_in,
-    Icons.wifi,
-    Icons.account_balance_sharp,
-    Icons.add_alert,
-  ];
+  final Map<IconData, String> icons = {
+    Icons.access_alarm: "Access Alarm",
+    Icons.access_time: "Access Time",
+    Icons.add_alarm: "Add Alarm",
+    Icons.airplanemode_active: "Airplane Mode Active",
+    Icons.bluetooth: "Bluetooth",
+    Icons.camera: "Camera",
+    Icons.directions_bike: "Directions Bike",
+    Icons.email: "Email",
+    Icons.face: "Face",
+    Icons.golf_course: "Gold Course",
+    Icons.headset: "Headset",
+    Icons.image: "Image",
+    Icons.laptop: "Laptop",
+    Icons.account_balance_outlined: "Account Balance",
+    Icons.pets: "Pets",
+    Icons.shopping_cart: "Shopping Card",
+    Icons.star: "Star",
+    Icons.train: "Train",
+    Icons.videocam: "Videocam",
+    Icons.watch: "Watch",
+    Icons.zoom_in: "Zoom in",
+    Icons.wifi: "Wifi",
+    Icons.account_balance_sharp: "Account Balance Sharp",
+    Icons.add_alert: "Add Alert",
+  };
 
   bool isHovering = false;
   bool openIcons = false;
-  IconData selectedIcon = Icons.select_all;
+  IconData selectedIcon = Icons.access_alarm;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        InkWell(
-          hoverColor: Colors.transparent,
-          onHover: (value) {
-            setState(() {
-              isHovering = value;
-            });
-          },
-          onTap: () {
-            setState(() {
-              openIcons = !openIcons;
-            });
-          },
-          child: Container(
-            height: 30,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              border: Border.all(
-                  color: Color(isHovering ? 0xff0099FF : 0xff35363A), width: 1),
-              borderRadius: const BorderRadius.all(Radius.circular(6)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        selectedIcon,
-                        size: 20,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(selectedIcon.toString()),
-                    ],
-                  ),
-                  const Icon(
-                    Icons.keyboard_arrow_down,
-                    size: 16,
-                  ),
-                ],
+    return SizedBox(
+      width: double.maxFinite,
+      child: AppDropDownMenu<IconData>(
+        selectedOption: selectedIcon,
+        leadingIcon: selectedIcon,
+        onChanged: (icon) {
+          setState(() {
+            selectedIcon = icon;
+            widget.onChanged(icon);
+          });
+        },
+        items: icons.keys
+            .map(
+              (e) => DropdownMenuEntry(
+                value: e,
+                leadingIcon: Icon(e),
+                label: icons[e]!,
               ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        openIcons
-            ? Container(
-                height: 297,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                    color: Color(0xFF35363A)),
-                child: GridView.builder(
-                  itemCount: 24,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return GridTile(
-                      child: Center(
-                        child: InkWell(
-                          onTap: () {
-                            widget.onChanged(icons[index]);
-                            selectedIcon = icons[index];
-                          },
-                          child: Icon(
-                            icons[index],
-                            color: Colors.white,
-                            size: 24,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              )
-            : const SizedBox(),
-      ],
+            )
+            .toList(),
+      ),
     );
   }
 }

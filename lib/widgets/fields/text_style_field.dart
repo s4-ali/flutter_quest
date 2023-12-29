@@ -23,6 +23,7 @@ class TextStylePreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<TextStyle>(
+      title: "Text Style",
       values: const [
         TextStyle(
             color: Colors.black, fontSize: 24, fontStyle: FontStyle.italic),

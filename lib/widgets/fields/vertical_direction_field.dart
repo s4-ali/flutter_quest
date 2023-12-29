@@ -40,6 +40,7 @@ class VerticalDirectionPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<VerticalDirection>(
+      title: "Vertical Direction",
       values: VerticalDirection.values,
       propertyBuilder: (onChanged, value) {
         return VerticalDirectionField(

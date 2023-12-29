@@ -28,6 +28,7 @@ class StringFieldPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<String>(
+      title: "String",
       values: const ["String: 1", "String: 2", "String: 3"],
       propertyBuilder: (onChanged, value) {
         return StringField(

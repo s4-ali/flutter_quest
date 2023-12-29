@@ -124,6 +124,7 @@ class BorderRadiusPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<BorderRadius>(
+      title: "Border Radius",
       values: [
         const BorderRadius.all(Radius.circular(30)),
         BorderRadius.circular(20),

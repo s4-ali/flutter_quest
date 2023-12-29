@@ -98,6 +98,7 @@ class IconDataPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<IconData>(
+      title: "Icon Data",
       values: const [
         Icons.favorite,
         Icons.circle,

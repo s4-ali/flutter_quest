@@ -50,6 +50,7 @@ class BoxFitPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<BoxFit>(
+      title: "Box Fit",
       values: BoxFit.values,
       propertyBuilder: (onChanged, value) {
         return BoxFitField(

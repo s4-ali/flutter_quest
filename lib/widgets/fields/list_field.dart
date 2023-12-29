@@ -70,13 +70,14 @@ class ListPreviewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PropertyPreviewer<dynamic>(
-      values: Axis.values,
+    return PropertyPreviewer<List<String>>(
+      title: "List",
+      values: const [["ABC", "DEF", "GHI"], ["JKL", "MNO", "PQR"], ["RST", "UVW", "XYZ"]],
       propertyBuilder: (onChanged, value) {
         return ListField(
           onChanged: onChanged,
           value: value,
-          values: [],
+          values: const [["ABC", "DEF", "GHI"], ["JKL", "MNO", "PQR"], ["RST", "UVW", "XYZ"]],
         );
       },
     );

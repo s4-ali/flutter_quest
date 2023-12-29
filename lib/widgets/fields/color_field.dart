@@ -104,59 +104,58 @@ class _ColorFieldState extends State<_ColorField> {
 
   SizedBox buildOpacityTextField() {
     return SizedBox(
-            width: 85,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 0),
-              child: AppTextField(
-                label: "Opacity",
-                controller: opacityTextEditingController,
-                suffix: const Text("%"),
-                maxLength: 3,
-                onChanged: (value) {
-                  try {
-                    final intValue = int.parse(value);
-                    if (intValue > 100) {
-                      opacityTextEditingController.text = "100";
-                      return;
-                    }
-                    widget
-                        .onChanged(widget.value.withOpacity(intValue / 100));
-                  } catch (e) {
-                    opacityTextEditingController.text = "100";
-                  }
-                },
-                textAlign: TextAlign.center,
-              ),
-            ),
-          );
+      width: 85,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 0),
+        child: AppTextField(
+          label: "Opacity",
+          controller: opacityTextEditingController,
+          suffix: const Text("%"),
+          maxLength: 3,
+          onChanged: (value) {
+            try {
+              final intValue = int.parse(value);
+              if (intValue > 100) {
+                opacityTextEditingController.text = "100";
+                return;
+              }
+              widget.onChanged(widget.value.withOpacity(intValue / 100));
+            } catch (e) {
+              opacityTextEditingController.text = "100";
+            }
+          },
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
   }
 
   Expanded buildColorTextField(String textFieldValue) {
     return Expanded(
-            child: AppTextField(
-              label: "Color",
-              maxLength: 6,
-              controller: TextEditingController(text: textFieldValue),
-              onChanged: (value) {
-                if(value.length != 6) return;
-                final color = Color(int.parse(
-                    "0x${widget.value.hexAlpha.substring(0, 2)}$value"));
-                widget.onChanged(
-                  color,
-                );
-              },
-            ),
+      child: AppTextField(
+        label: "Color",
+        maxLength: 6,
+        controller: TextEditingController(text: textFieldValue),
+        onChanged: (value) {
+          if (value.length != 6) return;
+          final color = Color(
+              int.parse("0x${widget.value.hexAlpha.substring(0, 2)}$value"));
+          widget.onChanged(
+            color,
           );
+        },
+      ),
+    );
   }
 
   Padding buildColorBox(BuildContext context) {
     return Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: ColorOptionBox(
-              fillColor: widget.value,
-              onUpdated: (color) => _showColorPickerDialog(context, color),
-            ),
-          );
+      padding: const EdgeInsets.only(right: 8),
+      child: ColorOptionBox(
+        fillColor: widget.value,
+        onUpdated: (color) => _showColorPickerDialog(context, color),
+      ),
+    );
   }
 
   void _showColorPickerDialog(BuildContext context, Color color) async {
@@ -198,6 +197,7 @@ class ColorPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<Color>(
+      title: "Color",
       values: const [
         Colors.red,
         Colors.blue,

@@ -26,6 +26,7 @@ class BooleanPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<bool>(
+      title: "Bool",
       values: const [true, false],
       propertyBuilder: (onChanged, value) {
         return BooleanField(

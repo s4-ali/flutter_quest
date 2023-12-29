@@ -45,6 +45,7 @@ class NumberFieldPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<num>(
+      title: "Number",
       values: const [56, 89, 456, 2, 754],
       propertyBuilder: (onChanged, value) {
         return NumberField(

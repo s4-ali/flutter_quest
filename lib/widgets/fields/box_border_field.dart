@@ -23,6 +23,7 @@ class BoxBorderPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<BoxBorder>(
+      title: "Box Border",
       values: [
         Border.all(color: Colors.black, width: 2.0),
         const Border(

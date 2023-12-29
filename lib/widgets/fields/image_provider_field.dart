@@ -23,6 +23,7 @@ class ImageProviderPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<ImageProvider>(
+      title: "Image Provider",
       values: const [
         AssetImage(''),
         NetworkImage(''),

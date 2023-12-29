@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/utils/constants.dart';
 import 'package:flutter_quest/utils/extensions.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -56,12 +57,14 @@ class _AppRadioButtonState extends State<AppRadioButton> {
           });
         },
         child: Container(
-          height: 30,
-          width: 30,
+          height: kElementHeightDense,
+          width: kElementHeightDense,
           decoration: boxDecoration,
           child: Center(
             child: SvgPicture.asset(
               widget.iconPath,
+              height: kElementHeightDense-10,
+              width: kElementHeightDense-10,
               colorFilter: ColorFilter.mode(
                 svgColor,
                 BlendMode.srcATop,

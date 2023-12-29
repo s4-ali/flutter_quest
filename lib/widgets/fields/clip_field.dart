@@ -23,6 +23,7 @@ class ClipPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<Clip>(
+      title: "Clip",
       values: Clip.values,
       propertyBuilder: (onChanged, value) {
         return ClipField(

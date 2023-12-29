@@ -24,6 +24,7 @@ class Matrix4Previewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<Matrix4>(
+      title: "Matrix4",
       values: [Matrix4.zero()],
       valueTitleBuilder: (val) => "Matrix4.zero()",
       propertyBuilder: (onChanged, value) {

@@ -77,6 +77,7 @@ class AlignmentPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<Alignment>(
+      title: "Alignment",
       values: values,
       propertyBuilder: (onChanged, value) {
         return AlignmentField(

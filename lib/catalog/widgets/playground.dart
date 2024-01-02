@@ -27,30 +27,32 @@ class PropertyPlayground extends StatelessWidget {
             "Four",
           ],
         );
-        final padding = provider.edgeInsetsField(id: 'padding', title: 'Padding', );
-        final margin = provider.edgeInsetsField(id: 'margin', title: 'Margin', );
 
         final color = isRed == null
             ? Colors.green
             : isRed
                 ? Colors.red
                 : Colors.blue;
-        final alignment = provider.alignmentField(id: "alignment", title: "Alignment");
+        final alignment =
+            provider.alignmentField(id: "alignment", title: "Alignment");
 
-        return Align(
-          alignment: alignment?? Alignment.center,
-          child: Container(
-            height: height,
-            width: width,
-            decoration: BoxDecoration(
-              color: color,
+        return (
+          widget: Align(
+            alignment: alignment ?? Alignment.center,
+            child: Container(
+              height: height,
+              width: width,
+              decoration: BoxDecoration(
+                color: color,
+              ),
+              child: text == null
+                  ? null
+                  : Center(
+                      child: Text(text),
+                    ),
             ),
-            child: text == null
-                ? null
-                : Center(
-                    child: Text(text),
-                  ),
           ),
+          code: "Playground code goes here...",
         );
       },
     );

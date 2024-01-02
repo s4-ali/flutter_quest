@@ -45,28 +45,31 @@ class SliderPropertyExplorer extends StatelessWidget {
             title: "allowedInteraction",
             values: SliderInteraction.values);
 
-        return Slider(
-          value: value ?? 0,
-          secondaryTrackValue: secondaryTrackValue,
-          onChanged: (val) {},
-          onChangeStart: (val) {},
-          onChangeEnd: (val) {},
-          min: min ?? 0.0,
-          max: max ?? 1.0,
-          divisions: divisions,
-          label: label,
-          activeColor: activeColor,
-          inactiveColor: inactiveColor,
-          secondaryActiveColor: secondaryActiveColor,
-          thumbColor: thumbColor,
-          overlayColor: MaterialStatePropertyAll<Color?>(overlayColor),
-          mouseCursor: mouseCursor,
-          semanticFormatterCallback: (val) {
-            return "String";
-          },
-          focusNode: FocusNode(),
-          autofocus: autofocus ?? false,
-          allowedInteraction: allowedInteraction,
+        return (
+          widget: Slider(
+            value: value ?? 0,
+            secondaryTrackValue: secondaryTrackValue,
+            onChanged: (val) {},
+            onChangeStart: (val) {},
+            onChangeEnd: (val) {},
+            min: min ?? 0.0,
+            max: max ?? 1.0,
+            divisions: divisions,
+            label: label,
+            activeColor: activeColor,
+            inactiveColor: inactiveColor,
+            secondaryActiveColor: secondaryActiveColor,
+            thumbColor: thumbColor,
+            overlayColor: MaterialStatePropertyAll<Color?>(overlayColor),
+            mouseCursor: mouseCursor,
+            semanticFormatterCallback: (val) {
+              return "String";
+            },
+            focusNode: FocusNode(),
+            autofocus: autofocus ?? false,
+            allowedInteraction: allowedInteraction,
+          ),
+          code: "Slider code goes here...",
         );
       },
     );

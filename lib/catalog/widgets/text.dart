@@ -59,31 +59,34 @@ class TextPropertyExplorer extends StatelessWidget {
         final selectionColor =
             provider.colorField(id: "selectionColor", title: "selectionColor");
 
-        return Text(
-          data ?? "",
-          style: style,
-          strutStyle: StrutStyle(
-            fontFamily: fontFamily,
-            height: height,
-            leadingDistribution: leadingDistribution,
-            leading: leading,
-            fontWeight: fontWeight,
-            fontStyle: fontStyle,
-            forceStrutHeight: forceStrutHeight,
-            debugLabel: debugLabel,
-            package: package,
+        return (
+          widget: Text(
+            data ?? "",
+            style: style,
+            strutStyle: StrutStyle(
+              fontFamily: fontFamily,
+              height: height,
+              leadingDistribution: leadingDistribution,
+              leading: leading,
+              fontWeight: fontWeight,
+              fontStyle: fontStyle,
+              forceStrutHeight: forceStrutHeight,
+              debugLabel: debugLabel,
+              package: package,
+            ),
+            textAlign: textAlign,
+            textDirection: textDirection,
+            locale: Locale(locale ?? " "),
+            softWrap: softWrap,
+            overflow: overflow,
+            textScaleFactor: textScaleFactor,
+            maxLines: maxLines,
+            semanticsLabel: semanticsLabel,
+            textWidthBasis: textWidthBasis,
+            textHeightBehavior: const TextHeightBehavior(),
+            selectionColor: selectionColor,
           ),
-          textAlign: textAlign,
-          textDirection: textDirection,
-          locale: Locale(locale ?? " "),
-          softWrap: softWrap,
-          overflow: overflow,
-          textScaleFactor: textScaleFactor,
-          maxLines: maxLines,
-          semanticsLabel: semanticsLabel,
-          textWidthBasis: textWidthBasis,
-          textHeightBehavior: const TextHeightBehavior(),
-          selectionColor: selectionColor,
+          code: "Text code goes here...",
         );
       },
     );

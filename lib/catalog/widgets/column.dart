@@ -25,7 +25,7 @@ class ColumnPropertyExplorer extends StatelessWidget {
         final verticalDirection = provider.verticalDirectionField(id: "verticalDirection", title: "Vertical Direction");
         final textBaseLine = provider.listField<TextBaseline>(id: "textBaseLine", title: "TextBaseLine", values: TextBaseline.values);
 
-        return Column(
+        return (widget: Column(
           mainAxisAlignment: mainAxisAlignment??MainAxisAlignment.start,
           mainAxisSize: mainAxisSize??MainAxisSize.max,
           crossAxisAlignment: crossAxisAlignment??CrossAxisAlignment.center,
@@ -33,7 +33,7 @@ class ColumnPropertyExplorer extends StatelessWidget {
           verticalDirection: verticalDirection??VerticalDirection.down,
           textBaseline: textBaseLine,
           children: [],
-        );
+        ), code: "Column code goes here...");
       },
     );
   }

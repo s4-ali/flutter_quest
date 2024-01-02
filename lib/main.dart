@@ -1,7 +1,24 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/catalog/home.dart';
 import 'package:flutter_quest/catalog/properties_list.dart';
+
+enum InitialScreen{
+  home,
+  propertiesList,
+}
+
+extension on InitialScreen{
+  Widget get widget {
+    switch(this) {
+      case InitialScreen.home:
+        return const Home();
+      case InitialScreen.propertiesList:
+        return const PropertiesList();
+    }
+  }
+}
+
+const _initialScreen = InitialScreen.home;
 
 void main() {
   runApp(const MyApp());
@@ -12,39 +29,41 @@ final ValueNotifier<Color> themeColorNotifier = ValueNotifier(Colors.teal);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Color>(
       valueListenable: themeColorNotifier,
       builder: (_, color, __) {
         return ValueListenableBuilder<ThemeMode>(
-            valueListenable: themeNotifier,
-            builder: (_, mode, __) {
-              return MaterialApp(
-                title: 'Flutter Quest',
-                debugShowCheckedModeBanner: false,
-                theme: ThemeData(
-                  colorScheme: ColorScheme.fromSeed(
-                    seedColor: color,
-                    brightness: Brightness.light,
-                  ),
-                  sliderTheme: const SliderThemeData(
-                    showValueIndicator: ShowValueIndicator.always,
-                  ),
+          valueListenable: themeNotifier,
+          builder: (_, mode, __) {
+            return MaterialApp(
+              title: 'Flutter Quest',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: color,
+                  brightness: Brightness.light,
                 ),
-                darkTheme: ThemeData(
-                  colorScheme: ColorScheme.fromSeed(
-                    seedColor: color,
-                    brightness: Brightness.dark,
-                  ),
-                  sliderTheme: const SliderThemeData(
-                    showValueIndicator: ShowValueIndicator.always,
-                  ),
+                sliderTheme: const SliderThemeData(
+                  showValueIndicator: ShowValueIndicator.always,
                 ),
-                themeMode: mode,
-                home: const PropertiesList(),
-              );
-            });
+              ),
+              darkTheme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: color,
+                  brightness: Brightness.dark,
+                ),
+                sliderTheme: const SliderThemeData(
+                  showValueIndicator: ShowValueIndicator.always,
+                ),
+              ),
+              themeMode: mode,
+              home: _initialScreen.widget,
+            );
+          },
+        );
       },
     );
   }
@@ -93,4 +112,3 @@ void navigateTo(BuildContext context, Widget screen) {
     ),
   );
 }
-

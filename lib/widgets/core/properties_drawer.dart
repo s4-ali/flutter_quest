@@ -14,38 +14,33 @@ class PropertiesDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     log.i("$title -> properties: ${widgets.length}");
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).drawerTheme.backgroundColor,
-        boxShadow: const [
-          BoxShadow(
-              color: Colors.black26, offset: Offset(-4, 3), blurRadius: 4),
-        ],
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+    return Drawer(
       width: 350,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            child: Text(
-              "$title Properties",
-              style: Theme.of(context).textTheme.titleLarge,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 0),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              child: Text(
+                "$title Properties",
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
             ),
-          ),
-          Expanded(
-            child: ListView(
-              children: [
-                ...widgets.map(
-                  (e) => Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: e,
+            Expanded(
+              child: ListView(
+                children: [
+                  ...widgets.map(
+                    (e) => Padding(
+                      padding: const EdgeInsets.only(bottom: 0),
+                      child: e,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

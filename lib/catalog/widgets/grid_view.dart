@@ -65,37 +65,40 @@ class GridViewPropertyExplorer extends StatelessWidget {
         final restorationId =
             provider.stringField(id: "restorationId", title: "Restoration Id");
 
-        return GridView(
-          scrollDirection: scrollDirection ?? Axis.vertical,
-          reverse: reverse ?? false,
-          controller: ScrollController(
-            initialScrollOffset: initialScrollOffset ?? 0.0,
-            keepScrollOffset: keepScrollOffset ?? true,
-            debugLabel: debugLabel,
-            onAttach: (v) {},
-            onDetach: (v) {},
+        return (
+          widget: GridView(
+            scrollDirection: scrollDirection ?? Axis.vertical,
+            reverse: reverse ?? false,
+            controller: ScrollController(
+              initialScrollOffset: initialScrollOffset ?? 0.0,
+              keepScrollOffset: keepScrollOffset ?? true,
+              debugLabel: debugLabel,
+              onAttach: (v) {},
+              onDetach: (v) {},
+            ),
+            primary: primary,
+            physics: const ScrollPhysics(),
+            shrinkWrap: shrinkWrap ?? false,
+            padding: padding,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount ?? 2,
+              crossAxisSpacing: crossAxisSpacing ?? 10.0,
+              mainAxisSpacing: mainAxisSpacing ?? 10.0,
+              mainAxisExtent: mainAxisExtent,
+            ),
+            addAutomaticKeepAlives: addAutomaticKeepAlives ?? true,
+            addRepaintBoundaries: addRepaintBoundaries ?? true,
+            addSemanticIndexes: addSemanticIndexes ?? true,
+            cacheExtent: cacheExtent,
+            semanticChildCount: semanticChildCount,
+            dragStartBehavior: dragStartBehavior ?? DragStartBehavior.start,
+            clipBehavior: clipBehavior ?? Clip.hardEdge,
+            keyboardDismissBehavior: keyboardDismissBehavior ??
+                ScrollViewKeyboardDismissBehavior.manual,
+            restorationId: restorationId,
+            children: [],
           ),
-          primary: primary,
-          physics: const ScrollPhysics(),
-          shrinkWrap: shrinkWrap ?? false,
-          padding: padding,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: crossAxisCount ?? 2,
-            crossAxisSpacing: crossAxisSpacing ?? 10.0,
-            mainAxisSpacing: mainAxisSpacing ?? 10.0,
-            mainAxisExtent: mainAxisExtent,
-          ),
-          addAutomaticKeepAlives: addAutomaticKeepAlives ?? true,
-          addRepaintBoundaries: addRepaintBoundaries ?? true,
-          addSemanticIndexes: addSemanticIndexes ?? true,
-          cacheExtent: cacheExtent,
-          semanticChildCount: semanticChildCount,
-          dragStartBehavior: dragStartBehavior ?? DragStartBehavior.start,
-          clipBehavior: clipBehavior ?? Clip.hardEdge,
-          keyboardDismissBehavior: keyboardDismissBehavior ??
-              ScrollViewKeyboardDismissBehavior.manual,
-          restorationId: restorationId,
-          children: [],
+          code: "GridView code goes here...",
         );
       },
     );

@@ -48,9 +48,9 @@ class _TextRadioButtonState<T> extends State<TextRadioButton<T>> {
     }
 
     return InkWell(
-      hoverColor: Colors.transparent,
+      // hoverColor: Colors.transparent,
       onTap: () => widget.onChanged(widget.option),
-      onHover: onHover,
+      // onHover: onHover,
       child: Container(
         padding: const EdgeInsets.only(bottom: 2),
         margin: const EdgeInsets.all(1),

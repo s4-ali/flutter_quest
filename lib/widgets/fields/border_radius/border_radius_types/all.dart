@@ -16,7 +16,7 @@ class BorderRadiusAll extends StatelessWidget {
   Widget build(BuildContext context) {
     return RadiusField(
       value: value.topRight,
-      onChanged: (radius) => BorderRadius.all(radius),
+      onChanged: (radius) => onChanged(BorderRadius.all(radius)),
     );
   }
 }

@@ -25,7 +25,8 @@ class ContainerPropertyExplorer extends StatelessWidget {
         final padding =
             provider.edgeInsetsField(id: "padding", title: "Padding");
         final color = provider.colorField(id: "color", title: "Color");
-        final borderRadius = provider.borderRadiusField(id: "BorderRadius", title: "BorderRadius");
+        final borderRadius = provider.borderRadiusField(
+            id: "BorderRadius", title: "BorderRadius");
         final border = provider.borderField(id: "border", title: "Border");
         final foregroundColor =
             provider.colorField(id: "fgColor", title: "Foreground Color");
@@ -48,30 +49,33 @@ class ContainerPropertyExplorer extends StatelessWidget {
         final transformAlignment = provider.alignmentField(
             id: "transformAlignment", title: "Transform Alignment");
 
-        return Container(
-          height: height,
-          width: width,
-          alignment: alignment,
-          margin: margin,
-          padding: padding,
-          transform: transform,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: borderRadius,
-            border: border,
+        return (
+          widget: Container(
+            height: height,
+            width: width,
+            alignment: alignment,
+            margin: margin,
+            padding: padding,
+            transform: transform,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: borderRadius,
+              border: border,
+            ),
+            foregroundDecoration: BoxDecoration(
+              color: foregroundColor,
+            ),
+            clipBehavior: clipBehavior,
+            constraints: BoxConstraints(
+              minWidth: minWidth,
+              maxWidth: maxWidth,
+              minHeight: minHeight,
+              maxHeight: maxHeight,
+            ),
+            transformAlignment: transformAlignment,
+            child: Container(),
           ),
-          foregroundDecoration: BoxDecoration(
-            color: foregroundColor,
-          ),
-          clipBehavior: clipBehavior,
-          constraints: BoxConstraints(
-            minWidth: minWidth,
-            maxWidth: maxWidth,
-            minHeight: minHeight,
-            maxHeight: maxHeight,
-          ),
-          transformAlignment: transformAlignment,
-          child: Container(),
+          code: "Container code goes here...",
         );
       },
     );

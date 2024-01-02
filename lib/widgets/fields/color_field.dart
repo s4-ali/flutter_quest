@@ -85,15 +85,19 @@ class _ColorFieldState extends State<_ColorField> {
           padding: EdgeInsets.only(top: 16, bottom: 7),
           child: Text("Common Colors"),
         ),
-        Wrap(
-          children: List.generate(
-            _commonColorList.length,
-            (index) => Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: ColorOptionBox(
-                fillColor: _commonColorList[index],
-                isSelected: _commonColorList[index] == widget.value,
-                onUpdated: widget.onChanged,
+        SizedBox(
+          width: double.maxFinite,
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            children: List.generate(
+              _commonColorList.length,
+              (index) => Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: ColorOptionBox(
+                  fillColor: _commonColorList[index],
+                  isSelected: _commonColorList[index] == widget.value,
+                  onUpdated: widget.onChanged,
+                ),
               ),
             ),
           ),

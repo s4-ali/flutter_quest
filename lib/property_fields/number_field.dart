@@ -22,6 +22,7 @@ class NumberPropertyField extends PropertyField<NumberPropertyParams, num> {
     num value,
   ) {
     return NumberField(
+      key: ValueKey(params.id),
       onChanged: onChanged,
       value: value,
     );

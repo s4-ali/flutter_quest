@@ -17,7 +17,6 @@ class IconPropertyExplorer extends StatelessWidget {
     return PropertyExplorerBuilder(
       widgetName: "Icon",
       builder: (provider) {
-
         final icon = provider.iconDataField(id: "icon", title: "Icon");
         final size = provider.doubleField(id: "iconSize", title: "Icon Size");
         final fill = provider.doubleField(id: "fill", title: "Fill");
@@ -43,25 +42,28 @@ class IconPropertyExplorer extends StatelessWidget {
         final textDirection = provider.textDirectionField(
             id: "textDirection", title: "textDirection");
 
-        return Icon(
-          icon,
-          size: size,
-          fill: fill,
-          weight: weight,
-          grade: grade,
-          opticalSize: opticalSize,
-          color: color,
-          shadows: [
-            BoxShadow(
-              color: shadowColor ?? const Color(0xFF000000),
-              offset: Offset(scaleX ?? 0.0, scaleY ?? 0.0),
-              blurRadius: shadowBlurRadius ?? 0.0,
-              spreadRadius: shadowSpreadRadius ?? 0.0,
-              blurStyle: blurStyle ?? BlurStyle.normal,
-            )
-          ],
-          semanticLabel: semanticLabel,
-          textDirection: textDirection,
+        return (
+          widget: Icon(
+            icon,
+            size: size,
+            fill: fill,
+            weight: weight,
+            grade: grade,
+            opticalSize: opticalSize,
+            color: color,
+            shadows: [
+              BoxShadow(
+                color: shadowColor ?? const Color(0xFF000000),
+                offset: Offset(scaleX ?? 0.0, scaleY ?? 0.0),
+                blurRadius: shadowBlurRadius ?? 0.0,
+                spreadRadius: shadowSpreadRadius ?? 0.0,
+                blurStyle: blurStyle ?? BlurStyle.normal,
+              )
+            ],
+            semanticLabel: semanticLabel,
+            textDirection: textDirection,
+          ),
+          code: "Icon code goes here...",
         );
       },
     );

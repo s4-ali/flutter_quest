@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_holder.dart';
 import 'package:flutter_quest/core/property_provider.dart';
-import 'package:flutter_quest/widgets/core/scaffold.dart';
+import 'package:flutter_quest/widgets/core/editor.dart';
 
 class PropertyExplorerBuilder extends StatefulWidget {
   final String widgetName;
-  final Widget Function(PropertyProvider configurations) builder;
+  final ({Widget widget, String code}) Function(PropertyProvider configurations) builder;
 
   const PropertyExplorerBuilder({
     super.key,
@@ -33,11 +33,12 @@ class _PropertyExplorerBuilderState extends State<PropertyExplorerBuilder> {
   @override
   Widget build(BuildContext context) {
     toWidget(PropertyHolder e) => e.widget;
-
-    return WidgetEditorScaffold(
+    final props = widget.builder.call(configurations);
+    return WidgetEditor(
       title: widget.widgetName,
       properties: configurations.widgets.map(toWidget).toList(),
-      widget: widget.builder.call(configurations),
+      widget: props.widget,
+      code: props.code,
     );
   }
 }

@@ -33,17 +33,20 @@ class CardPropertyExplorer extends StatelessWidget {
         final semanticContainer = provider.booleanField(
             id: "semanticContainer", title: "Semantic Container");
 
-        return Card(
-          color: color,
-          shadowColor: shadowColor,
-          surfaceTintColor: surfaceTintColor,
-          elevation: elevation,
-          shape: shape,
-          borderOnForeground: borderForeground ?? true,
-          margin: margin,
-          clipBehavior: clipBehavior,
-          semanticContainer: semanticContainer ?? true,
-          child: const Center(child: Text("Card")),
+        return (
+          widget: Card(
+            color: color,
+            shadowColor: shadowColor,
+            surfaceTintColor: surfaceTintColor,
+            elevation: elevation,
+            shape: shape,
+            borderOnForeground: borderForeground ?? true,
+            margin: margin,
+            clipBehavior: clipBehavior,
+            semanticContainer: semanticContainer ?? true,
+            child: const Center(child: Text("Card")),
+          ),
+          code: "Card code goes here",
         );
       },
     );

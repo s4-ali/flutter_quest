@@ -87,13 +87,13 @@ class CheckBoxPropertyExplorer extends StatelessWidget {
         final semanticLabel =
             provider.stringField(id: "semanticLabel", title: "Semantic Label");
 
-        return Checkbox(
+        return (widget: Checkbox(
           value: value,
           tristate: triState?? true,
           mouseCursor: mouseCursor,
           activeColor: activeColor,
           fillColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
+                (Set<MaterialState> states) {
               return fillColor ?? Colors.transparent; // Default color
             },
           ),
@@ -101,7 +101,7 @@ class CheckBoxPropertyExplorer extends StatelessWidget {
           focusColor: focusColor,
           hoverColor: hoverColor,
           overlayColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
+                (Set<MaterialState> states) {
               return overLayColor ?? Colors.transparent; // Default color
             },
           ),
@@ -126,7 +126,7 @@ class CheckBoxPropertyExplorer extends StatelessWidget {
           isError: isError ?? false,
           semanticLabel: semanticLabel,
           onChanged: (val) {},
-        );
+        ), code: "Checkbox code goes here...");
       },
     );
   }

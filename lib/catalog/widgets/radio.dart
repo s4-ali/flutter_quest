@@ -56,30 +56,33 @@ class _RadioPropertyExplorerState extends State<RadioPropertyExplorer> {
         final autofocus =
             provider.booleanField(id: "autofocus", title: "autofocus");
 
-        return Radio(
-          value: value,
-          groupValue: selectedRadio,
-          onChanged: (v) {
-            setState(() {
-              selectedRadio = v!;
-            });
-          },
-          mouseCursor: mouseCursor,
-          toggleable: toggleable ?? false,
-          activeColor: activeColor,
-          fillColor: MaterialStatePropertyAll<Color?>(
-            fillColor,
+        return (
+          widget: Radio(
+            value: value,
+            groupValue: selectedRadio,
+            onChanged: (v) {
+              setState(() {
+                selectedRadio = v!;
+              });
+            },
+            mouseCursor: mouseCursor,
+            toggleable: toggleable ?? false,
+            activeColor: activeColor,
+            fillColor: MaterialStatePropertyAll<Color?>(
+              fillColor,
+            ),
+            focusColor: focusColor,
+            hoverColor: hoverColor,
+            overlayColor: MaterialStatePropertyAll<Color?>(
+              overlayColor,
+            ),
+            splashRadius: splashRadius,
+            materialTapTargetSize: materialTapTargetSize,
+            visualDensity: visualDensity,
+            focusNode: FocusNode(),
+            autofocus: autofocus ?? false,
           ),
-          focusColor: focusColor,
-          hoverColor: hoverColor,
-          overlayColor: MaterialStatePropertyAll<Color?>(
-            overlayColor,
-          ),
-          splashRadius: splashRadius,
-          materialTapTargetSize: materialTapTargetSize,
-          visualDensity: visualDensity,
-          focusNode: FocusNode(),
-          autofocus: autofocus ?? false,
+          code: "Radio code goes here...",
         );
       },
     );

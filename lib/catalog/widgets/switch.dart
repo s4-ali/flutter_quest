@@ -62,36 +62,39 @@ class SwitchPropertyExplorer extends StatelessWidget {
             title: "Material Tap Target Size",
             values: MaterialTapTargetSize.values);
 
-        return Switch(
-          value: value ?? false,
-          onChanged: (val) {},
-          activeColor: activeColor,
-          activeTrackColor: activeTrackColor,
-          inactiveThumbColor: inactiveThumbColor,
-          inactiveTrackColor: inactiveThumbColor,
-          activeThumbImage: NetworkImage(activeThumbImage ??
-              "https://cdn.pixabay.com/photo/2017/11/10/05/24/add-2935429_960_720.png"),
-          onActiveThumbImageError: (object, stackTrace) {},
-          inactiveThumbImage: NetworkImage(inactiveThumbImage ??
-              'https://cdn.pixabay.com/photo/2017/11/10/05/24/add-2935429_960_720.png'),
-          onInactiveThumbImageError: (object, stackTrace) {},
-          thumbColor: MaterialStatePropertyAll<Color?>(thumbColor),
-          trackColor: MaterialStatePropertyAll<Color?>(trackColor),
-          trackOutlineColor:
-              MaterialStatePropertyAll<Color?>(trackOutlineColor),
-          trackOutlineWidth:
-              MaterialStatePropertyAll<double?>(trackOutlineWidth),
-          thumbIcon: MaterialStatePropertyAll<Icon?>(Icon(thumbIcon)),
-          dragStartBehavior: dragStartBehavior ?? DragStartBehavior.start,
-          materialTapTargetSize: materialTapTargetSize,
-          mouseCursor: mouseCursor,
-          focusColor: focusColor,
-          hoverColor: hoverColor,
-          overlayColor: MaterialStatePropertyAll<Color?>(overlayColor),
-          splashRadius: splashRadius,
-          focusNode: FocusNode(),
-          onFocusChange: (val) {},
-          autofocus: autofocus ?? false,
+        return (
+          widget: Switch(
+            value: value ?? false,
+            onChanged: (val) {},
+            activeColor: activeColor,
+            activeTrackColor: activeTrackColor,
+            inactiveThumbColor: inactiveThumbColor,
+            inactiveTrackColor: inactiveThumbColor,
+            activeThumbImage: NetworkImage(activeThumbImage ??
+                "https://cdn.pixabay.com/photo/2017/11/10/05/24/add-2935429_960_720.png"),
+            onActiveThumbImageError: (object, stackTrace) {},
+            inactiveThumbImage: NetworkImage(inactiveThumbImage ??
+                'https://cdn.pixabay.com/photo/2017/11/10/05/24/add-2935429_960_720.png'),
+            onInactiveThumbImageError: (object, stackTrace) {},
+            thumbColor: MaterialStatePropertyAll<Color?>(thumbColor),
+            trackColor: MaterialStatePropertyAll<Color?>(trackColor),
+            trackOutlineColor:
+                MaterialStatePropertyAll<Color?>(trackOutlineColor),
+            trackOutlineWidth:
+                MaterialStatePropertyAll<double?>(trackOutlineWidth),
+            thumbIcon: MaterialStatePropertyAll<Icon?>(Icon(thumbIcon)),
+            dragStartBehavior: dragStartBehavior ?? DragStartBehavior.start,
+            materialTapTargetSize: materialTapTargetSize,
+            mouseCursor: mouseCursor,
+            focusColor: focusColor,
+            hoverColor: hoverColor,
+            overlayColor: MaterialStatePropertyAll<Color?>(overlayColor),
+            splashRadius: splashRadius,
+            focusNode: FocusNode(),
+            onFocusChange: (val) {},
+            autofocus: autofocus ?? false,
+          ),
+          code: "Switch code goes here...",
         );
       },
     );

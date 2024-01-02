@@ -14,13 +14,13 @@ class SizedBoxPropertyExplorer extends StatelessWidget {
       builder: (provider) {
         final height = provider.heightField();
         final width = provider.widthField();
-        return SizedBox(
+        return (widget: SizedBox(
           height: height,
           width: width,
           child: ColoredBox(
             color: Theme.of(context).primaryColor,
           ),
-        );
+        ), code: "SizedBox code goes here...");
       },
     );
   }

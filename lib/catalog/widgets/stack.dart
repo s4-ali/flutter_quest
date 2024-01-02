@@ -23,12 +23,15 @@ class StackPropertyExplorer extends StatelessWidget {
         final clipBehavior = provider.listField(
             id: "clipBehavior", title: "ClipBehavior", values: Clip.values);
 
-        return Stack(
-          alignment: alignment ?? Alignment.topLeft,
-          textDirection: textDirection,
-          fit: fit ?? StackFit.loose,
-          clipBehavior: clipBehavior ?? Clip.hardEdge,
-          children: [],
+        return (
+          widget: Stack(
+            alignment: alignment ?? Alignment.topLeft,
+            textDirection: textDirection,
+            fit: fit ?? StackFit.loose,
+            clipBehavior: clipBehavior ?? Clip.hardEdge,
+            children: [],
+          ),
+          code: "Stack code goes here...",
         );
       },
     );

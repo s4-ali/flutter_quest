@@ -23,22 +23,25 @@ class CircleAvatarPropertyExplorer extends StatelessWidget {
             id: "foregroundImage", title: "Foreground Image");
         final foregroundColor = provider.colorField(
             id: "foregroundColor", title: "Foreground Color");
-        final radius =
-            provider.doubleField(id: "radius", title: "Radius");
+        final radius = provider.doubleField(id: "radius", title: "Radius");
         final minRadius =
             provider.doubleField(id: "minRadius", title: "Minimum Radius");
         final maxRadius =
             provider.doubleField(id: "maxRadius", title: "MaximumRadius");
-        final childText = provider.stringField(id: "childText", title: "Child Text");
-        return CircleAvatar(
-          radius: radius,
-          backgroundColor: backgroundColor,
-          backgroundImage: backgroundImage,
-          foregroundImage: foregroundImage,
-          foregroundColor: foregroundColor,
-          minRadius: minRadius,
-          maxRadius: maxRadius,
-          child: Text(childText?? ""),
+        final childText =
+            provider.stringField(id: "childText", title: "Child Text");
+        return (
+          widget: CircleAvatar(
+            radius: radius,
+            backgroundColor: backgroundColor,
+            backgroundImage: backgroundImage,
+            foregroundImage: foregroundImage,
+            foregroundColor: foregroundColor,
+            minRadius: minRadius,
+            maxRadius: maxRadius,
+            child: Text(childText ?? ""),
+          ),
+          code: "CircleAvatar code goes here...",
         );
       },
     );

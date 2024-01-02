@@ -100,59 +100,60 @@ class _TabBarPropertyExplorerState extends State<TabBarPropertyExplorer>
             title: "TabAlignment",
             values: TabAlignment.values);
 
-        return Scaffold(
-          appBar: AppBar(
-              title: TabBar(
-            controller: _tabController,
-            tabs: const [
-              Text('Home'),
-              Text('Body'),
-            ],
-            isScrollable: isScrollable ?? false,
-            padding: padding,
-            indicatorColor: indicatorColor,
-            automaticIndicatorColorAdjustment:
-                automaticIndicatorColorAdjustment ?? true,
-            indicatorWeight: indicatorWeight ?? 2.0,
-            indicatorPadding: indicatorPadding ?? EdgeInsets.zero,
-            indicator: BoxDecoration(
-              color: color,
-              border: border,
-              borderRadius: borderRadius,
-              backgroundBlendMode: backgroundBlendMode,
-              shape: shape ?? BoxShape.rectangle,
-              boxShadow: const [],
-            ),
-            indicatorSize: indicatorSize,
-            dividerColor: dividerColor,
-            labelColor: labelColor,
-            labelStyle: labelStyle,
-            labelPadding: labelPadding,
-            unselectedLabelColor: unselectedLabelColor,
-            unselectedLabelStyle: unselectedLabelStyle,
-            dragStartBehavior: dragStartBehavior ?? DragStartBehavior.start,
-            overlayColor: MaterialStatePropertyAll(overlayColor),
-            mouseCursor: mouseCursor,
-            enableFeedback: enableFeedback,
-            onTap: (v) {},
-            physics: const ScrollPhysics(),
-            splashFactory: NoSplash.splashFactory,
-            splashBorderRadius: splashBorderRadius,
-            tabAlignment: tabAlignment,
-          )),
-          body: TabBarView(
+        return (
+          widget: Scaffold(
+            appBar: AppBar(
+                title: TabBar(
               controller: _tabController,
-              children: [
-            Container(
-              //for first tab
-              height: 400,
-              color: Colors.red,
-            ),
-            Container(
-              height: 400,
-              color: Colors.green,
-            ),
-          ]),
+              tabs: const [
+                Text('Home'),
+                Text('Body'),
+              ],
+              isScrollable: isScrollable ?? false,
+              padding: padding,
+              indicatorColor: indicatorColor,
+              automaticIndicatorColorAdjustment:
+                  automaticIndicatorColorAdjustment ?? true,
+              indicatorWeight: indicatorWeight ?? 2.0,
+              indicatorPadding: indicatorPadding ?? EdgeInsets.zero,
+              indicator: BoxDecoration(
+                color: color,
+                border: border,
+                borderRadius: borderRadius,
+                backgroundBlendMode: backgroundBlendMode,
+                shape: shape ?? BoxShape.rectangle,
+                boxShadow: const [],
+              ),
+              indicatorSize: indicatorSize,
+              dividerColor: dividerColor,
+              labelColor: labelColor,
+              labelStyle: labelStyle,
+              labelPadding: labelPadding,
+              unselectedLabelColor: unselectedLabelColor,
+              unselectedLabelStyle: unselectedLabelStyle,
+              dragStartBehavior: dragStartBehavior ?? DragStartBehavior.start,
+              overlayColor: MaterialStatePropertyAll(overlayColor),
+              mouseCursor: mouseCursor,
+              enableFeedback: enableFeedback,
+              onTap: (v) {},
+              physics: const ScrollPhysics(),
+              splashFactory: NoSplash.splashFactory,
+              splashBorderRadius: splashBorderRadius,
+              tabAlignment: tabAlignment,
+            )),
+            body: TabBarView(controller: _tabController, children: [
+              Container(
+                //for first tab
+                height: 400,
+                color: Colors.red,
+              ),
+              Container(
+                height: 400,
+                color: Colors.green,
+              ),
+            ]),
+          ),
+          code: "TabBar code goes here...",
         );
       },
     );

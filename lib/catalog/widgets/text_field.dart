@@ -26,37 +26,37 @@ class TextFieldPropertyExplorer extends StatelessWidget {
     return PropertyExplorerBuilder(
       widgetName: "TextField",
       builder: (provider) {
-        final iconColor = provider.colorField(
-            id: "iconColor", title: "Icon Color");
+        final iconColor =
+            provider.colorField(id: "iconColor", title: "Icon Color");
         final icon = provider.iconDataField(id: "icon", title: "Icon");
         final label = provider.iconDataField(id: "label", title: "Label");
-        final labelText = provider.stringField(
-            id: "labelText", title: "Label Text");
-        final labelStyle = provider.textStyleField(
-            id: "labelStyle", title: "Label Style");
+        final labelText =
+            provider.stringField(id: "labelText", title: "Label Text");
+        final labelStyle =
+            provider.textStyleField(id: "labelStyle", title: "Label Style");
         final floatingLabelStyle = provider.textStyleField(
             id: "floatingLabelStyle", title: "Floating Label Style");
-        final helperText = provider.stringField(
-            id: "helperText", title: "Helper Text");
-        final helperStyle = provider.textStyleField(
-            id: "helperStyle", title: "Helper Style");
-        final helperMaxLines = provider.intField(
-            id: "helperMaxLines", title: "Helper MaxLines");
-        final hintText = provider.stringField(
-            id: "hintText", title: "Hint Text");
-        final hintStyle = provider.textStyleField(
-            id: "hintStyle", title: "Hint Style");
+        final helperText =
+            provider.stringField(id: "helperText", title: "Helper Text");
+        final helperStyle =
+            provider.textStyleField(id: "helperStyle", title: "Helper Style");
+        final helperMaxLines =
+            provider.intField(id: "helperMaxLines", title: "Helper MaxLines");
+        final hintText =
+            provider.stringField(id: "hintText", title: "Hint Text");
+        final hintStyle =
+            provider.textStyleField(id: "hintStyle", title: "Hint Style");
         final hintTextDirection = provider.textDirectionField(
             id: "hintTextDirection", title: "Hint Text Direction");
-        final hintMaxLines = provider.intField(
-            id: "hintMaxLines", title: "Hint Max Lines");
+        final hintMaxLines =
+            provider.intField(id: "hintMaxLines", title: "Hint Max Lines");
         final error = provider.iconDataField(id: "error", title: "Error");
-        final errorText = provider.stringField(
-            id: "errorText", title: "Error Text");
-        final errorStyle = provider.textStyleField(
-            id: "errorStyle", title: "Error Style");
-        final errorMaxLines = provider.intField(
-            id: "errorMaxLines", title: "Error Max Lines");
+        final errorText =
+            provider.stringField(id: "errorText", title: "Error Text");
+        final errorStyle =
+            provider.textStyleField(id: "errorStyle", title: "Error Style");
+        final errorMaxLines =
+            provider.intField(id: "errorMaxLines", title: "Error Max Lines");
         final floatingLabelAlignment = provider.listField(
             id: "floatingLabelAlignment",
             title: "Floating Label Alignment",
@@ -64,13 +64,13 @@ class TextFieldPropertyExplorer extends StatelessWidget {
               FloatingLabelAlignment.start,
               FloatingLabelAlignment.center
             ]);
-        final isCollapsed = provider.booleanField(
-            id: "isCollapsed", title: "IsCollapsed");
+        final isCollapsed =
+            provider.booleanField(id: "isCollapsed", title: "IsCollapsed");
         final isDense = provider.booleanField(id: "isDense", title: "IsDense");
         final contentPadding = provider.edgeInsetsField(
             id: "contentPadding", title: "Content Padding");
-        final prefixIcon = provider.iconDataField(
-            id: "prefixIcon", title: "Prefix Icon");
+        final prefixIcon =
+            provider.iconDataField(id: "prefixIcon", title: "Prefix Icon");
 
         final prefixMaxHeight = provider.doubleField(
             id: "prefixMaxHeight", title: "Prefix Icon Maximum Height");
@@ -82,14 +82,14 @@ class TextFieldPropertyExplorer extends StatelessWidget {
             id: "prefixMinWidth", title: "PrefixIcon Minimum Width");
 
         final prefix = provider.iconDataField(id: "prefix", title: "Prefix");
-        final prefixText = provider.stringField(
-            id: "prefixText", title: "Prefix Text");
-        final prefixStyle = provider.textStyleField(
-            id: "prefixStyle", title: "Prefix Style");
+        final prefixText =
+            provider.stringField(id: "prefixText", title: "Prefix Text");
+        final prefixStyle =
+            provider.textStyleField(id: "prefixStyle", title: "Prefix Style");
         final prefixIconColor = provider.colorField(
             id: "prefixIconColor", title: "Prefix Icon Color");
-        final suffixIcon = provider.iconDataField(
-            id: "suffixIcon", title: "Suffix Icon");
+        final suffixIcon =
+            provider.iconDataField(id: "suffixIcon", title: "Suffix Icon");
 
         final suffixMaxHeight = provider.doubleField(
             id: "suffixMaxHeight", title: "Suffix Icon Maximum Height");
@@ -100,24 +100,24 @@ class TextFieldPropertyExplorer extends StatelessWidget {
         final suffixMinWidth = provider.doubleField(
             id: "suffixMinWidth", title: "Suffix Icon Minimum Width");
 
-        final suffixText = provider.stringField(
-            id: "suffixText", title: "Suffix Text");
-        final suffixStyle = provider.textStyleField(
-            id: "suffixStyle", title: "Suffix Style");
+        final suffixText =
+            provider.stringField(id: "suffixText", title: "Suffix Text");
+        final suffixStyle =
+            provider.textStyleField(id: "suffixStyle", title: "Suffix Style");
         final suffixIconColor = provider.colorField(
             id: "suffixIconColor", title: "Suffix Icon Color");
         final counter = provider.iconDataField(id: "counter", title: "Counter");
-        final counterText = provider.stringField(
-            id: "counterText", title: "Counter Text");
-        final counterStyle = provider.textStyleField(
-            id: "counterStyle", title: "Counter Style");
+        final counterText =
+            provider.stringField(id: "counterText", title: "Counter Text");
+        final counterStyle =
+            provider.textStyleField(id: "counterStyle", title: "Counter Style");
         final filled = provider.booleanField(id: "filled", title: "Filled");
-        final fillColor = provider.colorField(
-            id: "fillColor", title: "Fill Color");
-        final focusColor = provider.colorField(
-            id: "focusColor", title: "Focus Color");
-        final hoverColor = provider.colorField(
-            id: "hoverColor", title: "Hover Color");
+        final fillColor =
+            provider.colorField(id: "fillColor", title: "Fill Color");
+        final focusColor =
+            provider.colorField(id: "focusColor", title: "Focus Color");
+        final hoverColor =
+            provider.colorField(id: "hoverColor", title: "Hover Color");
 
         final errorBorderColor = provider.colorField(
             id: "errorBorderColor", title: "Error Border Color");
@@ -125,7 +125,8 @@ class TextFieldPropertyExplorer extends StatelessWidget {
             id: "errorBorderWidth", title: "Error Border Width");
         final errorBorderRadius = provider.borderRadiusField(
             id: "errorBorderRadius", title: "Error Border Radius");
-        final errorBorderStyle = provider.listField(id: "errorBorderStyle",
+        final errorBorderStyle = provider.listField(
+            id: "errorBorderStyle",
             title: "Error Border Style",
             values: BorderStyle.values);
         final errorStrokeAlign = provider.doubleField(
@@ -139,7 +140,8 @@ class TextFieldPropertyExplorer extends StatelessWidget {
             id: "focusBorderWidth", title: "Focus Border Width");
         final focusBorderRadius = provider.borderRadiusField(
             id: "focusBorderRadius", title: "Focus Border Radius");
-        final focusBorderStyle = provider.listField(id: "focusBorderStyle",
+        final focusBorderStyle = provider.listField(
+            id: "focusBorderStyle",
             title: "Focus Border Style",
             values: BorderStyle.values);
         final focusStrokeAlign = provider.doubleField(
@@ -183,7 +185,8 @@ class TextFieldPropertyExplorer extends StatelessWidget {
             id: "enabledBorderWidth", title: "Enabled Border Width");
         final enabledBorderRadius = provider.borderRadiusField(
             id: "enabledBorderRadius", title: "Enabled Border Radius");
-        final enabledBorderStyle = provider.listField(id: "enabledBorderStyle",
+        final enabledBorderStyle = provider.listField(
+            id: "enabledBorderStyle",
             title: "Enabled Border Style",
             values: BorderStyle.values);
         final enabledStrokeAlign = provider.doubleField(
@@ -191,19 +194,20 @@ class TextFieldPropertyExplorer extends StatelessWidget {
         final enabledGapPadding = provider.doubleField(
             id: "enabledGapPadding", title: "Enabled Gap Padding");
 
-        final borderColor = provider.colorField(
-            id: "borderColor", title: "Border Color");
-        final borderWidth = provider.doubleField(
-            id: "borderWidth", title: "Border Width");
+        final borderColor =
+            provider.colorField(id: "borderColor", title: "Border Color");
+        final borderWidth =
+            provider.doubleField(id: "borderWidth", title: "Border Width");
         final borderRadius = provider.borderRadiusField(
             id: "borderRadius", title: "Border Radius");
-        final borderStyle = provider.listField(id: "borderStyle",
+        final borderStyle = provider.listField(
+            id: "borderStyle",
             title: "Border Style",
             values: BorderStyle.values);
-        final strokeAlign = provider.doubleField(
-            id: "strokeAlign", title: "Stroke Align");
-        final gapPadding = provider.doubleField(
-            id: "gapPadding", title: "Gap Padding");
+        final strokeAlign =
+            provider.doubleField(id: "strokeAlign", title: "Stroke Align");
+        final gapPadding =
+            provider.doubleField(id: "gapPadding", title: "Gap Padding");
 
         final enabled = provider.booleanField(id: "enabled", title: "Enabled");
         final semanticCounterText = provider.stringField(
@@ -211,29 +215,32 @@ class TextFieldPropertyExplorer extends StatelessWidget {
         final alignLabelWithHint = provider.booleanField(
             id: "alignLabelWithHint", title: "AlignLabel With Hint");
 
-        final maxHeight = provider.doubleField(
-            id: "maxHeight", title: "Maximum Height");
-        final minHeight = provider.doubleField(
-            id: "minHeight", title: "minimum Height");
-        final maxWidth = provider.doubleField(
-            id: "maxWidth", title: "Maximum Width");
-        final minWidth = provider.doubleField(
-            id: "minWidth", title: "Minimum Width");
+        final maxHeight =
+            provider.doubleField(id: "maxHeight", title: "Maximum Height");
+        final minHeight =
+            provider.doubleField(id: "minHeight", title: "minimum Height");
+        final maxWidth =
+            provider.doubleField(id: "maxWidth", title: "Maximum Width");
+        final minWidth =
+            provider.doubleField(id: "minWidth", title: "Minimum Width");
 
-
-        final keyboardType = provider.listField(id: "keyboardType",
+        final keyboardType = provider.listField(
+            id: "keyboardType",
             title: "Keyboard Type",
             values: TextInputType.values);
-        final textInputAction = provider.listField(id: "textInputAction",
+        final textInputAction = provider.listField(
+            id: "textInputAction",
             title: "Text Input Action",
             values: TextInputAction.values);
-        final textCapitalization = provider.listField(id: "textCapitalization",
+        final textCapitalization = provider.listField(
+            id: "textCapitalization",
             title: "Text Capitalization",
             values: TextCapitalization.values);
         final style = provider.textStyleField(id: "style", title: "Style");
         final textAlign = provider.listField(
             id: "textAlign", title: "Text Align", values: TextAlign.values);
-        final textAlignVertical = provider.listField(id: "textAlignVertical",
+        final textAlignVertical = provider.listField(
+            id: "textAlignVertical",
             title: "TextAlign Vertical",
             values: [
               TextAlignVertical.bottom,
@@ -242,8 +249,8 @@ class TextFieldPropertyExplorer extends StatelessWidget {
             ]);
         final textDirection = provider.textDirectionField(
             id: "textDirection", title: "Text Direction");
-        final readOnly = provider.booleanField(
-            id: "readOnly", title: "Read Only");
+        final readOnly =
+            provider.booleanField(id: "readOnly", title: "Read Only");
 
         final copyToolBarOption = provider.booleanField(
             id: "copyToolBarOption", title: "Copy ToolBar Option");
@@ -254,47 +261,49 @@ class TextFieldPropertyExplorer extends StatelessWidget {
         final selectAllToolBarOption = provider.booleanField(
             id: "selectAllToolBarOption", title: "SelectAll ToolBar Option");
 
-        final showCursor = provider.booleanField(
-            id: "showCursor", title: "Show Cursor");
-        final autofocus = provider.booleanField(
-            id: "autofocus", title: "Autofocus");
+        final showCursor =
+            provider.booleanField(id: "showCursor", title: "Show Cursor");
+        final autofocus =
+            provider.booleanField(id: "autofocus", title: "Autofocus");
         final obscuringCharacter = provider.stringField(
             id: "obscuringCharacter", title: "Obscuring Character");
-        final obscureText = provider.booleanField(
-            id: "obscureText", title: "Obscure Text");
-        final autocorrect = provider.booleanField(
-            id: "autocorrect", title: "Auto Correct");
-        final smartDashesType = provider.listField(id: "smartDashesType",
+        final obscureText =
+            provider.booleanField(id: "obscureText", title: "Obscure Text");
+        final autocorrect =
+            provider.booleanField(id: "autocorrect", title: "Auto Correct");
+        final smartDashesType = provider.listField(
+            id: "smartDashesType",
             title: "Smart Dashes Type",
             values: SmartDashesType.values);
-        final smartQuotesType = provider.listField(id: "smartQuotesType",
+        final smartQuotesType = provider.listField(
+            id: "smartQuotesType",
             title: "Smart Quotes Type",
             values: SmartQuotesType.values);
         final enableSuggestions = provider.booleanField(
             id: "enableSuggestions", title: "Enable Suggestions");
-        final maxLines = provider.intField(
-            id: "maxLines", title: "Maximum Lines");
-        final minLines = provider.intField(
-            id: "minLines", title: "Minimum Lines");
+        final maxLines =
+            provider.intField(id: "maxLines", title: "Maximum Lines");
+        final minLines =
+            provider.intField(id: "minLines", title: "Minimum Lines");
         final expands = provider.booleanField(id: "expands", title: "Expands");
-        final maxLength = provider.intField(
-            id: "maxLength", title: "Maximum Length");
+        final maxLength =
+            provider.intField(id: "maxLength", title: "Maximum Length");
         final maxLengthEnforcement = provider.listField(
             id: "maxLengthEnforcement",
             title: "Maximum Length Enforcement",
             values: MaxLengthEnforcement.values);
-        final enabledText = provider.booleanField(
-            id: "enabledText", title: "Enabled Text");
-        final cursorWidth = provider.doubleField(
-            id: "cursorWidth", title: "Cursor Width");
-        final cursorHeight = provider.doubleField(
-            id: "cursorHeight", title: "Cursor Height");
-        final cursorRadius = provider.doubleField(
-            id: "cursorRadius", title: "Cursor Radius");
+        final enabledText =
+            provider.booleanField(id: "enabledText", title: "Enabled Text");
+        final cursorWidth =
+            provider.doubleField(id: "cursorWidth", title: "Cursor Width");
+        final cursorHeight =
+            provider.doubleField(id: "cursorHeight", title: "Cursor Height");
+        final cursorRadius =
+            provider.doubleField(id: "cursorRadius", title: "Cursor Radius");
         final cursorOpacityAnimates = provider.booleanField(
             id: "cursorOpacityAnimates", title: "Cursor Opacity Animates");
-        final cursorColor = provider.colorField(
-            id: "cursorColor", title: "Cursor Color");
+        final cursorColor =
+            provider.colorField(id: "cursorColor", title: "Cursor Color");
         final selectionHeightStyle = provider.listField(
             id: "selectionHeightStyle",
             title: "Selection Height Style",
@@ -303,24 +312,27 @@ class TextFieldPropertyExplorer extends StatelessWidget {
             id: "selectionWidthStyle",
             title: "Selection Width Style",
             values: BoxWidthStyle.values);
-        final keyboardAppearance = provider.listField(id: "keyboardAppearance",
+        final keyboardAppearance = provider.listField(
+            id: "keyboardAppearance",
             title: "Keyboard Appearance",
             values: Brightness.values);
         final scrollPadding = provider.edgeInsetsField(
             id: "scrollPadding", title: "Scroll Padding");
-        final dragStartBehavior = provider.listField(id: "dragStartBehavior",
+        final dragStartBehavior = provider.listField(
+            id: "dragStartBehavior",
             title: "Drag Start Behavior",
             values: DragStartBehavior.values);
         final enableInteractiveSelection = provider.booleanField(
             id: "enableInteractiveSelection",
             title: "Enable Interactive Selection");
-        final mouseCursor = provider.listField(id: "mouseCursor",
+        final mouseCursor = provider.listField(
+            id: "mouseCursor",
             title: "Mouse Cursor",
             values: [MouseCursor.defer, MouseCursor.uncontrolled]);
-        final clipBehavior = provider.clipField(
-            id: "clipBehavior", title: "ClipBehavior");
-        final restorationId = provider.stringField(
-            id: "restorationId", title: "RestorationId");
+        final clipBehavior =
+            provider.clipField(id: "clipBehavior", title: "ClipBehavior");
+        final restorationId =
+            provider.stringField(id: "restorationId", title: "RestorationId");
         final scribbleEnabled = provider.booleanField(
             id: "scribbleEnabled", title: "Scribble Enabled");
         final enableIMEPersonalizedLearning = provider.booleanField(
@@ -329,178 +341,179 @@ class TextFieldPropertyExplorer extends StatelessWidget {
         final canRequestFocus = provider.booleanField(
             id: "canRequestFocus", title: "Can Request Focus");
 
-
-        return TextField(
-          focusNode: FocusNode(),
-          decoration: InputDecoration(
-            icon: Icon(icon),
-            iconColor: iconColor,
-            label: Icon(
-                label
-            ),
-            labelText: labelText,
-            labelStyle: labelStyle,
-            floatingLabelStyle: floatingLabelStyle,
-            helperText: helperText,
-            helperStyle: helperStyle,
-            helperMaxLines: helperMaxLines,
-            hintText: hintText,
-            hintStyle: hintStyle,
-            hintTextDirection: hintTextDirection,
-            hintMaxLines: hintMaxLines,
-            error: Icon(error),
-            errorText: errorText,
-            errorStyle: errorStyle,
-            errorMaxLines: errorMaxLines,
-            floatingLabelAlignment: floatingLabelAlignment,
-            isCollapsed: isCollapsed ?? false,
-            isDense: isDense,
-            contentPadding: contentPadding,
-            prefixIcon: Icon(prefixIcon),
-            prefixIconConstraints: BoxConstraints(
-              maxHeight: prefixMaxHeight ?? double.infinity,
-              minHeight: prefixMinHeight ?? 0.0,
-              maxWidth: prefixMaxWidth ?? double.infinity,
-              minWidth: prefixMinWidth ?? 0.0,
-            ),
-            prefix: Icon(prefix),
-            prefixText: prefixText,
-            prefixStyle: prefixStyle,
-            prefixIconColor: prefixIconColor,
-            suffixIcon: Icon(suffixIcon),
-            suffixIconConstraints: BoxConstraints(
-              maxHeight: suffixMaxHeight ?? double.infinity,
-              minHeight: suffixMinHeight ?? 0.0,
-              maxWidth: suffixMaxWidth ?? double.infinity,
-              minWidth: suffixMinWidth ?? 0.0,
-            ),
-            suffixText: suffixText,
-            suffixStyle: suffixStyle,
-            suffixIconColor: suffixIconColor,
-            counter: Icon(counter),
-            counterText: counterText,
-            counterStyle: counterStyle,
-            filled: filled,
-            fillColor: fillColor,
-            focusColor: focusColor,
-            hoverColor: hoverColor,
-            errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: errorBorderColor ?? Colors.transparent,
-                width: errorBorderWidth ?? 1.0,
-                style: errorBorderStyle ?? BorderStyle.solid,
-                strokeAlign: errorStrokeAlign ?? 1.0,
+        return (
+          widget: TextField(
+            focusNode: FocusNode(),
+            decoration: InputDecoration(
+              icon: Icon(icon),
+              iconColor: iconColor,
+              label: Icon(label),
+              labelText: labelText,
+              labelStyle: labelStyle,
+              floatingLabelStyle: floatingLabelStyle,
+              helperText: helperText,
+              helperStyle: helperStyle,
+              helperMaxLines: helperMaxLines,
+              hintText: hintText,
+              hintStyle: hintStyle,
+              hintTextDirection: hintTextDirection,
+              hintMaxLines: hintMaxLines,
+              error: Icon(error),
+              errorText: errorText,
+              errorStyle: errorStyle,
+              errorMaxLines: errorMaxLines,
+              floatingLabelAlignment: floatingLabelAlignment,
+              isCollapsed: isCollapsed ?? false,
+              isDense: isDense,
+              contentPadding: contentPadding,
+              prefixIcon: Icon(prefixIcon),
+              prefixIconConstraints: BoxConstraints(
+                maxHeight: prefixMaxHeight ?? double.infinity,
+                minHeight: prefixMinHeight ?? 0.0,
+                maxWidth: prefixMaxWidth ?? double.infinity,
+                minWidth: prefixMinWidth ?? 0.0,
               ),
-              borderRadius: errorBorderRadius ?? BorderRadius.zero,
-              gapPadding: errorGapPadding ?? 4.0,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: focusBorderColor ?? Colors.transparent,
-                width: focusBorderWidth ?? 1.0,
-                style: focusBorderStyle ?? BorderStyle.solid,
-                strokeAlign: focusStrokeAlign ?? 1.0,
+              prefix: Icon(prefix),
+              prefixText: prefixText,
+              prefixStyle: prefixStyle,
+              prefixIconColor: prefixIconColor,
+              suffixIcon: Icon(suffixIcon),
+              suffixIconConstraints: BoxConstraints(
+                maxHeight: suffixMaxHeight ?? double.infinity,
+                minHeight: suffixMinHeight ?? 0.0,
+                maxWidth: suffixMaxWidth ?? double.infinity,
+                minWidth: suffixMinWidth ?? 0.0,
               ),
-              borderRadius: focusBorderRadius ?? BorderRadius.zero,
-              gapPadding: focusGapPadding ?? 4.0,
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: focusErrorBorderColor ?? Colors.transparent,
-                width: focusErrorBorderWidth ?? 1.0,
-                style: focusErrorBorderStyle ?? BorderStyle.solid,
-                strokeAlign: focusErrorStrokeAlign ?? 1.0,
+              suffixText: suffixText,
+              suffixStyle: suffixStyle,
+              suffixIconColor: suffixIconColor,
+              counter: Icon(counter),
+              counterText: counterText,
+              counterStyle: counterStyle,
+              filled: filled,
+              fillColor: fillColor,
+              focusColor: focusColor,
+              hoverColor: hoverColor,
+              errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: errorBorderColor ?? Colors.transparent,
+                  width: errorBorderWidth ?? 1.0,
+                  style: errorBorderStyle ?? BorderStyle.solid,
+                  strokeAlign: errorStrokeAlign ?? 1.0,
+                ),
+                borderRadius: errorBorderRadius ?? BorderRadius.zero,
+                gapPadding: errorGapPadding ?? 4.0,
               ),
-              borderRadius: focusErrorBorderRadius ?? BorderRadius.zero,
-              gapPadding: focusErrorGapPadding ?? 4.0,
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: disabledBorderColor ?? Colors.transparent,
-                width: disabledBorderWidth ?? 1.0,
-                style: disabledBorderStyle ?? BorderStyle.solid,
-                strokeAlign: disabledStrokeAlign ?? 1.0,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: focusBorderColor ?? Colors.transparent,
+                  width: focusBorderWidth ?? 1.0,
+                  style: focusBorderStyle ?? BorderStyle.solid,
+                  strokeAlign: focusStrokeAlign ?? 1.0,
+                ),
+                borderRadius: focusBorderRadius ?? BorderRadius.zero,
+                gapPadding: focusGapPadding ?? 4.0,
               ),
-              borderRadius: disabledBorderRadius ?? BorderRadius.zero,
-              gapPadding: disabledGapPadding ?? 4.0,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: enabledBorderColor ?? Colors.transparent,
-                width: enabledBorderWidth ?? 1.0,
-                style: enabledBorderStyle ?? BorderStyle.solid,
-                strokeAlign: enabledStrokeAlign ?? 1.0,
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: focusErrorBorderColor ?? Colors.transparent,
+                  width: focusErrorBorderWidth ?? 1.0,
+                  style: focusErrorBorderStyle ?? BorderStyle.solid,
+                  strokeAlign: focusErrorStrokeAlign ?? 1.0,
+                ),
+                borderRadius: focusErrorBorderRadius ?? BorderRadius.zero,
+                gapPadding: focusErrorGapPadding ?? 4.0,
               ),
-              borderRadius: enabledBorderRadius ?? BorderRadius.zero,
-              gapPadding: enabledGapPadding ?? 4.0,
-            ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: borderColor ?? Colors.transparent,
-                width: borderWidth ?? 1.0,
-                style: borderStyle ?? BorderStyle.solid,
-                strokeAlign: strokeAlign ?? 1.0,
+              disabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: disabledBorderColor ?? Colors.transparent,
+                  width: disabledBorderWidth ?? 1.0,
+                  style: disabledBorderStyle ?? BorderStyle.solid,
+                  strokeAlign: disabledStrokeAlign ?? 1.0,
+                ),
+                borderRadius: disabledBorderRadius ?? BorderRadius.zero,
+                gapPadding: disabledGapPadding ?? 4.0,
               ),
-              borderRadius: borderRadius ?? BorderRadius.zero,
-              gapPadding: gapPadding ?? 4.0,
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: enabledBorderColor ?? Colors.transparent,
+                  width: enabledBorderWidth ?? 1.0,
+                  style: enabledBorderStyle ?? BorderStyle.solid,
+                  strokeAlign: enabledStrokeAlign ?? 1.0,
+                ),
+                borderRadius: enabledBorderRadius ?? BorderRadius.zero,
+                gapPadding: enabledGapPadding ?? 4.0,
+              ),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: borderColor ?? Colors.transparent,
+                  width: borderWidth ?? 1.0,
+                  style: borderStyle ?? BorderStyle.solid,
+                  strokeAlign: strokeAlign ?? 1.0,
+                ),
+                borderRadius: borderRadius ?? BorderRadius.zero,
+                gapPadding: gapPadding ?? 4.0,
+              ),
+              enabled: enabled ?? true,
+              semanticCounterText: semanticCounterText,
+              alignLabelWithHint: alignLabelWithHint,
+              constraints: BoxConstraints(
+                maxHeight: maxHeight ?? double.infinity,
+                minHeight: minHeight ?? 0.0,
+                maxWidth: maxWidth ?? double.infinity,
+                minWidth: minWidth ?? 0.0,
+              ),
             ),
-            enabled: enabled ?? true,
-            semanticCounterText: semanticCounterText,
-            alignLabelWithHint: alignLabelWithHint,
-            constraints: BoxConstraints(
-              maxHeight: maxHeight ?? double.infinity,
-              minHeight: minHeight ?? 0.0,
-              maxWidth: maxWidth ?? double.infinity,
-              minWidth: minWidth ?? 0.0,
+            keyboardType: keyboardType,
+            textInputAction: textInputAction,
+            textCapitalization: textCapitalization ?? TextCapitalization.none,
+            style: style,
+            textAlign: textAlign ?? TextAlign.start,
+            textAlignVertical: textAlignVertical,
+            textDirection: textDirection,
+            readOnly: readOnly ?? false,
+            toolbarOptions: ToolbarOptions(
+              copy: copyToolBarOption ?? false,
+              cut: cutToolBarOption ?? false,
+              paste: pasteToolBarOption ?? false,
+              selectAll: selectAllToolBarOption ?? false,
             ),
+            showCursor: showCursor,
+            autofocus: autofocus ?? false,
+            obscuringCharacter: obscuringCharacter ?? "*",
+            obscureText: obscureText ?? false,
+            autocorrect: autocorrect ?? true,
+            smartDashesType: smartDashesType,
+            smartQuotesType: smartQuotesType,
+            enableSuggestions: enableSuggestions ?? true,
+            maxLines: maxLines ?? 1,
+            minLines: minLines,
+            expands: expands ?? false,
+            maxLength: maxLength,
+            maxLengthEnforcement: maxLengthEnforcement,
+            inputFormatters: const [],
+            enabled: enabledText,
+            cursorWidth: cursorWidth ?? 2.0,
+            cursorHeight: cursorHeight,
+            cursorRadius: Radius.circular(cursorRadius ?? 0.0),
+            cursorOpacityAnimates: cursorOpacityAnimates,
+            cursorColor: cursorColor,
+            selectionHeightStyle: selectionHeightStyle ?? BoxHeightStyle.tight,
+            selectionWidthStyle: selectionWidthStyle ?? BoxWidthStyle.tight,
+            keyboardAppearance: keyboardAppearance,
+            scrollPadding: scrollPadding ?? const EdgeInsets.all(2.0),
+            dragStartBehavior: dragStartBehavior ?? DragStartBehavior.start,
+            enableInteractiveSelection: enableInteractiveSelection,
+            mouseCursor: mouseCursor,
+            clipBehavior: clipBehavior ?? Clip.none,
+            restorationId: restorationId,
+            scribbleEnabled: scribbleEnabled ?? true,
+            enableIMEPersonalizedLearning:
+                enableIMEPersonalizedLearning ?? true,
+            canRequestFocus: canRequestFocus ?? true,
+            magnifierConfiguration: TextMagnifierConfiguration.disabled,
           ),
-          keyboardType: keyboardType,
-          textInputAction: textInputAction,
-          textCapitalization: textCapitalization ?? TextCapitalization.none,
-          style: style,
-          textAlign: textAlign ?? TextAlign.start,
-          textAlignVertical: textAlignVertical,
-          textDirection: textDirection,
-          readOnly: readOnly ?? false,
-          toolbarOptions: ToolbarOptions(
-            copy: copyToolBarOption ?? false,
-            cut: cutToolBarOption ?? false,
-            paste: pasteToolBarOption ?? false,
-            selectAll: selectAllToolBarOption ?? false,
-          ),
-          showCursor: showCursor,
-          autofocus: autofocus ?? false,
-          obscuringCharacter: obscuringCharacter ?? "*",
-          obscureText: obscureText ?? false,
-          autocorrect: autocorrect ?? true,
-          smartDashesType: smartDashesType,
-          smartQuotesType: smartQuotesType,
-          enableSuggestions: enableSuggestions ?? true,
-          maxLines: maxLines ?? 1,
-          minLines: minLines,
-          expands: expands ?? false,
-          maxLength: maxLength,
-          maxLengthEnforcement: maxLengthEnforcement,
-          inputFormatters: const [],
-          enabled: enabledText,
-          cursorWidth: cursorWidth ?? 2.0,
-          cursorHeight: cursorHeight,
-          cursorRadius: Radius.circular(cursorRadius ?? 0.0),
-          cursorOpacityAnimates: cursorOpacityAnimates,
-          cursorColor: cursorColor,
-          selectionHeightStyle: selectionHeightStyle ?? BoxHeightStyle.tight,
-          selectionWidthStyle: selectionWidthStyle ?? BoxWidthStyle.tight,
-          keyboardAppearance: keyboardAppearance,
-          scrollPadding: scrollPadding ?? const EdgeInsets.all(2.0),
-          dragStartBehavior: dragStartBehavior ?? DragStartBehavior.start,
-          enableInteractiveSelection: enableInteractiveSelection,
-          mouseCursor: mouseCursor,
-          clipBehavior: clipBehavior ?? Clip.none,
-          restorationId: restorationId,
-          scribbleEnabled: scribbleEnabled ?? true,
-          enableIMEPersonalizedLearning: enableIMEPersonalizedLearning ?? true,
-          canRequestFocus: canRequestFocus ?? true,
-          magnifierConfiguration: TextMagnifierConfiguration.disabled,
+          code: "TextField code goes here...",
         );
       },
     );

@@ -31,16 +31,19 @@ class DrawerPropertyExplorer extends StatelessWidget {
         final clipBehavior =
             provider.clipField(id: "clipBehavior", title: "Clip Behavior");
 
-        return Drawer(
-          width: width,
-          backgroundColor: bgColor,
-          elevation: elevation,
-          shadowColor: shadowColor,
-          surfaceTintColor: surfaceColor,
-          shape: shape,
-          semanticLabel: semanticLabel,
-          clipBehavior: clipBehavior,
-          child: ListView(),
+        return (
+          widget: Drawer(
+            width: width,
+            backgroundColor: bgColor,
+            elevation: elevation,
+            shadowColor: shadowColor,
+            surfaceTintColor: surfaceColor,
+            shape: shape,
+            semanticLabel: semanticLabel,
+            clipBehavior: clipBehavior,
+            child: ListView(),
+          ),
+          code: "Drawer code goes here...",
         );
       },
     );

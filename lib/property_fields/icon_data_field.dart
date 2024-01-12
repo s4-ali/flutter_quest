@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/icon_data_field.dart';
 
-class IconDataPropertyParams extends PropertyParams<IconData> {
+class IconDataPropertyParams extends BasePropertyParams<IconData> {
   IconDataPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,7 +30,7 @@ class IconDataPropertyField
   }
 }
 
-extension IconFieldPropertyProvider on PropertyProvider {
+extension IconFieldPropertyProvider on PropertiesNotifier {
   IconData? iconDataField({
     required String id,
     required String title,

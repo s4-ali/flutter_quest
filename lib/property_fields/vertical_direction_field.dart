@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/vertical_direction_field.dart';
 
-class VerticalDirectionPropertyParams extends PropertyParams<VerticalDirection> {
+class VerticalDirectionPropertyParams extends BasePropertyParams<VerticalDirection> {
   VerticalDirectionPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,7 +30,7 @@ class VerticalDirectionPropertyField
   }
 }
 
-extension VerticalDirectionFieldPropertyProvider on PropertyProvider {
+extension VerticalDirectionFieldPropertyProvider on PropertiesNotifier {
   VerticalDirection? verticalDirectionField({
     required String id,
     required String title,

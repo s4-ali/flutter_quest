@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/shape_border_field.dart';
 
-class ShapeBorderPropertyParams extends PropertyParams<ShapeBorder> {
+class ShapeBorderPropertyParams extends BasePropertyParams<ShapeBorder> {
   ShapeBorderPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,7 +30,7 @@ class ShapeBorderPropertyField
   }
 }
 
-extension ShapeBorderFieldPropertyProvider on PropertyProvider {
+extension ShapeBorderFieldPropertyProvider on PropertiesNotifier {
   ShapeBorder? shapeBorderField({
     required String id,
     required String title,

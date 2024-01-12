@@ -3,6 +3,7 @@ import 'package:flutter_quest/catalog/widgets_list.dart';
 import 'package:flutter_quest/utils/extensions.dart';
 import 'package:flutter_quest/widgets/animated_card.dart';
 import 'package:flutter_quest/widgets/app_bar.dart';
+import 'package:flutter_quest/widgets/core/editor.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class Home extends StatefulWidget {
@@ -13,11 +14,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late ExplorableWidget selectedWidget;
 
   @override
   void initState() {
-    selectedWidget = widgetsList.first;
     super.initState();
   }
 
@@ -39,22 +38,13 @@ class _HomeState extends State<Home> {
   }
 
   Widget buildTablet(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SizedBox(
         width: double.maxFinite,
         child: Row(
           children: [
-            WidgetsListDrawer(
-              onWidgetSelected: (widget) {
-                setState(() {
-                  selectedWidget = widget;
-                });
-              },
-              selectedWidget: selectedWidget,
-            ),
-            Expanded(
-              child: selectedWidget.widget,
-            ),
+            WidgetsListDrawer(),
+            Expanded(child: WidgetEditor())
           ],
         ),
       ),
@@ -100,3 +90,5 @@ class SelectWidget extends StatelessWidget {
     );
   }
 }
+
+

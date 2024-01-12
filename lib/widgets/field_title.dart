@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/core/property_provider.dart';
+import 'package:flutter_quest/core/logger.dart';
+import 'package:flutter_quest/core/property_params.dart';
 
 class FieldTitle extends StatefulWidget {
-  final PropertyParams params;
+  final BasePropertyParams params;
   final Widget? child;
   final void Function(dynamic) onChanged;
   final bool inline;
@@ -20,17 +21,23 @@ class FieldTitle extends StatefulWidget {
 }
 
 class _FieldTitleState extends State<FieldTitle> {
-  bool get isEnabled => widget.child != null;
-  bool expanded = false;
+  late bool expanded;
   final controller = ExpansionTileController();
 
   @override
+  void initState() {
+    expanded = widget.child != null;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    log.i("expanded: $expanded");
     return ExpansionTile(
       title: Text(widget.params.title),
       onExpansionChanged: onExpansionChanged,
       controller: controller,
-      initiallyExpanded: widget.child != null,
+      initiallyExpanded: expanded,
       trailing: AnimatedRotation(
         turns: expanded ? 315 / 360 : 0,
         duration: const Duration(milliseconds: 350),

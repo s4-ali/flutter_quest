@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/boolean_field.dart';
 
 
-class BooleanPropertyParams extends PropertyParams<bool> {
+class BooleanPropertyParams extends BasePropertyParams<bool> {
   BooleanPropertyParams({
     required super.id,
     super.initialValue,
@@ -30,7 +31,7 @@ class BooleanPropertyField
   }
 }
 
-extension BooleanFieldPropertyProvider on PropertyProvider {
+extension BooleanFieldPropertyProvider on PropertiesNotifier {
   bool? booleanField({
     required String id,
     required String title,

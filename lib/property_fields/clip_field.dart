@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/clip_field.dart';
 
-class ClipPropertyParams extends PropertyParams<Clip> {
+class ClipPropertyParams extends BasePropertyParams<Clip> {
   ClipPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,7 +30,7 @@ class ClipPropertyField
   }
 }
 
-extension ClipFieldPropertyProvider on PropertyProvider {
+extension ClipFieldPropertyProvider on PropertiesNotifier {
   Clip? clipField({
     required String id,
     required String title,

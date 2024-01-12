@@ -1,10 +1,10 @@
-import 'package:dart_code_viewer2/dart_code_viewer2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/catalog/widgets_list.dart';
+import 'package:flutter_quest/core/explorable_widget.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/utils/extensions.dart';
-import 'package:flutter_quest/widgets/core/properties_drawer.dart';
 import 'package:flutter_quest/widgets/switch_theme_icon_button.dart';
 import 'package:flutter_quest/widgets/theme_colors.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class WidgetEditorPage extends StatelessWidget {
@@ -22,17 +22,9 @@ class WidgetEditorPage extends StatelessWidget {
 }
 
 class WidgetEditor extends StatefulWidget {
-  final String title;
-  final Widget widget;
-  final List<Widget>? properties;
-  final String code;
 
   const WidgetEditor({
     super.key,
-    required this.title,
-    required this.widget,
-    required this.code,
-    this.properties,
   });
 
   @override
@@ -41,18 +33,10 @@ class WidgetEditor extends StatefulWidget {
 
 class _WidgetEditorState extends State<WidgetEditor>
     with TickerProviderStateMixin {
-  late Widget selectedWidget;
-
-  Widget? buildPropertyDrawer() {
-    if (widget.properties == null) {
-      return null;
-    }
-    return PropertiesDrawer(title: widget.title, widgets: widget.properties!);
-  }
 
   AppBar buildAppBar() {
     return AppBar(
-      title: Text(widget.title),
+      title: const Text("widget.title"),
       // actions: [
       //   IconButton(
       //     onPressed: () {},
@@ -65,87 +49,79 @@ class _WidgetEditorState extends State<WidgetEditor>
   Widget buildMobile(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      endDrawer: buildPropertyDrawer(),
-      body: widget.widget,
+      endDrawer: const SizedBox(),
+      body: const SizedBox(),
     );
   }
 
   Widget buildTablet(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Consumer<ActiveWidgetNotifier>(
+      builder: (_, notifier, __){
+        return DefaultTabController(
+          length: 2,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Column(
                   children: [
-                    const SizedBox(
-                      width: 300,
-                      child: TabBar(
-                        tabs: [
-                          Tab(
-                            text: "Widget",
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const SizedBox(
+                          width: 300,
+                          child: TabBar(
+                            tabs: [
+                              Tab(
+                                text: "Widget",
+                              ),
+                              Tab(
+                                text: "Code",
+                              ),
+                            ],
                           ),
-                          Tab(
-                            text: "Code",
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            notifier.explorable.title,
+                            style: context.textTheme.titleLarge,
                           ),
+                        ),
+                        const Row(
+                          children: [
+                            ThemeColors(),
+                            SwitchThemeIconButton(),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: TabBarView(
+                        children: [
+                          Center(
+                            child: notifier.explorable.widget,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: notifier.explorable.code,
+                          )
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        widget.title,
-                        style: context.textTheme.titleLarge,
-                      ),
-                    ),
-                    const Row(
-                      children: [
-                        ThemeColors(),
-                        SwitchThemeIconButton(),
-                      ],
-                    ),
                   ],
                 ),
-                Expanded(
-                  child: TabBarView(
-                    children: [
-                      Center(
-                        child: widget.widget,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: DartCodeViewer(
-                          widget.code,
-                          classStyle: TextStyle(
-                            color: context.colorScheme.primary,
-                          ),
-                          numberStyle: TextStyle(
-                            color: context.colorScheme.tertiary,
-                          ),
-                          punctuationStyle: TextStyle(
-                            color: context.colorScheme.onSurface,
-                          ),
-                          showCopyButton: false,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+              notifier.explorable.drawer,
+            ],
           ),
-          if (widget.properties != null) buildPropertyDrawer()!,
-        ],
-      ),
+        );
+      },
     );
   }
 
   Widget buildDesktop(BuildContext context) {
-    return const SizedBox();
+    return buildTablet(context);
   }
 
   @override

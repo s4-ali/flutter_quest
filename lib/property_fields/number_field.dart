@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/number_field.dart';
 
-class NumberPropertyParams extends PropertyParams<num> {
+class NumberPropertyParams extends BasePropertyParams<num> {
   NumberPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,7 +30,7 @@ class NumberPropertyField extends PropertyField<NumberPropertyParams, num> {
   }
 }
 
-extension NumberFieldPropertyProvider on PropertyProvider {
+extension NumberFieldPropertyProvider on PropertiesNotifier {
   num? numberField({
     required String id,
     required String title,

@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-extension PropertyHolderListExtension on List<PropertyHolder> {
-  void update(PropertyHolder property) {
+extension PropertyIdentifierListExtension on List<PropertyIdentifier> {
+  void update(PropertyIdentifier property) {
     final widget = firstWhere((element) => element.id == property.id);
     final index = indexOf(widget);
     remove(widget);
@@ -16,11 +16,15 @@ extension PropertyHolderListExtension on List<PropertyHolder> {
   }
 }
 
-class PropertyHolder<T> {
+/// Encapsulates the property widget with it's unique id.
+class PropertyIdentifier<T> {
+  /// This is used to store a value against this property
   final String id;
+
+  /// This is the property widget that will get displayed in properties panel
   final Widget widget;
 
-  const PropertyHolder({
+  const PropertyIdentifier({
     required this.id,
     required this.widget,
   });

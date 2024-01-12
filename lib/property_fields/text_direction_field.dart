@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/text_direction_field.dart';
 
-class TextDirectionPropertyParams extends PropertyParams<TextDirection> {
+class TextDirectionPropertyParams extends BasePropertyParams<TextDirection> {
   TextDirectionPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,7 +30,7 @@ class TextDirectionPropertyField
   }
 }
 
-extension TextDirectionFieldPropertyProvider on PropertyProvider {
+extension TextDirectionFieldPropertyProvider on PropertiesNotifier {
   TextDirection? textDirectionField({
     required String id,
     required String title,

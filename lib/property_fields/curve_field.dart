@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/curve_field.dart';
 
-class CurvePropertyParams extends PropertyParams<Curve> {
+class CurvePropertyParams extends BasePropertyParams<Curve> {
   CurvePropertyParams({
     required super.id,
     super.initialValue,
@@ -29,7 +30,7 @@ class CurvePropertyField
   }
 }
 
-extension CurveFieldPropertyProvider on PropertyProvider {
+extension CurveFieldPropertyProvider on PropertiesNotifier {
   Curve? curveField({
     required String id,
     required String title,

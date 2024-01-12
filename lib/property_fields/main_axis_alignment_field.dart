@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/main_axis_alignment_field.dart';
 
-class MainAxisAlignmentPropertyParams extends PropertyParams<MainAxisAlignment> {
+class MainAxisAlignmentPropertyParams extends BasePropertyParams<MainAxisAlignment> {
   MainAxisAlignmentPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,7 +30,7 @@ class MainAxisAlignmentPropertyField
   }
 }
 
-extension MainAxisAlignmentFieldPropertyProvider on PropertyProvider {
+extension MainAxisAlignmentFieldPropertyProvider on PropertiesNotifier {
   MainAxisAlignment? mainAxisAlignmentField({
     required String id,
     required String title,

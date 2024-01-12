@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/cross_axis_alignemnt_field.dart';
 
-class CrossAxisAlignmentPropertyParams extends PropertyParams<CrossAxisAlignment> {
+class CrossAxisAlignmentPropertyParams extends BasePropertyParams<CrossAxisAlignment> {
   CrossAxisAlignmentPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,7 +30,7 @@ class CrossAxisAlignmentPropertyField
   }
 }
 
-extension CrossAxisAlignemntFieldPropertyProvider on PropertyProvider {
+extension CrossAxisAlignemntFieldPropertyProvider on PropertiesNotifier {
   CrossAxisAlignment? crossAxisAlignmentField({
     required String id,
     required String title,

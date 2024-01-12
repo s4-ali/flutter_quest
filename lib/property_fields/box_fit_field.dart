@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/box_fit_field.dart';
 
-class BoxFitPropertyParams extends PropertyParams<BoxFit> {
+class BoxFitPropertyParams extends BasePropertyParams<BoxFit> {
   BoxFitPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,7 +30,7 @@ class BoxFitPropertyField
   }
 }
 
-extension BoxFitFieldPropertyProvider on PropertyProvider {
+extension BoxFitFieldPropertyProvider on PropertiesNotifier {
   BoxFit? boxFitField({
     required String id,
     required String title,

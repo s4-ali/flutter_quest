@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/image_provider_field.dart';
 
-class ImageProviderPropertyParams extends PropertyParams<ImageProvider> {
+class ImageProviderPropertyParams extends BasePropertyParams<ImageProvider> {
   ImageProviderPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,7 +30,7 @@ class ImageProviderPropertyField
   }
 }
 
-extension ImageProviderFieldPropertyProvider on PropertyProvider {
+extension ImageProviderFieldPropertyProvider on PropertiesNotifier {
   ImageProvider? imageProviderField({
     required String id,
     required String title,

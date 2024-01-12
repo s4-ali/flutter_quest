@@ -1,76 +1,109 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_quest/core/explorable_widget.dart';
+import 'package:flutter_quest/core/property_params.dart';
 
 import '../widgets/field_title.dart';
-import 'property_holder.dart';
+import 'property_identifier.dart';
 
-class PropertyProvider {
-  final List<void Function()> _listeners = [];
-  final List<PropertyHolder> widgets = [];
-  final Map<String, dynamic> values = {};
+/// Holds the currently active properties notifier
+class ActiveWidgetNotifier extends ChangeNotifier {
+  ExplorableWidget _widget;
+  ExplorableWidget get explorable => _widget;
 
-  void addListener(void Function() listener) {
-    if (!_listeners.contains(listener)) {
-      _listeners.add(listener);
-    }
+  ActiveWidgetNotifier(this._widget);
+
+  void update({required ExplorableWidget explorable}){
+    _widget = explorable;
+    notifyListeners();
+  }
+}
+
+/// Holds a list of properties of an [ExplorableWidget] and
+/// the values against those properties.
+abstract class PropertiesNotifier<T> extends ChangeNotifier
+    with DiagnosticableTreeMixin {
+
+  T get fieldValues;
+  String get code;
+  PropertiesNotifier(){
+    registerFields();
+  }
+  /// List of property widgets
+  final List<PropertyIdentifier> properties = [];
+
+  /// Values of each property
+  final Map<String, dynamic> _values = {};
+
+  void updateProperty(PropertyIdentifier widget) {
+    properties.update(widget);
   }
 
-  void notifyListeners() {
-    for (final listener in _listeners) {
-      listener();
-    }
+  void setValueOf(String id, dynamic value) {
+    _values[id] = value;
+    notifyListeners();
   }
 
-  dynamic getValueOf(String id, dynamic initial) {
-    if (values[id] == null) {
-      values[id] = initial;
+  dynamic getValueOf(String id, [dynamic initial]) {
+    if (_values[id] == null) {
+      _values[id] = initial;
     }
-    return values[id];
+    return _values[id];
   }
 
   void setInitialValue(String id, value) {
-    if (values.keys.contains(id)) return;
-    values[id] = value;
+    if (_values.keys.contains(id)) return;
+    _values[id] = value;
+  }
+
+  Widget buildPreview(BuildContext context);
+
+  void registerFields();
+
+  /// called when field is closed or opened
+  void onFieldUpdated(){
+    notifyListeners();
   }
 }
 
-class PropertyParams<T> {
-  final String id;
-  final String title;
-  final T? initialValue;
-  final T defaultValue;
-  final bool isOptional;
+class BuildResult<T> extends ChangeNotifier with DiagnosticableTreeMixin{
+  Widget _widget = const SizedBox.shrink();
+  String _code = "";
 
-  PropertyParams({
-    required this.id,
-    required this.title,
-    required this.defaultValue,
-    this.isOptional = true,
-    T? initialValue,
-  }) : initialValue = isOptional ? initialValue : initialValue ?? defaultValue;
+  Widget get widget => _widget;
+
+  String get code => _code;
+
+  void update({
+    required Widget widget,
+    required String code,
+  }) {
+    this._widget = widget;
+    this._code = code;
+  }
 }
 
-abstract class PropertyField<T extends PropertyParams, U> {
-  final PropertyProvider _provider;
+abstract class PropertyField<T extends BasePropertyParams, U> {
+  final PropertiesNotifier _props;
   final T params;
 
   bool get inline => false;
 
-  PropertyField(this._provider, this.params);
+  PropertyField(this._props, this.params);
 
   Widget build(T params, Function(U) onChanged, U value);
 
-  U? call() {
-    _provider.setInitialValue(params.id, params.initialValue);
+  void register() {
+    _props.setInitialValue(params.id, params.initialValue);
 
-    if (_provider.widgets.alreadyExists(params.id)) {
-      return _provider.getValueOf(
-          params.id, params.isOptional ? null : params.initialValue);
+    if (_props.properties.alreadyExists(params.id)) {
+      return;
     }
 
-    PropertyHolder buildPropertyField(Function(U?) onChanged) {
-      final value = _provider.getValueOf(
+    PropertyIdentifier buildPropertyField(Function(U?) onChanged) {
+      final value = _props.getValueOf(
           params.id, params.isOptional ? null : params.initialValue);
-      return PropertyHolder<U>(
+      return PropertyIdentifier<U>(
         id: params.id,
         widget: FieldTitle(
           params: params,
@@ -88,16 +121,10 @@ abstract class PropertyField<T extends PropertyParams, U> {
     }
 
     void onValueUpdated(U? newValue) {
-      _provider.values[params.id] = newValue;
-      _provider.widgets.update(buildPropertyField(onValueUpdated));
-      _provider.notifyListeners();
+      _props.setValueOf(params.id, newValue);
+      _props.updateProperty(buildPropertyField(onValueUpdated));
     }
 
-    _provider.widgets.add(buildPropertyField(onValueUpdated));
-    Future.delayed(
-      const Duration(milliseconds: 100),
-      _provider.notifyListeners,
-    );
-    return _provider.values[params.id];
+    _props.properties.add(buildPropertyField(onValueUpdated));
   }
 }

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/catalog/home.dart';
 import 'package:flutter_quest/catalog/properties_list.dart';
+import 'package:flutter_quest/catalog/widgets.providers.g.dart';
+import 'package:flutter_quest/catalog/widgets/divider.dart';
+import 'package:flutter_quest/catalog/widgets_list.dart';
+import 'package:provider/provider.dart';
+
+import 'core/property_provider.dart';
 
 enum InitialScreen{
   home,
@@ -32,39 +38,42 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Color>(
-      valueListenable: themeColorNotifier,
-      builder: (_, color, __) {
-        return ValueListenableBuilder<ThemeMode>(
-          valueListenable: themeNotifier,
-          builder: (_, mode, __) {
-            return MaterialApp(
-              title: 'Flutter Quest',
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(
-                  seedColor: color,
-                  brightness: Brightness.light,
+    return MultiProvider(
+      providers: getProviders(),
+      builder: (_,__) => ValueListenableBuilder<Color>(
+        valueListenable: themeColorNotifier,
+        builder: (_, color, __) {
+          return ValueListenableBuilder<ThemeMode>(
+            valueListenable: themeNotifier,
+            builder: (_, mode, __) {
+              return MaterialApp(
+                title: 'Flutter Quest',
+                debugShowCheckedModeBanner: false,
+                theme: ThemeData(
+                  colorScheme: ColorScheme.fromSeed(
+                    seedColor: color,
+                    brightness: Brightness.light,
+                  ),
+                  sliderTheme: const SliderThemeData(
+                    showValueIndicator: ShowValueIndicator.always,
+                  ),
                 ),
-                sliderTheme: const SliderThemeData(
-                  showValueIndicator: ShowValueIndicator.always,
+                darkTheme: ThemeData(
+                  colorScheme: ColorScheme.fromSeed(
+                    seedColor: color,
+                    brightness: Brightness.dark,
+                  ),
+                  sliderTheme: const SliderThemeData(
+                    showValueIndicator: ShowValueIndicator.always,
+                  ),
                 ),
-              ),
-              darkTheme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(
-                  seedColor: color,
-                  brightness: Brightness.dark,
-                ),
-                sliderTheme: const SliderThemeData(
-                  showValueIndicator: ShowValueIndicator.always,
-                ),
-              ),
-              themeMode: mode,
-              home: _initialScreen.widget,
-            );
-          },
-        );
-      },
+                themeMode: mode,
+                home: const Home(),//_initialScreen.widget,
+              );
+            },
+          );
+        },
+      ) ,
     );
   }
 }

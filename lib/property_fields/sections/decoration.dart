@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/sections/decoration.dart';
 
-class DecorationPropertyParams extends PropertyParams<BoxDecoration> {
+class DecorationPropertyParams extends BasePropertyParams<BoxDecoration> {
   DecorationPropertyParams({
     required super.id,
     super.initialValue,
@@ -26,7 +27,7 @@ class DecorationPropertySection
   }
 }
 
-extension DecorationPropertyProvider on PropertyProvider {
+extension DecorationPropertyProvider on PropertiesNotifier {
   BoxDecoration? decorationSection({
     required String id,
     required String title,

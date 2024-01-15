@@ -5,180 +5,6 @@ import 'package:flutter_quest/property_fields/color_field.dart';
 import 'package:flutter_quest/property_fields/list_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/property_fields/string_field.dart';
-import 'package:flutter_quest/widgets/core/propery_builder.dart';
-
-class CheckBoxPropertyExplorer extends StatelessWidget {
-  const CheckBoxPropertyExplorer({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return PropertyExplorerBuilder(
-      widgetName: "CheckBox",
-      builder: (PropertiesNotifier provider) {
-        final value = provider.booleanField(
-          id: "value",
-          title: "Value",
-        );
-        final triState = provider.booleanField(
-          id: "triState",
-          title: "TriState",
-        );
-        final mouseCursor = provider.listField<MouseCursor>(
-          id: "mouseCursor",
-          title: "MouseCursor",
-          values: [MouseCursor.defer, MouseCursor.uncontrolled],
-        );
-        final activeColor = provider.colorField(
-          id: "activeColor",
-          title: "Active Color",
-        );
-        final fillColor = provider.colorField(
-          id: "fillColor",
-          title: "Fill Color",
-        );
-        final checkColor = provider.colorField(
-          id: "checkColor",
-          title: "Check Color",
-        );
-        final focusColor = provider.colorField(
-          id: "focusColor",
-          title: "Focus Color",
-        );
-        final hoverColor = provider.colorField(
-          id: "hoverColor",
-          title: "Hover Color",
-        );
-        final overLayColor = provider.colorField(
-          id: "overLayColor",
-          title: "Overlay Color",
-        );
-        final splashRadius =
-            provider.doubleField(id: "splashRadius", title: "Splash Radius");
-        final materialTapTargetSize = provider.listField<MaterialTapTargetSize>(
-          id: "materialTapTargetSize",
-          title: "Material Tap Target Size",
-          values: MaterialTapTargetSize.values,
-        );
-        final visualDensityVertical = provider.doubleField(
-            id: "visualDensityVertical", title: "Visual Density Vertical");
-        final visualDensityHorizontal = provider.doubleField(
-            id: "visualDensityHorizontal", title: "Visual Density Horizontal");
-
-        final autoFocus =
-            provider.booleanField(id: "autoFocus", title: "Auto Focus");
-        final eccentricity =
-            provider.doubleField(id: "eccentricity", title: "Eccentricity");
-        final borderColor = provider.colorField(
-          id: "borderColor",
-          title: "Border Color",
-        );
-        final borderWidth =
-            provider.doubleField(id: "borderWidth", title: "Border Width");
-        final borderStyle = provider.listField<BorderStyle>(
-            id: "borderStyle",
-            title: "Border Style",
-            values: BorderStyle.values);
-        final strokeAlign =
-            provider.doubleField(id: "strokeAlign", title: "Stroke Align");
-        final isError = provider.booleanField(id: "isError", title: "isError");
-        final semanticLabel =
-            provider.stringField(id: "semanticLabel", title: "Semantic Label");
-
-        return (
-          widget: buildCheckbox(
-              value,
-              triState,
-              mouseCursor,
-              activeColor,
-              fillColor,
-              checkColor,
-              focusColor,
-              hoverColor,
-              overLayColor,
-              splashRadius,
-              materialTapTargetSize,
-              visualDensityVertical,
-              visualDensityHorizontal,
-              autoFocus,
-              eccentricity,
-              borderColor,
-              borderWidth,
-              borderStyle,
-              strokeAlign,
-              isError,
-              semanticLabel),
-          code: "Checkbox code goes here..."
-        );
-      },
-    );
-  }
-
-  Checkbox buildCheckbox(
-      bool? value,
-      bool? triState,
-      MouseCursor? mouseCursor,
-      Color? activeColor,
-      Color? fillColor,
-      Color? checkColor,
-      Color? focusColor,
-      Color? hoverColor,
-      Color? overLayColor,
-      double? splashRadius,
-      MaterialTapTargetSize? materialTapTargetSize,
-      double? visualDensityVertical,
-      double? visualDensityHorizontal,
-      bool? autoFocus,
-      double? eccentricity,
-      Color? borderColor,
-      double? borderWidth,
-      BorderStyle? borderStyle,
-      double? strokeAlign,
-      bool? isError,
-      String? semanticLabel) {
-    return Checkbox(
-      value: value,
-      tristate: triState ?? true,
-      mouseCursor: mouseCursor,
-      activeColor: activeColor,
-      fillColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          return fillColor ?? Colors.transparent; // Default color
-        },
-      ),
-      checkColor: checkColor,
-      focusColor: focusColor,
-      hoverColor: hoverColor,
-      overlayColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          return overLayColor ?? Colors.transparent; // Default color
-        },
-      ),
-      splashRadius: splashRadius,
-      materialTapTargetSize: materialTapTargetSize,
-      visualDensity: VisualDensity(
-        vertical: visualDensityVertical ?? 0.0,
-        horizontal: visualDensityHorizontal ?? 0.0,
-      ),
-      focusNode: FocusNode(),
-      autofocus: autoFocus ?? false,
-      shape: CircleBorder(
-        side: const BorderSide(),
-        eccentricity: eccentricity ?? 0.0,
-      ),
-      side: BorderSide(
-        color: borderColor ?? const Color(0xFF000000),
-        width: borderWidth ?? 1.0,
-        style: borderStyle ?? BorderStyle.solid,
-        strokeAlign: strokeAlign ?? 0.0,
-      ),
-      isError: isError ?? false,
-      semanticLabel: semanticLabel,
-      onChanged: (val) {},
-    );
-  }
-}
 
 typedef CheckBoxProperties = ({
   bool? value,
@@ -219,33 +45,34 @@ class CheckBoxPropertiesNotifier
         },
       ),
       checkColor: fieldValues.checkColor,
-      focusColor: focusColor,
-      hoverColor: hoverColor,
+      focusColor: fieldValues.focusColor,
+      hoverColor: fieldValues.hoverColor,
       overlayColor: MaterialStateProperty.resolveWith<Color>(
         (Set<MaterialState> states) {
-          return overLayColor ?? Colors.transparent; // Default color
+          return fieldValues.overLayColor ??
+              Colors.transparent; // Default color
         },
       ),
-      splashRadius: splashRadius,
-      materialTapTargetSize: materialTapTargetSize,
+      splashRadius: fieldValues.splashRadius,
+      materialTapTargetSize: fieldValues.materialTapTargetSize,
       visualDensity: VisualDensity(
-        vertical: visualDensityVertical ?? 0.0,
-        horizontal: visualDensityHorizontal ?? 0.0,
+        vertical: fieldValues.visualDensityVertical ?? 0.0,
+        horizontal: fieldValues.visualDensityHorizontal ?? 0.0,
       ),
       focusNode: FocusNode(),
-      autofocus: autoFocus ?? false,
+      autofocus: fieldValues.autoFocus ?? false,
       shape: CircleBorder(
         side: const BorderSide(),
-        eccentricity: eccentricity ?? 0.0,
+        eccentricity: fieldValues.eccentricity ?? 0.0,
       ),
       side: BorderSide(
-        color: borderColor ?? const Color(0xFF000000),
-        width: borderWidth ?? 1.0,
-        style: borderStyle ?? BorderStyle.solid,
-        strokeAlign: strokeAlign ?? 0.0,
+        color: fieldValues.borderColor ?? const Color(0xFF000000),
+        width: fieldValues.borderWidth ?? 1.0,
+        style: fieldValues.borderStyle ?? BorderStyle.solid,
+        strokeAlign: fieldValues.strokeAlign ?? 0.0,
       ),
-      isError: isError ?? false,
-      semanticLabel: semanticLabel,
+      isError: fieldValues.isError ?? false,
+      semanticLabel: fieldValues.semanticLabel,
       onChanged: (val) {},
     );
   }
@@ -253,44 +80,45 @@ class CheckBoxPropertiesNotifier
   @override
   String get code {
     return """
-        return Checkbox(
+        Checkbox(
       value: ${fieldValues.value},
-      tristate: ${fieldValues.triState ?? true},
-      mouseCursor: fieldValues.mouseCursor,
-      activeColor: fieldValues.activeColor,
+      tristate: ${fieldValues.triState} ?? true,
+      mouseCursor: ${fieldValues.mouseCursor},
+      activeColor: ${fieldValues.activeColor},
       fillColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
+        (Set<MaterialState> states) {
           return fieldValues.fillColor ?? Colors.transparent; // Default color
         },
       ),
-      checkColor: fieldValues.checkColor,
-      focusColor: focusColor,
-      hoverColor: hoverColor,
+      checkColor: ${fieldValues.checkColor},
+      focusColor: ${fieldValues.focusColor},
+      hoverColor: ${fieldValues.hoverColor},
       overlayColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-          return overLayColor ?? Colors.transparent; // Default color
+        (Set<MaterialState> states) {
+          return ${fieldValues.overLayColor} ??
+              Colors.transparent; // Default color
         },
       ),
-      splashRadius: splashRadius,
-      materialTapTargetSize: materialTapTargetSize,
+      splashRadius: ${fieldValues.splashRadius},
+      materialTapTargetSize: ${fieldValues.materialTapTargetSize},
       visualDensity: VisualDensity(
-        vertical: visualDensityVertical?? 0.0,
-        horizontal: visualDensityHorizontal?? 0.0,
+        vertical: ${fieldValues.visualDensityVertical} ?? 0.0,
+        horizontal: ${fieldValues.visualDensityHorizontal} ?? 0.0,
       ),
       focusNode: FocusNode(),
-      autofocus: autoFocus ?? false,
+      autofocus: ${fieldValues.autoFocus} ?? false,
       shape: CircleBorder(
         side: const BorderSide(),
-        eccentricity: eccentricity?? 0.0,
+        eccentricity: ${fieldValues.eccentricity} ?? 0.0,
       ),
       side: BorderSide(
-        color: borderColor ?? const Color(0xFF000000),
-        width: borderWidth?? 1.0,
-        style: borderStyle ?? BorderStyle.solid,
-        strokeAlign: strokeAlign?? 0.0,
+        color: ${fieldValues.borderColor} ?? const Color(0xFF000000),
+        width: ${fieldValues.borderWidth} ?? 1.0,
+        style: ${fieldValues.borderStyle} ?? BorderStyle.solid,
+        strokeAlign: ${fieldValues.strokeAlign} ?? 0.0,
       ),
-      isError: isError ?? false,
-      semanticLabel: semanticLabel,
+      isError: ${fieldValues.isError} ?? false,
+      semanticLabel: ${fieldValues.semanticLabel},
       onChanged: (val) {},
     );
 
@@ -332,5 +160,32 @@ class CheckBoxPropertiesNotifier
       id: "triState",
       title: "TriState",
     );
+    listField<MouseCursor>(
+      id: "mouseCursor",
+      title: "MouseCursor",
+      values: [MouseCursor.defer, MouseCursor.uncontrolled],
+    );
+    colorField(id: 'fillColor', title: 'Fill Color');
+    colorField(id: 'checkColor', title: 'Check Color');
+    colorField(id: 'focusColor', title: 'Color Field');
+    colorField(id: 'hoverColor', title: 'Hover Color');
+    colorField(id: 'overLayColor', title: 'Overlay Color');
+    doubleField(id: 'splashRadius', title: 'Splash Radius');
+    listField<MaterialTapTargetSize>(
+      id: "materialTapTargetSize",
+      title: "Material Tap Target Size",
+      values: MaterialTapTargetSize.values,
+    );
+    doubleField(id: 'visualDensityVertical');
+    doubleField(id: 'visualDensityHorizontal');
+    booleanField(id: 'autoFocus', title: 'Auto Focus');
+    doubleField(id: 'eccentricity');
+    colorField(id: 'borderColor', title: 'Border Color');
+    doubleField(id: 'borderWidth');
+    listField<BorderStyle>(
+        id: "borderStyle", title: "Border Style", values: BorderStyle.values);
+    doubleField(id: 'strokeAlign');
+    booleanField(id: 'isError', title: 'Is Error');
+    stringField(id: 'semanticLabel', title: 'Semantic Label');
   }
 }

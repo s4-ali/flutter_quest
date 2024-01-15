@@ -37,7 +37,7 @@ class ListPropertyField<T> extends PropertyField<ListPropertyParams<T>, T> {
 }
 
 extension ListFieldPropertyProvider on PropertiesNotifier {
-  T? listField<T>({
+  void listField<T>({
     required String id,
     required String title,
     required List<T> values,
@@ -56,9 +56,9 @@ extension ListFieldPropertyProvider on PropertiesNotifier {
       titleBuilder: titleBuilder,
     );
 
-    return ListPropertyField<T>(
+    ListPropertyField<T>(
       this,
       params,
-    )();
+    ).register();
   }
 }

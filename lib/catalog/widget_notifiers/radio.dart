@@ -20,7 +20,7 @@ typedef RadioProperties = ({
   bool? autofocus,
 });
 
-class RadioPropertiesNotifier extends PropertiesNotifier {
+class RadioPropertiesNotifier extends PropertiesNotifier<RadioProperties> {
   int selectedRadio = 0;
 
   @override
@@ -81,7 +81,7 @@ class RadioPropertiesNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
+  RadioProperties get fieldValues => (
         value: getValueOf('value'),
         mouseCursor: getValueOf('mouseCursor'),
         toggleable: getValueOf('toggleable'),

@@ -31,7 +31,7 @@ class Matrix4PropertyField
 }
 
 extension Matrix4FieldPropertyProvider on PropertiesNotifier {
-  Matrix4? matrix4Field({
+  void matrix4Field({
     required String id,
     required String title,
     Matrix4? initialValue,
@@ -45,9 +45,9 @@ extension Matrix4FieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue??Matrix4.rotationX(0.0),
       initialValue: initialValue,
     );
-    return Matrix4PropertyField(
+    Matrix4PropertyField(
       this,
       params,
-    )();
+    );
   }
 }

@@ -19,9 +19,10 @@ typedef CardProperties = ({
   bool? semanticContainer,
 });
 
-class CardPropertiesNotifier extends PropertiesNotifier {
+class CardPropertiesNotifier extends PropertiesNotifier<CardProperties> {
   @override
   Widget buildPreview(BuildContext context) {
+    // TODO: User fieldValues instead
     return Card(
       color: getValueOf('color'),
       shadowColor: getValueOf('shadowColor'),
@@ -53,7 +54,7 @@ class CardPropertiesNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
+  CardProperties get fieldValues => (
         elevation: getValueOf('elevation'),
         color: getValueOf('color'),
         shadowColor: getValueOf('shadowColor'),

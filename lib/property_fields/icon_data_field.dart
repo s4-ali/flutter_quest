@@ -31,7 +31,7 @@ class IconDataPropertyField
 }
 
 extension IconFieldPropertyProvider on PropertiesNotifier {
-  IconData? iconDataField({
+  void iconDataField({
     required String id,
     required String title,
     IconData? initialValue,
@@ -45,9 +45,9 @@ extension IconFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return IconDataPropertyField(
+    IconDataPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

@@ -31,7 +31,7 @@ class CrossAxisAlignmentPropertyField
 }
 
 extension CrossAxisAlignemntFieldPropertyProvider on PropertiesNotifier {
-  CrossAxisAlignment? crossAxisAlignmentField({
+  void crossAxisAlignmentField({
     required String id,
     required String title,
     CrossAxisAlignment? initialValue,
@@ -45,9 +45,9 @@ extension CrossAxisAlignemntFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return CrossAxisAlignmentPropertyField(
+    CrossAxisAlignmentPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

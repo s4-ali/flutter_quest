@@ -31,7 +31,7 @@ class StringFieldPropertyField
 }
 
 extension StringFieldFieldPropertyProvider on PropertiesNotifier {
-  String? stringField({
+  void stringField({
     required String id,
     required String title,
     String? initialValue,
@@ -45,9 +45,9 @@ extension StringFieldFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return StringFieldPropertyField(
+    StringFieldPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

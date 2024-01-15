@@ -15,7 +15,7 @@ import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/property_fields/string_field.dart';
 import 'package:flutter_quest/property_fields/text_direction_field.dart';
 
-typedef TextFormFieldProperties = ({
+typedef TextFieldProperties = ({
 // Icon
   Color? iconColor,
   IconData? icon,
@@ -139,10 +139,6 @@ typedef TextFormFieldProperties = ({
   TextAlignVertical? textAlignVertical,
   TextDirection? textDirection,
   bool? readOnly,
-  bool? copyToolBarOption,
-  bool? cutToolBarOption,
-  bool? pasteToolBarOption,
-  bool? selectAllToolBarOption,
   bool? showCursor,
   bool? autofocus,
   String? obscuringCharacter,
@@ -176,7 +172,8 @@ typedef TextFormFieldProperties = ({
   bool? canRequestFocus,
 });
 
-class TextFieldPropertyNotifier extends PropertiesNotifier {
+class TextFieldPropertiesNotifier
+    extends PropertiesNotifier<TextFieldProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     // TODO: implement buildPreview
@@ -311,12 +308,6 @@ class TextFieldPropertyNotifier extends PropertiesNotifier {
       textAlignVertical: fieldValues.textAlignVertical,
       textDirection: fieldValues.textDirection,
       readOnly: fieldValues.readOnly ?? false,
-      toolbarOptions: ToolbarOptions(
-        copy: fieldValues.copyToolBarOption ?? false,
-        cut: fieldValues.cutToolBarOption ?? false,
-        paste: fieldValues.pasteToolBarOption ?? false,
-        selectAll: fieldValues.selectAllToolBarOption ?? false,
-      ),
       showCursor: fieldValues.showCursor,
       autofocus: fieldValues.autofocus ?? false,
       obscuringCharacter: fieldValues.obscuringCharacter ?? "*",
@@ -491,12 +482,6 @@ class TextFieldPropertyNotifier extends PropertiesNotifier {
       textAlignVertical: ${fieldValues.textAlignVertical},
       textDirection: ${fieldValues.textDirection},
       readOnly: ${fieldValues.readOnly} ?? false,
-      toolbarOptions: ToolbarOptions(
-        copy: ${fieldValues.copyToolBarOption} ?? false,
-        cut: ${fieldValues.cutToolBarOption} ?? false,
-        paste: ${fieldValues.pasteToolBarOption} ?? false,
-        selectAll: ${fieldValues.selectAllToolBarOption} ?? false,
-      ),
       showCursor: ${fieldValues.showCursor},
       autofocus: ${fieldValues.autofocus} ?? false,
       obscuringCharacter: ${fieldValues.obscuringCharacter} ?? "*",
@@ -538,7 +523,7 @@ class TextFieldPropertyNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
+  TextFieldProperties get fieldValues => (
         // Icon
         iconColor: getValueOf('iconColor'),
         icon: getValueOf('icon'),
@@ -662,10 +647,6 @@ class TextFieldPropertyNotifier extends PropertiesNotifier {
         textAlignVertical: getValueOf('textAlignVertical'),
         textDirection: getValueOf('textDirection'),
         readOnly: getValueOf('readOnly'),
-        copyToolBarOption: getValueOf('copyToolBarOption'),
-        cutToolBarOption: getValueOf('cutToolBarOption'),
-        pasteToolBarOption: getValueOf('pasteToolBarOption'),
-        selectAllToolBarOption: getValueOf('selectAllToolBarOption'),
         showCursor: getValueOf('showCursor'),
         autofocus: getValueOf('autofocus'),
         obscuringCharacter: getValueOf('obscuringCharacter'),
@@ -888,13 +869,6 @@ class TextFieldPropertyNotifier extends PropertiesNotifier {
     );
     textDirectionField(id: "textDirection", title: "Text Direction");
     booleanField(id: "readOnly", title: "Read Only");
-    booleanField(id: "copyToolBarOption", title: "Copy Tool Bar Option");
-    booleanField(id: "cutToolBarOption", title: "Cut Tool Bar Option");
-    booleanField(id: "pasteToolBarOption", title: "Paste Tool Bar Option");
-    booleanField(
-      id: "selectAllToolBarOption",
-      title: "Select All Tool Bar Option",
-    );
     booleanField(id: "showCursor", title: "Show Cursor");
     booleanField(id: "autofocus", title: "Autofocus");
     stringField(id: "obscuringCharacter", title: "Obscuring Character");

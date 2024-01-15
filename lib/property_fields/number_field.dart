@@ -31,7 +31,7 @@ class NumberPropertyField extends PropertyField<NumberPropertyParams, num> {
 }
 
 extension NumberFieldPropertyProvider on PropertiesNotifier {
-  num? numberField({
+  void numberField({
     required String id,
     required String title,
     num? initialValue,
@@ -45,45 +45,45 @@ extension NumberFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return NumberPropertyField(
+    NumberPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 
-  double? heightField({
+  void heightField({
     String id = "height",
     String title = "Height",
     num? initialValue,
     bool isOptional = true,
     num defaultValue = 0,
   }) {
-    return numberField(
+    numberField(
       id: id,
       title: title,
       isOptional: isOptional,
       initialValue: initialValue,
       defaultValue: defaultValue,
-    )?.toDouble();
+    );
   }
 
-  double? widthField({
+  void widthField({
     String id = "width",
     String title = "Width",
     num? initialValue,
     bool isOptional = true,
     num defaultValue = 0,
   }) {
-    return numberField(
+    numberField(
       id: id,
       title: title,
       isOptional: isOptional,
       initialValue: initialValue,
       defaultValue: defaultValue,
-    )?.toDouble();
+    );
   }
 
-  double? doubleField({
+  void doubleField({
     String id = "doubleField",
     String title = "doubleField",
     num? initialValue,
@@ -96,12 +96,12 @@ extension NumberFieldPropertyProvider on PropertiesNotifier {
       isOptional: isOptional,
       initialValue: initialValue,
       defaultValue: defaultValue,
-    )?.toDouble();
+    );
   }
 
 
 
-  int? intField({
+  void intField({
     String id = "intField",
     String title = "Int Field",
     num? initialValue,
@@ -114,7 +114,7 @@ extension NumberFieldPropertyProvider on PropertiesNotifier {
       isOptional: isOptional,
       initialValue: initialValue,
       defaultValue: defaultValue,
-    )?.toInt();
+    );
   }
 
 

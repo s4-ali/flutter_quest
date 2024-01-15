@@ -33,7 +33,8 @@ typedef GridViewProperties = ({
   String? restorationId,
 });
 
-class GridViewPropertiesNotifier extends PropertiesNotifier {
+class GridViewPropertiesNotifier
+    extends PropertiesNotifier<GridViewProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return GridView(
@@ -108,7 +109,7 @@ GridView(
 ''';
 
   @override
-  get fieldValues => (
+  GridViewProperties get fieldValues => (
         scrollDirection: getValueOf('scrollDirection'),
         reverse: getValueOf('reverse'),
         initialScrollOffset: getValueOf('initialScrollOffset'),

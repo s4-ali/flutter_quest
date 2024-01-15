@@ -25,7 +25,6 @@ typedef TextProperties = ({
   String? locale,
   bool? softWrap,
   TextOverflow? overflow,
-  double? textScaleFactor,
   int? maxLines,
   String? semanticsLabel,
   TextWidthBasis? textWidthBasis,
@@ -33,7 +32,7 @@ typedef TextProperties = ({
   Color? selectionColor,
 });
 
-class TextPropertiesNotifier extends PropertiesNotifier {
+class TextPropertiesNotifier extends PropertiesNotifier<TextProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Text(
@@ -55,7 +54,6 @@ class TextPropertiesNotifier extends PropertiesNotifier {
       locale: Locale(fieldValues.locale ?? " "),
       softWrap: fieldValues.softWrap ?? true,
       overflow: fieldValues.overflow ?? TextOverflow.clip,
-      textScaleFactor: fieldValues.textScaleFactor ?? 1.0,
       maxLines: fieldValues.maxLines,
       semanticsLabel: fieldValues.semanticsLabel,
       textWidthBasis: fieldValues.textWidthBasis ?? TextWidthBasis.parent,
@@ -86,7 +84,6 @@ class TextPropertiesNotifier extends PropertiesNotifier {
       locale: Locale('${fieldValues.locale ?? " "}'),
       softWrap: ${fieldValues.softWrap ?? true},
       overflow: ${fieldValues.overflow ?? TextOverflow.clip},
-      textScaleFactor: ${fieldValues.textScaleFactor ?? 1.0},
       maxLines: ${fieldValues.maxLines},
       semanticsLabel: ${fieldValues.semanticsLabel},
       textWidthBasis: ${fieldValues.textWidthBasis ?? TextWidthBasis.parent},
@@ -96,7 +93,7 @@ class TextPropertiesNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
+  TextProperties get fieldValues => (
         data: getValueOf('data'),
         style: getValueOf('style'),
         fontFamily: getValueOf('fontFamily'),
@@ -113,7 +110,6 @@ class TextPropertiesNotifier extends PropertiesNotifier {
         locale: getValueOf('locale'),
         softWrap: getValueOf('softWrap'),
         overflow: getValueOf('overflow'),
-        textScaleFactor: getValueOf('textScaleFactor'),
         maxLines: getValueOf('maxLines'),
         semanticsLabel: getValueOf('semanticsLabel'),
         textWidthBasis: getValueOf('textWidthBasis'),
@@ -143,7 +139,6 @@ class TextPropertiesNotifier extends PropertiesNotifier {
     stringField(id: "locale", title: "Locale String");
     booleanField(id: "softWrap", title: "softWrap");
     listField(id: "overflow", title: "overflow", values: TextOverflow.values);
-    doubleField(id: "textScaleFactor", title: "textScaleFactor");
     intField(id: "maxLines", title: "maxLines");
     stringField(id: "semanticsLabel", title: "semanticsLabel");
     listField(

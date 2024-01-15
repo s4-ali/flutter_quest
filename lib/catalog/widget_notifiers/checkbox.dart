@@ -6,7 +6,7 @@ import 'package:flutter_quest/property_fields/list_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/property_fields/string_field.dart';
 
-typedef CheckBoxProperties = ({
+typedef CheckboxProperties = ({
   bool? value,
   bool? triState,
   MouseCursor? mouseCursor,
@@ -30,8 +30,8 @@ typedef CheckBoxProperties = ({
   String? semanticLabel,
 });
 
-class CheckBoxPropertiesNotifier
-    extends PropertiesNotifier<CheckBoxProperties> {
+class CheckboxPropertiesNotifier
+    extends PropertiesNotifier<CheckboxProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Checkbox(
@@ -126,7 +126,7 @@ class CheckBoxPropertiesNotifier
   }
 
   @override
-  CheckBoxProperties get fieldValues => (
+  CheckboxProperties get fieldValues => (
         value: getValueOf("value"),
         triState: getValueOf("triState"),
         mouseCursor: getValueOf("mouseCursor"),

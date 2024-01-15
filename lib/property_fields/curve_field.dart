@@ -31,7 +31,7 @@ class CurvePropertyField
 }
 
 extension CurveFieldPropertyProvider on PropertiesNotifier {
-  Curve? curveField({
+  void curveField({
     required String id,
     required String title,
     Curve? initialValue,
@@ -45,9 +45,9 @@ extension CurveFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return CurvePropertyField(
+    CurvePropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

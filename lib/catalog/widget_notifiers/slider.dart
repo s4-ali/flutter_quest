@@ -7,23 +7,23 @@ import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/property_fields/string_field.dart';
 
 typedef SliderProperties = ({
-double? value,
-double? secondaryTrackValue,
-double? min,
-double? max,
-int? divisions,
-String? label,
-Color? activeColor,
-Color? inactiveColor,
-Color? secondaryActiveColor,
-Color? thumbColor,
-Color? overlayColor,
-MouseCursor? mouseCursor,
-bool? autofocus,
-SliderInteraction? allowedInteraction,
+  double? value,
+  double? secondaryTrackValue,
+  double? min,
+  double? max,
+  int? divisions,
+  String? label,
+  Color? activeColor,
+  Color? inactiveColor,
+  Color? secondaryActiveColor,
+  Color? thumbColor,
+  Color? overlayColor,
+  MouseCursor? mouseCursor,
+  bool? autofocus,
+  SliderInteraction? allowedInteraction,
 });
 
-class SliderPropertiesNotifier extends PropertiesNotifier {
+class SliderPropertiesNotifier extends PropertiesNotifier<SliderProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Slider(
@@ -79,22 +79,22 @@ class SliderPropertiesNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
-  value: getValueOf('value'),
-  secondaryTrackValue: getValueOf('secondaryTrackValue'),
-  min: getValueOf('min'),
-  max: getValueOf('max'),
-  divisions: getValueOf('divisions'),
-  label: getValueOf('label'),
-  activeColor: getValueOf('activeColor'),
-  inactiveColor: getValueOf('inactiveColor'),
-  secondaryActiveColor: getValueOf('secondaryActiveColor'),
-  thumbColor: getValueOf('thumbColor'),
-  overlayColor: getValueOf('overlayColor'),
-  mouseCursor: getValueOf('mouseCursor'),
-  autofocus: getValueOf('autofocus'),
-  allowedInteraction: getValueOf('allowedInteraction'),
-  );
+  SliderProperties get fieldValues => (
+        value: getValueOf('value'),
+        secondaryTrackValue: getValueOf('secondaryTrackValue'),
+        min: getValueOf('min'),
+        max: getValueOf('max'),
+        divisions: getValueOf('divisions'),
+        label: getValueOf('label'),
+        activeColor: getValueOf('activeColor'),
+        inactiveColor: getValueOf('inactiveColor'),
+        secondaryActiveColor: getValueOf('secondaryActiveColor'),
+        thumbColor: getValueOf('thumbColor'),
+        overlayColor: getValueOf('overlayColor'),
+        mouseCursor: getValueOf('mouseCursor'),
+        autofocus: getValueOf('autofocus'),
+        allowedInteraction: getValueOf('allowedInteraction'),
+      );
 
   @override
   void registerFields() {

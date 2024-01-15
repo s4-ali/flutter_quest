@@ -31,7 +31,7 @@ class TextDirectionPropertyField
 }
 
 extension TextDirectionFieldPropertyProvider on PropertiesNotifier {
-  TextDirection? textDirectionField({
+  void textDirectionField({
     required String id,
     required String title,
     TextDirection? initialValue,
@@ -48,6 +48,6 @@ extension TextDirectionFieldPropertyProvider on PropertiesNotifier {
     return TextDirectionPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

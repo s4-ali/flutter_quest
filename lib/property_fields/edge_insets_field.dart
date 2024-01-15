@@ -31,7 +31,7 @@ class EdgeInsetsPropertyField
 }
 
 extension EdgeInsetsFieldPropertyProvider on PropertiesNotifier {
-  EdgeInsets? edgeInsetsField({
+  void edgeInsetsField({
     required String id,
     required String title,
     EdgeInsets? initialValue,
@@ -45,9 +45,9 @@ extension EdgeInsetsFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return EdgeInsetsPropertyField(
+    EdgeInsetsPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

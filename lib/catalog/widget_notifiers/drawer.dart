@@ -7,17 +7,17 @@ import 'package:flutter_quest/property_fields/shape_border_field.dart';
 import 'package:flutter_quest/property_fields/string_field.dart';
 
 typedef DrawerProperties = ({
-double? width,
-Color? bgColor,
-double? elevation,
-Color? shadowColor,
-Color? surfaceTintColor,
-ShapeBorder? shape,
-String? semanticLabel,
-Clip? clipBehavior,
+  double? width,
+  Color? bgColor,
+  double? elevation,
+  Color? shadowColor,
+  Color? surfaceTintColor,
+  ShapeBorder? shape,
+  String? semanticLabel,
+  Clip? clipBehavior,
 });
 
-class DrawerPropertiesNotifier extends PropertiesNotifier {
+class DrawerPropertiesNotifier extends PropertiesNotifier<DrawerProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Drawer(
@@ -50,15 +50,15 @@ class DrawerPropertiesNotifier extends PropertiesNotifier {
 
   @override
   get fieldValues => (
-  width: getValueOf('width'),
-  bgColor: getValueOf('bgColor'),
-  elevation: getValueOf('elevation'),
-  shadowColor: getValueOf('shadowColor'),
-  surfaceTintColor: getValueOf('surfaceTintColor'),
-  shape: getValueOf('shape'),
-  semanticLabel: getValueOf('semanticLabel'),
-  clipBehavior: getValueOf('clipBehavior'),
-  );
+        width: getValueOf('width'),
+        bgColor: getValueOf('bgColor'),
+        elevation: getValueOf('elevation'),
+        shadowColor: getValueOf('shadowColor'),
+        surfaceTintColor: getValueOf('surfaceTintColor'),
+        shape: getValueOf('shape'),
+        semanticLabel: getValueOf('semanticLabel'),
+        clipBehavior: getValueOf('clipBehavior'),
+      );
 
   @override
   void registerFields() {

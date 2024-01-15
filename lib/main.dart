@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quest/catalog/home.dart';
 import 'package:flutter_quest/catalog/properties_list.dart';
 import 'package:flutter_quest/catalog/widgets.providers.g.dart';
-import 'package:flutter_quest/catalog/widgets/divider.dart';
-import 'package:flutter_quest/catalog/widgets_list.dart';
 import 'package:provider/provider.dart';
-
-import 'core/property_provider.dart';
 
 enum InitialScreen{
   home,

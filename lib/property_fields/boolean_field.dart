@@ -32,7 +32,7 @@ class BooleanPropertyField
 }
 
 extension BooleanFieldPropertyProvider on PropertiesNotifier {
-  bool? booleanField({
+  void booleanField({
     required String id,
     required String title,
     bool? initialValue,
@@ -49,6 +49,6 @@ extension BooleanFieldPropertyProvider on PropertiesNotifier {
     return BooleanPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

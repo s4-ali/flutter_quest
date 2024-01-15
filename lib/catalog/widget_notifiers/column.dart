@@ -16,7 +16,7 @@ typedef ColumnProperties = ({
   TextBaseline? textBaseLine,
 });
 
-class ColumnPropertiesNotifier extends PropertiesNotifier {
+class ColumnPropertiesNotifier extends PropertiesNotifier<ColumnProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Column(
@@ -29,7 +29,7 @@ class ColumnPropertiesNotifier extends PropertiesNotifier {
       verticalDirection:
           fieldValues.verticalDirection ?? VerticalDirection.down,
       textBaseline: fieldValues.textBaseLine,
-      children: [],
+      children: const [],
     );
   }
 

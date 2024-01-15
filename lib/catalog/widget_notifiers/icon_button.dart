@@ -61,7 +61,8 @@ typedef IconButtonProperties = ({
   IconData? selectedIcon,
 });
 
-class IconButtonPropertiesNotifier extends PropertiesNotifier {
+class IconButtonPropertiesNotifier
+    extends PropertiesNotifier<IconButtonProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return IconButton(
@@ -258,7 +259,7 @@ IconButton(
 ''';
 
   @override
-  get fieldValues => (
+  IconButtonProperties get fieldValues => (
         iconSize: getValueOf('iconSize'),
         visualDensity: getValueOf('visualDensity'),
         icon: getValueOf('icon'),

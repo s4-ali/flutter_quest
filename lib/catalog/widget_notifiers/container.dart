@@ -10,27 +10,29 @@ import 'package:flutter_quest/property_fields/matrix4_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 
 typedef ContainerProperties = ({
-double? height,
-double? width,
-Alignment? alignment,
-EdgeInsets? margin,
-EdgeInsets? padding,
-Color? color,
-BorderRadius? borderRadius,
-BoxBorder? border,
-Color? foregroundColor,
-Matrix4? transform,
-Clip? clipBehavior,
-double? minHeight,
-double? maxHeight,
-double? minWidth,
-double? maxWidth,
-Alignment? transformAlignment,
+  double? height,
+  double? width,
+  Alignment? alignment,
+  EdgeInsets? margin,
+  EdgeInsets? padding,
+  Color? color,
+  BorderRadius? borderRadius,
+  BoxBorder? border,
+  Color? foregroundColor,
+  Matrix4? transform,
+  Clip? clipBehavior,
+  double? minHeight,
+  double? maxHeight,
+  double? minWidth,
+  double? maxWidth,
+  Alignment? transformAlignment,
 });
 
-class ContainerPropertiesNotifier extends PropertiesNotifier {
+class ContainerPropertiesNotifier
+    extends PropertiesNotifier<ContainerProperties> {
   @override
   Widget buildPreview(BuildContext context) {
+    // TODO: Use field values instead
     return Container(
       height: getValueOf('height'),
       width: getValueOf('width'),
@@ -58,6 +60,7 @@ class ContainerPropertiesNotifier extends PropertiesNotifier {
     );
   }
 
+  // TODO: Use field values instead
   @override
   String get code => '''
     Container(
@@ -88,24 +91,24 @@ class ContainerPropertiesNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
-  height: getValueOf('height'),
-  width: getValueOf('width'),
-  alignment: getValueOf('alignment'),
-  margin: getValueOf('margin'),
-  padding: getValueOf('padding'),
-  color: getValueOf('color'),
-  borderRadius: getValueOf('borderRadius'),
-  border: getValueOf('border'),
-  foregroundColor: getValueOf('foregroundColor'),
-  transform: getValueOf('transform'),
-  clipBehavior: getValueOf('clipBehavior'),
-  minHeight: getValueOf('minHeight'),
-  maxHeight: getValueOf('maxHeight'),
-  minWidth: getValueOf('minWidth'),
-  maxWidth: getValueOf('maxWidth'),
-  transformAlignment: getValueOf('transformAlignment'),
-  );
+  ContainerProperties get fieldValues => (
+        height: getValueOf('height'),
+        width: getValueOf('width'),
+        alignment: getValueOf('alignment'),
+        margin: getValueOf('margin'),
+        padding: getValueOf('padding'),
+        color: getValueOf('color'),
+        borderRadius: getValueOf('borderRadius'),
+        border: getValueOf('border'),
+        foregroundColor: getValueOf('foregroundColor'),
+        transform: getValueOf('transform'),
+        clipBehavior: getValueOf('clipBehavior'),
+        minHeight: getValueOf('minHeight'),
+        maxHeight: getValueOf('maxHeight'),
+        minWidth: getValueOf('minWidth'),
+        maxWidth: getValueOf('maxWidth'),
+        transformAlignment: getValueOf('transformAlignment'),
+      );
 
   @override
   void registerFields() {

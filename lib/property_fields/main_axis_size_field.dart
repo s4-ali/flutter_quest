@@ -31,7 +31,7 @@ class MainAxisSizePropertyField
 }
 
 extension MainAxisSizeFieldPropertyProvider on PropertiesNotifier {
-  MainAxisSize? mainAxisSizeField({
+  void mainAxisSizeField({
     required String id,
     required String title,
     MainAxisSize? initialValue,
@@ -45,9 +45,9 @@ extension MainAxisSizeFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return MainAxisSizePropertyField(
+    MainAxisSizePropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

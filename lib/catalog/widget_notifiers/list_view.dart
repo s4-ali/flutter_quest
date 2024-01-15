@@ -32,7 +32,7 @@ typedef ListViewProperties = ({
   String? restorationId,
 });
 
-class ListViewPropertiesNotifier extends PropertiesNotifier {
+class ListViewPropertiesNotifier extends PropertiesNotifier<ListViewProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return ListView(
@@ -99,7 +99,7 @@ ListView(
 ''';
 
   @override
-  get fieldValues => (
+  ListViewProperties get fieldValues => (
         scrollDirection: getValueOf('scrollDirection'),
         reverse: getValueOf('reverse'),
         initialScrollOffset: getValueOf('initialScrollOffset'),

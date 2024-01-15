@@ -41,7 +41,7 @@ typedef ElevatedButtonProperties = ({
   TextStyle? textStyle,
 });
 
-class ElevatedButtonPropertiesNotifier extends PropertiesNotifier {
+class ElevatedButtonPropertiesNotifier extends PropertiesNotifier<ElevatedButtonProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return ElevatedButton(

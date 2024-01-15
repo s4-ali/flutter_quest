@@ -13,7 +13,8 @@ typedef PlaygroundProperties = ({
   Alignment? alignment,
 });
 
-class PlaygroundPropertiesNotifier extends PropertiesNotifier {
+class PlaygroundPropertiesNotifier extends PropertiesNotifier<
+    PlaygroundProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     final color = fieldValues.isRed == null
@@ -55,7 +56,7 @@ class PlaygroundPropertiesNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
+  PlaygroundProperties get fieldValues => (
         height: getValueOf('height'),
         width: getValueOf('width'),
         isRed: getValueOf('isRed'),

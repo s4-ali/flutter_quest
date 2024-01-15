@@ -11,7 +11,6 @@ import 'package:flutter_quest/property_fields/list_field.dart';
 import 'package:flutter_quest/property_fields/matrix4_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 
-
 typedef AnimatedContainerProperties = ({
   Alignment? alignment,
   Color? shadowColor,
@@ -39,7 +38,8 @@ typedef AnimatedContainerProperties = ({
   Clip? clipBehavior,
 });
 
-class AnimatedContainerPropertiesNotifier extends PropertiesNotifier {
+class AnimatedContainerPropertiesNotifier
+    extends PropertiesNotifier<AnimatedContainerProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return AnimatedContainer(
@@ -165,7 +165,7 @@ class AnimatedContainerPropertiesNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
+  AnimatedContainerProperties get fieldValues => (
         alignment: getValueOf('alignment'),
         shadowColor: getValueOf('shadowColor'),
         scaleX: getValueOf('scaleX'),

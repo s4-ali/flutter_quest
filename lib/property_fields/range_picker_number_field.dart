@@ -31,7 +31,7 @@ class RangePickerNumberPropertyField
 }
 
 extension RangePickerNumberFieldPropertyProvider on PropertiesNotifier {
-  num? rangePickerNumberField({
+  void rangePickerNumberField({
     required String id,
     required String title,
     num? initialValue,
@@ -45,25 +45,25 @@ extension RangePickerNumberFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return RangePickerNumberPropertyField(
+    RangePickerNumberPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 
-  double? doubleRangePickerField({
+  void doubleRangePickerField({
     String id = "doubleField",
     String title = "doubleField",
     num? initialValue,
     bool isOptional = true,
     num defaultValue = 0,
   }) {
-    return rangePickerNumberField(
+    rangePickerNumberField(
       id: id,
       title: title,
       isOptional: isOptional,
       initialValue: initialValue,
       defaultValue: defaultValue,
-    )?.toDouble();
+    );
   }
 }

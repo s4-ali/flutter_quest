@@ -15,9 +15,9 @@ class CodesGenerator extends GeneratorForAnnotation<WidgetsAnnotation> {
     code.writeln("import 'package:flutter/material.dart';");
     for(final widget in widgets) {
       code.writeln(
-          "import 'package:flutter_quest_architecture/catalog/widget_notifiers/${camelCaseToLowerUnderscore(widget)}.dart';");
+          "import 'package:flutter_quest/catalog/widget_notifiers/${camelCaseToLowerUnderscore(widget)}.dart';");
     }
-    code.writeln("import 'package:flutter_quest_architecture/widgets/code_viewer.dart';");
+    code.writeln("import 'package:flutter_quest/widgets/code_viewer.dart';");
     code.writeln("import 'package:provider/provider.dart';");
     code.writeln("");
     for(final widget in widgets) {

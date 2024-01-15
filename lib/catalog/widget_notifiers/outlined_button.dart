@@ -43,7 +43,8 @@ typedef OutlinedButtonProperties = ({
   String? childText,
 });
 
-class OutlinedButtonPropertiesNotifier extends PropertiesNotifier {
+class OutlinedButtonPropertiesNotifier
+    extends PropertiesNotifier<OutlinedButtonProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return OutlinedButton(
@@ -222,7 +223,7 @@ class OutlinedButtonPropertiesNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
+  OutlinedButtonProperties get fieldValues => (
         autofocus: getValueOf('autofocus'),
         clipBehavior: getValueOf('clipBehavior'),
         backgroundColor: getValueOf('backgroundColor'),

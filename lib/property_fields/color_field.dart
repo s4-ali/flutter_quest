@@ -31,7 +31,7 @@ class ColorPropertyField
 }
 
 extension ColorFieldPropertyProvider on PropertiesNotifier {
-  Color? colorField({
+  void colorField({
     required String id,
     required String title,
     Color? initialValue,
@@ -45,9 +45,9 @@ extension ColorFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return ColorPropertyField(
+    ColorPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

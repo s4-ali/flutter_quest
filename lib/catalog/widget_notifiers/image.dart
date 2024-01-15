@@ -27,7 +27,7 @@ typedef ImageProperties = ({
   FilterQuality? filterQuality,
 });
 
-class ImagePropertiesNotifier extends PropertiesNotifier {
+class ImagePropertiesNotifier extends PropertiesNotifier<ImageProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Image(
@@ -92,7 +92,7 @@ Image(
 ''';
 
   @override
-  get fieldValues => (
+  ImageProperties get fieldValues => (
         height: getValueOf('height'),
         width: getValueOf('width'),
         image: getValueOf('image'),

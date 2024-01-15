@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/core/logger.dart';
 import 'package:flutter_quest/core/property_params.dart';
 
 class FieldTitle extends StatefulWidget {
@@ -32,7 +31,6 @@ class _FieldTitleState extends State<FieldTitle> {
 
   @override
   Widget build(BuildContext context) {
-    log.i("expanded: $expanded");
     return ExpansionTile(
       title: Text(widget.params.title),
       onExpansionChanged: onExpansionChanged,

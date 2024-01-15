@@ -3,11 +3,12 @@ import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 
 typedef SizedBoxProperties = ({
-double? height,
-double? width,
+  double? height,
+  double? width,
 });
 
-class SizedBoxPropertiesNotifier extends PropertiesNotifier {
+class SizedBoxPropertiesNotifier
+    extends PropertiesNotifier<SizedBoxProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return SizedBox(
@@ -31,10 +32,10 @@ class SizedBoxPropertiesNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
-  height: getValueOf('height'),
-  width: getValueOf('width'),
-  );
+  SizedBoxProperties get fieldValues => (
+        height: getValueOf('height'),
+        width: getValueOf('width'),
+      );
 
   @override
   void registerFields() {

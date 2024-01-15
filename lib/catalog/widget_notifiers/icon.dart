@@ -9,7 +9,7 @@ import 'package:flutter_quest/property_fields/text_direction_field.dart';
 
 typedef IconProperties = ({
   IconData? icon,
-  double? iconSize,
+  double? size,
   double? fill,
   double? weight,
   double? grade,
@@ -25,7 +25,7 @@ typedef IconProperties = ({
   TextDirection? textDirection,
 });
 
-class IconPropertiesNotifier extends PropertiesNotifier {
+class IconPropertiesNotifier extends PropertiesNotifier<IconProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Icon(
@@ -51,9 +51,9 @@ class IconPropertiesNotifier extends PropertiesNotifier {
   }
 
   @override
-  get fieldValues => (
+  IconProperties get fieldValues => (
         icon: getValueOf('icon'),
-        iconSize: getValueOf('iconSize'),
+        size: getValueOf('size'),
         fill: getValueOf('fill'),
         weight: getValueOf('weight'),
         grade: getValueOf('grade'),
@@ -72,7 +72,7 @@ class IconPropertiesNotifier extends PropertiesNotifier {
   @override
   void registerFields() {
     iconDataField(id: "icon", title: "Icon");
-    doubleField(id: "iconSize", title: "Icon Size");
+    doubleField(id: "size", title: "Size");
     doubleField(id: "fill", title: "Fill");
     doubleField(id: "weight", title: "Weight");
     doubleField(id: "grade", title: "Grade");

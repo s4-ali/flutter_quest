@@ -44,7 +44,8 @@ typedef TextButtonProperties = ({
   bool? isSemanticButton,
 });
 
-class TextButtonPropertiesNotifier extends PropertiesNotifier {
+class TextButtonPropertiesNotifier
+    extends PropertiesNotifier<TextButtonProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return TextButton(
@@ -225,7 +226,7 @@ class TextButtonPropertiesNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
+  TextButtonProperties get fieldValues => (
         backgroundColor: getValueOf('backgroundColor'),
         foregroundColor: getValueOf('foregroundColor'),
         overlayColor: getValueOf('overlayColor'),

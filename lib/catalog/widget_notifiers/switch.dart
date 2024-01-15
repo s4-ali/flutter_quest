@@ -30,7 +30,7 @@ typedef SwitchProperties = ({
   MaterialTapTargetSize? materialTapTargetSize,
 });
 
-class SwitchPropertiesNotifier extends PropertiesNotifier {
+class SwitchPropertiesNotifier extends PropertiesNotifier<SwitchProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Switch(
@@ -103,7 +103,7 @@ class SwitchPropertiesNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
+  SwitchProperties get fieldValues => (
         value: getValueOf('value'),
         activeColor: getValueOf('activeColor'),
         inactiveThumbColor: getValueOf('inactiveThumbColor'),

@@ -31,7 +31,7 @@ class ClipPropertyField
 }
 
 extension ClipFieldPropertyProvider on PropertiesNotifier {
-  Clip? clipField({
+  void clipField({
     required String id,
     required String title,
     Clip? initialValue,
@@ -45,9 +45,9 @@ extension ClipFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return ClipPropertyField(
+    ClipPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

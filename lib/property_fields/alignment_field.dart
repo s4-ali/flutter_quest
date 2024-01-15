@@ -31,7 +31,7 @@ class AlignmentPropertyField
 }
 
 extension AlignmentFieldPropertyProvider on PropertiesNotifier {
-  Alignment? alignmentField({
+  void alignmentField({
     required String id,
     required String title,
     Alignment? initialValue,
@@ -45,10 +45,10 @@ extension AlignmentFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return AlignmentPropertyField(
+    AlignmentPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }
 

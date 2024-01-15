@@ -31,7 +31,7 @@ class ShapeBorderPropertyField
 }
 
 extension ShapeBorderFieldPropertyProvider on PropertiesNotifier {
-  ShapeBorder? shapeBorderField({
+  void shapeBorderField({
     required String id,
     required String title,
     ShapeBorder? initialValue,
@@ -48,6 +48,6 @@ extension ShapeBorderFieldPropertyProvider on PropertiesNotifier {
     return ShapeBorderPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

@@ -31,7 +31,7 @@ class ImageProviderPropertyField
 }
 
 extension ImageProviderFieldPropertyProvider on PropertiesNotifier {
-  ImageProvider? imageProviderField({
+  void imageProviderField({
     required String id,
     required String title,
     ImageProvider? initialValue,
@@ -45,9 +45,9 @@ extension ImageProviderFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue = const AssetImage("Add the image", ),
       initialValue: initialValue,
     );
-    return ImageProviderPropertyField(
+    ImageProviderPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

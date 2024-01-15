@@ -31,7 +31,7 @@ class TextStylePropertyField
 }
 
 extension TextStyleFieldPropertyProvider on PropertiesNotifier {
-  TextStyle? textStyleField({
+  void textStyleField({
     required String id,
     required String title,
     TextStyle? initialValue,
@@ -45,9 +45,9 @@ extension TextStyleFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue?? const TextStyle(),
       initialValue: initialValue,
     );
-    return TextStylePropertyField(
+    TextStylePropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

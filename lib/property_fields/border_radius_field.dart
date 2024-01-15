@@ -31,7 +31,7 @@ class BorderRadiusPropertyField
 }
 
 extension BorderRadiusFieldPropertyProvider on PropertiesNotifier {
-  BorderRadius? borderRadiusField({
+  void borderRadiusField({
     required String id,
     required String title,
     BorderRadius? initialValue,
@@ -45,9 +45,9 @@ extension BorderRadiusFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return BorderRadiusPropertyField(
+    BorderRadiusPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

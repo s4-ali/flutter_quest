@@ -9,7 +9,7 @@ import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/property_fields/text_style_field.dart';
 import 'package:flutter_quest/property_fields/vertical_direction_field.dart';
 
-typedef ToggleButtonProperties = ({
+typedef ToggleButtonsProperties = ({
   MouseCursor? mouseCursor,
   MaterialTapTargetSize? tapTargetSize,
   TextStyle? textStyle,
@@ -37,11 +37,12 @@ typedef ToggleButtonProperties = ({
   List<Widget>? children,
 });
 
-class ToggleButtonPropertiesNotifier extends PropertiesNotifier {
+class ToggleButtonsPropertiesNotifier
+    extends PropertiesNotifier<ToggleButtonsProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return ToggleButtons(
-      isSelected: [],
+      isSelected: const [],
       onPressed: (v) {},
       mouseCursor: fieldValues.mouseCursor,
       tapTargetSize: fieldValues.tapTargetSize,
@@ -110,7 +111,7 @@ class ToggleButtonPropertiesNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
+  ToggleButtonsProperties get fieldValues => (
         isSelected: getValueOf('isSelected'),
         onPressed: getValueOf('onPressed'),
         mouseCursor: getValueOf('mouseCursor'),

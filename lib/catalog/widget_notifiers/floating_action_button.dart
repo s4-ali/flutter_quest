@@ -31,7 +31,8 @@ typedef FloatingActionButtonProperties = ({
   String? childText,
 });
 
-class FloatingActionButtonPropertiesNotifier extends PropertiesNotifier {
+class FloatingActionButtonPropertiesNotifier
+    extends PropertiesNotifier<FloatingActionButtonProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return FloatingActionButton(
@@ -91,7 +92,7 @@ FloatingActionButton(
 ''';
 
   @override
-  get fieldValues => (
+  FloatingActionButtonProperties get fieldValues => (
         tooltip: getValueOf('tooltip'),
         foregroundColor: getValueOf('foregroundColor'),
         backgroundColor: getValueOf('backgroundColor'),

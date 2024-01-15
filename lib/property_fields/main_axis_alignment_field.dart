@@ -31,7 +31,7 @@ class MainAxisAlignmentPropertyField
 }
 
 extension MainAxisAlignmentFieldPropertyProvider on PropertiesNotifier {
-  MainAxisAlignment? mainAxisAlignmentField({
+  void mainAxisAlignmentField({
     required String id,
     required String title,
     MainAxisAlignment? initialValue,
@@ -45,9 +45,9 @@ extension MainAxisAlignmentFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return MainAxisAlignmentPropertyField(
+    MainAxisAlignmentPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

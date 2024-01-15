@@ -31,7 +31,7 @@ class BorderPropertyField
 }
 
 extension BorderFieldPropertyProvider on PropertiesNotifier {
-  BoxBorder? borderField({
+  void borderField({
     required String id,
     required String title,
     BoxBorder? initialValue,
@@ -45,9 +45,9 @@ extension BorderFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue??Border.all(),
       initialValue: initialValue,
     );
-    return BorderPropertyField(
+    BorderPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

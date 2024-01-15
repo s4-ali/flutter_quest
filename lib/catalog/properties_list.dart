@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/utils/extensions.dart';
-import 'package:flutter_quest/widgets/animated_card.dart';
 import 'package:flutter_quest/widgets/app_bar.dart';
 import 'package:flutter_quest/widgets/fields/alignment_field.dart';
 import 'package:flutter_quest/widgets/fields/axis_field.dart';

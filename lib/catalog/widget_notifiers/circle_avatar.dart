@@ -16,9 +16,11 @@ typedef CircleAvatarProperties = ({
   String? childText,
 });
 
-class CircleAvatarPropertiesNotifier extends PropertiesNotifier {
+class CircleAvatarPropertiesNotifier
+    extends PropertiesNotifier<CircleAvatarProperties> {
   @override
   Widget buildPreview(BuildContext context) {
+    // TODO: Use field values instead
     return CircleAvatar(
       radius: getValueOf('radius'),
       backgroundColor: getValueOf('backgroundColor'),
@@ -31,6 +33,7 @@ class CircleAvatarPropertiesNotifier extends PropertiesNotifier {
     );
   }
 
+  //TODO: Use field values instead
   @override
   String get code => '''
     CircleAvatar(
@@ -46,7 +49,7 @@ class CircleAvatarPropertiesNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
+  CircleAvatarProperties get fieldValues => (
         backgroundColor: getValueOf('backgroundColor'),
         backgroundImage: getValueOf('backgroundImage'),
         foregroundImage: getValueOf('foregroundImage'),

@@ -29,7 +29,8 @@ typedef NetworkImageProperties = ({
   int? cacheHeight,
 });
 
-class NetworkImagePropertiesNotifier extends PropertiesNotifier {
+class NetworkImagePropertiesNotifier
+    extends PropertiesNotifier<NetworkImageProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Image.network(
@@ -102,7 +103,7 @@ Image.network(
 ''';
 
   @override
-  get fieldValues => (
+  NetworkImageProperties get fieldValues => (
         height: getValueOf('height'),
         width: getValueOf('width'),
         scale: getValueOf('scale'),

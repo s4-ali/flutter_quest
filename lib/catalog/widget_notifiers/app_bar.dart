@@ -63,7 +63,7 @@ typedef AppBarProperties = ({
   Clip? clipBehavior,
 });
 
-class AppBarPropertiesNotifier extends PropertiesNotifier {
+class AppBarPropertiesNotifier extends PropertiesNotifier<AppBarProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return AppBar(
@@ -108,8 +108,8 @@ class AppBarPropertiesNotifier extends PropertiesNotifier {
       centerTitle: fieldValues.centerTitle,
       excludeHeaderSemantics: fieldValues.excludeHeaderSemantics ?? false,
       titleSpacing: fieldValues.titleSpacing,
-      toolbarOpacity: fieldValues.toolbarOpacity ?? RangeValues(0.0, 0.0),
-      bottomOpacity: fieldValues.bottomOpacity ?? RangeValues(0.0, 0.0),
+      toolbarOpacity: fieldValues.toolbarOpacity ?? const RangeValues(0.0, 0.0),
+      bottomOpacity: fieldValues.bottomOpacity ?? const RangeValues(0.0, 0.0),
       toolbarHeight: fieldValues.toolbarHeight,
       leadingWidth: fieldValues.leadingWidth,
       toolbarTextStyle: fieldValues.toolbarTextStyle,
@@ -201,7 +201,7 @@ AppBar(
 ''';
 
   @override
-  get fieldValues => (
+  AppBarProperties get fieldValues => (
         leading: getValueOf('leading'),
         automaticallyImplyLeading: getValueOf('automaticallyImplyLeading'),
         title: getValueOf('title'),

@@ -31,7 +31,7 @@ class VerticalDirectionPropertyField
 }
 
 extension VerticalDirectionFieldPropertyProvider on PropertiesNotifier {
-  VerticalDirection? verticalDirectionField({
+  void verticalDirectionField({
     required String id,
     required String title,
     VerticalDirection? initialValue,
@@ -45,9 +45,9 @@ extension VerticalDirectionFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return VerticalDirectionPropertyField(
+    VerticalDirectionPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

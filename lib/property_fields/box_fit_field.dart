@@ -31,7 +31,7 @@ class BoxFitPropertyField
 }
 
 extension BoxFitFieldPropertyProvider on PropertiesNotifier {
-  BoxFit? boxFitField({
+  void boxFitField({
     required String id,
     required String title,
     BoxFit? initialValue,
@@ -45,9 +45,9 @@ extension BoxFitFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return BoxFitPropertyField(
+    BoxFitPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

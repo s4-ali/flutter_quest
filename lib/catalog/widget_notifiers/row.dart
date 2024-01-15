@@ -8,25 +8,28 @@ import 'package:flutter_quest/property_fields/text_direction_field.dart';
 import 'package:flutter_quest/property_fields/vertical_direction_field.dart';
 
 typedef RowProperties = ({
-MainAxisAlignment? mainAxisAlignment,
-MainAxisSize? mainAxisSize,
-CrossAxisAlignment? crossAxisAlignment,
-TextDirection? textDirection,
-VerticalDirection? verticalDirection,
-TextBaseline? textBaseLine,
+  MainAxisAlignment? mainAxisAlignment,
+  MainAxisSize? mainAxisSize,
+  CrossAxisAlignment? crossAxisAlignment,
+  TextDirection? textDirection,
+  VerticalDirection? verticalDirection,
+  TextBaseline? textBaseLine,
 });
 
-class RowPropertiesNotifier extends PropertiesNotifier {
+class RowPropertiesNotifier extends PropertiesNotifier<RowProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Row(
-      mainAxisAlignment: fieldValues.mainAxisAlignment ?? MainAxisAlignment.start,
+      mainAxisAlignment:
+          fieldValues.mainAxisAlignment ?? MainAxisAlignment.start,
       mainAxisSize: fieldValues.mainAxisSize ?? MainAxisSize.max,
-      crossAxisAlignment: fieldValues.crossAxisAlignment ?? CrossAxisAlignment.center,
+      crossAxisAlignment:
+          fieldValues.crossAxisAlignment ?? CrossAxisAlignment.center,
       textDirection: fieldValues.textDirection,
-      verticalDirection: fieldValues.verticalDirection ?? VerticalDirection.down,
+      verticalDirection:
+          fieldValues.verticalDirection ?? VerticalDirection.down,
       textBaseline: fieldValues.textBaseLine,
-      children: [],
+      children: const [],
     );
   }
 
@@ -44,14 +47,14 @@ class RowPropertiesNotifier extends PropertiesNotifier {
   ''';
 
   @override
-  get fieldValues => (
-  mainAxisAlignment: getValueOf('mainAxisAlignment'),
-  mainAxisSize: getValueOf('mainAxisSize'),
-  crossAxisAlignment: getValueOf('crossAxisAlignment'),
-  textDirection: getValueOf('textDirection'),
-  verticalDirection: getValueOf('verticalDirection'),
-  textBaseLine: getValueOf('textBaseLine'),
-  );
+  RowProperties get fieldValues => (
+        mainAxisAlignment: getValueOf('mainAxisAlignment'),
+        mainAxisSize: getValueOf('mainAxisSize'),
+        crossAxisAlignment: getValueOf('crossAxisAlignment'),
+        textDirection: getValueOf('textDirection'),
+        verticalDirection: getValueOf('verticalDirection'),
+        textBaseLine: getValueOf('textBaseLine'),
+      );
 
   @override
   void registerFields() {

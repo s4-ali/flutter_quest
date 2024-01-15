@@ -31,7 +31,7 @@ class AxisPropertyField
 }
 
 extension AxisFieldPropertyProvider on PropertiesNotifier {
-  Axis? axisField({
+  void axisField({
     required String id,
     required String title,
     Axis? initialValue,
@@ -45,9 +45,9 @@ extension AxisFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return AxisPropertyField(
+    AxisPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

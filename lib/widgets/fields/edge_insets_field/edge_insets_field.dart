@@ -12,10 +12,10 @@ class EdgeInsetsField extends StatefulWidget {
   final EdgeInsets value;
 
   const EdgeInsetsField({
-    Key? key,
+    super.key,
     required this.onChanged,
     required this.value
-  }) : super(key: key);
+  });
 
   @override
   State<EdgeInsetsField> createState() => _EdgeInsetsFieldState();

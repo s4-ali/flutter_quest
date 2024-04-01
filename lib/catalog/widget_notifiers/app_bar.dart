@@ -33,20 +33,20 @@ typedef AppBarProperties = ({
   double? iconGrade,
   double? iconOpticalSize,
   Color? iconColor,
-  RangeValues? iconOpacity,
+  double? iconOpacity,
   double? actionsIconSize,
   double? actionsIconFill,
   double? actionsIconWeight,
   double? actionsIconGrade,
   double? actionsIconOpticalSize,
   Color? actionsIconColor,
-  RangeValues? actionsIconOpacity,
+  double? actionsIconOpacity,
   bool? primary,
   bool? centerTitle,
   bool? excludeHeaderSemantics,
   double? titleSpacing,
-  RangeValues? toolbarOpacity,
-  RangeValues? bottomOpacity,
+  double? toolbarOpacity,
+  double? bottomOpacity,
   double? toolbarHeight,
   double? leadingWidth,
   TextStyle? toolbarTextStyle,
@@ -108,8 +108,8 @@ class AppBarPropertiesNotifier extends PropertiesNotifier<AppBarProperties> {
       centerTitle: fieldValues.centerTitle,
       excludeHeaderSemantics: fieldValues.excludeHeaderSemantics ?? false,
       titleSpacing: fieldValues.titleSpacing,
-      toolbarOpacity: fieldValues.toolbarOpacity ?? const RangeValues(0.0, 0.0),
-      bottomOpacity: fieldValues.bottomOpacity ?? const RangeValues(0.0, 0.0),
+      toolbarOpacity: fieldValues.toolbarOpacity ?? 1,
+      bottomOpacity: fieldValues.bottomOpacity ?? 1,
       toolbarHeight: fieldValues.toolbarHeight,
       leadingWidth: fieldValues.leadingWidth,
       toolbarTextStyle: fieldValues.toolbarTextStyle,
@@ -280,7 +280,7 @@ AppBar(
     doubleField(id: "iconGrade", title: "IconTheme Grade");
     doubleField(id: "iconOpticalSize", title: "IconTheme Optical Size");
     colorField(id: "iconColor", title: "IconTheme Color");
-    doubleRangePickerField(id: "iconOpacity", title: "IconTheme Opacity");
+    rangePickerNumberField(id: "iconOpacity", title: "IconTheme Opacity");
     doubleField(id: "actionsIconSize", title: "ActionsIconTheme Size");
     doubleField(id: "actionsIconFill", title: "ActionsIconTheme Fill");
     doubleField(id: "actionsIconWeight", title: "ActionsIconTheme Weight");
@@ -288,15 +288,15 @@ AppBar(
     doubleField(
         id: "actionsIconOpticalSize", title: "ActionsIconTheme Optical Size");
     colorField(id: "actionsIconColor", title: "ActionsIconTheme Color");
-    doubleRangePickerField(
+    rangePickerNumberField(
         id: "actionsIconOpacity", title: "ActionsIconTheme Opacity");
     booleanField(id: "primary", title: "Primary");
     booleanField(id: "centerTitle", title: "Center Title");
     booleanField(
         id: "excludeHeaderSemantics", title: "Exclude Header Semantics");
     doubleField(id: "titleSpacing", title: "Title Spacing");
-    doubleRangePickerField(id: "toolbarOpacity", title: "Toolbar Opacity");
-    doubleRangePickerField(id: "bottomOpacity", title: "Bottom Opacity");
+    rangePickerNumberField(id: "toolbarOpacity", title: "Toolbar Opacity");
+    rangePickerNumberField(id: "bottomOpacity", title: "Bottom Opacity");
     doubleField(id: "toolbarHeight", title: "Toolbar Height");
     doubleField(id: "leadingWidth", title: "Leading Width");
     textStyleField(id: "toolbarTextStyle", title: "Toolbar Text Style");

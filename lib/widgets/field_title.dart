@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/logger.dart';
 import 'package:flutter_quest/core/property_params.dart';
 
 class FieldTitle extends StatefulWidget {
@@ -31,93 +32,42 @@ class _FieldTitleState extends State<FieldTitle> {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      title: Text(widget.params.title),
-      onExpansionChanged: onExpansionChanged,
-      controller: controller,
-      initiallyExpanded: expanded,
-      trailing: AnimatedRotation(
-        turns: expanded ? 315 / 360 : 0,
-        duration: const Duration(milliseconds: 350),
-        child: const Icon(Icons.add),
-      ),
+    log.i("expanded: $expanded");
+    if (widget.params.isOptional) {
+      return ExpansionTile(
+        title: Text(widget.params.title),
+        onExpansionChanged: onExpansionChanged,
+        controller: controller,
+        initiallyExpanded: expanded,
+        trailing: widget.params.isOptional
+            ? AnimatedRotation(
+          turns: expanded ? 315 / 360 : 0,
+          duration: const Duration(milliseconds: 350),
+          child: const Icon(Icons.add),
+        )
+            : const SizedBox.shrink(),
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: widget.child,
+          ),
+        ],
+      );
+    }
+    return Column(
       children: [
+        ListTile(
+          title: Text(widget.params.title),
+        ),
         Padding(
           padding: const EdgeInsets.all(8),
           child: widget.child,
         ),
       ],
     );
-
-    // final title = TitleText(widget.params.title);
-    // final optionalIconButton = IconButton(
-    //   padding: const EdgeInsets.all(0),
-    //   onPressed: toggleField,
-    //   icon: Icon(
-    //     isEnabled ? Icons.close : Icons.add,
-    //     size: 24,
-    //   ),
-    // );
-    // final fixedSizedOptionalIconButton = SizedBox(
-    //   height: 24,
-    //   width: 24,
-    //   child: widget.params.isOptional ? optionalIconButton : null,
-    // );
-    // if (widget.inline) {
-    //   return SizedBox(
-    //     height: 32,
-    //     child: Center(
-    //       child: Row(
-    //         children: [
-    //           title,
-    //           const Spacer(),
-    //           if (isEnabled) widget.child!,
-    //           if (widget.params.isOptional)
-    //             SizedBox(
-    //               height: 24,
-    //               width: 24,
-    //               child: optionalIconButton,
-    //             )
-    //         ],
-    //       ),
-    //     ),
-    //   );
-    // } else {
-    //   final titleRow = Row(
-    //     crossAxisAlignment: CrossAxisAlignment.center,
-    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //     children: [
-    //       title,
-    //       fixedSizedOptionalIconButton,
-    //     ],
-    //   );
-    //   if(isEnabled) {
-    //     return Column(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: [
-    //         titleRow,
-    //         if (isEnabled) ...[
-    //           const SizedBox(
-    //             height: 6,
-    //           ),
-    //           widget.child!,
-    //         ]
-    //       ],
-    //     );
-    //   } else {
-    //     return SizedBox(
-    //       height: 32,
-    //       child: Center(child: titleRow),
-    //     );
-    //   }
-    // }
   }
 
   void onExpansionChanged(expanded) {
-    if (!widget.params.isOptional) {
-      controller.expand();
-      return;
-    }
     if (expanded) {
       widget.onChanged(widget.params.defaultValue!);
     } else {

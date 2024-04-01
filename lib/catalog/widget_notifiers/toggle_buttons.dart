@@ -112,8 +112,6 @@ class ToggleButtonsPropertiesNotifier
 
   @override
   ToggleButtonsProperties get fieldValues => (
-        isSelected: getValueOf('isSelected'),
-        onPressed: getValueOf('onPressed'),
         mouseCursor: getValueOf('mouseCursor'),
         tapTargetSize: getValueOf('tapTargetSize'),
         textStyle: getValueOf('textStyle'),

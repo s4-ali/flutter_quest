@@ -2,34 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:generator/generator.dart';
 
 const widgets = [
-  AnimatedContainer,
-  AppBar,
-  Card,
-  Checkbox,
-  CircleAvatar,
-  Column,
+  SizedBox,
   Container,
-  Divider,
-  Drawer,
+  Card,
+  AppBar,
+  Checkbox,
+  Icon,
+  Image,
+  // Layouts
+  Column,
+  Row,
+  Stack,
+  ListView,
+  GridView,
+
+  // Buttons
   ElevatedButton,
   FloatingActionButton,
-  GridView,
-  Icon,
   IconButton,
-  Image,
-  ListView,
-  NetworkImage,
   OutlinedButton,
-  Radio,
-  Row,
-  SizedBox,
-  Slider,
-  Stack,
-  Switch,
-  Text,
   TextButton,
+
+  // Form
+  Text,
+  Divider,
+  Radio,
+  Slider,
+  Switch,
   TextField,
-  ToggleButtons,
 ];
 
 @WidgetsAnnotation(widgets: widgets)

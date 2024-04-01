@@ -31,7 +31,7 @@ typedef OutlinedButtonProperties = ({
   Color? borderColor,
   double? borderWidth,
   BorderStyle? borderStyle,
-  BorderSide? strokeAlign,
+  double? strokeAlign,
   MouseCursor? mouseCursor,
   VisualDensity? visualDensity,
   MaterialTapTargetSize? materialTapTargetSize,

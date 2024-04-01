@@ -13,7 +13,7 @@ typedef TextProperties = ({
   TextStyle? style,
   String? fontFamily,
   double? height,
-  List<TextLeadingDistribution>? leadingDistribution,
+  TextLeadingDistribution? leadingDistribution,
   double? leading,
   FontWeight? fontWeight,
   FontStyle? fontStyle,

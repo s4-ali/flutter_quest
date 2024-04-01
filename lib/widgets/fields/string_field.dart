@@ -13,7 +13,7 @@ class StringField extends PropertyWidget<String> {
   @override
   Widget build(BuildContext context) {
     return AppTextField(
-      hintText: "Value",
+      label: "Value",
       onChanged: onChanged,
       controller: TextEditingController(
         text: value,
@@ -28,6 +28,7 @@ class StringFieldPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<String>(
+      title: "String",
       values: const ["String: 1", "String: 2", "String: 3"],
       propertyBuilder: (onChanged, value) {
         return StringField(

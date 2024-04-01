@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/string_field.dart';
 
-class StringFieldPropertyParams extends PropertyParams<String> {
+class StringFieldPropertyParams extends BasePropertyParams<String> {
   StringFieldPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,8 +30,8 @@ class StringFieldPropertyField
   }
 }
 
-extension StringFieldFieldPropertyProvider on PropertyProvider {
-  String? stringField({
+extension StringFieldFieldPropertyProvider on PropertiesNotifier {
+  void stringField({
     required String id,
     required String title,
     String? initialValue,
@@ -44,9 +45,9 @@ extension StringFieldFieldPropertyProvider on PropertyProvider {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return StringFieldPropertyField(
+    StringFieldPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

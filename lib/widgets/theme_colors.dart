@@ -44,6 +44,7 @@ class _ThemeColor extends StatelessWidget {
             onUpdated: (_) {
               themeColorNotifier.value = color;
             },
+            dense: true,
           ),
         );
       },

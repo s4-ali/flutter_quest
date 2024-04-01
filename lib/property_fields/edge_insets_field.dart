@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import '../widgets/fields/edge_insets_field/edge_insets_field.dart';
 
-class EdgeInsetsPropertyParams extends PropertyParams<EdgeInsets> {
+class EdgeInsetsPropertyParams extends BasePropertyParams<EdgeInsets> {
   EdgeInsetsPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,8 +30,8 @@ class EdgeInsetsPropertyField
   }
 }
 
-extension EdgeInsetsFieldPropertyProvider on PropertyProvider {
-  EdgeInsets? edgeInsetsField({
+extension EdgeInsetsFieldPropertyProvider on PropertiesNotifier {
+  void edgeInsetsField({
     required String id,
     required String title,
     EdgeInsets? initialValue,
@@ -44,9 +45,9 @@ extension EdgeInsetsFieldPropertyProvider on PropertyProvider {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return EdgeInsetsPropertyField(
+    EdgeInsetsPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

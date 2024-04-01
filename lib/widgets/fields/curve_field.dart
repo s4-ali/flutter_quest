@@ -59,10 +59,10 @@ class CurveField extends PropertyWidget<Curve> {
   @override
   Widget build(BuildContext context) {
     return IconOptions(
-      onChanged: (val) => onChanged(val),
+      onChanged: onChanged,
       value: value,
       options: values,
-      iconPath: (val) => (value).iconPath,
+      iconPath: (value) => (value).iconPath,
     );
   }
 }
@@ -73,7 +73,8 @@ class CurvePreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<Curve>(
-      values: const [Curves.linear, Curves.bounceIn, Curves.bounceOut],
+      title: "Curve",
+      values: values,
       propertyBuilder: (onChanged, value) {
         return CurveField(
           onChanged: onChanged,

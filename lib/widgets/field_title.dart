@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/core/property_provider.dart';
-import 'title_text.dart';
+import 'package:flutter_quest/core/logger.dart';
+import 'package:flutter_quest/core/property_params.dart';
 
 class FieldTitle extends StatefulWidget {
-  final PropertyParams params;
+  final BasePropertyParams params;
   final Widget? child;
   final void Function(dynamic) onChanged;
   final bool inline;
@@ -21,79 +21,60 @@ class FieldTitle extends StatefulWidget {
 }
 
 class _FieldTitleState extends State<FieldTitle> {
-  bool get isEnabled => widget.child != null;
+  late bool expanded;
+  final controller = ExpansionTileController();
+
+  @override
+  void initState() {
+    expanded = widget.child != null;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final title = TitleText(widget.params.title);
-    final optionalIconButton = IconButton(
-      padding: const EdgeInsets.all(0),
-      onPressed: toggleField,
-      icon: Icon(
-        isEnabled ? Icons.close : Icons.add,
-        size: 24,
-      ),
-    );
-    final fixedSizedOptionalIconButton = SizedBox(
-      height: 24,
-      width: 24,
-      child: widget.params.isOptional ? optionalIconButton : null,
-    );
-    if (widget.inline) {
-      return SizedBox(
-        height: 32,
-        child: Center(
-          child: Row(
-            children: [
-              title,
-              const Spacer(),
-              if (isEnabled) widget.child!,
-              if (widget.params.isOptional)
-                SizedBox(
-                  height: 24,
-                  width: 24,
-                  child: optionalIconButton,
-                )
-            ],
-          ),
-        ),
-      );
-    } else {
-      final titleRow = Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    log.i("expanded: $expanded");
+    if (widget.params.isOptional) {
+      return ExpansionTile(
+        title: Text(widget.params.title),
+        onExpansionChanged: onExpansionChanged,
+        controller: controller,
+        initiallyExpanded: expanded,
+        trailing: widget.params.isOptional
+            ? AnimatedRotation(
+          turns: expanded ? 315 / 360 : 0,
+          duration: const Duration(milliseconds: 350),
+          child: const Icon(Icons.add),
+        )
+            : const SizedBox.shrink(),
         children: [
-          title,
-          fixedSizedOptionalIconButton,
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: widget.child,
+          ),
         ],
       );
-      if(isEnabled) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            titleRow,
-            if (isEnabled) ...[
-              const SizedBox(
-                height: 6,
-              ),
-              widget.child!,
-            ]
-          ],
-        );
-      } else {
-        return SizedBox(
-          height: 32,
-          child: Center(child: titleRow),
-        );
-      }
     }
+    return Column(
+      children: [
+        ListTile(
+          title: Text(widget.params.title),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: widget.child,
+        ),
+      ],
+    );
   }
 
-  void toggleField() {
-    if (isEnabled) {
-      widget.onChanged(null);
-    } else {
+  void onExpansionChanged(expanded) {
+    if (expanded) {
       widget.onChanged(widget.params.defaultValue!);
+    } else {
+      widget.onChanged(null);
     }
+    setState(() {
+      this.expanded = expanded;
+    });
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/range_picker_number_field.dart';
 
-class RangePickerNumberPropertyParams extends PropertyParams<num> {
+class RangePickerNumberPropertyParams extends BasePropertyParams<num> {
   RangePickerNumberPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,8 +30,8 @@ class RangePickerNumberPropertyField
   }
 }
 
-extension RangePickerNumberFieldPropertyProvider on PropertyProvider {
-  num? rangePickerNumberField({
+extension RangePickerNumberFieldPropertyProvider on PropertiesNotifier {
+  void rangePickerNumberField({
     required String id,
     required String title,
     num? initialValue,
@@ -44,25 +45,25 @@ extension RangePickerNumberFieldPropertyProvider on PropertyProvider {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return RangePickerNumberPropertyField(
+    RangePickerNumberPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 
-  double? doubleRangePickerField({
+  void doubleRangePickerField({
     String id = "doubleField",
     String title = "doubleField",
     num? initialValue,
     bool isOptional = true,
     num defaultValue = 0,
   }) {
-    return rangePickerNumberField(
+    rangePickerNumberField(
       id: id,
       title: title,
       isOptional: isOptional,
       initialValue: initialValue,
       defaultValue: defaultValue,
-    )?.toDouble();
+    );
   }
 }

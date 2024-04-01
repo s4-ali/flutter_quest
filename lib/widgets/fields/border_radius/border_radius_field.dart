@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
-import 'package:flutter_quest/widgets/drop_down_button.dart';
-import 'package:flutter_quest/widgets/fields/border_radius/border_radius_layouts.dart';
+import 'package:flutter_quest/widgets/fields/border_radius/dropdown.dart';
+
+import 'border_radius_types/all.dart';
+import 'border_radius_types/circular.dart';
+import 'border_radius_types/horizontal.dart';
+import 'border_radius_types/only.dart';
+import 'border_radius_types/vertical.dart';
+import 'radius_field.dart';
 
 enum BorderRadiusType {
   all,
@@ -44,108 +50,71 @@ class _BorderRadiusField extends StatefulWidget {
 
 class _BorderRadiusFieldState extends State<_BorderRadiusField> {
   BorderRadiusType selectedOption = BorderRadiusType.all;
-  late Widget selectedLayout;
+  BorderRadiusCornerType borderRadiusCornerType =
+      BorderRadiusCornerType.circular;
 
   @override
   void initState() {
     super.initState();
-    selectedLayout = BorderRadiusAllLayout(
-      onChanged: widget.onChanged,
-      value: widget.value,
-    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppDropDownButton(
-          selectedOption: selectedOption,
+        BorderRadiusTypeDropdown(
+          value: selectedOption,
           onChanged: (value) {
             setState(() {
-              selectedOption = value!;
+              selectedOption = value;
             });
           },
-          width: selectedOption == BorderRadiusType.circular ||
-                  selectedOption == BorderRadiusType.zero
-              ? double.infinity
-              : null,
-          items: [
-            DropdownMenuItem<BorderRadiusType>(
-              onTap: () => selectedLayout = BorderRadiusAllLayout(
-                onChanged: widget.onChanged,
-                value: widget.value,
-              ),
-              value: BorderRadiusType.all,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 3),
-                child: Text("All"),
-              ),
-            ),
-            DropdownMenuItem<BorderRadiusType>(
-              onTap: () => selectedLayout = BorderRadiusCircularLayout(
-                onChanged: widget.onChanged,
-                value: widget.value,
-              ),
-              value: BorderRadiusType.circular,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 5),
-                child: Text("Circular"),
-              ),
-            ),
-            DropdownMenuItem<BorderRadiusType>(
-              onTap: () => selectedLayout = BorderRadiusVerticalLayout(
-                onChanged: widget.onChanged,
-                value: widget.value,
-              ),
-              value: BorderRadiusType.vertical,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 5),
-                child: Text("Vertical"),
-              ),
-            ),
-            DropdownMenuItem<BorderRadiusType>(
-              onTap: () => selectedLayout = BorderRadiusHorizontalLayout(
-                onChanged: widget.onChanged,
-                value: widget.value,
-              ),
-              value: BorderRadiusType.horizontal,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 5),
-                child: Text("Horizontal"),
-              ),
-            ),
-            DropdownMenuItem<BorderRadiusType>(
-              onTap: () => selectedLayout = BorderRadiusOnlyLayout(
-                onChanged: widget.onChanged,
-                value: widget.value,
-              ),
-              value: BorderRadiusType.only,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 5),
-                child: Text("Only"),
-              ),
-            ),
-            DropdownMenuItem<BorderRadiusType>(
-              onTap: () {
-                selectedLayout = const SizedBox();
-                widget.onChanged(BorderRadius.zero);
-              },
-              value: BorderRadiusType.zero,
-              child: const Padding(
-                padding: EdgeInsets.only(left: 8, bottom: 5),
-                child: Text("Zero"),
-              ),
-            ),
-          ],
         ),
-        Padding(
-          padding: EdgeInsets.only(
-              top: selectedOption == BorderRadiusType.circular ? 45.0 : 0.0),
-          child: selectedLayout,
+        const SizedBox(
+          height: 8,
         ),
+        borderRadiusLayout(),
       ],
     );
+  }
+
+  void onBorderRadiusCornerTypeChanged(BorderRadiusCornerType type) {
+    setState(() {
+      borderRadiusCornerType = type;
+    });
+  }
+
+  Widget borderRadiusLayout() {
+    switch (selectedOption) {
+      case BorderRadiusType.all:
+        return BorderRadiusAll(
+          value: widget.value,
+          onChanged: widget.onChanged,
+        );
+      case BorderRadiusType.circular:
+        return BorderRadiusCircular(
+          value: widget.value,
+          onChanged: widget.onChanged,
+        );
+      case BorderRadiusType.vertical:
+        return BorderRadiusVertical(
+          value: widget.value,
+          onChanged: widget.onChanged,
+        );
+      case BorderRadiusType.horizontal:
+        return BorderRadiusHorizontal(
+          value: widget.value,
+          onChanged: widget.onChanged,
+        );
+      case BorderRadiusType.only:
+        return BorderRadiusOnly(
+          value: widget.value,
+          onChanged: widget.onChanged,
+        );
+      case BorderRadiusType.zero:
+        return const SizedBox();
+    }
   }
 }
 
@@ -155,6 +124,7 @@ class BorderRadiusPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<BorderRadius>(
+      title: "Border Radius",
       values: [
         const BorderRadius.all(Radius.circular(30)),
         BorderRadius.circular(20),

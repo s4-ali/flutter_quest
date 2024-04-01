@@ -24,6 +24,7 @@ class NumberRangePreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<num>(
+      title: "Range Picker Number",
       values: const [45, 79, 65, 1, 63],
       propertyBuilder: (onChanged, value) {
         return RangePickerNumberField(

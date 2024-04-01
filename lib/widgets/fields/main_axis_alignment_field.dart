@@ -48,6 +48,7 @@ class MainAxisAlignmentPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<MainAxisAlignment>(
+      title: "Main Axis Alignment",
       values: MainAxisAlignment.values,
       propertyBuilder: (onChanged, value) {
         return MainAxisAlignmentField(

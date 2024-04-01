@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/border_radius/border_radius_field.dart';
 
-class BorderRadiusPropertyParams extends PropertyParams<BorderRadius> {
+class BorderRadiusPropertyParams extends BasePropertyParams<BorderRadius> {
   BorderRadiusPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,8 +30,8 @@ class BorderRadiusPropertyField
   }
 }
 
-extension BorderRadiusFieldPropertyProvider on PropertyProvider {
-  BorderRadius? borderRadiusField({
+extension BorderRadiusFieldPropertyProvider on PropertiesNotifier {
+  void borderRadiusField({
     required String id,
     required String title,
     BorderRadius? initialValue,
@@ -44,9 +45,9 @@ extension BorderRadiusFieldPropertyProvider on PropertyProvider {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return BorderRadiusPropertyField(
+    BorderRadiusPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

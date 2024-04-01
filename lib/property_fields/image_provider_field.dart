@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/image_provider_field.dart';
 
-class ImageProviderPropertyParams extends PropertyParams<ImageProvider> {
+class ImageProviderPropertyParams extends BasePropertyParams<ImageProvider> {
   ImageProviderPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,8 +30,8 @@ class ImageProviderPropertyField
   }
 }
 
-extension ImageProviderFieldPropertyProvider on PropertyProvider {
-  ImageProvider? imageProviderField({
+extension ImageProviderFieldPropertyProvider on PropertiesNotifier {
+  void imageProviderField({
     required String id,
     required String title,
     ImageProvider? initialValue,
@@ -44,9 +45,9 @@ extension ImageProviderFieldPropertyProvider on PropertyProvider {
       defaultValue: defaultValue = const AssetImage("Add the image", ),
       initialValue: initialValue,
     );
-    return ImageProviderPropertyField(
+    ImageProviderPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

@@ -7,11 +7,13 @@ class PropertyPreviewer<U> extends StatefulWidget {
   final List<U> values;
   final PropertyWidget<U> Function(void Function(U), U) propertyBuilder;
   final String Function(U)? valueTitleBuilder;
+  final String title;
 
   const PropertyPreviewer({
     super.key,
     required this.values,
     required this.propertyBuilder,
+    required this.title,
     this.valueTitleBuilder,
   }) : assert(values.length > 0, 'Values cannot be empty');
 
@@ -30,7 +32,7 @@ class _PropertyPreviewerState<U> extends State<PropertyPreviewer<U>> {
     final title = widget.valueTitleBuilder?.call(value) ?? value.toString();
 
     final widgetTitle = Text(
-      "Title",
+      widget.title,
       style: context.textTheme.titleLarge
           ?.copyWith(color: context.colorScheme.onSurface),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
+import 'package:flutter_quest/widgets/text_radio_button.dart';
 
 const values = [
   Alignment.topLeft,
@@ -56,10 +57,11 @@ class AlignmentField extends PropertyWidget<Alignment> {
           children: List.generate(3, (col) {
             Alignment option = values[row * 3 + col];
             return Expanded(
-              child: _AlignmentFieldItem(
+              child: TextRadioButton(
                 option: option,
                 onChanged: onChanged,
                 isSelected: option == value,
+                title: option.title,
               ),
             );
           }),
@@ -69,79 +71,13 @@ class AlignmentField extends PropertyWidget<Alignment> {
   }
 }
 
-class _AlignmentFieldItem extends StatefulWidget {
-  final Alignment option;
-  final void Function(Alignment) onChanged;
-  final bool isSelected;
-
-  const _AlignmentFieldItem({
-    required this.onChanged,
-    required this.isSelected,
-    required this.option,
-  });
-
-  @override
-  State<_AlignmentFieldItem> createState() => _AlignmentFieldItemState();
-}
-
-class _AlignmentFieldItemState extends State<_AlignmentFieldItem> {
-  bool isHovering = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final backgroundColor =
-        widget.isSelected ? const Color(0xFF0099FF) : Colors.transparent;
-    final borderColor = widget.isSelected
-        ? Colors.transparent
-        : isHovering
-            ? const Color(0xFF0099FF)
-            : const Color(0xFF35363A);
-    final decoration = BoxDecoration(
-      color: backgroundColor,
-      border: Border.all(
-        color: borderColor,
-        width: 1,
-      ),
-      borderRadius: const BorderRadius.all(Radius.circular(4)),
-    );
-
-    final textColor = widget.isSelected || isHovering
-        ? const Color(0xFFFFFFFF)
-        : const Color(0xFF808080);
-
-    return InkWell(
-      hoverColor: Colors.transparent,
-      onTap: () => widget.onChanged(widget.option),
-      onHover: onHover,
-      child: Container(
-        padding: const EdgeInsets.only(bottom: 2),
-        margin: const EdgeInsets.all(1),
-        alignment: Alignment.center,
-        height: 35,
-        decoration: decoration,
-        child: Text(
-          widget.option.title,
-          style: TextStyle(
-            color: textColor,
-          ),
-        ),
-      ),
-    );
-  }
-
-  void onHover(val) {
-    setState(() {
-      isHovering = val;
-    });
-  }
-}
-
 class AlignmentPreviewer extends StatelessWidget {
   const AlignmentPreviewer({super.key});
 
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<Alignment>(
+      title: "Alignment",
       values: values,
       propertyBuilder: (onChanged, value) {
         return AlignmentField(

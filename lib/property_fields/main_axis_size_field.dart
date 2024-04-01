@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/main_axis_size_field.dart';
 
-class MainAxisSizePropertyParams extends PropertyParams<MainAxisSize> {
+class MainAxisSizePropertyParams extends BasePropertyParams<MainAxisSize> {
   MainAxisSizePropertyParams({
     required super.id,
     super.initialValue,
@@ -29,8 +30,8 @@ class MainAxisSizePropertyField
   }
 }
 
-extension MainAxisSizeFieldPropertyProvider on PropertyProvider {
-  MainAxisSize? mainAxisSizeField({
+extension MainAxisSizeFieldPropertyProvider on PropertiesNotifier {
+  void mainAxisSizeField({
     required String id,
     required String title,
     MainAxisSize? initialValue,
@@ -44,9 +45,9 @@ extension MainAxisSizeFieldPropertyProvider on PropertyProvider {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return MainAxisSizePropertyField(
+    MainAxisSizePropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

@@ -23,6 +23,7 @@ class ShapeBorderPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<ShapeBorder>(
+      title: "Shape Border",
       values: [
         const OutlineInputBorder(borderSide: BorderSide.none),
         Border.all(color: Colors.black, width: 4),

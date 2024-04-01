@@ -412,7 +412,6 @@ class _IconContainer extends StatelessWidget {
   final String iconPath;
 
   const _IconContainer({
-    super.key,
     required this.iconPath,
   });
 

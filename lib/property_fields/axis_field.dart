@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/axis_field.dart';
 
-class AxisPropertyParams extends PropertyParams<Axis> {
+class AxisPropertyParams extends BasePropertyParams<Axis> {
   AxisPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,8 +30,8 @@ class AxisPropertyField
   }
 }
 
-extension AxisFieldPropertyProvider on PropertyProvider {
-  Axis? axisField({
+extension AxisFieldPropertyProvider on PropertiesNotifier {
+  void axisField({
     required String id,
     required String title,
     Axis? initialValue,
@@ -44,9 +45,9 @@ extension AxisFieldPropertyProvider on PropertyProvider {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return AxisPropertyField(
+    AxisPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/box_border_field.dart';
 
-class BoxBorderPropertyParams extends PropertyParams<BoxBorder> {
+class BoxBorderPropertyParams extends BasePropertyParams<BoxBorder> {
   BoxBorderPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,8 +30,8 @@ class BorderPropertyField
   }
 }
 
-extension BorderFieldPropertyProvider on PropertyProvider {
-  BoxBorder? borderField({
+extension BorderFieldPropertyProvider on PropertiesNotifier {
+  void borderField({
     required String id,
     required String title,
     BoxBorder? initialValue,
@@ -44,9 +45,9 @@ extension BorderFieldPropertyProvider on PropertyProvider {
       defaultValue: defaultValue??Border.all(),
       initialValue: initialValue,
     );
-    return BorderPropertyField(
+    BorderPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

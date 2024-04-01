@@ -44,6 +44,7 @@ class CrossAxisAlignmentPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<CrossAxisAlignment>(
+      title: "Cross Axis Alignment",
       values: CrossAxisAlignment.values,
       propertyBuilder: (onChanged, value) {
         return CrossAxisAlignmentField(

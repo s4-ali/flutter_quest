@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/list_field.dart';
 
-class ListPropertyParams<T> extends PropertyParams<T> {
+class ListPropertyParams<T> extends BasePropertyParams<T> {
   final List<T> values;
   final String Function(T)? titleBuilder;
 
@@ -35,8 +36,8 @@ class ListPropertyField<T> extends PropertyField<ListPropertyParams<T>, T> {
   }
 }
 
-extension ListFieldPropertyProvider on PropertyProvider {
-  T? listField<T>({
+extension ListFieldPropertyProvider on PropertiesNotifier {
+  void listField<T>({
     required String id,
     required String title,
     required List<T> values,
@@ -55,9 +56,9 @@ extension ListFieldPropertyProvider on PropertyProvider {
       titleBuilder: titleBuilder,
     );
 
-    return ListPropertyField<T>(
+    ListPropertyField<T>(
       this,
       params,
-    )();
+    ).register();
   }
 }

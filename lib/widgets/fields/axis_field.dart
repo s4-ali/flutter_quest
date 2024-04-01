@@ -40,6 +40,7 @@ class AxisPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<Axis>(
+      title: "Axis",
       values: Axis.values,
       propertyBuilder: (onChanged, value) {
         return AxisField(

@@ -42,6 +42,7 @@ class MainAxisSizePreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<MainAxisSize>(
+      title: "Main Axis Size",
       values: MainAxisSize.values,
       propertyBuilder: (onChanged, value) {
         return MainAxisSizeField(

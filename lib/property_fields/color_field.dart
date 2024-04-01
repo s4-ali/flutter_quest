@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/color_field.dart';
 
-class ColorPropertyParams extends PropertyParams<Color> {
+class ColorPropertyParams extends BasePropertyParams<Color> {
   ColorPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,8 +30,8 @@ class ColorPropertyField
   }
 }
 
-extension ColorFieldPropertyProvider on PropertyProvider {
-  Color? colorField({
+extension ColorFieldPropertyProvider on PropertiesNotifier {
+  void colorField({
     required String id,
     required String title,
     Color? initialValue,
@@ -44,9 +45,9 @@ extension ColorFieldPropertyProvider on PropertyProvider {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return ColorPropertyField(
+    ColorPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/alignment_field.dart';
 
-class AlignmentPropertyParams extends PropertyParams<Alignment> {
+class AlignmentPropertyParams extends BasePropertyParams<Alignment> {
   AlignmentPropertyParams({
     required super.id,
     super.initialValue,
@@ -29,8 +30,8 @@ class AlignmentPropertyField
   }
 }
 
-extension AlignmentFieldPropertyProvider on PropertyProvider {
-  Alignment? alignmentField({
+extension AlignmentFieldPropertyProvider on PropertiesNotifier {
+  void alignmentField({
     required String id,
     required String title,
     Alignment? initialValue,
@@ -44,10 +45,10 @@ extension AlignmentFieldPropertyProvider on PropertyProvider {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    return AlignmentPropertyField(
+    AlignmentPropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }
 

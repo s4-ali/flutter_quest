@@ -1,7 +1,26 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/catalog/home.dart';
 import 'package:flutter_quest/catalog/properties_list.dart';
+import 'package:flutter_quest/catalog/widgets.providers.g.dart';
+import 'package:provider/provider.dart';
+
+enum InitialScreen{
+  home,
+  propertiesList,
+}
+
+extension on InitialScreen{
+  Widget get widget {
+    switch(this) {
+      case InitialScreen.home:
+        return const Home();
+      case InitialScreen.propertiesList:
+        return const PropertiesList();
+    }
+  }
+}
+
+const _initialScreen = InitialScreen.home;
 
 void main() {
   runApp(const MyApp());
@@ -12,12 +31,15 @@ final ValueNotifier<Color> themeColorNotifier = ValueNotifier(Colors.teal);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Color>(
-      valueListenable: themeColorNotifier,
-      builder: (_, color, __) {
-        return ValueListenableBuilder<ThemeMode>(
+    return MultiProvider(
+      providers: getProviders(),
+      builder: (_,__) => ValueListenableBuilder<Color>(
+        valueListenable: themeColorNotifier,
+        builder: (_, color, __) {
+          return ValueListenableBuilder<ThemeMode>(
             valueListenable: themeNotifier,
             builder: (_, mode, __) {
               return MaterialApp(
@@ -42,10 +64,12 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
                 themeMode: mode,
-                home: const PropertiesList(),
+                home: const Home(),//_initialScreen.widget,
               );
-            });
-      },
+            },
+          );
+        },
+      ) ,
     );
   }
 }
@@ -93,4 +117,3 @@ void navigateTo(BuildContext context, Widget screen) {
     ),
   );
 }
-

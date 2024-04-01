@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/text_style_field.dart';
 
-class TextStylePropertyParams extends PropertyParams<TextStyle> {
+class TextStylePropertyParams extends BasePropertyParams<TextStyle> {
   TextStylePropertyParams({
     required super.id,
     super.initialValue,
@@ -29,8 +30,8 @@ class TextStylePropertyField
   }
 }
 
-extension TextStyleFieldPropertyProvider on PropertyProvider {
-  TextStyle? textStyleField({
+extension TextStyleFieldPropertyProvider on PropertiesNotifier {
+  void textStyleField({
     required String id,
     required String title,
     TextStyle? initialValue,
@@ -44,9 +45,9 @@ extension TextStyleFieldPropertyProvider on PropertyProvider {
       defaultValue: defaultValue?? const TextStyle(),
       initialValue: initialValue,
     );
-    return TextStylePropertyField(
+    TextStylePropertyField(
       this,
       params,
-    )();
+    ).register();
   }
 }

@@ -41,6 +41,7 @@ class TextDirectionPreviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PropertyPreviewer<TextDirection>(
+      title: "Text Direction",
       values: TextDirection.values,
       propertyBuilder: (onChanged, value) {
         return TextDirectionField(

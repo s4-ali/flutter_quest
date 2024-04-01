@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_params.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/fields/matrix4_field.dart';
 
-class Matrix4PropertyParams extends PropertyParams<Matrix4> {
+class Matrix4PropertyParams extends BasePropertyParams<Matrix4> {
   Matrix4PropertyParams({
     required super.id,
     super.initialValue,
@@ -29,8 +30,8 @@ class Matrix4PropertyField
   }
 }
 
-extension Matrix4FieldPropertyProvider on PropertyProvider {
-  Matrix4? matrix4Field({
+extension Matrix4FieldPropertyProvider on PropertiesNotifier {
+  void matrix4Field({
     required String id,
     required String title,
     Matrix4? initialValue,
@@ -44,9 +45,9 @@ extension Matrix4FieldPropertyProvider on PropertyProvider {
       defaultValue: defaultValue??Matrix4.rotationX(0.0),
       initialValue: initialValue,
     );
-    return Matrix4PropertyField(
+    Matrix4PropertyField(
       this,
       params,
-    )();
+    );
   }
 }

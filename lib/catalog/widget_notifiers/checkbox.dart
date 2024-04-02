@@ -155,6 +155,7 @@ class CheckboxPropertiesNotifier
     booleanField(
       id: "value",
       title: "Value",
+      initialValue: false,
     );
     booleanField(
       id: "triState",
@@ -166,7 +167,7 @@ class CheckboxPropertiesNotifier
       values: [MouseCursor.defer, MouseCursor.uncontrolled],
     );
     colorField(id: 'fillColor', title: 'Fill Color');
-    colorField(id: 'checkColor', title: 'Check Color');
+    colorField(id: 'checkColor', title: 'Check Color',initialValue: Colors.teal);
     colorField(id: 'focusColor', title: 'Color Field');
     colorField(id: 'hoverColor', title: 'Hover Color');
     colorField(id: 'overLayColor', title: 'Overlay Color');
@@ -186,6 +187,6 @@ class CheckboxPropertiesNotifier
         id: "borderStyle", title: "Border Style", values: BorderStyle.values);
     doubleField(id: 'strokeAlign');
     booleanField(id: 'isError', title: 'Is Error');
-    stringField(id: 'semanticLabel', title: 'Semantic Label');
+    stringField(id: 'semanticLabel', title: 'Semantic Label', initialValue: "Checkbox");
   }
 }

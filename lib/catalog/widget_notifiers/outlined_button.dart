@@ -260,13 +260,13 @@ class OutlinedButtonPropertiesNotifier
   void registerFields() {
     booleanField(id: "autofocus", title: "Autofocus");
     clipField(id: "clipBehavior", title: "Clip Behavior");
-    colorField(id: "backgroundColor", title: "Background Color");
+    colorField(id: "backgroundColor", title: "Background Color", initialValue: Colors.grey[300]);
     colorField(id: "foregroundColor", title: "Foreground Color");
-    colorField(id: "overlayColor", title: "Overlay Color");
+    colorField(id: "overlayColor", title: "Overlay Color", initialValue: Colors.teal[300]);
     colorField(id: "shadowColor", title: "Shadow Color");
     colorField(id: "surfaceTintColor", title: "Surface Tint Color");
     doubleField(id: "elevation", title: "Elevation");
-    edgeInsetsField(id: "padding", title: "Padding");
+    edgeInsetsField(id: "padding", title: "Padding", initialValue: EdgeInsets.all(15.0));
     doubleField(id: "minHeight", title: "Minimum Height");
     doubleField(id: "minWidth", title: "Minimum Width");
     doubleField(id: "maxHeight", title: "Maximum Height");

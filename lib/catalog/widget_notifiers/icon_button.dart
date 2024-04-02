@@ -321,7 +321,7 @@ IconButton(
           VisualDensity.compact,
           VisualDensity.adaptivePlatformDensity
         ]);
-    iconDataField(id: "icon", title: "Icon");
+    iconDataField(id: "icon", title: "Icon", initialValue: Icons.add);
     edgeInsetsField(id: "padding", title: "Padding");
     alignmentField(id: "alignment", title: "Alignment");
     doubleField(id: "splashRadius", title: "Splash Radius");
@@ -335,7 +335,7 @@ IconButton(
         id: "mouseCursor",
         title: "MouseCursor",
         values: [MouseCursor.defer, MouseCursor.uncontrolled]);
-    stringField(id: "tooltip", title: "Tooltip");
+    stringField(id: "tooltip", title: "Tooltip", initialValue: 'click here');
     booleanField(id: "enableFeedback", title: "Enable Feedback");
     doubleField(id: "minWidth", title: "Minimum Width");
     doubleField(id: "maxWidth", title: "Maximum Width");
@@ -343,7 +343,7 @@ IconButton(
     doubleField(id: "maxHeight", title: "Maximum Height");
     colorField(id: "backgroundColor", title: "Background Color");
     colorField(id: "foregroundColor", title: "Foreground Color");
-    colorField(id: "overlayColor", title: "Overlay Color");
+    colorField(id: "overlayColor", title: "Overlay Color", initialValue: Colors.black12);
     colorField(id: "shadowColor", title: "Shadow Color");
     colorField(id: "surfaceTintColor", title: "Surface Tint Color");
     doubleField(id: "elevation", title: "Elevation");

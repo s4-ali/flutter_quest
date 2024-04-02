@@ -128,12 +128,12 @@ class SwitchPropertiesNotifier extends PropertiesNotifier<SwitchProperties> {
   @override
   void registerFields() {
     booleanField(id: "value", title: "Value");
-    colorField(id: "activeColor", title: "Active Color");
+    colorField(id: "activeColor", title: "Active Color", initialValue: Colors.blue);
     colorField(id: "inactiveThumbColor", title: "Inactive Thumb Color");
-    colorField(id: "activeTrackColor", title: "Active Track Color");
-    stringField(id: "activeThumbImage", title: "Active Thumb Image Link");
-    stringField(id: "inactiveThumbImage", title: "InactiveThumb Image Link");
-    colorField(id: "thumbColor", title: "Thumb Color");
+    colorField(id: "activeTrackColor", title: "Active Track Color", initialValue: Colors.blueGrey[300]);
+    stringField(id: "activeThumbImage", title: "Active Thumb Image Link",initialValue: "");
+    stringField(id: "inactiveThumbImage", title: "InactiveThumb Image Link",initialValue: "");
+    colorField(id: "thumbColor", title: "Thumb Color", initialValue: Colors.teal);
     colorField(id: "trackColor", title: "Track Color");
     colorField(id: "trackOutlineColor", title: "Track Outline Color");
     doubleField(id: "trackOutlineWidth", title: "Track Outline Width");
@@ -150,7 +150,7 @@ class SwitchPropertiesNotifier extends PropertiesNotifier<SwitchProperties> {
     );
     colorField(id: "focusColor", title: "Focus Color");
     colorField(id: "hoverColor", title: "Hover Color");
-    colorField(id: "overlayColor", title: "Overlay Color");
+    colorField(id: "overlayColor", title: "Overlay Color", initialValue: Colors.blueGrey[200]);
     doubleField(id: "splashRadius", title: "Splash Radius");
     booleanField(id: "autofocus", title: "autofocus");
     listField<MaterialTapTargetSize>(

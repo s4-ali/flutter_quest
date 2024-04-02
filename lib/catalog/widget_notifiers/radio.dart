@@ -109,7 +109,7 @@ class RadioPropertiesNotifier extends PropertiesNotifier<RadioProperties> {
     colorField(id: "fillColor", title: "Fill Color");
     colorField(id: "focusColor", title: "Focus Color");
     colorField(id: "hoverColor", title: "Hover Color");
-    colorField(id: "overlayColor", title: "Overlay Color");
+    colorField(id: "overlayColor", title: "Overlay Color", initialValue: Colors.grey[400]);
     doubleField(id: "splashRadius", title: "Splash Radius");
     listField(
       id: "materialTapTargetSize",

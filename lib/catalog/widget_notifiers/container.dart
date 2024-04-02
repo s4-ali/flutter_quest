@@ -112,14 +112,14 @@ class ContainerPropertiesNotifier
 
   @override
   void registerFields() {
-    heightField();
-    widthField();
-    alignmentField(id: "alignment", title: "Alignment");
-    edgeInsetsField(id: "margin", title: "Margin");
-    edgeInsetsField(id: "padding", title: "Padding");
-    colorField(id: "color", title: "Color");
-    borderRadiusField(id: "BorderRadius", title: "BorderRadius");
-    borderField(id: "border", title: "Border");
+    heightField(initialValue: 150.0);
+    widthField(initialValue: 150.0);
+    alignmentField(id: "alignment", title: "Alignment", initialValue: Alignment.center);
+    edgeInsetsField(id: "margin", title: "Margin", initialValue: EdgeInsets.all(16.0));
+    edgeInsetsField(id: "padding", title: "Padding", initialValue: EdgeInsets.all(20.0));
+    colorField(id: "color", title: "Color", initialValue: Colors.cyan);
+    borderRadiusField(id: "BorderRadius", title: "BorderRadius", initialValue: BorderRadius.circular(8.0));
+    borderField(id: "border", title: "Border", initialValue: Border.all(color: Colors.black, width: 1.0));
     colorField(id: "foregroundColor", title: "Foreground Color");
     matrix4Field(id: "transform", title: "Transform");
     clipField(id: "clipBehavior", title: "Clip Behavior");
@@ -127,6 +127,6 @@ class ContainerPropertiesNotifier
     heightField(id: "maxHeight", title: "Maximum Height");
     widthField(id: "minWidth", title: "Minimum Width");
     widthField(id: "maxWidth", title: "Maximum Width");
-    alignmentField(id: "transformAlignment", title: "Transform Alignment");
+    alignmentField(id: "transformAlignment", title: "Transform Alignment", initialValue: Alignment.center);
   }
 }

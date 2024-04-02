@@ -689,23 +689,23 @@ class TextFieldPropertiesNotifier
 
     // Label
     iconDataField(id: "label", title: "Label");
-    stringField(id: "labelText", title: "Label Text");
+    stringField(id: "labelText", title: "Label Text",);
     iconDataField(id: "labelStyle", title: "Label Style");
     iconDataField(id: "floatingLabelStyle", title: "Floating Label Style");
 
     // Helper Text
-    stringField(id: "helperText", title: "Helper Text");
+    stringField(id: "helperText", title: "Helper Text", initialValue: "Helper Text");
     iconDataField(id: "helperStyle", title: "Helper Style");
     intField(id: "helperMaxLines", title: "Helper MaxLines");
 
     // Hint Text
-    stringField(id: "hintText", title: "Hint Text");
+    stringField(id: "hintText", title: "Hint Text", initialValue: "Hint Text");
     iconDataField(id: "hintStyle", title: "Hint Style");
     textDirectionField(id: "hintTextDirection", title: "Hint Text Direction");
     intField(id: "hintMaxLines", title: "Hint Max Lines");
 
     // Error
-    iconDataField(id: "error", title: "Error");
+    iconDataField(id: "error", title: "Error", initialValue: Icons.error);
     stringField(id: "errorText", title: "Error Text");
     iconDataField(id: "errorStyle", title: "Error Style");
     intField(id: "errorMaxLines", title: "Error Max Lines");
@@ -721,19 +721,19 @@ class TextFieldPropertiesNotifier
     booleanField(id: "isCollapsed", title: "IsCollapsed");
     booleanField(id: "isDense", title: "IsDense");
     edgeInsetsField(id: "contentPadding", title: "Content Padding");
-    iconDataField(id: "prefixIcon", title: "Prefix Icon");
+    iconDataField(id: "prefixIcon", title: "Prefix Icon", initialValue: Icons.email);
 
     doubleField(id: "prefixMaxHeight", title: "Prefix Icon Maximum Height");
     doubleField(id: "prefixMinHeight", title: "Prefix Icon Minimum Height");
     doubleField(id: "prefixMaxWidth", title: "PrefixIcon Maximum Width");
     doubleField(id: "prefixMinWidth", title: "PrefixIcon Minimum Width");
 
-    iconDataField(id: "prefix", title: "Prefix");
+    iconDataField(id: "prefix", title: "Prefix",);
     stringField(id: "prefixText", title: "Prefix Text");
     iconDataField(id: "prefixStyle", title: "Prefix Style");
-    colorField(id: "prefixIconColor", title: "Prefix Icon Color");
+    colorField(id: "prefixIconColor", title: "Prefix Icon Color", initialValue: Colors.teal);
 
-    iconDataField(id: "suffixIcon", title: "Suffix Icon");
+    iconDataField(id: "suffixIcon", title: "Suffix Icon", initialValue: Icons.arrow_forward);
 
     doubleField(id: "suffixMaxHeight", title: "Suffix Icon Maximum Height");
     doubleField(id: "suffixMinHeight", title: "Suffix Icon Minimum Height");
@@ -742,20 +742,20 @@ class TextFieldPropertiesNotifier
 
     stringField(id: "suffixText", title: "Suffix Text");
     iconDataField(id: "suffixStyle", title: "Suffix Style");
-    colorField(id: "suffixIconColor", title: "Suffix Icon Color");
+    colorField(id: "suffixIconColor", title: "Suffix Icon Color", initialValue: Colors.teal);
 
     iconDataField(id: "counter", title: "Counter");
     stringField(id: "counterText", title: "Counter Text");
     iconDataField(id: "counterStyle", title: "Counter Style");
-    booleanField(id: "filled", title: "Filled");
-    colorField(id: "fillColor", title: "Fill Color");
+    booleanField(id: "filled", title: "Filled", initialValue: true);
+    colorField(id: "fillColor", title: "Fill Color", initialValue: Colors.purple[200]);
     colorField(id: "focusColor", title: "Focus Color");
-    colorField(id: "hoverColor", title: "Hover Color");
+    colorField(id: "hoverColor", title: "Hover Color", initialValue: Colors.lightGreenAccent[100]);
 
     // Error Border
-    colorField(id: "errorBorderColor", title: "Error Border Color");
+    colorField(id: "errorBorderColor", title: "Error Border Color", initialValue: Colors.red);
     doubleField(id: "errorBorderWidth", title: "Error Border Width");
-    borderRadiusField(id: "errorBorderRadius", title: "Error Border Radius");
+    borderRadiusField(id: "errorBorderRadius", title: "Error Border Radius", initialValue: BorderRadius.circular(8.0));
     listField(
       id: "errorBorderStyle",
       title: "Error Border Style",
@@ -765,9 +765,9 @@ class TextFieldPropertiesNotifier
     doubleField(id: "errorGapPadding", title: "Error Gap Padding");
 
     // Focus Border
-    colorField(id: "focusBorderColor", title: "Focus Border Color");
+    colorField(id: "focusBorderColor", title: "Focus Border Color", initialValue: Colors.purple);
     doubleField(id: "focusBorderWidth", title: "Focus Border Width");
-    borderRadiusField(id: "focusBorderRadius", title: "Focus Border Radius");
+    borderRadiusField(id: "focusBorderRadius", title: "Focus Border Radius", initialValue: BorderRadius.circular(8.0));
     listField(
       id: "focusBorderStyle",
       title: "Focus Border Style",

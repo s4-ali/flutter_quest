@@ -244,8 +244,8 @@ class AnimatedContainerPropertiesNotifier
         values: BlendMode.values);
     listField<BoxShape>(
         id: "shape", title: "Foreground Shape", values: BoxShape.values);
-    widthField();
-    heightField();
+    widthField(initialValue: 200);
+    heightField(initialValue: 200);
     doubleField(id: "minWidth", title: "Minimum Width");
     doubleField(id: "maxWidth", title: "Maximum Width");
     doubleField(id: "minHeight", title: "Minimum Height");

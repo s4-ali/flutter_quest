@@ -68,14 +68,14 @@ class CardPropertiesNotifier extends PropertiesNotifier<CardProperties> {
 
   @override
   void registerFields() {
-    doubleField(id: "elevation", title: "Elevation");
-    colorField(id: "color", title: "Color");
-    colorField(id: "shadowColor", title: "Shadow Color");
-    colorField(id: "surfaceTintColor", title: "Surface Tint Color");
-    shapeBorderField(id: "shape", title: "Shape");
+    doubleField(id: "elevation", title: "Elevation", initialValue: 20.0);
+    colorField(id: "color", title: "Color" , initialValue: Colors.purpleAccent);
+    colorField(id: "shadowColor", title: "Shadow Color", initialValue: Colors.black);
+    colorField(id: "surfaceTintColor", title: "Surface Tint Color", initialValue: Colors.white);
+    shapeBorderField(id: "shape", title: "Shape", initialValue: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)));
     booleanField(id: "borderForeground", title: "Border on Foreground");
-    edgeInsetsField(id: "margin", title: "Margin");
-    clipField(id: "clipBehavior", title: "Clip Behavior");
+    edgeInsetsField(id: "margin", title: "Margin", initialValue: EdgeInsets.all(50.0));
+    clipField(id: "clipBehavior", title: "Clip Behavior", initialValue: Clip.none);
     booleanField(id: "semanticContainer", title: "Semantic Container");
   }
 }

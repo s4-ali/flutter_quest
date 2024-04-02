@@ -1,5 +1,5 @@
 class WidgetsAnnotation {
-  final List<Type> widgets;
+  final Map<Type, String> widgets;
 
   const WidgetsAnnotation({required this.widgets});
 }

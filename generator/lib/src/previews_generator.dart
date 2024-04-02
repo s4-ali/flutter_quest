@@ -10,7 +10,7 @@ class PreviewsGenerator extends GeneratorForAnnotation<WidgetsAnnotation> {
     StringBuffer code = StringBuffer();
 
     // Access annotation values
-    final widgets = annotation.read('widgets').listValue.map((e) => e.toTypeValue()!.getDisplayString(withNullability: false).replaceAll("<dynamic>", ""));
+    final widgets = annotation.read('widgets').mapValue.keys.toList().map((e) => e!.toTypeValue()!.getDisplayString(withNullability: false).replaceAll("<dynamic>", ""));
 
     code.writeln("import 'package:flutter/material.dart';");
     for(final widget in widgets) {

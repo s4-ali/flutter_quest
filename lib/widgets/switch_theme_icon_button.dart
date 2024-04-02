@@ -10,10 +10,17 @@ class SwitchThemeIconButton extends StatelessWidget {
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,
       builder: (BuildContext context, ThemeMode value, Widget? child) {
-        return IconButton(
-          onPressed: themeNotifier.switchTheme,
-          icon: Icon(
-            themeNotifier.isDark ? Icons.light_mode : Icons.dark_mode,
+        return Container(
+          decoration: BoxDecoration(
+            color: context.colorScheme.primaryContainer,
+            shape: BoxShape.circle,
+          ),
+          child: IconButton(
+            onPressed: themeNotifier.switchTheme,
+            icon: Icon(
+              themeNotifier.isDark ? Icons.light_mode : Icons.dark_mode,
+              color: context.colorScheme.onPrimaryContainer,
+            ),
           ),
         );
       },

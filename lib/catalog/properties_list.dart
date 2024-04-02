@@ -24,6 +24,7 @@ import 'package:flutter_quest/widgets/fields/text_direction_field.dart';
 import 'package:flutter_quest/widgets/fields/text_style_field.dart';
 import 'package:flutter_quest/widgets/fields/vertical_direction_field.dart';
 import 'package:flutter_quest/widgets/theme_colors.dart';
+import 'package:flutter_quest/widgets/title_container_with_theme.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class PropertiesList extends StatelessWidget {
@@ -77,25 +78,28 @@ class PropertiesList extends StatelessWidget {
       ),
     );
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: "Properties List",
-      ),
-      body: deviceType.isMobile
-          ? Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  margin: const EdgeInsets.only(top: 8),
-                  decoration: ShapeDecoration(
-                    color: context.colorScheme.tertiaryContainer,
-                    shape: const StadiumBorder(),
-                  ),
-                  child: const ThemeColors(),
+      body: Column(
+        children: [
+          const TitleContainerWithTheme(title: "Explore Properties"),
+          Expanded(child: deviceType.isMobile
+              ? Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                margin: const EdgeInsets.only(top: 8),
+                decoration: ShapeDecoration(
+                  color: context.colorScheme.tertiaryContainer,
+                  shape: const StadiumBorder(),
                 ),
-                Expanded(child: content),
-              ],
-            )
-          : content,
+                child: const ThemeColors(),
+              ),
+              Expanded(child: content),
+            ],
+          )
+              : content)
+          ,
+        ],
+      ),
     );
   }
 }

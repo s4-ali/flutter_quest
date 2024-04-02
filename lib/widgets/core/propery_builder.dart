@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
-// import 'package:flutter_quest/core/property_identifier.dart';
-// import 'package:flutter_quest/core/property_provider.dart';
-// import 'package:flutter_quest/widgets/core/editor.dart';
+// import 'package:flutter_quest_architecture/core/property_identifier.dart';
+// import 'package:flutter_quest_architecture/core/property_provider.dart';
+// import 'package:flutter_quest_architecture/widgets/core/editor.dart';
 // import 'package:provider/provider.dart';
 //
 // class PropertyExplorerBuilder<T> extends StatefulWidget {

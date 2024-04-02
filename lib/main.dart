@@ -11,7 +11,7 @@ enum InitialScreen{
 
 extension on InitialScreen{
   Widget get widget {
-    switch(this) {
+    switch(_initialScreen) {
       case InitialScreen.home:
         return const Home();
       case InitialScreen.propertiesList:
@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
                 themeMode: mode,
-                home: const Home(),//_initialScreen.widget,
+                home: _initialScreen.widget,
               );
             },
           );

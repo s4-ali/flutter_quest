@@ -1,94 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quest/catalog/widgets_list.dart';
-import 'package:flutter_quest/utils/extensions.dart';
-import 'package:flutter_quest/widgets/animated_card.dart';
-import 'package:flutter_quest/widgets/app_bar.dart';
-import 'package:flutter_quest/widgets/core/editor.dart';
-import 'package:responsive_builder/responsive_builder.dart';
+import 'package:flutter_quest/catalog/widgets.providers.g.dart';
+import 'package:flutter_quest/widgets/explore_widget_card.dart';
+import 'package:flutter_quest/widgets/title_container_with_theme.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout.builder(
-      mobile: buildMobile,
-      tablet: buildTablet,
-      desktop: buildTablet,
-      watch: (BuildContext context) => Container(color: Colors.purple),
-    );
-  }
-
-  Widget buildMobile(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomAppBar(title: "Widgets"),
-      body: WidgetsList(),
-    );
-  }
-
-  Widget buildTablet(BuildContext context) {
-    return const Scaffold(
-      body: SizedBox(
-        width: double.maxFinite,
-        child: Row(
-          children: [
-            WidgetsListDrawer(),
-            Expanded(child: WidgetEditor())
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class SelectWidget extends StatelessWidget {
-  final Widget toNavigate;
-  final String widgetName;
-
-  const SelectWidget({
-    super.key,
-    required this.widgetName,
-    required this.toNavigate,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => toNavigate),
-          );
-        },
-        child: SizedBox(
-          height: 250,
-          width: 250,
-          child: AnimatedCard(
+    final size = MediaQuery.of(context).size;
+    final widgetsList = explorableWidgets.values.toList();
+    final itemCount = widgetsList.length;
+    return Scaffold(
+      body: Column(
+        children: [
+          const TitleContainerWithTheme(title: "Explore Widgets"),
+          Expanded(
             child: Center(
-              child: Text(
-                widgetName,
-                textAlign: TextAlign.center,
-                style: context.textTheme.titleLarge,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(32),
+                  child: Wrap(
+                    children: [
+                      for (int i = 0; i < itemCount; i++)
+                        ExploreWidgetCard(widget: widgetsList[i])
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
+
 }
-
-

@@ -9,9 +9,12 @@ class ProviderGenerator extends GeneratorForAnnotation<WidgetsAnnotation> {
       element, annotation,buildStep) {
     StringBuffer code = StringBuffer();
 
+    String dartTypeToString(e) {
+     return e!.toTypeValue()!.getDisplayString(withNullability: false).replaceAll("<dynamic>", "");
+    }
     // Access annotation values
-    final widgets = annotation.read('widgets').listValue.map((e) => e.toTypeValue()!.getDisplayString(withNullability: false).replaceAll("<dynamic>", ""));
-
+    final widgetsMap = annotation.read('widgets').mapValue.map<String, String>((key, value) => MapEntry(dartTypeToString(key), value!.toStringValue()!));
+    final widgets = widgetsMap.keys;
 
     code.writeln("import 'package:flutter/material.dart';");
     code.writeln("import 'package:flutter_quest/core/explorable_widget.dart';");
@@ -33,6 +36,7 @@ class ProviderGenerator extends GeneratorForAnnotation<WidgetsAnnotation> {
       code.writeln("    code: const ${widget}Code(),");
       code.writeln("    drawer: const ${widget}PropertyDrawer(),");
       code.writeln("    propertiesNotifier: ${widget}PropertiesNotifier(),");
+      code.writeln("    description: \"${widgetsMap[widget]}\",");
       code.writeln("  ),");
     }
     code.writeln("};");

@@ -1,6 +1,6 @@
 // import 'package:flutter/material.dart';
-// import 'package:flutter_quest/core/property_identifier.dart';
-// import 'package:flutter_quest/core/property_provider.dart';
+// import 'package:flutter_quest_architecture/core/property_identifier.dart';
+// import 'package:flutter_quest_architecture/core/property_provider.dart';
 // import 'section.dart' as app;
 // class SectionBuilder extends StatefulWidget {
 //   final String widgetName;

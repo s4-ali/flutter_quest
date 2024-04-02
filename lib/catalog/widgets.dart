@@ -1,36 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:generator/generator.dart';
 
-const widgets = [
-  SizedBox,
-  Container,
-  Card,
-  AppBar,
-  Checkbox,
-  Icon,
-  Image,
+const widgets = {
+  SizedBox: "This is description",
+  Container: "This is description",
+  Card: "This is description",
+  AppBar: "This is description",
+  Checkbox: "This is description",
+  Icon: "This is description",
+  Image: "This is description",
   // Layouts
-  Column,
-  Row,
-  Stack,
-  ListView,
-  GridView,
+  Column: "This is description",
+  Row: "This is description",
+  Stack: "This is description",
+  ListView: "This is description",
+  GridView: "This is description",
 
   // Buttons
-  ElevatedButton,
-  FloatingActionButton,
-  IconButton,
-  OutlinedButton,
-  TextButton,
+  ElevatedButton: "This is description",
+  FloatingActionButton: "This is description",
+  IconButton: "This is description",
+  OutlinedButton: "This is description",
+  TextButton: "This is description",
 
   // Form
-  Text,
-  Divider,
-  Radio,
-  Slider,
-  Switch,
-  TextField,
-];
+  Text: "This is description",
+  Divider: "This is description",
+  Radio: "This is description",
+  Slider: "This is description",
+  Switch: "This is description",
+  TextField: "This is description",
+};
 
 @WidgetsAnnotation(widgets: widgets)
 class Widgets{}

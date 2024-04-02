@@ -41,10 +41,10 @@ class _FieldTitleState extends State<FieldTitle> {
         initiallyExpanded: expanded,
         trailing: widget.params.isOptional
             ? AnimatedRotation(
-          turns: expanded ? 315 / 360 : 0,
-          duration: const Duration(milliseconds: 350),
-          child: const Icon(Icons.add),
-        )
+                turns: expanded ? 315 / 360 : 0,
+                duration: const Duration(milliseconds: 350),
+                child: const Icon(Icons.add),
+              )
             : const SizedBox.shrink(),
         children: [
           Padding(

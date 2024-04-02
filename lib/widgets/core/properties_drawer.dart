@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/widgets/title_container.dart';
 
 class PropertiesDrawer extends StatelessWidget {
   final String title;
@@ -17,14 +18,8 @@ class PropertiesDrawer extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Column(
           children: [
-            Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Text(
-                "$title Properties",
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-            ),
+            TitleContainer(title: "$title Properties"),
+            const SizedBox(height: 16,),
             Expanded(
               child: ListView(
                 children: [

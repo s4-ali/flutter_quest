@@ -6,6 +6,7 @@ class ExplorableWidget {
   final Widget code;
   final Widget drawer;
   final String title;
+  final String description;
   final PropertiesNotifier propertiesNotifier;
 
   const ExplorableWidget({
@@ -14,5 +15,6 @@ class ExplorableWidget {
     required this.code,
     required this.propertiesNotifier,
     required this.drawer,
+    required this.description,
   });
 }

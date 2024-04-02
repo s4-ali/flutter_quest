@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/catalog/widgets.providers.g.dart';
 import 'package:flutter_quest/core/explorable_widget.dart';
 import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/utils/extensions.dart';
-import 'package:flutter_quest/widgets/switch_theme_icon_button.dart';
-import 'package:flutter_quest/widgets/theme_colors.dart';
+import 'package:flutter_quest/widgets/canvas_background.dart';
+import 'package:flutter_quest/widgets/hover_builder.dart';
+import 'package:flutter_quest/widgets/title_container.dart';
+import 'package:flutter_quest/widgets/title_container_with_theme.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 class WidgetEditorPage extends StatelessWidget {
   final ExplorableWidget widget;
@@ -22,7 +24,6 @@ class WidgetEditorPage extends StatelessWidget {
 }
 
 class WidgetEditor extends StatefulWidget {
-
   const WidgetEditor({
     super.key,
   });
@@ -33,30 +34,44 @@ class WidgetEditor extends StatefulWidget {
 
 class _WidgetEditorState extends State<WidgetEditor>
     with TickerProviderStateMixin {
+  ActiveWidgetNotifier? currentNotifier;
 
-  AppBar buildAppBar() {
-    return AppBar(
-      title: const Text("widget.title"),
-      // actions: [
-      //   IconButton(
-      //     onPressed: () {},
-      //     icon: const Icon(Icons.add),
-      //   ),
-      // ],
+  Widget buildAppBar(ActiveWidgetNotifier notifier, BuildContext context) {
+    final titleBar = Hero(
+      tag: "title-${notifier.explorable.title}",
+      child: TitleContainerWithTheme(
+        title: notifier.explorable.title,
+      ),
+    );
+
+    return Column(
+      children: [
+        titleBar,
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: TabBar(
+                tabs: [
+                  Tab(
+                    text: "Widget",
+                  ),
+                  Tab(
+                    text: "Code",
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
-  Widget buildMobile(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(),
-      endDrawer: const SizedBox(),
-      body: const SizedBox(),
-    );
-  }
-
-  Widget buildTablet(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Consumer<ActiveWidgetNotifier>(
-      builder: (_, notifier, __){
+      builder: (_, notifier, __) {
         return DefaultTabController(
           length: 2,
           child: Row(
@@ -65,47 +80,17 @@ class _WidgetEditorState extends State<WidgetEditor>
               Expanded(
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const SizedBox(
-                          width: 300,
-                          child: TabBar(
-                            tabs: [
-                              Tab(
-                                text: "Widget",
-                              ),
-                              Tab(
-                                text: "Code",
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            notifier.explorable.title,
-                            style: context.textTheme.titleLarge,
-                          ),
-                        ),
-                        const Row(
-                          children: [
-                            ThemeColors(),
-                            SwitchThemeIconButton(),
-                          ],
-                        ),
-                      ],
-                    ),
+                    buildAppBar(notifier, context),
                     Expanded(
                       child: TabBarView(
                         children: [
-                          Center(
-                            child: notifier.explorable.widget,
+                          WidgetPreview(
+                            notifier.explorable,
                           ),
                           Padding(
                             padding: const EdgeInsets.all(16),
                             child: notifier.explorable.code,
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -119,18 +104,48 @@ class _WidgetEditorState extends State<WidgetEditor>
       },
     );
   }
+}
 
-  Widget buildDesktop(BuildContext context) {
-    return buildTablet(context);
-  }
+class WidgetPreview extends StatelessWidget {
+  final ExplorableWidget notifier;
+
+  const WidgetPreview(
+    this.notifier, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout.builder(
-      mobile: buildMobile,
-      tablet: buildTablet,
-      desktop: buildDesktop,
-      watch: (BuildContext context) => Container(color: Colors.purple),
+    return SizedBox(
+      height: double.maxFinite,
+      width: double.maxFinite,
+      child: HoverBuilder<bool>(
+        value: (val) => val,
+        builder: (isHovering) {
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 350),
+            margin: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: isHovering
+                    ? context.colorScheme.primary
+                    : context.colorScheme.outline,
+                width: isHovering ? 2 : 1,
+              ),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Hero(
+                tag: "canvas-${notifier.title}",
+                child: CanvasBackground(
+                  child: Center(child: notifier.widget),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

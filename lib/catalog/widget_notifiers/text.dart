@@ -119,7 +119,7 @@ class TextPropertiesNotifier extends PropertiesNotifier<TextProperties> {
 
   @override
   void registerFields() {
-    stringField(id: "data", title: "Write Text");
+    stringField(id: "data", title: "Write Text", initialValue: "Hello World");
     textStyleField(id: "style", title: "Text Style");
     stringField(id: "fontFamily", title: "fontFamily");
     doubleField(id: "height", title: "height");

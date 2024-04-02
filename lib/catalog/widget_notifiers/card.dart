@@ -74,7 +74,7 @@ class CardPropertiesNotifier extends PropertiesNotifier<CardProperties> {
     colorField(id: "surfaceTintColor", title: "Surface Tint Color", initialValue: Colors.white);
     shapeBorderField(id: "shape", title: "Shape", initialValue: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)));
     booleanField(id: "borderForeground", title: "Border on Foreground");
-    edgeInsetsField(id: "margin", title: "Margin", initialValue: EdgeInsets.all(50.0));
+    edgeInsetsField(id: "margin", title: "Margin", initialValue: EdgeInsets.all(150.0));
     clipField(id: "clipBehavior", title: "Clip Behavior", initialValue: Clip.none);
     booleanField(id: "semanticContainer", title: "Semantic Container");
   }

@@ -71,7 +71,7 @@ class IconPropertiesNotifier extends PropertiesNotifier<IconProperties> {
 
   @override
   void registerFields() {
-    iconDataField(id: "icon", title: "Icon");
+    iconDataField(id: "icon", title: "Icon", initialValue: Icons.star);
     doubleField(id: "size", title: "Size");
     doubleField(id: "fill", title: "Fill");
     doubleField(id: "weight", title: "Weight");

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_provider.dart';
+import 'package:flutter_quest/main.dart';
 import 'package:flutter_quest/property_fields/boolean_field.dart';
 import 'package:flutter_quest/property_fields/clip_field.dart';
 import 'package:flutter_quest/property_fields/color_field.dart';
@@ -69,12 +70,12 @@ class CardPropertiesNotifier extends PropertiesNotifier<CardProperties> {
   @override
   void registerFields() {
     doubleField(id: "elevation", title: "Elevation", initialValue: 20.0);
-    colorField(id: "color", title: "Color" , initialValue: Colors.purpleAccent);
+    colorField(id: "color", title: "Color" , initialValue: themeColorNotifier.value);
     colorField(id: "shadowColor", title: "Shadow Color", initialValue: Colors.black);
-    colorField(id: "surfaceTintColor", title: "Surface Tint Color", initialValue: Colors.white);
+    colorField(id: "surfaceTintColor", title: "Surface Tint Color");
     shapeBorderField(id: "shape", title: "Shape", initialValue: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)));
     booleanField(id: "borderForeground", title: "Border on Foreground");
-    edgeInsetsField(id: "margin", title: "Margin", initialValue: EdgeInsets.all(150.0));
+    edgeInsetsField(id: "margin", title: "Margin", initialValue: EdgeInsets.all(20.0));
     clipField(id: "clipBehavior", title: "Clip Behavior", initialValue: Clip.none);
     booleanField(id: "semanticContainer", title: "Semantic Container");
   }

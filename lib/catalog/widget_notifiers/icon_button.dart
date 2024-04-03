@@ -10,6 +10,8 @@ import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/property_fields/string_field.dart';
 import 'package:flutter_quest/property_fields/text_style_field.dart';
 
+import '../../main.dart';
+
 typedef IconButtonProperties = ({
   double? iconSize,
   VisualDensity? visualDensity,
@@ -325,7 +327,7 @@ IconButton(
     edgeInsetsField(id: "padding", title: "Padding");
     alignmentField(id: "alignment", title: "Alignment");
     doubleField(id: "splashRadius", title: "Splash Radius");
-    colorField(id: "color", title: "Color");
+    colorField(id: "color", title: "Color",initialValue: themeColorNotifier.value);
     colorField(id: "focusColor", title: "Focus Color");
     colorField(id: "hoverColor", title: "Hover Color");
     colorField(id: "highlightColor", title: "Highlight Color");
@@ -354,9 +356,9 @@ IconButton(
     doubleField(id: "maxWidth", title: "Maximum Width");
     doubleField(id: "fixedHeight", title: "Fixed Height");
     doubleField(id: "fixedWidth", title: "Fixed Width");
-    colorField(id: "iconColor", title: "Icon Color");
+    colorField(id: "iconColor", title: "Icon Color",initialValue: themeColorNotifier.value);
     doubleField(id: "iconSize", title: "Icon Size");
-    colorField(id: "borderColor", title: "Border Color");
+    colorField(id: "borderColor", title: "Border Color" ,initialValue: themeColorNotifier.value);
     doubleField(id: "borderWidth", title: "Border Width");
     listField(
         id: "borderStyle", title: "Border Style", values: BorderStyle.values);

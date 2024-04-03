@@ -15,6 +15,8 @@ import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/property_fields/string_field.dart';
 import 'package:flutter_quest/property_fields/text_direction_field.dart';
 
+import '../../main.dart';
+
 typedef TextFieldProperties = ({
 // Icon
   Color? iconColor,
@@ -688,7 +690,7 @@ class TextFieldPropertiesNotifier
     iconDataField(id: "icon", title: "Icon");
 
     // Label
-    iconDataField(id: "label", title: "Label");
+    iconDataField(id: "label", title: "Label",initialValue: null);
     stringField(id: "labelText", title: "Label Text",);
     iconDataField(id: "labelStyle", title: "Label Style");
     iconDataField(id: "floatingLabelStyle", title: "Floating Label Style");
@@ -699,13 +701,13 @@ class TextFieldPropertiesNotifier
     intField(id: "helperMaxLines", title: "Helper MaxLines");
 
     // Hint Text
-    stringField(id: "hintText", title: "Hint Text", initialValue: "Hint Text");
+    stringField(id: "hintText", title: "Hint Text",initialValue: "Hint Text");
     iconDataField(id: "hintStyle", title: "Hint Style");
     textDirectionField(id: "hintTextDirection", title: "Hint Text Direction");
     intField(id: "hintMaxLines", title: "Hint Max Lines");
 
     // Error
-    iconDataField(id: "error", title: "Error", initialValue: Icons.error);
+    iconDataField(id: "error", title: "Error");
     stringField(id: "errorText", title: "Error Text");
     iconDataField(id: "errorStyle", title: "Error Style");
     intField(id: "errorMaxLines", title: "Error Max Lines");
@@ -731,7 +733,7 @@ class TextFieldPropertiesNotifier
     iconDataField(id: "prefix", title: "Prefix",);
     stringField(id: "prefixText", title: "Prefix Text");
     iconDataField(id: "prefixStyle", title: "Prefix Style");
-    colorField(id: "prefixIconColor", title: "Prefix Icon Color", initialValue: Colors.teal);
+    colorField(id: "prefixIconColor", title: "Prefix Icon Color", initialValue: themeColorNotifier.value);
 
     iconDataField(id: "suffixIcon", title: "Suffix Icon", initialValue: Icons.arrow_forward);
 
@@ -742,18 +744,18 @@ class TextFieldPropertiesNotifier
 
     stringField(id: "suffixText", title: "Suffix Text");
     iconDataField(id: "suffixStyle", title: "Suffix Style");
-    colorField(id: "suffixIconColor", title: "Suffix Icon Color", initialValue: Colors.teal);
+    colorField(id: "suffixIconColor", title: "Suffix Icon Color", initialValue: themeColorNotifier.value);
 
     iconDataField(id: "counter", title: "Counter");
     stringField(id: "counterText", title: "Counter Text");
     iconDataField(id: "counterStyle", title: "Counter Style");
     booleanField(id: "filled", title: "Filled", initialValue: true);
-    colorField(id: "fillColor", title: "Fill Color", initialValue: Colors.purple[200]);
-    colorField(id: "focusColor", title: "Focus Color");
-    colorField(id: "hoverColor", title: "Hover Color", initialValue: Colors.lightGreenAccent[100]);
+    colorField(id: "fillColor", title: "Fill Color",initialValue: Colors.grey[200]);
+    colorField(id: "focusColor", title: "Focus Color",initialValue: themeColorNotifier.value.withOpacity(0.5));
+    colorField(id: "hoverColor", title: "Hover Color", initialValue: Colors.grey[100]);
 
     // Error Border
-    colorField(id: "errorBorderColor", title: "Error Border Color", initialValue: Colors.red);
+    colorField(id: "errorBorderColor", title: "Error Border Color",initialValue: Colors.grey);
     doubleField(id: "errorBorderWidth", title: "Error Border Width");
     borderRadiusField(id: "errorBorderRadius", title: "Error Border Radius", initialValue: BorderRadius.circular(8.0));
     listField(
@@ -765,7 +767,7 @@ class TextFieldPropertiesNotifier
     doubleField(id: "errorGapPadding", title: "Error Gap Padding");
 
     // Focus Border
-    colorField(id: "focusBorderColor", title: "Focus Border Color", initialValue: Colors.purple);
+    colorField(id: "focusBorderColor", title: "Focus Border Color");
     doubleField(id: "focusBorderWidth", title: "Focus Border Width");
     borderRadiusField(id: "focusBorderRadius", title: "Focus Border Radius", initialValue: BorderRadius.circular(8.0));
     listField(
@@ -896,7 +898,7 @@ class TextFieldPropertiesNotifier
     doubleField(id: "cursorHeight", title: "Cursor Height");
     doubleField(id: "cursorRadius", title: "Cursor Radius");
     booleanField(id: "cursorOpacityAnimates", title: "Cursor Opacity Animates");
-    colorField(id: "cursorColor", title: "Cursor Color");
+    colorField(id: "cursorColor", title: "Cursor Color", initialValue: themeColorNotifier.value);
     listField(
         id: "selectionHeightStyle",
         title: "Selection Height Style",

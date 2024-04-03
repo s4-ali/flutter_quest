@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_provider.dart';
+import 'package:flutter_quest/main.dart';
 import 'package:flutter_quest/property_fields/boolean_field.dart';
 import 'package:flutter_quest/property_fields/color_field.dart';
 import 'package:flutter_quest/property_fields/list_field.dart';
@@ -146,6 +147,6 @@ class TextPropertiesNotifier extends PropertiesNotifier<TextProperties> {
       title: "textWidthBasis",
       values: TextWidthBasis.values,
     );
-    colorField(id: "selectionColor", title: "selectionColor");
+    colorField(id: "selectionColor", title: "selectionColor",initialValue: themeColorNotifier.value);
   }
 }

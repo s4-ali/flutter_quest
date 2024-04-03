@@ -7,6 +7,8 @@ import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/property_fields/string_field.dart';
 import 'package:flutter_quest/property_fields/text_direction_field.dart';
 
+import '../../main.dart';
+
 typedef IconProperties = ({
   IconData? icon,
   double? size,
@@ -77,7 +79,7 @@ class IconPropertiesNotifier extends PropertiesNotifier<IconProperties> {
     doubleField(id: "weight", title: "Weight");
     doubleField(id: "grade", title: "Grade");
     doubleField(id: "opticalSize", title: "Optical Size");
-    colorField(id: "color", title: "Color");
+    colorField(id: "color", title: "Color",initialValue: themeColorNotifier.value);
     colorField(id: "shadowColor", title: "Shadow Color");
     doubleField(id: "scaleX", title: "ScaleX");
     doubleField(id: "scaleY", title: "ScaleY");

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/property_provider.dart';
+import 'package:flutter_quest/main.dart';
 import 'package:flutter_quest/property_fields/alignment_field.dart';
 import 'package:flutter_quest/property_fields/border_radius_field.dart';
 import 'package:flutter_quest/property_fields/box_border_field.dart';
@@ -214,7 +215,7 @@ class AnimatedContainerPropertiesNotifier
   void registerFields() {
     alignmentField(id: "alignment", title: "Alignment");
     edgeInsetsField(id: "padding", title: "Padding");
-    colorField(id: "color", title: "Color", initialValue: Colors.cyan);
+    colorField(id: "color", title: "Color", initialValue: themeColorNotifier.value);
     borderField(id: "border", title: "Border");
     borderRadiusField(id: "borderRadius", title: "Border Radius", initialValue: BorderRadius.circular(8.0));
     colorField(id: "shadowColor", title: "Shadow Color");

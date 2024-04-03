@@ -8,6 +8,8 @@ import 'package:flutter_quest/property_fields/list_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/property_fields/string_field.dart';
 
+import '../../main.dart';
+
 typedef SwitchProperties = ({
   bool? value,
   Color? activeColor,
@@ -128,12 +130,12 @@ class SwitchPropertiesNotifier extends PropertiesNotifier<SwitchProperties> {
   @override
   void registerFields() {
     booleanField(id: "value", title: "Value");
-    colorField(id: "activeColor", title: "Active Color", initialValue: Colors.blue);
+    colorField(id: "activeColor", title: "Active Color", initialValue: themeColorNotifier.value.withOpacity(0.4));
     colorField(id: "inactiveThumbColor", title: "Inactive Thumb Color");
     colorField(id: "activeTrackColor", title: "Active Track Color", initialValue: Colors.blueGrey[300]);
     stringField(id: "activeThumbImage", title: "Active Thumb Image Link",initialValue: "");
     stringField(id: "inactiveThumbImage", title: "InactiveThumb Image Link",initialValue: "");
-    colorField(id: "thumbColor", title: "Thumb Color", initialValue: Colors.teal);
+    colorField(id: "thumbColor", title: "Thumb Color", initialValue: themeColorNotifier.value);
     colorField(id: "trackColor", title: "Track Color");
     colorField(id: "trackOutlineColor", title: "Track Outline Color");
     doubleField(id: "trackOutlineWidth", title: "Track Outline Width");

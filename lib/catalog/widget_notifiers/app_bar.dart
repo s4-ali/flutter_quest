@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quest/core/property_provider.dart';
+import 'package:flutter_quest/main.dart';
 import 'package:flutter_quest/property_fields/boolean_field.dart';
 import 'package:flutter_quest/property_fields/clip_field.dart';
 import 'package:flutter_quest/property_fields/color_field.dart';
@@ -270,9 +271,9 @@ AppBar(
     doubleField(
         id: "scrolledUnderElevation", title: "Scrolled Under Elevation");
     colorField(id: "shadowColor", title: "Shadow Color");
-    colorField(id: "surfaceTintColor", title: "Surface Tint Color", initialValue: Colors.white);
+    colorField(id: "surfaceTintColor", title: "Surface Tint Color");
     shapeBorderField(id: "shape", title: "Shape", initialValue: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)));
-    colorField(id: "backgroundColor", title: "Background Color", initialValue: Colors.blue);
+    colorField(id: "backgroundColor", title: "Background Color", initialValue: themeColorNotifier.value);
     colorField(id: "foregroundColor", title: "Foreground Color", initialValue: Colors.white);
     doubleField(id: "iconSize", title: "IconTheme Size", initialValue: 24.0);
     doubleField(id: "iconFill", title: "IconTheme Fill");

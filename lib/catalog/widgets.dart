@@ -9,6 +9,7 @@ const widgets = {
   Checkbox: "This is description",
   Icon: "This is description",
   Image: "This is description",
+
   // Layouts
   Column: "This is description",
   Row: "This is description",

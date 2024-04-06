@@ -6,14 +6,22 @@ import 'package:flutter_quest/core/property_params.dart';
 import '../widgets/field_title.dart';
 import 'property_identifier.dart';
 
+class ValueHolder<T> {
+  final T value;
+  final bool isSet;
+
+  ValueHolder(this.value, this.isSet);
+}
+
 /// Holds the currently active properties notifier
 class ActiveWidgetNotifier extends ChangeNotifier {
   ExplorableWidget _widget;
+
   ExplorableWidget get explorable => _widget;
 
   ActiveWidgetNotifier(this._widget);
 
-  void update({required ExplorableWidget explorable}){
+  void update({required ExplorableWidget explorable}) {
     _widget = explorable;
     notifyListeners();
   }
@@ -23,17 +31,19 @@ class ActiveWidgetNotifier extends ChangeNotifier {
 /// the values against those properties.
 abstract class PropertiesNotifier<T> extends ChangeNotifier
     with DiagnosticableTreeMixin {
-
   T get fieldValues;
+
   String get code;
-  PropertiesNotifier(){
+
+  PropertiesNotifier() {
     registerFields();
   }
+
   /// List of property widgets
   final List<PropertyIdentifier> properties = [];
 
   /// Values of each property
-  final Map<String, dynamic> _values = {};
+  final Map<String, ValueHolder> _values = {};
 
   void updateProperty(PropertyIdentifier widget) {
     properties.update(widget);
@@ -44,11 +54,11 @@ abstract class PropertiesNotifier<T> extends ChangeNotifier
     notifyListeners();
   }
 
-  dynamic getValueOf(String id, [dynamic initial]) {
+  ValueHolder getValueOf(String id, [dynamic initial]) {
     if (_values[id] == null) {
       _values[id] = initial;
     }
-    return _values[id];
+    return _values[id]!;
   }
 
   void setInitialValue(String id, value) {
@@ -61,12 +71,12 @@ abstract class PropertiesNotifier<T> extends ChangeNotifier
   void registerFields();
 
   /// called when field is closed or opened
-  void onFieldUpdated(){
+  void onFieldUpdated() {
     notifyListeners();
   }
 }
 
-class BuildResult<T> extends ChangeNotifier with DiagnosticableTreeMixin{
+class BuildResult<T> extends ChangeNotifier with DiagnosticableTreeMixin {
   Widget _widget = const SizedBox.shrink();
   String _code = "";
 
@@ -91,7 +101,7 @@ abstract class PropertyField<T extends BasePropertyParams, U> {
 
   PropertyField(this._props, this.params);
 
-  Widget build(T params, Function(U) onChanged, U value);
+  Widget build(T params, Function(ValueHolder<U>) onChanged, U value);
 
   void register() {
     _props.setInitialValue(params.id, params.initialValue);
@@ -100,27 +110,28 @@ abstract class PropertyField<T extends BasePropertyParams, U> {
       return;
     }
 
-    PropertyIdentifier buildPropertyField(Function(U?) onChanged) {
+    PropertyIdentifier buildPropertyField(Function(ValueHolder<U?>) onChanged) {
       final value = _props.getValueOf(
           params.id, params.isOptional ? null : params.initialValue);
       return PropertyIdentifier<U>(
         id: params.id,
         widget: FieldTitle(
           params: params,
-          onChanged: (val) => onChanged(val as U?),
+          onChanged: (val) =>
+              onChanged(ValueHolder<U?>(val as U?, val == null ? false : true)),
           inline: inline,
-          child: value == null
+          child: value.value == null
               ? null
               : build(
                   params,
                   onChanged,
-                  value!,
+                  value.value!,
                 ),
         ),
       );
     }
 
-    void onValueUpdated(U? newValue) {
+    void onValueUpdated(ValueHolder<U?> newValue) {
       _props.setValueOf(params.id, newValue);
       _props.updateProperty(buildPropertyField(onValueUpdated));
     }

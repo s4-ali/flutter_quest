@@ -20,7 +20,7 @@ class AlignmentPropertyField
   @override
   Widget build(
     AlignmentPropertyParams params,
-    Function(Alignment) onChanged,
+    Function(ValueHolder<Alignment>) onChanged,
     Alignment value,
   ) {
     return AlignmentField(

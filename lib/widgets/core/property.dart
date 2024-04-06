@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 
 abstract class PropertyWidget<T> extends StatelessWidget {
-  final void Function(T) onChanged;
+  final void Function(ValueHolder<T>) onChanged;
   final T value;
 
   const PropertyWidget({
@@ -12,7 +13,7 @@ abstract class PropertyWidget<T> extends StatelessWidget {
 }
 
 abstract class PropertyStatefulWidget<T> extends StatefulWidget {
-  final void Function(T) onChanged;
+  final void Function(ValueHolder<T>) onChanged;
   final T value;
 
   const PropertyStatefulWidget({

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/text_radio_button.dart';
@@ -59,7 +60,7 @@ class AlignmentField extends PropertyWidget<Alignment> {
             return Expanded(
               child: TextRadioButton(
                 option: option,
-                onChanged: onChanged,
+                onChanged: (value) => onChanged(ValueHolder(value, true)),
                 isSelected: option == value,
                 title: option.title,
               ),

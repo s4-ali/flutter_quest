@@ -3,8 +3,8 @@ import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 
 typedef SizedBoxProperties = ({
-  double? height,
-  double? width,
+  ValueHolder<double?> height,
+  ValueHolder<double?> width,
 });
 
 class SizedBoxPropertiesNotifier
@@ -12,8 +12,8 @@ class SizedBoxPropertiesNotifier
   @override
   Widget buildPreview(BuildContext context) {
     return SizedBox(
-      height: fieldValues.height,
-      width: fieldValues.width,
+      height: fieldValues.height.isSet ? fieldValues.height.value : null,
+      width: fieldValues.width.isSet ? fieldValues.width.value : null,
       child: ColoredBox(
         color: Theme.of(context).primaryColor,
       ),

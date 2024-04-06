@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/icon_options.dart';
@@ -26,7 +27,7 @@ class AxisField extends PropertyWidget<Axis> {
   @override
   Widget build(BuildContext context) {
     return IconOptions(
-      onChanged: (val) => onChanged(val),
+      onChanged: (val) => onChanged(ValueHolder(val, false)),
       value: value,
       options: Axis.values,
       iconPath: (val) => (val).iconPath,

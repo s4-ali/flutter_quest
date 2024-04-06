@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/utils/extensions.dart';
 import 'package:flutter_quest/widgets/animated_card.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 
 class PropertyPreviewer<U> extends StatefulWidget {
   final List<U> values;
-  final PropertyWidget<U> Function(void Function(U), U) propertyBuilder;
+  final PropertyWidget<U> Function(void Function(ValueHolder<U>), U) propertyBuilder;
   final String Function(U)? valueTitleBuilder;
   final String title;
 

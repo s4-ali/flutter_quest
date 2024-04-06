@@ -24,7 +24,7 @@ class BooleanPropertyField
   @override
   Widget build(
     BooleanPropertyParams params,
-    Function(bool) onChanged,
+    Function(ValueHolder<bool>) onChanged,
     bool value,
   ) {
     return BooleanField(onChanged: onChanged, value: value);

@@ -20,7 +20,7 @@ class AxisPropertyField
   @override
   Widget build(
     AxisPropertyParams params,
-    Function(Axis) onChanged,
+    Function(ValueHolder<Axis>) onChanged,
     Axis value,
   ) {
     return AxisField(

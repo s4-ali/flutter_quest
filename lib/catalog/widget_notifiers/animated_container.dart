@@ -12,7 +12,7 @@ import 'package:flutter_quest/property_fields/matrix4_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 
 typedef AnimatedContainerProperties = ({
-  Alignment? alignment,
+  ValueHolder<Alignment?> alignment,
   EdgeInsets? padding,
   Color? color,
   BoxBorder? border,
@@ -52,7 +52,8 @@ class AnimatedContainerPropertiesNotifier
   @override
   Widget buildPreview(BuildContext context) {
     return AnimatedContainer(
-      alignment: fieldValues.alignment,
+      alignment:
+          fieldValues.alignment.isSet ? fieldValues.alignment.value : null,
       padding: fieldValues.padding,
       color: fieldValues.color,
       decoration: BoxDecoration(

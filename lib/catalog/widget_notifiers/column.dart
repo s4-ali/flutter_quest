@@ -8,27 +8,24 @@ import 'package:flutter_quest/property_fields/text_direction_field.dart';
 import 'package:flutter_quest/property_fields/vertical_direction_field.dart';
 
 typedef ColumnProperties = ({
-  MainAxisAlignment? mainAxisAlignment,
-  MainAxisSize? mainAxisSize,
-  CrossAxisAlignment? crossAxisAlignment,
-  TextDirection? textDirection,
-  VerticalDirection? verticalDirection,
-  TextBaseline? textBaseLine,
+  ValueHolder<MainAxisAlignment?> mainAxisAlignment,
+  ValueHolder<MainAxisSize?> mainAxisSize,
+  ValueHolder<CrossAxisAlignment?> crossAxisAlignment,
+  ValueHolder<TextDirection?> textDirection,
+  ValueHolder<VerticalDirection?> verticalDirection,
+  ValueHolder<TextBaseline?> textBaseLine,
 });
 
 class ColumnPropertiesNotifier extends PropertiesNotifier<ColumnProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Column(
-      mainAxisAlignment:
-          fieldValues.mainAxisAlignment ?? MainAxisAlignment.start,
-      mainAxisSize: fieldValues.mainAxisSize ?? MainAxisSize.max,
-      crossAxisAlignment:
-          fieldValues.crossAxisAlignment ?? CrossAxisAlignment.center,
-      textDirection: fieldValues.textDirection,
-      verticalDirection:
-          fieldValues.verticalDirection ?? VerticalDirection.down,
-      textBaseline: fieldValues.textBaseLine,
+      mainAxisAlignment: fieldValues.mainAxisAlignment.isSet ? fieldValues.mainAxisAlignment.value! : MainAxisAlignment.start,
+      mainAxisSize: fieldValues.mainAxisSize.isSet ? fieldValues.mainAxisSize.value! : MainAxisSize.max,
+      crossAxisAlignment: fieldValues.crossAxisAlignment.isSet ? fieldValues.crossAxisAlignment.value! : CrossAxisAlignment.center,
+      textDirection: fieldValues.textDirection.isSet ? fieldValues.textDirection.value : null,
+      verticalDirection: fieldValues.verticalDirection.isSet ? fieldValues.verticalDirection.value! : VerticalDirection.down,
+      textBaseline: fieldValues.textBaseLine.isSet ? fieldValues.textBaseLine.value : null,
       children: const [],
     );
   }

@@ -4,11 +4,11 @@ import 'package:flutter_quest/property_fields/color_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 
 typedef DividerProperties = ({
-  double? height,
-  double? thickness,
-  double? indent,
-  double? endIndent,
-  Color? color,
+  ValueHolder<double?> height,
+  ValueHolder<double?> thickness,
+  ValueHolder<double?> indent,
+  ValueHolder<double?> endIndent,
+  ValueHolder<Color?> color,
 });
 
 class DividerPropertiesNotifier extends PropertiesNotifier<DividerProperties> {
@@ -27,11 +27,11 @@ class DividerPropertiesNotifier extends PropertiesNotifier<DividerProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Divider(
-      height: fieldValues.height,
-      thickness: fieldValues.thickness,
-      indent: fieldValues.indent,
-      endIndent: fieldValues.endIndent,
-      color: fieldValues.color,
+      height: fieldValues.height.isSet ? fieldValues.height.value : null,
+      thickness: fieldValues.thickness.isSet ? fieldValues.thickness.value : null,
+      indent: fieldValues.indent.isSet ? fieldValues.indent.value : null,
+      endIndent: fieldValues.endIndent.isSet ? fieldValues.endIndent.value : null,
+      color: fieldValues.color.isSet ? fieldValues.color.value : null,
     );
   }
 

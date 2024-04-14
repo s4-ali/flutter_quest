@@ -6,11 +6,11 @@ import 'package:flutter_quest/property_fields/list_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 
 typedef PlaygroundProperties = ({
-  double? height,
-  double? width,
-  bool? isRed,
-  String? text,
-  Alignment? alignment,
+  ValueHolder<double?> height,
+  ValueHolder<double?> width,
+  ValueHolder<bool?> isRed,
+  ValueHolder<String?> text,
+  ValueHolder<Alignment?> alignment,
 });
 
 class PlaygroundPropertiesNotifier extends PropertiesNotifier<
@@ -19,23 +19,23 @@ class PlaygroundPropertiesNotifier extends PropertiesNotifier<
   Widget buildPreview(BuildContext context) {
     final color = fieldValues.isRed == null
         ? Colors.green
-        : fieldValues.isRed!
-            ? Colors.red
-            : Colors.blue;
+        : fieldValues.isRed!.isSet
+        ? Colors.red
+        : Colors.blue;
 
     return Align(
-      alignment: fieldValues.alignment ?? Alignment.center,
+      alignment: fieldValues.alignment.isSet? fieldValues.alignment.value! : Alignment.center,
       child: Container(
-        height: fieldValues.height,
-        width: fieldValues.width,
+        height: fieldValues.height.isSet? fieldValues.height.value : null,
+        width: fieldValues.width.isSet? fieldValues.width.value : null,
         decoration: BoxDecoration(
           color: color,
         ),
         child: fieldValues.text == null
             ? null
             : Center(
-                child: Text(fieldValues.text!),
-              ),
+          child: Text(fieldValues.text.isSet? fieldValues.text.value! : " ",),
+        ),
       ),
     );
   }
@@ -48,7 +48,7 @@ class PlaygroundPropertiesNotifier extends PropertiesNotifier<
         height: ${fieldValues.height},
         width: ${fieldValues.width},
         decoration: BoxDecoration(
-          color: ${fieldValues.isRed == null ? 'Colors.green' : fieldValues.isRed! ? 'Colors.red' : 'Colors.blue'},
+          color: ${fieldValues.isRed == null ? 'Colors.green' : fieldValues.isRed!.isSet ? 'Colors.red' : 'Colors.blue'},
         ),
         child: ${fieldValues.text == null ? 'null' : "Center(child: Text('${fieldValues.text!}'),)"},
       ),

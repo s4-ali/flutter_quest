@@ -11,36 +11,36 @@ import 'package:flutter_quest/property_fields/string_field.dart';
 import 'package:flutter_quest/property_fields/text_style_field.dart';
 
 typedef OutlinedButtonProperties = ({
-  bool? autofocus,
-  Clip? clipBehavior,
-  Color? backgroundColor,
-  Color? foregroundColor,
-  Color? overlayColor,
-  Color? shadowColor,
-  Color? surfaceTintColor,
-  double? elevation,
-  EdgeInsets? padding,
-  double? minHeight,
-  double? minWidth,
-  double? maxHeight,
-  double? maxWidth,
-  double? fixedHeight,
-  double? fixedWidth,
-  Color? iconColor,
-  double? iconSize,
-  Color? borderColor,
-  double? borderWidth,
-  BorderStyle? borderStyle,
-  double? strokeAlign,
-  MouseCursor? mouseCursor,
-  VisualDensity? visualDensity,
-  MaterialTapTargetSize? materialTapTargetSize,
-  int? animationSeconds,
-  int? animationMinutes,
-  bool? enableFeedback,
-  AlignmentGeometry? alignment,
-  TextStyle? textStyle,
-  String? childText,
+  ValueHolder<bool?> autofocus,
+  ValueHolder<Clip?> clipBehavior,
+  ValueHolder<Color?> backgroundColor,
+  ValueHolder<Color?> foregroundColor,
+  ValueHolder<Color?> overlayColor,
+  ValueHolder<Color?> shadowColor,
+  ValueHolder<Color?> surfaceTintColor,
+  ValueHolder<double?> elevation,
+  ValueHolder<EdgeInsets?> padding,
+  ValueHolder<double?> minHeight,
+  ValueHolder<double?> minWidth,
+  ValueHolder<double?> maxHeight,
+  ValueHolder<double?> maxWidth,
+  ValueHolder<double?> fixedHeight,
+  ValueHolder<double?> fixedWidth,
+  ValueHolder<Color?> iconColor,
+  ValueHolder<double?> iconSize,
+  ValueHolder<Color?> borderColor,
+  ValueHolder<double?> borderWidth,
+  ValueHolder<BorderStyle?> borderStyle,
+  ValueHolder<double?> strokeAlign,
+  ValueHolder<MouseCursor?> mouseCursor,
+  ValueHolder<VisualDensity?> visualDensity,
+  ValueHolder<MaterialTapTargetSize?> materialTapTargetSize,
+  ValueHolder<int?> animationSeconds,
+  ValueHolder<int?> animationMinutes,
+  ValueHolder<bool?> enableFeedback,
+  ValueHolder<AlignmentGeometry?> alignment,
+  ValueHolder<TextStyle?> textStyle,
+  ValueHolder<String?> childText,
 });
 
 class OutlinedButtonPropertiesNotifier
@@ -54,54 +54,53 @@ class OutlinedButtonPropertiesNotifier
       onFocusChange: (v) {},
       style: ButtonStyle(
         backgroundColor: MaterialStatePropertyAll<Color?>(
-          fieldValues.backgroundColor,
+          fieldValues.backgroundColor.isSet? fieldValues.backgroundColor.value : null,
         ),
         foregroundColor: MaterialStatePropertyAll<Color?>(
-          fieldValues.foregroundColor,
+          fieldValues.foregroundColor.isSet? fieldValues.foregroundColor.value : null,
         ),
         overlayColor: MaterialStatePropertyAll<Color?>(
-          fieldValues.overlayColor,
+          fieldValues.overlayColor.isSet? fieldValues.overlayColor.value : null,
         ),
         shadowColor: MaterialStatePropertyAll<Color?>(
-          fieldValues.shadowColor,
+          fieldValues.shadowColor.isSet? fieldValues.shadowColor.value : null,
         ),
         surfaceTintColor: MaterialStatePropertyAll<Color?>(
-          fieldValues.surfaceTintColor,
+          fieldValues.surfaceTintColor.isSet? fieldValues.surfaceTintColor.value : null,
         ),
         elevation: MaterialStatePropertyAll<double?>(
-          fieldValues.elevation,
+          fieldValues.elevation.isSet? fieldValues.elevation.value : null,
         ),
         padding: MaterialStatePropertyAll<EdgeInsets?>(
-          fieldValues.padding,
+          fieldValues.padding.isSet? fieldValues.padding.value : null,
         ),
         minimumSize: MaterialStatePropertyAll<Size>(
-          Size(fieldValues.minWidth ?? 0.0, fieldValues.minHeight ?? 0.0),
+          Size(fieldValues.minWidth.isSet? fieldValues.minWidth.value! : 0.0, fieldValues.minHeight.isSet? fieldValues.minHeight.value! :  0.0),
         ),
         fixedSize: MaterialStatePropertyAll<Size>(
           Size(
-            fieldValues.fixedWidth ?? double.infinity,
-            fieldValues.fixedHeight ?? double.infinity,
+            fieldValues.fixedWidth.isSet? fieldValues.fixedWidth.value! : double.infinity,
+            fieldValues.fixedHeight.isSet? fieldValues.fixedHeight.value! : double.infinity,
           ),
         ),
         maximumSize: MaterialStatePropertyAll<Size>(
           Size(
-            fieldValues.maxWidth ?? double.infinity,
-            fieldValues.maxHeight ?? double.infinity,
+            fieldValues.maxWidth.isSet? fieldValues.maxWidth.value! : double.infinity,
+            fieldValues.maxHeight.isSet? fieldValues.maxHeight.value! : double.infinity,
           ),
         ),
         iconColor: MaterialStatePropertyAll<Color?>(
-          fieldValues.iconColor,
+          fieldValues.iconColor.isSet? fieldValues.iconColor.value : null,
         ),
         iconSize: MaterialStatePropertyAll<double?>(
-          fieldValues.iconSize,
+          fieldValues.iconSize.isSet? fieldValues.iconSize.value : null,
         ),
         side: MaterialStatePropertyAll<BorderSide?>(
           BorderSide(
-            color: fieldValues.borderColor ?? Colors.black,
-            width: fieldValues.borderWidth ?? 1.0,
-            style: fieldValues.borderStyle ?? BorderStyle.solid,
-            strokeAlign:
-                fieldValues.strokeAlign ?? BorderSide.strokeAlignCenter,
+            color: fieldValues.borderColor.isSet? fieldValues.borderColor.value! : Colors.black,
+            width: fieldValues.borderWidth.isSet? fieldValues.borderWidth.value! : 1.0,
+            style: fieldValues.borderStyle.isSet? fieldValues.borderStyle.value! : BorderStyle.solid,
+            strokeAlign: fieldValues.strokeAlign.isSet? fieldValues.strokeAlign.value! : BorderSide.strokeAlignCenter,
           ),
         ),
         shape: const MaterialStatePropertyAll(
@@ -110,27 +109,27 @@ class OutlinedButtonPropertiesNotifier
           ),
         ),
         mouseCursor: MaterialStatePropertyAll<MouseCursor?>(
-          fieldValues.mouseCursor,
+          fieldValues.mouseCursor.isSet? fieldValues.mouseCursor.value : null,
         ),
-        visualDensity: fieldValues.visualDensity,
-        tapTargetSize: fieldValues.materialTapTargetSize,
+        visualDensity: fieldValues.visualDensity.isSet? fieldValues.visualDensity.value : null,
+        tapTargetSize: fieldValues.materialTapTargetSize.isSet? fieldValues.materialTapTargetSize.value : null,
         animationDuration: Duration(
-          seconds: fieldValues.animationSeconds ?? 0,
-          minutes: fieldValues.animationMinutes ?? 0,
+          seconds: fieldValues.animationSeconds.isSet? fieldValues.animationSeconds.value! : 0,
+          minutes: fieldValues.animationMinutes.isSet? fieldValues.animationMinutes.value! : 0,
         ),
-        enableFeedback: fieldValues.enableFeedback,
-        alignment: fieldValues.alignment,
+        enableFeedback: fieldValues.enableFeedback.isSet? fieldValues.enableFeedback.value : null,
+        alignment: fieldValues.alignment.isSet? fieldValues.alignment.value : null,
         splashFactory: NoSplash.splashFactory,
         //only one option available
         textStyle: MaterialStatePropertyAll<TextStyle?>(
-          fieldValues.textStyle,
+          fieldValues.textStyle.isSet? fieldValues.textStyle.value : null,
         ),
       ),
       focusNode: FocusNode(),
-      autofocus: fieldValues.autofocus ?? false,
-      clipBehavior: fieldValues.clipBehavior ?? Clip.none,
+      autofocus: fieldValues.autofocus.isSet? fieldValues.autofocus.value! : false,
+      clipBehavior: fieldValues.clipBehavior.isSet? fieldValues.clipBehavior.value! : Clip.none,
       statesController: MaterialStatesController(),
-      child: Text(fieldValues.childText ?? "Button"),
+      child: Text(fieldValues.childText.isSet? fieldValues.childText.value! : "Button"),
     );
   }
 

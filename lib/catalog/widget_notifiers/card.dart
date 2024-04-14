@@ -8,15 +8,15 @@ import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/property_fields/shape_border_field.dart';
 
 typedef CardProperties = ({
-  double? elevation,
-  Color? color,
-  Color? shadowColor,
-  Color? surfaceTintColor,
-  ShapeBorder? shape,
-  bool? borderForeground,
-  EdgeInsets? margin,
-  Clip? clipBehavior,
-  bool? semanticContainer,
+  ValueHolder<double?> elevation,
+  ValueHolder<Color?> color,
+  ValueHolder<Color?> shadowColor,
+  ValueHolder<Color?> surfaceTintColor,
+  ValueHolder<ShapeBorder?> shape,
+  ValueHolder<bool?> borderForeground,
+  ValueHolder<EdgeInsets?> margin,
+  ValueHolder<Clip?> clipBehavior,
+  ValueHolder<bool?> semanticContainer,
 });
 
 class CardPropertiesNotifier extends PropertiesNotifier<CardProperties> {
@@ -24,15 +24,15 @@ class CardPropertiesNotifier extends PropertiesNotifier<CardProperties> {
   Widget buildPreview(BuildContext context) {
     // TODO: User fieldValues instead
     return Card(
-      color: getValueOf('color'),
-      shadowColor: getValueOf('shadowColor'),
-      surfaceTintColor: getValueOf('surfaceTintColor'),
-      elevation: getValueOf('elevation'),
-      shape: getValueOf('shape'),
-      borderOnForeground: getValueOf('borderForeground') ?? true,
-      margin: getValueOf('margin'),
-      clipBehavior: getValueOf('clipBehavior'),
-      semanticContainer: getValueOf('semanticContainer') ?? true,
+      color: fieldValues.color.isSet ? fieldValues.color.value : null,
+      shadowColor: fieldValues.shadowColor.isSet ? fieldValues.shadowColor.value : null,
+      surfaceTintColor: fieldValues.surfaceTintColor.isSet ? fieldValues.surfaceTintColor.value : null,
+      elevation: fieldValues.elevation.isSet ? fieldValues.elevation.value : null,
+      shape: fieldValues.shape.isSet ? fieldValues.shape.value : null,
+      borderOnForeground: fieldValues.borderForeground.isSet ? fieldValues.borderForeground.value! : true,
+      margin: fieldValues.margin.isSet ? fieldValues.margin.value : null,
+      clipBehavior: fieldValues.clipBehavior.isSet ? fieldValues.clipBehavior.value : null,
+      semanticContainer: fieldValues.semanticContainer.isSet ? fieldValues.semanticContainer.value! : true,
       child: const Center(child: Text("Card")),
     );
   }

@@ -7,27 +7,27 @@ import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/property_fields/string_field.dart';
 
 typedef CheckboxProperties = ({
-  bool? value,
-  bool? triState,
-  MouseCursor? mouseCursor,
-  Color? activeColor,
-  Color? fillColor,
-  Color? checkColor,
-  Color? focusColor,
-  Color? hoverColor,
-  Color? overLayColor,
-  double? splashRadius,
-  MaterialTapTargetSize? materialTapTargetSize,
-  double? visualDensityVertical,
-  double? visualDensityHorizontal,
-  bool? autoFocus,
-  double? eccentricity,
-  Color? borderColor,
-  double? borderWidth,
-  BorderStyle? borderStyle,
-  double? strokeAlign,
-  bool? isError,
-  String? semanticLabel,
+  ValueHolder<bool?> value,
+  ValueHolder<bool?> triState,
+  ValueHolder<MouseCursor?> mouseCursor,
+  ValueHolder<Color?> activeColor,
+  ValueHolder<Color?> fillColor,
+  ValueHolder<Color?> checkColor,
+  ValueHolder<Color?> focusColor,
+  ValueHolder<Color?> hoverColor,
+  ValueHolder<Color?> overLayColor,
+  ValueHolder<double?> splashRadius,
+  ValueHolder<MaterialTapTargetSize?> materialTapTargetSize,
+  ValueHolder<double?> visualDensityVertical,
+  ValueHolder<double?> visualDensityHorizontal,
+  ValueHolder<bool?> autoFocus,
+  ValueHolder<double?> eccentricity,
+  ValueHolder<Color?> borderColor,
+  ValueHolder<double?> borderWidth,
+  ValueHolder<BorderStyle?> borderStyle,
+  ValueHolder<double?> strokeAlign,
+  ValueHolder<bool?> isError,
+  ValueHolder<String?> semanticLabel,
 });
 
 class CheckboxPropertiesNotifier
@@ -35,44 +35,43 @@ class CheckboxPropertiesNotifier
   @override
   Widget buildPreview(BuildContext context) {
     return Checkbox(
-      value: fieldValues.value,
-      tristate: fieldValues.triState ?? true,
-      mouseCursor: fieldValues.mouseCursor,
-      activeColor: fieldValues.activeColor,
+      value: fieldValues.value.isSet ? fieldValues.value.value : null,
+      tristate: fieldValues.triState.isSet ? fieldValues.triState.value! : true,
+      mouseCursor: fieldValues.mouseCursor.isSet ? fieldValues.mouseCursor.value : null,
+      activeColor: fieldValues.activeColor.isSet ? fieldValues.activeColor.value : null,
       fillColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          return fieldValues.fillColor ?? Colors.transparent; // Default color
+            (Set<MaterialState> states) {
+          return fieldValues.fillColor.isSet ? fieldValues.fillColor.value! : Colors.transparent; // Default color
         },
       ),
-      checkColor: fieldValues.checkColor,
-      focusColor: fieldValues.focusColor,
-      hoverColor: fieldValues.hoverColor,
+      checkColor: fieldValues.checkColor.isSet ? fieldValues.checkColor.value : null,
+      focusColor: fieldValues.focusColor.isSet ? fieldValues.focusColor.value : null,
+      hoverColor: fieldValues.hoverColor.isSet ? fieldValues.hoverColor.value : null,
       overlayColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          return fieldValues.overLayColor ??
-              Colors.transparent; // Default color
+            (Set<MaterialState> states) {
+          return fieldValues.overLayColor.isSet ? fieldValues.overLayColor.value! : Colors.transparent; // Default color
         },
       ),
-      splashRadius: fieldValues.splashRadius,
-      materialTapTargetSize: fieldValues.materialTapTargetSize,
+      splashRadius: fieldValues.splashRadius.isSet ? fieldValues.splashRadius.value : null,
+      materialTapTargetSize: fieldValues.materialTapTargetSize.isSet ? fieldValues.materialTapTargetSize.value : null,
       visualDensity: VisualDensity(
-        vertical: fieldValues.visualDensityVertical ?? 0.0,
-        horizontal: fieldValues.visualDensityHorizontal ?? 0.0,
+        vertical: fieldValues.visualDensityVertical.isSet ? fieldValues.visualDensityVertical.value! : 0.0,
+        horizontal: fieldValues.visualDensityHorizontal.isSet ? fieldValues.visualDensityHorizontal.value! : 0.0,
       ),
       focusNode: FocusNode(),
-      autofocus: fieldValues.autoFocus ?? false,
+      autofocus: fieldValues.autoFocus.isSet ? fieldValues.autoFocus.value! : false,
       shape: CircleBorder(
         side: const BorderSide(),
-        eccentricity: fieldValues.eccentricity ?? 0.0,
+        eccentricity: fieldValues.eccentricity.isSet ? fieldValues.eccentricity.value! : 0.0,
       ),
       side: BorderSide(
-        color: fieldValues.borderColor ?? const Color(0xFF000000),
-        width: fieldValues.borderWidth ?? 1.0,
-        style: fieldValues.borderStyle ?? BorderStyle.solid,
-        strokeAlign: fieldValues.strokeAlign ?? 0.0,
+        color: fieldValues.borderColor.isSet ? fieldValues.borderColor.value! : const Color(0xFF000000),
+        width: fieldValues.borderWidth.isSet ? fieldValues.borderWidth.value! : 1.0,
+        style: fieldValues.borderStyle.isSet ? fieldValues.borderStyle.value! : BorderStyle.solid,
+        strokeAlign: fieldValues.strokeAlign.isSet ? fieldValues.strokeAlign.value! : 0.0,
       ),
-      isError: fieldValues.isError ?? false,
-      semanticLabel: fieldValues.semanticLabel,
+      isError: fieldValues.isError.isSet ? fieldValues.isError.value! : false,
+      semanticLabel: fieldValues.semanticLabel.isSet ? fieldValues.semanticLabel.value : null,
       onChanged: (val) {},
     );
   }

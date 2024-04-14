@@ -9,65 +9,65 @@ import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/property_fields/string_field.dart';
 
 typedef SwitchProperties = ({
-  bool? value,
-  Color? activeColor,
-  Color? inactiveThumbColor,
-  Color? activeTrackColor,
-  String? activeThumbImage,
-  String? inactiveThumbImage,
-  Color? thumbColor,
-  Color? trackColor,
-  Color? trackOutlineColor,
-  double? trackOutlineWidth,
-  IconData? thumbIcon,
-  DragStartBehavior? dragStartBehavior,
-  MouseCursor? mouseCursor,
-  Color? focusColor,
-  Color? hoverColor,
-  Color? overlayColor,
-  double? splashRadius,
-  bool? autofocus,
-  MaterialTapTargetSize? materialTapTargetSize,
+  ValueHolder<bool?> value,
+  ValueHolder<Color?> activeColor,
+  ValueHolder<Color?> inactiveThumbColor,
+  ValueHolder<Color?> activeTrackColor,
+  ValueHolder<String?> activeThumbImage,
+  ValueHolder<String?> inactiveThumbImage,
+  ValueHolder<Color?> thumbColor,
+  ValueHolder<Color?> trackColor,
+  ValueHolder<Color?> trackOutlineColor,
+  ValueHolder<double?> trackOutlineWidth,
+  ValueHolder<IconData?> thumbIcon,
+  ValueHolder<DragStartBehavior?> dragStartBehavior,
+  ValueHolder<MouseCursor?> mouseCursor,
+  ValueHolder<Color?> focusColor,
+  ValueHolder<Color?> hoverColor,
+  ValueHolder<Color?> overlayColor,
+  ValueHolder<double?> splashRadius,
+  ValueHolder<bool?> autofocus,
+  ValueHolder<MaterialTapTargetSize?> materialTapTargetSize,
 });
 
 class SwitchPropertiesNotifier extends PropertiesNotifier<SwitchProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Switch(
-      value: fieldValues.value ?? false,
+      value: fieldValues.value.isSet? fieldValues.value.value! : false,
       onChanged: (val) {},
-      activeColor: fieldValues.activeColor,
-      activeTrackColor: fieldValues.activeTrackColor,
-      inactiveThumbColor: fieldValues.inactiveThumbColor,
-      inactiveTrackColor: fieldValues.inactiveThumbColor,
-      activeThumbImage: fieldValues.activeThumbImage != null
-          ? NetworkImage(fieldValues.activeThumbImage!)
+      activeColor: fieldValues.activeColor.isSet? fieldValues.activeColor.value : null,
+      activeTrackColor: fieldValues.activeTrackColor.isSet? fieldValues.activeTrackColor.value : null,
+      inactiveThumbColor: fieldValues.inactiveThumbColor.isSet? fieldValues.inactiveThumbColor.value : null,
+      inactiveTrackColor: fieldValues.inactiveThumbColor.isSet? fieldValues.inactiveThumbColor.value : null,
+      activeThumbImage: fieldValues.activeThumbImage.isSet
+          ? NetworkImage(fieldValues.activeThumbImage.value! )
           : null,
       onActiveThumbImageError: (object, stackTrace) {},
-      inactiveThumbImage: fieldValues.inactiveThumbImage != null
-          ? NetworkImage(fieldValues.inactiveThumbImage!)
+      inactiveThumbImage: fieldValues.inactiveThumbImage.isSet
+          ? NetworkImage(fieldValues.inactiveThumbImage.value!)
           : null,
       onInactiveThumbImageError: (object, stackTrace) {},
-      thumbColor: MaterialStatePropertyAll<Color?>(fieldValues.thumbColor),
-      trackColor: MaterialStatePropertyAll<Color?>(fieldValues.trackColor),
+      thumbColor: MaterialStatePropertyAll<Color?>(fieldValues.thumbColor.isSet? fieldValues.thumbColor.value : null,),
+      trackColor: MaterialStatePropertyAll<Color?>(fieldValues.trackColor.isSet? fieldValues.trackColor.value : null,),
       trackOutlineColor:
-          MaterialStatePropertyAll<Color?>(fieldValues.trackOutlineColor),
+      MaterialStatePropertyAll<Color?>(fieldValues.trackOutlineColor.isSet? fieldValues.trackColor.value : null,),
       trackOutlineWidth:
-          MaterialStatePropertyAll<double?>(fieldValues.trackOutlineWidth),
+      MaterialStatePropertyAll<double?>(fieldValues.trackOutlineWidth.isSet? fieldValues.trackOutlineWidth.value : null,),
       thumbIcon: MaterialStatePropertyAll<Icon?>(
-        Icon(fieldValues.thumbIcon),
+        Icon(fieldValues.thumbIcon.isSet? fieldValues.thumbIcon.value : null,),
       ),
       dragStartBehavior:
-          fieldValues.dragStartBehavior ?? DragStartBehavior.start,
-      materialTapTargetSize: fieldValues.materialTapTargetSize,
-      mouseCursor: fieldValues.mouseCursor,
-      focusColor: fieldValues.focusColor,
-      hoverColor: fieldValues.hoverColor,
-      overlayColor: MaterialStatePropertyAll<Color?>(fieldValues.overlayColor),
-      splashRadius: fieldValues.splashRadius,
+      fieldValues.dragStartBehavior.isSet? fieldValues.dragStartBehavior.value! : DragStartBehavior.start,
+      materialTapTargetSize: fieldValues.materialTapTargetSize.isSet? fieldValues.materialTapTargetSize.value : null,
+      mouseCursor: fieldValues.mouseCursor.isSet? fieldValues.mouseCursor.value : null,
+      focusColor: fieldValues.focusColor.isSet? fieldValues.focusColor.value : null,
+      hoverColor: fieldValues.hoverColor.isSet? fieldValues.hoverColor.value : null,
+      overlayColor: MaterialStatePropertyAll<Color?>(fieldValues.overlayColor.isSet? fieldValues.overlayColor.value : null,),
+      splashRadius: fieldValues.splashRadius.isSet? fieldValues.splashRadius.value : null,
       focusNode: FocusNode(),
       onFocusChange: (val) {},
-      autofocus: fieldValues.autofocus ?? false,
+      autofocus: fieldValues.autofocus.isSet? fieldValues.autofocus.value! : false,
     );
   }
 

@@ -6,18 +6,18 @@ import 'package:flutter_quest/property_fields/list_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 
 typedef RadioProperties = ({
-  int? value,
-  MouseCursor? mouseCursor,
-  bool? toggleable,
-  Color? activeColor,
-  Color? fillColor,
-  Color? focusColor,
-  Color? hoverColor,
-  Color? overlayColor,
-  double? splashRadius,
-  MaterialTapTargetSize? materialTapTargetSize,
-  VisualDensity? visualDensity,
-  bool? autofocus,
+  ValueHolder<int?> value,
+  ValueHolder<MouseCursor?> mouseCursor,
+  ValueHolder<bool?> toggleable,
+  ValueHolder<Color?> activeColor,
+  ValueHolder<Color?> fillColor,
+  ValueHolder<Color?> focusColor,
+  ValueHolder<Color?> hoverColor,
+  ValueHolder<Color?> overlayColor,
+  ValueHolder<double?> splashRadius,
+  ValueHolder<MaterialTapTargetSize?> materialTapTargetSize,
+  ValueHolder<VisualDensity?> visualDensity,
+  ValueHolder<bool?> autofocus,
 });
 
 class RadioPropertiesNotifier extends PropertiesNotifier<RadioProperties> {
@@ -32,22 +32,22 @@ class RadioPropertiesNotifier extends PropertiesNotifier<RadioProperties> {
         selectedRadio = v!;
         notifyListeners();
       },
-      mouseCursor: fieldValues.mouseCursor,
-      toggleable: fieldValues.toggleable ?? false,
-      activeColor: fieldValues.activeColor,
+      mouseCursor: fieldValues.mouseCursor.isSet? fieldValues.mouseCursor.value : null,
+      toggleable: fieldValues.toggleable.isSet? fieldValues.toggleable.value! : false,
+      activeColor: fieldValues.activeColor.isSet? fieldValues.activeColor.value : null,
       fillColor: MaterialStatePropertyAll<Color?>(
-        fieldValues.fillColor,
+        fieldValues.fillColor.isSet? fieldValues.fillColor.value : null,
       ),
-      focusColor: fieldValues.focusColor,
-      hoverColor: fieldValues.hoverColor,
+      focusColor: fieldValues.focusColor.isSet? fieldValues.focusColor.value : null,
+      hoverColor: fieldValues.hoverColor.isSet? fieldValues.hoverColor.value : null,
       overlayColor: MaterialStatePropertyAll<Color?>(
-        fieldValues.overlayColor,
+        fieldValues.overlayColor.isSet? fieldValues.overlayColor.value : null,
       ),
-      splashRadius: fieldValues.splashRadius,
-      materialTapTargetSize: fieldValues.materialTapTargetSize,
-      visualDensity: fieldValues.visualDensity,
+      splashRadius: fieldValues.splashRadius.isSet? fieldValues.splashRadius.value : null,
+      materialTapTargetSize: fieldValues.materialTapTargetSize.isSet? fieldValues.materialTapTargetSize.value : null,
+      visualDensity: fieldValues.visualDensity.isSet? fieldValues.visualDensity.value : null,
       focusNode: FocusNode(),
-      autofocus: fieldValues.autofocus ?? false,
+      autofocus: fieldValues.autofocus.isSet? fieldValues.autofocus.value! : false,
     );
   }
 

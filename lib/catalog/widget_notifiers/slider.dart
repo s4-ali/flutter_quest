@@ -7,47 +7,48 @@ import 'package:flutter_quest/property_fields/number_field.dart';
 import 'package:flutter_quest/property_fields/string_field.dart';
 
 typedef SliderProperties = ({
-  double? value,
-  double? secondaryTrackValue,
-  double? min,
-  double? max,
-  int? divisions,
-  String? label,
-  Color? activeColor,
-  Color? inactiveColor,
-  Color? secondaryActiveColor,
-  Color? thumbColor,
-  Color? overlayColor,
-  MouseCursor? mouseCursor,
-  bool? autofocus,
-  SliderInteraction? allowedInteraction,
+  ValueHolder<double?> value,
+  ValueHolder<double?> secondaryTrackValue,
+  ValueHolder<double?> min,
+  ValueHolder<double?> max,
+  ValueHolder<int?> divisions,
+  ValueHolder<String?> label,
+  ValueHolder<Color?> activeColor,
+  ValueHolder<Color?> inactiveColor,
+  ValueHolder<Color?> secondaryActiveColor,
+  ValueHolder<Color?> thumbColor,
+  ValueHolder<Color?> overlayColor,
+  ValueHolder<MouseCursor?> mouseCursor,
+  ValueHolder<bool?> autofocus,
+  ValueHolder<SliderInteraction?> allowedInteraction,
 });
+
 
 class SliderPropertiesNotifier extends PropertiesNotifier<SliderProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Slider(
-      value: fieldValues.value ?? 0,
-      secondaryTrackValue: fieldValues.secondaryTrackValue,
+      value: fieldValues.value.isSet? fieldValues.value.value! : 0,
+      secondaryTrackValue: fieldValues.secondaryTrackValue.isSet? fieldValues.secondaryTrackValue.value : null,
       onChanged: (val) {},
       onChangeStart: (val) {},
       onChangeEnd: (val) {},
-      min: fieldValues.min ?? 0.0,
-      max: fieldValues.max ?? 1.0,
-      divisions: fieldValues.divisions,
-      label: fieldValues.label,
-      activeColor: fieldValues.activeColor,
-      inactiveColor: fieldValues.inactiveColor,
-      secondaryActiveColor: fieldValues.secondaryActiveColor,
-      thumbColor: fieldValues.thumbColor,
-      overlayColor: MaterialStatePropertyAll<Color?>(fieldValues.overlayColor),
-      mouseCursor: fieldValues.mouseCursor,
+      min: fieldValues.min.isSet? fieldValues.min.value! : 0.0,
+      max: fieldValues.max.isSet? fieldValues.max.value! : 1.0,
+      divisions: fieldValues.divisions.isSet? fieldValues.divisions.value : null,
+      label: fieldValues.label.isSet? fieldValues.label.value : null,
+      activeColor: fieldValues.activeColor.isSet? fieldValues.activeColor.value : null,
+      inactiveColor: fieldValues.inactiveColor.isSet? fieldValues.inactiveColor.value : null,
+      secondaryActiveColor: fieldValues.secondaryActiveColor.isSet? fieldValues.secondaryActiveColor.value : null,
+      thumbColor: fieldValues.thumbColor.isSet? fieldValues.thumbColor.value : null,
+      overlayColor: MaterialStatePropertyAll<Color?>(fieldValues.overlayColor.isSet? fieldValues.overlayColor.value : null,),
+      mouseCursor: fieldValues.mouseCursor.isSet? fieldValues.mouseCursor.value : null,
       semanticFormatterCallback: (val) {
         return "String";
       },
       focusNode: FocusNode(),
-      autofocus: fieldValues.autofocus ?? false,
-      allowedInteraction: fieldValues.allowedInteraction,
+      autofocus: fieldValues.autofocus.isSet? fieldValues.autofocus.value! : false,
+      allowedInteraction: fieldValues.allowedInteraction.isSet? fieldValues.allowedInteraction.value : null,
     );
   }
 

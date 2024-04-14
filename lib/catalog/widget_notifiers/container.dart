@@ -10,22 +10,22 @@ import 'package:flutter_quest/property_fields/matrix4_field.dart';
 import 'package:flutter_quest/property_fields/number_field.dart';
 
 typedef ContainerProperties = ({
-  double? height,
-  double? width,
-  Alignment? alignment,
-  EdgeInsets? margin,
-  EdgeInsets? padding,
-  Color? color,
-  BorderRadius? borderRadius,
-  BoxBorder? border,
-  Color? foregroundColor,
-  Matrix4? transform,
-  Clip? clipBehavior,
-  double? minHeight,
-  double? maxHeight,
-  double? minWidth,
-  double? maxWidth,
-  Alignment? transformAlignment,
+  ValueHolder<double?> height,
+  ValueHolder<double?> width,
+  ValueHolder<Alignment?> alignment,
+  ValueHolder<EdgeInsets?> margin,
+  ValueHolder<EdgeInsets?> padding,
+  ValueHolder<Color?> color,
+  ValueHolder<BorderRadius?> borderRadius,
+  ValueHolder<BoxBorder?> border,
+  ValueHolder<Color?> foregroundColor,
+  ValueHolder<Matrix4?> transform,
+  ValueHolder<Clip?> clipBehavior,
+  ValueHolder<double?> minHeight,
+  ValueHolder<double?> maxHeight,
+  ValueHolder<double?> minWidth,
+  ValueHolder<double?> maxWidth,
+  ValueHolder<Alignment?> transformAlignment,
 });
 
 class ContainerPropertiesNotifier
@@ -34,28 +34,28 @@ class ContainerPropertiesNotifier
   Widget buildPreview(BuildContext context) {
     // TODO: Use field values instead
     return Container(
-      height: getValueOf('height'),
-      width: getValueOf('width'),
-      alignment: getValueOf('alignment'),
-      margin: getValueOf('margin'),
-      padding: getValueOf('padding'),
-      transform: getValueOf('transform'),
+      height: fieldValues.height.isSet ? fieldValues.height.value : null,
+      width: fieldValues.width.isSet ? fieldValues.width.value : null,
+      alignment: fieldValues.alignment.isSet ? fieldValues.alignment.value : null,
+      margin: fieldValues.margin.isSet ? fieldValues.margin.value : null,
+      padding: fieldValues.padding.isSet ? fieldValues.padding.value : null,
+      transform: fieldValues.transform.isSet ? fieldValues.transform.value : null,
       decoration: BoxDecoration(
-        color: getValueOf('color'),
-        borderRadius: getValueOf('borderRadius'),
-        border: getValueOf('border'),
+        color: fieldValues.color.isSet ? fieldValues.color.value : null,
+        borderRadius: fieldValues.borderRadius.isSet ? fieldValues.borderRadius.value : null,
+        border: fieldValues.border.isSet ? fieldValues.border.value : null,
       ),
       foregroundDecoration: BoxDecoration(
-        color: getValueOf('foregroundColor'),
+        color: fieldValues.foregroundColor.isSet ? fieldValues.foregroundColor.value : null,
       ),
-      clipBehavior: getValueOf('clipBehavior') ?? Clip.none,
+      clipBehavior: fieldValues.clipBehavior.isSet ? fieldValues.clipBehavior.value! : Clip.none,
       constraints: BoxConstraints(
-        minWidth: getValueOf('minWidth') ?? 0.0,
-        maxWidth: getValueOf('maxWidth') ?? double.infinity,
-        minHeight: getValueOf('minHeight') ?? 0.0,
-        maxHeight: getValueOf('maxHeight') ?? double.infinity,
+        minWidth: fieldValues.minWidth.isSet ? fieldValues.minWidth.value! : 0.0,
+        maxWidth: fieldValues.maxWidth.isSet ? fieldValues.maxWidth.value! : double.infinity,
+        minHeight: fieldValues.minHeight.isSet ? fieldValues.minHeight.value! : 0.0,
+        maxHeight: fieldValues.maxHeight.isSet ? fieldValues.maxHeight.value! : double.infinity,
       ),
-      transformAlignment: getValueOf('transformAlignment'),
+      transformAlignment: fieldValues.transformAlignment.isSet ? fieldValues.transformAlignment.value : null,
       child: Container(),
     );
   }

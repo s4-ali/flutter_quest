@@ -5,20 +5,20 @@ import 'package:flutter_quest/property_fields/list_field.dart';
 import 'package:flutter_quest/property_fields/text_direction_field.dart';
 
 typedef StackProperties = ({
-  Alignment? alignment,
-  TextDirection? textDirection,
-  StackFit? fit,
-  Clip? clipBehavior,
+  ValueHolder<Alignment?> alignment,
+  ValueHolder<TextDirection?> textDirection,
+  ValueHolder<StackFit?> fit,
+  ValueHolder<Clip?> clipBehavior,
 });
 
 class StackPropertiesNotifier extends PropertiesNotifier<StackProperties> {
   @override
   Widget buildPreview(BuildContext context) {
     return Stack(
-      alignment: fieldValues.alignment ?? Alignment.topLeft,
-      textDirection: fieldValues.textDirection,
-      fit: fieldValues.fit ?? StackFit.loose,
-      clipBehavior: fieldValues.clipBehavior ?? Clip.hardEdge,
+      alignment: fieldValues.alignment.isSet? fieldValues.alignment.value! : Alignment.topLeft,
+      textDirection: fieldValues.textDirection.isSet? fieldValues.textDirection.value : null,
+      fit: fieldValues.fit.isSet? fieldValues.fit.value! : StackFit.loose,
+      clipBehavior: fieldValues.clipBehavior.isSet? fieldValues.clipBehavior.value! : Clip.hardEdge,
       children: const [],
     );
   }

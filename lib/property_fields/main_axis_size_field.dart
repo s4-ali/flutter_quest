@@ -20,7 +20,7 @@ class MainAxisSizePropertyField
   @override
   Widget build(
     MainAxisSizePropertyParams params,
-    Function(MainAxisSize) onChanged,
+    Function(ValueHolder<MainAxisSize>) onChanged,
     MainAxisSize value,
   ) {
     return MainAxisSizeField(

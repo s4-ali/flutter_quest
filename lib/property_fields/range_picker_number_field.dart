@@ -20,7 +20,7 @@ class RangePickerNumberPropertyField
   @override
   Widget build(
     RangePickerNumberPropertyParams params,
-    Function(num) onChanged,
+    Function(ValueHolder<num>) onChanged,
     num value,
   ) {
     return RangePickerNumberField(

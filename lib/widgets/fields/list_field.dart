@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/dropdown_button.dart';
@@ -30,7 +31,7 @@ class ListField<T> extends PropertyWidget<T> {
       }).toList(),
       onChanged: (val) {
         if (val != null) {
-          onChanged(val);
+          onChanged(ValueHolder(val, true));
         }
       },
       width: double.maxFinite,

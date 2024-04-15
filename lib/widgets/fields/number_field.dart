@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/core/logger.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/utils/extensions.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 
 import '../text_field.dart';
 
-class NumberField extends PropertyWidget<num> {
+class NumberField<T extends num> extends PropertyWidget<T> {
   const NumberField(
       {super.key, required super.onChanged, required super.value});
 
   @override
   Widget build(BuildContext context) {
-    return _NumberField(
+    return _NumberField<T>(
       key: key,
-      onChanged: onChanged,
+      onChanged: (T value) => onChanged(ValueHolder<T>(value, true)),
       value: value,
     );
   }
 }
 
-class _NumberField extends StatefulWidget {
-  final void Function(num) onChanged;
-  final num value;
+class _NumberField<T extends num> extends StatefulWidget {
+  final void Function(T) onChanged;
+  final T value;
 
   const _NumberField({
     super.key,

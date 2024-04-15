@@ -20,7 +20,7 @@ class ImageProviderPropertyField
   @override
   Widget build(
     ImageProviderPropertyParams params,
-    Function(ImageProvider) onChanged,
+    Function(ValueHolder<ImageProvider>) onChanged,
     ImageProvider value,
   ) {
     return ImageProviderField(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
+import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/fields/edge_insets_field/edge_insets_types_layout.dart';
 
 enum EdgeInsetsType {
@@ -7,21 +9,32 @@ enum EdgeInsetsType {
   symmetric,
 }
 
-class EdgeInsetsField extends StatefulWidget {
+class EdgeInsetsField extends PropertyWidget<EdgeInsets> {
+  const EdgeInsetsField(
+      {super.key, required super.onChanged, required super.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return _EdgeInsetsField(
+      key: key,
+      onChanged: (value) => onChanged(ValueHolder(value, true)),
+      value: value,
+    );
+  }
+}
+
+class _EdgeInsetsField extends StatefulWidget {
   final void Function(EdgeInsets) onChanged;
   final EdgeInsets value;
 
-  const EdgeInsetsField({
-    super.key,
-    required this.onChanged,
-    required this.value
-  });
+  const _EdgeInsetsField(
+      {super.key, required this.onChanged, required this.value});
 
   @override
-  State<EdgeInsetsField> createState() => _EdgeInsetsFieldState();
+  State<_EdgeInsetsField> createState() => _EdgeInsetsFieldState();
 }
 
-class _EdgeInsetsFieldState extends State<EdgeInsetsField> {
+class _EdgeInsetsFieldState extends State<_EdgeInsetsField> {
   EdgeInsetsType selectedOption = EdgeInsetsType.all;
   late Widget selectedLayout;
   bool isHovered = false;
@@ -29,19 +42,18 @@ class _EdgeInsetsFieldState extends State<EdgeInsetsField> {
   @override
   void initState() {
     super.initState();
-    selectedLayout = AllEdgeInsetsLayout(onChanged: widget.onChanged, value: widget.value,);
+    selectedLayout = AllEdgeInsetsLayout(
+      onChanged: widget.onChanged,
+      value: widget.value,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-
     Border buttonBorder = Border.all(
       width: 1.0,
-      color: isHovered
-          ? const Color(0xFF0099FF) : const Color(0xFF35363A),
+      color: isHovered ? const Color(0xFF0099FF) : const Color(0xFF35363A),
     );
-
-
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -62,9 +74,9 @@ class _EdgeInsetsFieldState extends State<EdgeInsetsField> {
             height: 30,
             width: 134,
             decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-                border: buttonBorder,
+              color: Colors.transparent,
+              borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+              border: buttonBorder,
             ),
             child: DropdownButton<EdgeInsetsType>(
               icon: const Padding(
@@ -85,8 +97,10 @@ class _EdgeInsetsFieldState extends State<EdgeInsetsField> {
               items: [
                 DropdownMenuItem<EdgeInsetsType>(
                   onTap: () {
-                    selectedLayout =
-                        AllEdgeInsetsLayout(onChanged: widget.onChanged, value: widget.value,);
+                    selectedLayout = AllEdgeInsetsLayout(
+                      onChanged: widget.onChanged,
+                      value: widget.value,
+                    );
                   },
                   value: EdgeInsetsType.all,
                   child: const Padding(
@@ -96,8 +110,8 @@ class _EdgeInsetsFieldState extends State<EdgeInsetsField> {
                 ),
                 DropdownMenuItem<EdgeInsetsType>(
                   onTap: () {
-                    selectedLayout =
-                        SymmetricEdgeInsetsLayout(onChanged: widget.onChanged, value: widget.value);
+                    selectedLayout = SymmetricEdgeInsetsLayout(
+                        onChanged: widget.onChanged, value: widget.value);
                   },
                   value: EdgeInsetsType.symmetric,
                   child: const Padding(
@@ -107,8 +121,8 @@ class _EdgeInsetsFieldState extends State<EdgeInsetsField> {
                 ),
                 DropdownMenuItem<EdgeInsetsType>(
                   onTap: () {
-                    selectedLayout =
-                        OnlyEdgeInsetsLayout(onChanged: widget.onChanged, value: widget.value);
+                    selectedLayout = OnlyEdgeInsetsLayout(
+                        onChanged: widget.onChanged, value: widget.value);
                   },
                   value: EdgeInsetsType.only,
                   child: const Padding(

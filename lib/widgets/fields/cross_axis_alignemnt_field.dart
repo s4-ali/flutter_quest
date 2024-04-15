@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/icon_options.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
@@ -30,7 +31,7 @@ class CrossAxisAlignmentField extends PropertyWidget<CrossAxisAlignment>  {
   @override
   Widget build(BuildContext context) {
     return IconOptions(
-      onChanged: (val) => onChanged(val),
+      onChanged: (val) => onChanged(ValueHolder(val, true)),
       value: value,
       options: CrossAxisAlignment.values,
       iconPath: (value) => (value).iconPath,

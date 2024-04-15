@@ -20,7 +20,7 @@ class VerticalDirectionPropertyField
   @override
   Widget build(
     VerticalDirectionPropertyParams params,
-    Function(VerticalDirection) onChanged,
+    Function(ValueHolder<VerticalDirection>) onChanged,
     VerticalDirection value,
   ) {
     return VerticalDirectionField(

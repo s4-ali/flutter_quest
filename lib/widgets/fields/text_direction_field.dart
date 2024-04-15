@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/icon_options.dart';
@@ -27,7 +28,7 @@ class TextDirectionField extends PropertyWidget<TextDirection> {
   @override
   Widget build(BuildContext context) {
     return IconOptions(
-      onChanged: (dynamic val) => onChanged(val as TextDirection),
+      onChanged: (dynamic val) => onChanged(ValueHolder(val as TextDirection, true)),
       value: value,
       options: TextDirection.values,
       iconPath: (dynamic value) => (value as TextDirection).iconPath,

@@ -20,7 +20,7 @@ class TextStylePropertyField
   @override
   Widget build(
     TextStylePropertyParams params,
-    Function(TextStyle) onChanged,
+    Function(ValueHolder<TextStyle>) onChanged,
     TextStyle value,
   ) {
     return TextStyleField(

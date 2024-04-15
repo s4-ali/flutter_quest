@@ -20,7 +20,7 @@ class BorderPropertyField
   @override
   Widget build(
     BoxBorderPropertyParams params,
-    Function(BoxBorder) onChanged,
+    Function(ValueHolder<BoxBorder>) onChanged,
       BoxBorder value,
   ) {
     return BoxBorderField(

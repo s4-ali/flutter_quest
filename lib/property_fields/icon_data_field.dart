@@ -20,7 +20,7 @@ class IconDataPropertyField
   @override
   Widget build(
     IconDataPropertyParams params,
-    Function(IconData) onChanged,
+    Function(ValueHolder<IconData>) onChanged,
     IconData value,
   ) {
     return IconDataField(

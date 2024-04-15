@@ -20,7 +20,7 @@ class BoxFitPropertyField
   @override
   Widget build(
     BoxFitPropertyParams params,
-    Function(BoxFit) onChanged,
+    Function(ValueHolder<BoxFit>) onChanged,
     BoxFit value,
   ) {
     return BoxFitField(

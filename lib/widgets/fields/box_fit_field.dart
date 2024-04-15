@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/icon_options.dart';
@@ -36,7 +37,7 @@ class BoxFitField extends PropertyWidget<BoxFit> {
   @override
   Widget build(BuildContext context) {
     return IconOptions(
-      onChanged: (dynamic val) => onChanged(val as BoxFit),
+      onChanged: (dynamic val) => onChanged(ValueHolder(val as BoxFit,true)),
       value: value,
       options: BoxFit.values,
       iconPath: (dynamic value) => (value as BoxFit).iconPath,

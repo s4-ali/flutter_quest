@@ -20,7 +20,7 @@ class Matrix4PropertyField
   @override
   Widget build(
     Matrix4PropertyParams params,
-    Function(Matrix4) onChanged,
+    Function(ValueHolder<Matrix4>) onChanged,
     Matrix4 value,
   ) {
     return Matrix4Field(

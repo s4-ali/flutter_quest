@@ -20,7 +20,7 @@ class EdgeInsetsPropertyField
   @override
   Widget build(
     EdgeInsetsPropertyParams params,
-    Function(EdgeInsets) onChanged,
+    Function(ValueHolder<EdgeInsets>) onChanged,
     EdgeInsets value,
   ) {
     return EdgeInsetsField(

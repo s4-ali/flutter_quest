@@ -20,7 +20,7 @@ class TextDirectionPropertyField
   @override
   Widget build(
     TextDirectionPropertyParams params,
-    Function(TextDirection) onChanged,
+    Function(ValueHolder<TextDirection>) onChanged,
     TextDirection value,
   ) {
     return TextDirectionField(

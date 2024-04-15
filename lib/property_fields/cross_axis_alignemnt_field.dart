@@ -20,7 +20,7 @@ class CrossAxisAlignmentPropertyField
   @override
   Widget build(
     CrossAxisAlignmentPropertyParams params,
-    Function(CrossAxisAlignment) onChanged,
+    Function(ValueHolder<CrossAxisAlignment>) onChanged,
     CrossAxisAlignment value,
   ) {
     return CrossAxisAlignmentField(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/fields/border_radius/dropdown.dart';
@@ -29,7 +30,7 @@ class BorderRadiusField extends PropertyWidget<BorderRadius> {
   @override
   Widget build(BuildContext context) {
     return _BorderRadiusField(
-      onChanged: onChanged,
+      onChanged: (value) => onChanged(ValueHolder(value, true)),
       value: value,
     );
   }

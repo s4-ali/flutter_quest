@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 
@@ -14,7 +15,7 @@ class BooleanField extends PropertyWidget<bool> {
     return Switch(
       value: value,
       onChanged: (value) {
-        onChanged(value);
+        onChanged(ValueHolder(value,true));
       },
     );
   }

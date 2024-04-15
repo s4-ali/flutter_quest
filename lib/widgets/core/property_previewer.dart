@@ -109,11 +109,11 @@ class _PropertyPreviewerState<U> extends State<PropertyPreviewer<U>> {
     });
   }
 
-  void onChanged(U val) {
+  void onChanged(ValueHolder<U> val) {
     setState(() {
-      _value = val;
-      if (widget.values.contains(val)) {
-        _currentIndex = widget.values.indexOf(val);
+      _value = val.value;
+      if (widget.values.contains(val.value)) {
+        _currentIndex = widget.values.indexOf(val.value);
         _value = null;
       }
     });

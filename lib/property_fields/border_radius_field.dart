@@ -20,7 +20,7 @@ class BorderRadiusPropertyField
   @override
   Widget build(
     BorderRadiusPropertyParams params,
-    Function(BorderRadius) onChanged,
+    Function(ValueHolder<BorderRadius>) onChanged,
     BorderRadius value,
   ) {
     return BorderRadiusField(

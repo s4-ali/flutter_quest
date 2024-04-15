@@ -20,7 +20,7 @@ class ClipPropertyField
   @override
   Widget build(
     ClipPropertyParams params,
-    Function(Clip) onChanged,
+    Function(ValueHolder<Clip>) onChanged,
     Clip value,
   ) {
     return ClipField(

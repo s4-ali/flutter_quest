@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/icon_options.dart';
@@ -26,7 +27,7 @@ class VerticalDirectionField extends PropertyWidget<VerticalDirection> {
   @override
   Widget build(BuildContext context) {
     return IconOptions(
-      onChanged: (dynamic val) => onChanged(val as VerticalDirection),
+      onChanged: (dynamic val) => onChanged(ValueHolder(val as VerticalDirection, true)),
       value: value,
       options: VerticalDirection.values,
       iconPath: (dynamic value) => (value as VerticalDirection).iconPath,

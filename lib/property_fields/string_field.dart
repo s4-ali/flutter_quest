@@ -20,7 +20,7 @@ class StringFieldPropertyField
   @override
   Widget build(
     StringFieldPropertyParams params,
-    Function(String) onChanged,
+    Function(ValueHolder<String>) onChanged,
     String value,
   ) {
     return StringField(

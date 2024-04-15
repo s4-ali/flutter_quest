@@ -20,7 +20,7 @@ class ShapeBorderPropertyField
   @override
   Widget build(
     ShapeBorderPropertyParams params,
-    Function(ShapeBorder) onChanged,
+    Function(ValueHolder<ShapeBorder>) onChanged,
     ShapeBorder value,
   ) {
     return ShapeBorderField(

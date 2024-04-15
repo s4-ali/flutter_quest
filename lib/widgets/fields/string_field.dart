@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
@@ -14,7 +15,7 @@ class StringField extends PropertyWidget<String> {
   Widget build(BuildContext context) {
     return AppTextField(
       label: "Value",
-      onChanged: onChanged,
+      onChanged: (value) => onChanged(ValueHolder(value, true)),
       controller: TextEditingController(
         text: value,
       ),

@@ -54,16 +54,16 @@ abstract class PropertiesNotifier<T> extends ChangeNotifier
     notifyListeners();
   }
 
-  ValueHolder getValueOf(String id, [dynamic initial]) {
+  dynamic getValueOf(String id, [dynamic initial]) {
     if (_values[id] == null) {
       _values[id] = initial;
     }
     return _values[id]!;
   }
 
-  void setInitialValue(String id, value) {
+  void setInitialValue<U>(String id, value) {
     if (_values.keys.contains(id)) return;
-    _values[id] = value;
+    _values[id] = ValueHolder<U?>(value, value != null);
   }
 
   Widget buildPreview(BuildContext context);
@@ -104,7 +104,7 @@ abstract class PropertyField<T extends BasePropertyParams, U> {
   Widget build(T params, Function(ValueHolder<U>) onChanged, U value);
 
   void register() {
-    _props.setInitialValue(params.id, params.initialValue);
+    _props.setInitialValue<U>(params.id, params.initialValue);
 
     if (_props.properties.alreadyExists(params.id)) {
       return;

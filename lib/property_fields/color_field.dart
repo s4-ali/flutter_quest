@@ -20,7 +20,7 @@ class ColorPropertyField
   @override
   Widget build(
     ColorPropertyParams params,
-    Function(Color) onChanged,
+    Function(ValueHolder<Color>) onChanged,
     Color value,
   ) {
     return ColorField(

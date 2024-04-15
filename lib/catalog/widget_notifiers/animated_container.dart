@@ -178,7 +178,7 @@ class AnimatedContainerPropertiesNotifier
 
   @override
   AnimatedContainerProperties get fieldValues => (
-        alignment: getValueOf('alignment'),
+        alignment: getValueOf('alignment') as ValueHolder<Alignment?>,
         padding: getValueOf('padding'),
         color: getValueOf('color'),
         border: getValueOf('border'),
@@ -191,7 +191,7 @@ class AnimatedContainerPropertiesNotifier
         blurStyle: getValueOf('blurStyle'),
         shape: getValueOf('shape'),
         backgroundBlendMode: getValueOf('backgroundBlendMode'),
-        fgShadowColor: getValueOf('fgShadowColor'),
+        fgShadowColor: ValueHolder<Color>(Colors.cyan, true),//getValueOf('fgShadowColor'),
         fgScaleX: getValueOf('fgScaleX'),
         fgScaleY: getValueOf('fgScaleY'),
         fgShadowBlurRadius: getValueOf('fgShadowBlurRadius'),

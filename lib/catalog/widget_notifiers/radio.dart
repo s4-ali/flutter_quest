@@ -25,29 +25,41 @@ class RadioPropertiesNotifier extends PropertiesNotifier<RadioProperties> {
 
   @override
   Widget buildPreview(BuildContext context) {
-    return Radio(
-      value: fieldValues.value,
+    return Radio<int>(
+      value: fieldValues.value.isSet ? fieldValues.value.value! : 0,
       groupValue: selectedRadio,
       onChanged: (v) {
         selectedRadio = v!;
         notifyListeners();
       },
-      mouseCursor: fieldValues.mouseCursor.isSet? fieldValues.mouseCursor.value : null,
-      toggleable: fieldValues.toggleable.isSet? fieldValues.toggleable.value! : false,
-      activeColor: fieldValues.activeColor.isSet? fieldValues.activeColor.value : null,
+      mouseCursor:
+          fieldValues.mouseCursor.isSet ? fieldValues.mouseCursor.value : null,
+      toggleable:
+          fieldValues.toggleable.isSet ? fieldValues.toggleable.value! : false,
+      activeColor:
+          fieldValues.activeColor.isSet ? fieldValues.activeColor.value : null,
       fillColor: MaterialStatePropertyAll<Color?>(
-        fieldValues.fillColor.isSet? fieldValues.fillColor.value : null,
+        fieldValues.fillColor.isSet ? fieldValues.fillColor.value : null,
       ),
-      focusColor: fieldValues.focusColor.isSet? fieldValues.focusColor.value : null,
-      hoverColor: fieldValues.hoverColor.isSet? fieldValues.hoverColor.value : null,
+      focusColor:
+          fieldValues.focusColor.isSet ? fieldValues.focusColor.value : null,
+      hoverColor:
+          fieldValues.hoverColor.isSet ? fieldValues.hoverColor.value : null,
       overlayColor: MaterialStatePropertyAll<Color?>(
-        fieldValues.overlayColor.isSet? fieldValues.overlayColor.value : null,
+        fieldValues.overlayColor.isSet ? fieldValues.overlayColor.value : null,
       ),
-      splashRadius: fieldValues.splashRadius.isSet? fieldValues.splashRadius.value : null,
-      materialTapTargetSize: fieldValues.materialTapTargetSize.isSet? fieldValues.materialTapTargetSize.value : null,
-      visualDensity: fieldValues.visualDensity.isSet? fieldValues.visualDensity.value : null,
+      splashRadius: fieldValues.splashRadius.isSet
+          ? fieldValues.splashRadius.value
+          : null,
+      materialTapTargetSize: fieldValues.materialTapTargetSize.isSet
+          ? fieldValues.materialTapTargetSize.value
+          : null,
+      visualDensity: fieldValues.visualDensity.isSet
+          ? fieldValues.visualDensity.value
+          : null,
       focusNode: FocusNode(),
-      autofocus: fieldValues.autofocus.isSet? fieldValues.autofocus.value! : false,
+      autofocus:
+          fieldValues.autofocus.isSet ? fieldValues.autofocus.value! : false,
     );
   }
 

@@ -24,7 +24,7 @@ class ListPropertyField<T> extends PropertyField<ListPropertyParams<T>, T> {
   @override
   Widget build(
     ListPropertyParams<T> params,
-    Function(T) onChanged,
+    Function(ValueHolder<T>) onChanged,
     T value,
   ) {
     return ListField<T>(

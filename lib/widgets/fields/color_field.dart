@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/color_option.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
@@ -37,7 +38,7 @@ class ColorField extends PropertyWidget<Color> {
 
   @override
   Widget build(BuildContext context) {
-    return _ColorField(onChanged: onChanged, value: value);
+    return _ColorField(onChanged: (value) => onChanged(ValueHolder(value, true)), value: value);
   }
 }
 

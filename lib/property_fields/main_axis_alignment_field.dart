@@ -20,7 +20,7 @@ class MainAxisAlignmentPropertyField
   @override
   Widget build(
     MainAxisAlignmentPropertyParams params,
-    Function(MainAxisAlignment) onChanged,
+    Function(ValueHolder<MainAxisAlignment>) onChanged,
     MainAxisAlignment value,
   ) {
     return MainAxisAlignmentField(

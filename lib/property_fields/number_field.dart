@@ -13,16 +13,16 @@ class NumberPropertyParams extends BasePropertyParams<num> {
   });
 }
 
-class NumberPropertyField extends PropertyField<NumberPropertyParams, num> {
+class NumberPropertyField<T extends num> extends PropertyField<NumberPropertyParams, T> {
   NumberPropertyField(super.provider, super.params);
 
   @override
   Widget build(
     NumberPropertyParams params,
-    Function(num) onChanged,
-    num value,
+    Function(ValueHolder<T>) onChanged,
+    T value,
   ) {
-    return NumberField(
+    return NumberField<T>(
       key: ValueKey(params.id),
       onChanged: onChanged,
       value: value,
@@ -31,12 +31,12 @@ class NumberPropertyField extends PropertyField<NumberPropertyParams, num> {
 }
 
 extension NumberFieldPropertyProvider on PropertiesNotifier {
-  void numberField({
+  void numberField<T extends num>({
     required String id,
     required String title,
-    num? initialValue,
+    required T defaultValue,
+    T? initialValue,
     bool isOptional = true,
-    num defaultValue = 0,
   }) {
     final params = NumberPropertyParams(
       id: id,
@@ -45,7 +45,7 @@ extension NumberFieldPropertyProvider on PropertiesNotifier {
       defaultValue: defaultValue,
       initialValue: initialValue,
     );
-    NumberPropertyField(
+    NumberPropertyField<T>(
       this,
       params,
     ).register();
@@ -54,11 +54,11 @@ extension NumberFieldPropertyProvider on PropertiesNotifier {
   void heightField({
     String id = "height",
     String title = "Height",
-    num? initialValue,
+    double? initialValue,
     bool isOptional = true,
-    num defaultValue = 0,
+    double defaultValue = 0,
   }) {
-    numberField(
+    numberField<double>(
       id: id,
       title: title,
       isOptional: isOptional,
@@ -70,11 +70,11 @@ extension NumberFieldPropertyProvider on PropertiesNotifier {
   void widthField({
     String id = "width",
     String title = "Width",
-    num? initialValue,
+    double? initialValue,
     bool isOptional = true,
-    num defaultValue = 0,
+    double defaultValue = 0,
   }) {
-    numberField(
+    numberField<double>(
       id: id,
       title: title,
       isOptional: isOptional,
@@ -86,11 +86,11 @@ extension NumberFieldPropertyProvider on PropertiesNotifier {
   void doubleField({
     String id = "doubleField",
     String title = "doubleField",
-    num? initialValue,
+    double? initialValue,
     bool isOptional = true,
-    num defaultValue = 0,
+    double defaultValue = 0,
   }) {
-    return numberField(
+    return numberField<double>(
       id: id,
       title: title,
       isOptional: isOptional,
@@ -104,11 +104,11 @@ extension NumberFieldPropertyProvider on PropertiesNotifier {
   void intField({
     String id = "intField",
     String title = "Int Field",
-    num? initialValue,
+    int? initialValue,
     bool isOptional = true,
-    num defaultValue = 0,
+    int defaultValue = 0,
   }) {
-    return numberField(
+    return numberField<int>(
       id: id,
       title: title,
       isOptional: isOptional,

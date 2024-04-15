@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/icon_options.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
@@ -27,7 +28,7 @@ class MainAxisSizeField extends PropertyWidget<MainAxisSize> {
   @override
   Widget build(BuildContext context) {
     return IconOptions(
-      onChanged: (dynamic val) => onChanged(val as MainAxisSize),
+      onChanged: (dynamic val) => onChanged(ValueHolder(val as MainAxisSize, true)),
       value: value,
       options: MainAxisSize.values,
       iconPath: (dynamic value) => (value as MainAxisSize).iconPath,

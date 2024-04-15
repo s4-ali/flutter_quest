@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/core/property_provider.dart';
 import 'package:flutter_quest/widgets/icon_options.dart';
 import 'package:flutter_quest/widgets/core/property.dart';
 import 'package:flutter_quest/widgets/core/property_previewer.dart';
@@ -59,7 +60,7 @@ class CurveField extends PropertyWidget<Curve> {
   @override
   Widget build(BuildContext context) {
     return IconOptions(
-      onChanged: onChanged,
+      onChanged: (value) => onChanged(ValueHolder(value, true)),
       value: value,
       options: values,
       iconPath: (value) => (value).iconPath,

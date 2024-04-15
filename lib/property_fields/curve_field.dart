@@ -20,7 +20,7 @@ class CurvePropertyField
   @override
   Widget build(
     CurvePropertyParams params,
-    Function(Curve) onChanged,
+    Function(ValueHolder<Curve>) onChanged,
     Curve value,
   ) {
     return CurveField(

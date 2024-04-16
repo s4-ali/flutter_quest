@@ -4,16 +4,20 @@ import 'package:flutter_quest/widgets/core/property_previewer.dart';
 import 'package:flutter_quest/widgets/text_field.dart';
 
 class StringField extends PropertyWidget<String> {
+  final String? title;
+
   const StringField({
     super.key,
     required super.onChanged,
     required super.value,
+    this.title,
   });
 
   @override
   Widget build(BuildContext context) {
+
     return AppTextField(
-      label: "Value",
+      label: title ?? "Value",
       onChanged: onChanged,
       controller: TextEditingController(
         text: value,
@@ -34,6 +38,7 @@ class StringFieldPreviewer extends StatelessWidget {
         return StringField(
           onChanged: onChanged,
           value: value,
+          title: "Preview",
         );
       },
     );

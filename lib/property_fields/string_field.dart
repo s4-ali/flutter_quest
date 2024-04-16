@@ -24,6 +24,7 @@ class StringFieldPropertyField
     String value,
   ) {
     return StringField(
+      title: params.title,
       onChanged: onChanged,
       value: value,
     );

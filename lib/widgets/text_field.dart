@@ -11,7 +11,6 @@ class AppTextField extends StatefulWidget {
   final TextAlign? textAlign;
   final EdgeInsets? contentPadding;
   final int? maxLength;
-
   const AppTextField({
     super.key,
     required this.onChanged,
@@ -32,6 +31,14 @@ class AppTextField extends StatefulWidget {
 
 class _AppTextFieldState extends State<AppTextField> {
 
+  late TextEditingController controller;
+
+  @override
+  void initState() {
+    controller = widget.controller;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -47,11 +54,11 @@ class _AppTextFieldState extends State<AppTextField> {
         label: widget.label == null?null:Text(widget.label!),
       ),
       maxLength: widget.maxLength,
-      controller: widget.controller,
+      controller: controller,
       keyboardType: widget.keyboardType,
       onChanged: widget.onChanged,
-      onEditingComplete: () => widget.onChanged(widget.controller.text),
-      onTapOutside: (_) => widget.onChanged(widget.controller.text),
+      onEditingComplete: () => widget.onChanged(controller.text),
+      onTapOutside: (_) => widget.onChanged(controller.text),
       maxLines: 1,
     );
   }
